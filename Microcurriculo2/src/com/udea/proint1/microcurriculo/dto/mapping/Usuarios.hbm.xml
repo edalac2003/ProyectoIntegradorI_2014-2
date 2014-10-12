@@ -1,21 +1,26 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 12/10/2014 12:39:16 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.Usuarios" table="USUARIOS">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <one-to-one name="persona" class="com.udea.proint1.microcurriculo.dto.Persona"></one-to-one>
+        <many-to-one name="persona" class="com.udea.proint1.microcurriculo.dto.Persona fetch="join">
+            <column name="VR_PERSONA" />
+        </many-to-one>
+        
         <property name="login" type="java.lang.String">
             <column name="LOGIN" />
         </property>
         <property name="password" type="java.lang.String">
             <column name="PASSWORD" />
         </property>
-        <one-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios"></one-to-one>
+        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+            <column name="VR_MODUSUARIO" />
+        </many-to-one>
         <property name="modFecha" type="java.util.Date">
             <column name="MODFECHA" />
         </property>
