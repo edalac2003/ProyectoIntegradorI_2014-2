@@ -3,38 +3,38 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.Persona" table="PERSONA">
+    <class name="com.udea.proint1.microcurriculo.dto.Persona" table="TB_ADM_PERSONA">
         <id name="idPersona" type="java.lang.String">
-            <column name="IDPERSONA" />
+            <column name="VR_IDPERSONA" />
             <generator class="assigned" />
         </id>
         <property name="nombres" type="java.lang.String">
-            <column name="NOMBRES" />
+            <column name="VR_NOMBRES" />
         </property>
         <property name="apellidos" type="java.lang.String">
-            <column name="APELLIDOS" />
+            <column name="VR_APELLIDOS" />
         </property>
         <property name="email" type="java.lang.String">
-            <column name="EMAIL" />
+            <column name="VR_EMAIL" />
         </property>
         <property name="telefono" type="java.lang.String">
-            <column name="TELEFONO" />
+            <column name="VR_TELEFONO" />
         </property>
         <many-to-one name="ciudad" class="com.udea.proint1.microcurriculo.dto.Ciudades" fetch="join">
-            <column name="CIUDAD" />
+            <column name="NB_CIUDAD" />
         </many-to-one>
         <property name="estado" type="char">
-            <column name="ESTADO" />
+            <column name="BL_ESTADO" />
         </property>
         <many-to-one name="idIdentificacion" class="com.udea.proint1.microcurriculo.dto.TipoIdentificacion" fetch="join">
-            <column name="IDIDENTIFICACION" />
+            <column name="NB_TIPODEIDENTIFICACION" />
         </many-to-one>
         <many-to-one name="tipoPersona" class="com.udea.proint1.microcurriculo.dto.TipoPersona" fetch="join">
-            <column name="TIPOPERSONA" />
+            <column name="NB_TIPOPERSONA" />
         </many-to-one>
         <one-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios"></one-to-one>
         <property name="modFecha" type="java.util.Date">
-            <column name="MODFECHA" />
+            <column name="DT_MODFECHA" />
         </property>
     </class>
 </hibernate-mapping>

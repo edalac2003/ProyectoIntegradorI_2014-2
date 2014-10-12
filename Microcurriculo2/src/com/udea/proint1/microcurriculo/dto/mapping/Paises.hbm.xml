@@ -3,19 +3,19 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.Paises" table="PAISES">
+    <class name="com.udea.proint1.microcurriculo.dto.Paises" table="TB_ADM_PAISES">
         <id name="idPais" type="int">
-            <column name="IDPAIS" />
+            <column name="NB_IDPAIS" />
             <generator class="assigned" />
         </id>
         <property name="nombre" type="int">
-            <column name="NOMBRE" />
+            <column name="VR_NOMBRE" />
         </property>
         <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
-            <column name="MODUSUARIO" />
+            <column name="VR_MODUSUARIO" />
         </many-to-one>
         <property name="modFecha" type="java.util.Date">
-            <column name="MODFECHA" />
+            <column name="DT_MODFECHA" />
         </property>
     </class>
 </hibernate-mapping>
