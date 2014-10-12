@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.Microcurriculos" table="MICROCURRICULOS">
+        <id name="idMicrocurriculo" type="java.lang.String">
+            <column name="IDMICROCURRICULO" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="materia" class="com.udea.proint1.microcurriculo.dto.Materias" fetch="join">
+            <column name="MATERIA" />
+        </many-to-one>
+        <property name="resumen" type="java.lang.String">
+            <column name="RESUMEN" />
+        </property>
+        <property name="metodologia" type="java.lang.String">
+            <column name="METODOLOGIA" />
+        </property>
+        <many-to-one name="semestre" class="com.udea.proint1.microcurriculo.dto.Semestre" fetch="join">
+            <column name="SEMESTRE" />
+        </many-to-one>
+        <many-to-one name="responsable" class="com.udea.proint1.microcurriculo.dto.Persona" fetch="join">
+            <column name="RESPONSABLE" />
+        </many-to-one>
+        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+            <column name="MODUSUARIO" />
+        </many-to-one>
+        <property name="modFecha" type="java.util.Date">
+            <column name="MODFECHA" />
+        </property>
+    </class>
+</hibernate-mapping>

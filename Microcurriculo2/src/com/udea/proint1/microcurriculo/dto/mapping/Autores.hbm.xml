@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.Autores" table="AUTORES">
+        <id name="idAutor" type="int">
+            <column name="NB_IDAUTOR" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombres" type="java.lang.String">
+            <column name="VR_NOMBRES" />
+        </property>
+        <property name="apellidos" type="java.lang.String">
+            <column name="VR_APELLIDOS" />
+        </property>
+        <many-to-one name="pais" class="com.udea.proint1.microcurriculo.dto.Paises" fetch="join">
+            <column name="NB_PAIS" />
+        </many-to-one>
+        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+            <column name="VR_MODUSUARIO" />
+        </many-to-one>
+        <property name="modFecha" type="java.util.Date">
+            <column name="DT_MODFECHA" />
+        </property>
+    </class>
+</hibernate-mapping>

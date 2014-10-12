@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.UnidadesXMicro" table="UNIDADESXMICRO">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="microcurriculo" class="com.udea.proint1.microcurriculo.dto.Microcurriculos" fetch="join">
+            <column name="MICROCURRICULO" />
+        </many-to-one>
+        <many-to-one name="unidad" class="com.udea.proint1.microcurriculo.dto.Unidades" fetch="join">
+            <column name="UNIDAD" />
+        </many-to-one>
+        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+            <column name="MODUSUARIO" />
+        </many-to-one>
+        <property name="modFecha" type="java.util.Date">
+            <column name="MODFECHA" />
+        </property>
+    </class>
+</hibernate-mapping>

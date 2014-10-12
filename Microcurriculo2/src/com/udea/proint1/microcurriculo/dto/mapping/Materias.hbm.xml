@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.Materias" table="MATERIAS">
+        <id name="idMateria" type="int">
+            <column name="IDMATERIA" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" />
+        </property>
+        <property name="semestre" type="int">
+            <column name="SEMESTRE" />
+        </property>
+        <property name="creditos" type="int">
+            <column name="CREDITOS" />
+        </property>
+        <property name="habilitable" type="char">
+            <column name="HABILITABLE" />
+        </property>
+        <property name="validable" type="char">
+            <column name="VALIDABLE" />
+        </property>
+        <property name="clasificable" type="char">
+            <column name="CLASIFICABLE" />
+        </property>
+        <property name="ht" type="int">
+            <column name="HT" />
+        </property>
+        <property name="hp" type="int">
+            <column name="HP" />
+        </property>
+        <property name="htp" type="int">
+            <column name="HTP" />
+        </property>
+        <many-to-one name="nucleo" class="com.udea.proint1.microcurriculo.dto.Nucleo" fetch="join">
+            <column name="NUCLEO" />
+        </many-to-one>
+        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+            <column name="MODUSUARIO" />
+        </many-to-one>
+        <property name="modFecha" type="java.util.Date">
+            <column name="MODFECHA" />
+        </property>
+    </class>
+</hibernate-mapping>
