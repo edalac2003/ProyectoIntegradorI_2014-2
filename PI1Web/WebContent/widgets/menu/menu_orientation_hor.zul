@@ -20,7 +20,7 @@
 				<menuitem id="btnReporteActividades" label="Reporte de actividades docentes"/>
 				<menu id="btnCurriculo" label="Gestionar micro-curriculo">
 					<menupopup>
-						<menuitem id="btnIngresarCurriculo" label="Ingresar micro curriculo" />
+					<!-- <menuitem id="btnIngresarCurriculo" label="Ingresar micro curriculo" />
 						<menuitem id="btnAprobarCurriculo" label="Aprobar micro curriculo" />
 						<menuitem id="btnDevolverCurriculo" label="Devolver micro curriculo" />
 						<menuitem id="btnDuplicarCurriculo" label="Duplicar micro curriculo" />
@@ -32,6 +32,7 @@
 								<menuitem id="btnReporteCurriculoEstado" label="Crear reporte micro curriculo estado" />
 							</menupopup>
 						</menu>
+						-->
 					</menupopup>
 				</menu>
 				<menuitem id="btnAdministracion" label="Administración" />

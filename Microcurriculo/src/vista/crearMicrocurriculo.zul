@@ -1,6 +1,0 @@
-<?page title="Creaci�n de Microcurriculo" contentType="text/html;charset=UTF-8"?>
-<zk>
-<window title="Creaci�n de Microcurriculo" border="normal" apply="${crearMicrocurriculoCtl}">
-New Content Here!
-</window>
-</zk>
