@@ -5,23 +5,23 @@
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.Semestre" table="SEMESTRE">
         <id name="idSemestre" type="java.lang.String">
-            <column name="IDSEMESTRE" />
+            <column name="VR_IDSEMESTRE" />
             <generator class="assigned" />
         </id>
         <property name="descripcion" type="java.lang.String">
-            <column name="DESCRIPCION" />
+            <column name="VR_NOMBRE" />
         </property>
         <property name="fechaInicio" type="java.util.Date">
-            <column name="FECHAINICIO" />
+            <column name="DT_FECHAINICIO" />
         </property>
         <property name="fechaFin" type="java.util.Date">
-            <column name="FECHAFIN" />
+            <column name="DT_FECHAFIN" />
         </property>
         <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
-            <column name="MODUSUARIO" />
+            <column name="VR_MODUSUARIO" />
         </many-to-one>
         <property name="modFecha" type="java.util.Date">
-            <column name="MODFECHA" />
+            <column name="DT_MODFECHA" />
         </property>
     </class>
 </hibernate-mapping>
