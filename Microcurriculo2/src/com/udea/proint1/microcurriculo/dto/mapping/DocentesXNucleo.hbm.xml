@@ -3,22 +3,22 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.DocentesXNucleo" table="DOCENTESXNUCLEO">
+    <class name="com.udea.proint1.microcurriculo.dto.DocentesXNucleo" table="TB_ADM_DOCENTESXNUCLEO">
         <id name="id" type="int">
-            <column name="ID" />
+            <column name="NB_ID" />
             <generator class="assigned" />
         </id>
         <many-to-one name="nucleo" class="com.udea.proint1.microcurriculo.dto.Nucleo" fetch="join">
-            <column name="NUCLEO" />
+            <column name="NB_NUCLEO" />
         </many-to-one>
         <many-to-one name="docente" class="com.udea.proint1.microcurriculo.dto.Persona" fetch="join">
-            <column name="DOCENTE" />
+            <column name="VR_DOCENTE" />
         </many-to-one>
         <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
-            <column name="MODUSUARIO" />
+            <column name="VR_MODUSUARIO" />
         </many-to-one>
         <property name="modFecha" type="java.util.Date">
-            <column name="MODFECHA" />
+            <column name="DT_MODFECHA" />
         </property>
     </class>
 </hibernate-mapping>
