@@ -5,20 +5,20 @@
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.AutorXBiblio" table="AUTORXBIBLIO">
         <id name="id" type="int">
-            <column name="ID" />
+            <column name="NB_ID" />
             <generator class="assigned" />
         </id>
         <many-to-one name="bibliografia" class="com.udea.proint1.microcurriculo.dto.Bibliografia" fetch="join">
-            <column name="BIBLIOGRAFIA" />
+            <column name="NB_BIBLIOGRAFIA" />
         </many-to-one>
         <many-to-one name="autor" class="com.udea.proint1.microcurriculo.dto.Autores" fetch="join">
-            <column name="AUTOR" />
+            <column name="NB_AUTOR" />
         </many-to-one>
         <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
-            <column name="MODUSUARIO" />
+            <column name="VR_MODUSUARIO" />
         </many-to-one>
         <property name="modFecha" type="java.util.Date">
-            <column name="MODFECHA" />
+            <column name="DT_MODFECHA" />
         </property>
     </class>
 </hibernate-mapping>

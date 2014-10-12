@@ -5,20 +5,20 @@
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.Ciudades" table="CIUDADES">
         <id name="idCiudad" type="int">
-            <column name="IDCIUDAD" />
+            <column name="NB_IDCIUDAD" />
             <generator class="assigned" />
         </id>
         <property name="nombre" type="java.lang.String">
-            <column name="NOMBRE" />
+            <column name="VR_NOMBRE" />
         </property>
         <many-to-one name="departamento" class="com.udea.proint1.microcurriculo.dto.Departamentos" fetch="join">
-            <column name="DEPARTAMENTO" />
+            <column name="NB_DEPARTAMENTO" />
         </many-to-one>
         <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
-            <column name="MODUSUARIO" />
+            <column name="VR_MODUSUARIO" />
         </many-to-one>
         <property name="modFecha" type="java.util.Date">
-            <column name="MODFECHA" />
+            <column name="DT_MODFECHA" />
         </property>
     </class>
 </hibernate-mapping>
