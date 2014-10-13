@@ -4,7 +4,7 @@
 <!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.Materias" table="TB_ADM_MATERIAS">
-        <id name="idMateria" type="int">
+        <id name="idMateria" type="java.lang.String" length="10">
             <column name="VR_IDMATERIA" />
             <generator class="assigned" />
         </id>
@@ -35,8 +35,11 @@
         <property name="htp" type="int">
             <column name="NB_HTP" />
         </property>
+        <property name="estado" type="char">
+            <column name="BL_ESTADO" />
+        </property>
         <many-to-one name="nucleo" class="com.udea.proint1.microcurriculo.dto.Nucleo" fetch="join">
-            <column name="NB_NUCLEO" />
+            <column name="VR_NUCLEO" />
         </many-to-one>
         <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
             <column name="VR_MODUSUARIO" />

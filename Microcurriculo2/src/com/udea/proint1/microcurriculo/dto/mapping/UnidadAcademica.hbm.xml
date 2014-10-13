@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 12/10/2014 11:45:21 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.UnidadAcademica" table="TB_ADM_UNIDAD_ACADEMICA">
-        <id name="idUnidad" type="int">
-            <column name="NB_IDUNIDAD" />
+    <class name="com.udea.proint1.microcurriculo.dto.UnidadAcademica" table="TB_ADM_UNIDADACADEMICA">
+        <id name="idUnidad" type="java.lang.String" length="2">
+            <column name="VR_IDUNIDAD" />
             <generator class="assigned" />
         </id>
         <property name="nombre" type="java.lang.String">

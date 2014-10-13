@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Dependencia {
 
-	private int idDependencia;
+	private String idDependencia;
 	private String nombre;
 	private UnidadAcademica unidad;
 	private Usuarios modUsuario;
@@ -14,16 +14,16 @@ public class Dependencia {
 		
 	}
 
-	public int getIdDependencia() {
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getIdDependencia() {
 		return idDependencia;
 	}
 
-	public void setIdDependencia(int idDependencia) {
+	public void setIdDependencia(String idDependencia) {
 		this.idDependencia = idDependencia;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public void setNombre(String nombre) {

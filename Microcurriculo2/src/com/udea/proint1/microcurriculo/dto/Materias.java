@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Materias {
 
-	private int idMateria;
+	private String idMateria;
 	private String nombre;
 	private int semestre;
 	private int creditos;
@@ -15,6 +15,7 @@ public class Materias {
 	private int hp;
 	private int htp;
 	private Nucleo nucleo;
+	private char estado;
 	private Usuarios modUsuario;
 	private Date modFecha;
 	
@@ -22,16 +23,16 @@ public class Materias {
 		
 	}
 
-	public int getIdMateria() {
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getIdMateria() {
 		return idMateria;
 	}
 
-	public void setIdMateria(int idMateria) {
+	public void setIdMateria(String idMateria) {
 		this.idMateria = idMateria;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -109,6 +110,14 @@ public class Materias {
 
 	public void setNucleo(Nucleo nucleo) {
 		this.nucleo = nucleo;
+	}
+
+	public char getEstado() {
+		return estado;
+	}
+
+	public void setEstado(char estado) {
+		this.estado = estado;
 	}
 
 	public Usuarios getModUsuario() {

@@ -4,8 +4,8 @@
 <!-- Generated 11/10/2014 11:49:24 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.Nucleo" table="TB_ADM_NUCLEO">
-        <id name="nucleo" type="int">
-            <column name="NB_NUCLEO" />
+        <id name="nucleo" type="java.lang.String" length="6">
+            <column name="VR_IDNUCLEO" />
             <generator class="assigned" />
         </id>
         <property name="nombre" type="java.lang.String">

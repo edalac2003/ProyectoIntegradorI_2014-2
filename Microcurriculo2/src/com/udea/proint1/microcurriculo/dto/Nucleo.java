@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Nucleo {
 
-	private int nucleo;
+	private String idNucleo;
 	private String nombre;
 	private Dependencia dependencia;
 	private Usuarios modUsuario;
@@ -14,24 +14,24 @@ public class Nucleo {
 		
 	}
 
-	public int getNucleo() {
-		return nucleo;
-	}
-
-	public void setNucleo(int nucleo) {
-		this.nucleo = nucleo;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public Dependencia getDependencia() {
 		return dependencia;
+	}
+
+	public String getIdNucleo() {
+		return idNucleo;
+	}
+
+	public void setIdNucleo(String idNucleo) {
+		this.idNucleo = idNucleo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public void setDependencia(Dependencia dependencia) {

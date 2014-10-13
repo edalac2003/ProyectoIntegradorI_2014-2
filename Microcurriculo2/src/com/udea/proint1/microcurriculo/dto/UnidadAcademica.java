@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UnidadAcademica {
 
-	private int idUnidad;
+	private String idUnidad;
 	private String nombre;
 	private Usuarios modUsuario;
 	private Date modFecha;
@@ -13,13 +13,14 @@ public class UnidadAcademica {
 		
 	}
 
-	public int getIdUnidad() {
+	public String getIdUnidad() {
 		return idUnidad;
 	}
 
-	public void setIdUnidad(int idUnidad) {
+	public void setIdUnidad(String idUnidad) {
 		this.idUnidad = idUnidad;
 	}
+
 
 	public String getNombre() {
 		return nombre;

@@ -11,7 +11,7 @@ public class Departamentos {
 	private Date modFecha;
 	
 	public Departamentos() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public int getIdDepartamento() {
