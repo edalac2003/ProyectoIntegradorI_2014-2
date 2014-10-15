@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 
 import static org.junit.Assert.*;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -20,10 +21,12 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-@ContextConfiguration(locations = "classpath:spring-configuration.xml")
+@ContextConfiguration(locations = "classpath:configuracion-spring.xml")
 
 public class TestMateriasDAOHibernate {
 
+	static final Logger log = Logger.getLogger(TestMateriasDAOHibernate.class);
+	
 	@Autowired
 	MateriasDAO materiasDAO;
 	
@@ -45,11 +48,12 @@ public class TestMateriasDAOHibernate {
 			materiasDAO.guardarMateria(materia);
 		} catch (ExcepcionesDAO e) {
 
-			e.printStackTrace();
+			log.info(e.getMessage());
+			//e.printStackTrace();
 		}
 	}
 
-	@Test
+	/*@Test
 	public void testObtenerMateria() {
 		Materias materia;
 		
@@ -61,6 +65,6 @@ public class TestMateriasDAOHibernate {
 
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }
