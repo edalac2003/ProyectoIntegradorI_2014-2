@@ -8,15 +8,15 @@
             <column name="NB_ID" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="materia" class="com.udea.proint1.microcurriculo.dto.Materias" fetch="join">
+        <property name="materia" type="java.lang.String">
             <column name="VR_MATERIA" />
-        </many-to-one>
-        <many-to-one name="correquisito" class="com.udea.proint1.microcurriculo.dto.Materias" fetch="join">
+        </property>
+        <property name="correquisito" type="java.lang.String">
             <column name="VR_CORREQUISITO" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

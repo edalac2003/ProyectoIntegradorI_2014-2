@@ -7,7 +7,7 @@ public class Objetivos {
 	private int idObjetivos;
 	private String descripcion;
 	private boolean tipo;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Objetivos() {
@@ -38,16 +38,16 @@ public class Objetivos {
 		this.tipo = tipo;
 	}
 
-	public Usuarios getModUsuario() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

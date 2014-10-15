@@ -6,7 +6,7 @@ public class TipoPersona {
 
 	private int idPersona;
 	private String descripcion;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public TipoPersona() {
@@ -33,11 +33,11 @@ public class TipoPersona {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
 	}
 

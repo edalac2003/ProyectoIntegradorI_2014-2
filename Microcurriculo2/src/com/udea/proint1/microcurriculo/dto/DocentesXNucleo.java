@@ -5,9 +5,9 @@ import java.util.Date;
 public class DocentesXNucleo {
 
 	private int id;
-	private Nucleo nucleo;
-	private Persona docente;
-	private Usuarios modUsuario;
+	private String nucleo;
+	private String docente;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public DocentesXNucleo() {
@@ -22,32 +22,32 @@ public class DocentesXNucleo {
 		this.id = id;
 	}
 
-	public Nucleo getNucleo() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getNucleo() {
 		return nucleo;
 	}
 
-	public void setNucleo(Nucleo nucleo) {
+	public void setNucleo(String nucleo) {
 		this.nucleo = nucleo;
 	}
 
-	public Persona getDocente() {
+	public String getDocente() {
 		return docente;
 	}
 
-	public void setDocente(Persona docente) {
+	public void setDocente(String docente) {
 		this.docente = docente;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

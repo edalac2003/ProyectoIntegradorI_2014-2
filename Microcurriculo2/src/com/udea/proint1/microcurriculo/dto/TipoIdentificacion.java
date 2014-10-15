@@ -6,7 +6,7 @@ public class TipoIdentificacion {
 	
 	private int idIdentificacion;
 	private String descripcion;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 
 	public TipoIdentificacion() {
@@ -33,11 +33,11 @@ public class TipoIdentificacion {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
 	}
 

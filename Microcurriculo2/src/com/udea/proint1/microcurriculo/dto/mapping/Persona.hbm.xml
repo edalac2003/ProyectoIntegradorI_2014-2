@@ -19,20 +19,22 @@
         </property>
         <property name="telefono" type="java.lang.String">
             <column name="VR_TELEFONO" />
-        </property>
-        <many-to-one name="ciudad" class="com.udea.proint1.microcurriculo.dto.Ciudades" fetch="join">
+        </property>        
+        <property name="ciudad" type="int">
             <column name="NB_CIUDAD" />
-        </many-to-one>
+        </property>
         <property name="estado" type="char">
             <column name="BL_ESTADO" />
+        </property>        
+        <property name="idIdentificacion" type="int">
+            <column name="NB_TIPOIDENTIFICACION" />
         </property>
-        <many-to-one name="idIdentificacion" class="com.udea.proint1.microcurriculo.dto.TipoIdentificacion" fetch="join">
-            <column name="NB_TIPODEIDENTIFICACION" />
-        </many-to-one>
-        <many-to-one name="tipoPersona" class="com.udea.proint1.microcurriculo.dto.TipoPersona" fetch="join">
+        <property name="tipoPersona" type="int">
             <column name="NB_TIPOPERSONA" />
-        </many-to-one>
-        <one-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios"></one-to-one>
+        </property>
+        <property name="modUsuario" type="java.lang.String">
+            <column name="VR_MODUSUARIO" />
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

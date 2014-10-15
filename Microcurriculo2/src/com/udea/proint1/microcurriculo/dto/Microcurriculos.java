@@ -5,12 +5,12 @@ import java.util.Date;
 public class Microcurriculos {
 
 	private String idMicrocurriculo;
-	private Materias materia;
+	private String materia;
 	private String resumen;
 	private String metodologia;
-	private Semestre semestre;
-	private Persona responsable;
-	private Usuarios modUsuario;
+	private String semestre;
+	private String responsable;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Microcurriculos() {
@@ -25,11 +25,11 @@ public class Microcurriculos {
 		this.idMicrocurriculo = idMicrocurriculo;
 	}
 
-	public Materias getMateria() {
+	public String getMateria() {
 		return materia;
 	}
 
-	public void setMateria(Materias materia) {
+	public void setMateria(String materia) {
 		this.materia = materia;
 	}
 
@@ -49,37 +49,38 @@ public class Microcurriculos {
 		this.metodologia = metodologia;
 	}
 
-	public Semestre getSemestre() {
+	public String getSemestre() {
 		return semestre;
 	}
 
-	public void setSemestre(Semestre semestre) {
+	public void setSemestre(String semestre) {
 		this.semestre = semestre;
 	}
 
-	public Persona getResponsable() {
+	public String getResponsable() {
 		return responsable;
 	}
 
-	public void setResponsable(Persona responsable) {
+	public void setResponsable(String responsable) {
 		this.responsable = responsable;
+	}
+
+	public String getModUsuario() {
+		return modUsuario;
+	}
+
+	public void setModUsuario(String modUsuario) {
+		this.modUsuario = modUsuario;
 	}
 
 	public Date getModFecha() {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
-		return modUsuario;
-	}
-
-	public void setModUsuario(Usuarios modUsuario) {
-		this.modUsuario = modUsuario;
-	}
-
 	public void setModFecha(Date modFecha) {
 		this.modFecha = modFecha;
 	}
-
 	
+	
+
 }

@@ -5,9 +5,9 @@ import java.util.Date;
 public class UnidadesXMicro {
 
 	private int id;
-	private Microcurriculos microcurriculo;
-	private Unidades unidad;
-	private Usuarios modUsuario;
+	private String microcurriculo;
+	private int unidad;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public UnidadesXMicro() {
@@ -22,32 +22,32 @@ public class UnidadesXMicro {
 		this.id = id;
 	}
 
-	public Microcurriculos getMicrocurriculo() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getMicrocurriculo() {
 		return microcurriculo;
 	}
 
-	public void setMicrocurriculo(Microcurriculos microcurriculo) {
+	public void setMicrocurriculo(String microcurriculo) {
 		this.microcurriculo = microcurriculo;
 	}
 
-	public Unidades getUnidad() {
+	public int getUnidad() {
 		return unidad;
 	}
 
-	public void setUnidad(Unidades unidad) {
+	public void setUnidad(int unidad) {
 		this.unidad = unidad;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

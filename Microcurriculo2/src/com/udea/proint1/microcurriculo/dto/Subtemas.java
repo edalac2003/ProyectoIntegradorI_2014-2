@@ -6,8 +6,8 @@ public class Subtemas {
 
 	private int idSubtema;
 	private String descripcion;
-	private Temas tema;
-	private Usuarios usuario;
+	private int tema;
+	private String usuario;
 	private Date modFecha;
 	
 	public Subtemas() {
@@ -30,19 +30,20 @@ public class Subtemas {
 		this.descripcion = descripcion;
 	}
 
-	public Temas getTema() {
+	
+	public int getTema() {
 		return tema;
 	}
 
-	public void setTema(Temas tema) {
+	public void setTema(int tema) {
 		this.tema = tema;
 	}
 
-	public Usuarios getUsuario() {
+	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 

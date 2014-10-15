@@ -5,9 +5,9 @@ import java.util.Date;
 public class MateriasXPensum {
 
 	private int id;
-	private Pensum pensum;
-	private Materias materia;
-	private Usuarios modUsuario;
+	private int pensum;
+	private String materia;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public MateriasXPensum() {
@@ -22,31 +22,31 @@ public class MateriasXPensum {
 		this.id = id;
 	}
 
-	public Pensum getPensum() {
-		return pensum;
-	}
-
-	public void setPensum(Pensum pensum) {
-		this.pensum = pensum;
-	}
-
-	public Materias getMateria() {
-		return materia;
-	}
-
-	public void setMateria(Materias materia) {
-		this.materia = materia;
-	}
-
 	public Date getModFecha() {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
+	public int getPensum() {
+		return pensum;
+	}
+
+	public void setPensum(int pensum) {
+		this.pensum = pensum;
+	}
+
+	public String getMateria() {
+		return materia;
+	}
+
+	public void setMateria(String materia) {
+		this.materia = materia;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
 	}
 

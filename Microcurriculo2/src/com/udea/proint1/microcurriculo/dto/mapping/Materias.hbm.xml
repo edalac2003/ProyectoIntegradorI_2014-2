@@ -38,12 +38,12 @@
         <property name="estado" type="char">
             <column name="BL_ESTADO" />
         </property>
-        <many-to-one name="nucleo" class="com.udea.proint1.microcurriculo.dto.Nucleo" fetch="join">
+        <property name="nucleo" type="java.lang.String">
             <column name="VR_NUCLEO" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

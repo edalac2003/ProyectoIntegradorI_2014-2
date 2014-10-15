@@ -5,9 +5,9 @@ import java.util.Date;
 public class ObjetivosXUnidad {
 
 	private int id;
-	private Unidades unidad;
-	private Objetivos objetivo;
-	private Usuarios modUsuario;
+	private int unidad;
+	private int objetivo;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public ObjetivosXUnidad() {
@@ -22,32 +22,32 @@ public class ObjetivosXUnidad {
 		this.id = id;
 	}
 
-	public Unidades getUnidad() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public int getUnidad() {
 		return unidad;
 	}
 
-	public void setUnidad(Unidades unidad) {
+	public void setUnidad(int unidad) {
 		this.unidad = unidad;
 	}
 
-	public Objetivos getObjetivo() {
+	public int getObjetivo() {
 		return objetivo;
 	}
 
-	public void setObjetivo(Objetivos objetivo) {
+	public void setObjetivo(int objetivo) {
 		this.objetivo = objetivo;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

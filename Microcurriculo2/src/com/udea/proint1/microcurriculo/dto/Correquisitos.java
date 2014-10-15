@@ -5,9 +5,9 @@ import java.util.Date;
 public class Correquisitos {
 
 	private int id;
-	private Materias materia;
-	private Materias correquisito;
-	private Usuarios modUsuario;
+	private String materia;
+	private String correquisito;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Correquisitos() {
@@ -22,36 +22,36 @@ public class Correquisitos {
 		this.id = id;
 	}
 
-	public Materias getMateria() {
+	public void setModFecha(Date modFecha) {
+		this.modFecha = modFecha;
+	}
+
+	public String getMateria() {
 		return materia;
 	}
 
-	public void setMateria(Materias materia) {
+	public void setMateria(String materia) {
 		this.materia = materia;
 	}
 
-	public Materias getCorrequisito() {
+	public String getCorrequisito() {
 		return correquisito;
 	}
 
-	public void setCorrequisito(Materias correquisito) {
+	public void setCorrequisito(String correquisito) {
 		this.correquisito = correquisito;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
 	}
 
 	public Date getModFecha() {
 		return modFecha;
-	}
-
-	public void setModFecha(Date modFecha) {
-		this.modFecha = modFecha;
 	}
 
 	

@@ -6,8 +6,8 @@ public class Departamentos {
 
 	private int idDepartamento;
 	private String nombre;
-	private Paises pais;
-	private Usuarios modUsuario;
+	private int pais;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Departamentos() {
@@ -30,24 +30,24 @@ public class Departamentos {
 		this.nombre = nombre;
 	}
 
-	public Paises getPais() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public int getPais() {
 		return pais;
 	}
 
-	public void setPais(Paises pais) {
+	public void setPais(int pais) {
 		this.pais = pais;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

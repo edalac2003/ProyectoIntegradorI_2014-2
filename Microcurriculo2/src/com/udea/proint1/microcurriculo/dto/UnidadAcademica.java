@@ -6,7 +6,7 @@ public class UnidadAcademica {
 
 	private String idUnidad;
 	private String nombre;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public UnidadAcademica() {
@@ -30,16 +30,16 @@ public class UnidadAcademica {
 		this.nombre = nombre;
 	}
 
-	public Date getModFecha() {
-		return modFecha;
-	}
-
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
+	}
+
+	public Date getModFecha() {
+		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

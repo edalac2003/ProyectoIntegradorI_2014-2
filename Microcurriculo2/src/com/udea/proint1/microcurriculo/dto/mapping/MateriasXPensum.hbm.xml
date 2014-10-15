@@ -7,16 +7,16 @@
         <id name="id" type="int">
             <column name="NB_ID" />
             <generator class="assigned" />
-        </id>
-        <many-to-one name="pensum" class="com.udea.proint1.microcurriculo.dto.Pensum" fetch="join">
+        </id>        
+        <property name="pensum" type="int">
             <column name="NB_PENSUM" />
-        </many-to-one>
-        <many-to-one name="materia" class="com.udea.proint1.microcurriculo.dto.Materias" fetch="join">
+        </property>
+        <property name="materia" type="java.lang.String">
             <column name="VR_MATERIA" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property> 
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

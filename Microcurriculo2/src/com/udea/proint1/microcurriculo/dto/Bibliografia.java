@@ -9,7 +9,7 @@ public class Bibliografia {
 	private String sitioWeb;
 	private String ISBN;
 	private boolean tipo;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Bibliografia() {
@@ -56,16 +56,16 @@ public class Bibliografia {
 		this.tipo = tipo;
 	}
 
-	public Usuarios getModUsuario() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

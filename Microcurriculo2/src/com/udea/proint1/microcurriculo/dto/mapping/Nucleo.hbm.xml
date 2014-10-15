@@ -10,13 +10,13 @@
         </id>
         <property name="nombre" type="java.lang.String">
             <column name="VR_NOMBRE" />
-        </property>
-        <many-to-one name="dependencia" class="com.udea.proint1.microcurriculo.dto.Dependencia" fetch="join">
+        </property>        
+        <property name="dependencia" type="int">
             <column name="NB_DEPENDENCIA" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="VR_MODFECHA" />
         </property>

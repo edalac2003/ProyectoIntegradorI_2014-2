@@ -6,8 +6,8 @@ public class Dependencia {
 
 	private String idDependencia;
 	private String nombre;
-	private UnidadAcademica unidad;
-	private Usuarios modUsuario;
+	private String unidad;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Dependencia() {
@@ -30,23 +30,23 @@ public class Dependencia {
 		this.nombre = nombre;
 	}
 
-	public UnidadAcademica getUnidad() {
-		return unidad;
-	}
-
-	public void setUnidad(UnidadAcademica unidad) {
-		this.unidad = unidad;
-	}
-
 	public Date getModFecha() {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(String unidad) {
+		this.unidad = unidad;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
 	}
 

@@ -5,9 +5,9 @@ import java.util.Date;
 public class MicroXSemestre {
 
 	private int id;
-	private Microcurriculos microcurriculo;
-	private Semestre semestre;
-	private Usuarios modUsuario;
+	private String microcurriculo;
+	private String semestre;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public MicroXSemestre() {
@@ -22,32 +22,32 @@ public class MicroXSemestre {
 		this.id = id;
 	}
 
-	public Microcurriculos getMicrocurriculo() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getMicrocurriculo() {
 		return microcurriculo;
 	}
 
-	public void setMicrocurriculo(Microcurriculos microcurriculo) {
+	public void setMicrocurriculo(String microcurriculo) {
 		this.microcurriculo = microcurriculo;
 	}
 
-	public Semestre getSemestre() {
+	public String getSemestre() {
 		return semestre;
 	}
 
-	public void setSemestre(Semestre semestre) {
+	public void setSemestre(String semestre) {
 		this.semestre = semestre;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

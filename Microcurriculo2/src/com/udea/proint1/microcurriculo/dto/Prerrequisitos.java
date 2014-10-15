@@ -5,9 +5,9 @@ import java.util.Date;
 public class Prerrequisitos {
 
 	private int id;
-	private Materias materia;
-	private Materias prerrequisito;
-	private Usuarios modUsuario;
+	private String materia;
+	private String prerrequisito;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Prerrequisitos() {
@@ -22,32 +22,32 @@ public class Prerrequisitos {
 		this.id = id;
 	}
 
-	public Materias getMateria() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getMateria() {
 		return materia;
 	}
 
-	public void setMateria(Materias materia) {
+	public void setMateria(String materia) {
 		this.materia = materia;
 	}
 
-	public Materias getPrerrequisito() {
+	public String getPrerrequisito() {
 		return prerrequisito;
 	}
 
-	public void setPrerrequisito(Materias prerrequisito) {
+	public void setPrerrequisito(String prerrequisito) {
 		this.prerrequisito = prerrequisito;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

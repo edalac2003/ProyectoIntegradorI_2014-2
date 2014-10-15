@@ -9,11 +9,11 @@ public class Persona {
 	private String apellidos;
 	private String email;
 	private String telefono;
-	private Ciudades ciudad;
+	private int ciudad;
 	private char estado;
-	private TipoIdentificacion idIdentificacion;
-	private TipoPersona tipoPersona;
-	private Usuarios modUsuario;
+	private int idIdentificacion;
+	private int tipoPersona;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Persona() {
@@ -60,11 +60,11 @@ public class Persona {
 		this.telefono = telefono;
 	}
 
-	public Ciudades getCiudad() {
+	public int getCiudad() {
 		return ciudad;
 	}
 
-	public void setCiudad(Ciudades ciudad) {
+	public void setCiudad(int ciudad) {
 		this.ciudad = ciudad;
 	}
 
@@ -76,38 +76,37 @@ public class Persona {
 		this.estado = estado;
 	}
 
-	public TipoIdentificacion getIdIdentificacion() {
+	public int getIdIdentificacion() {
 		return idIdentificacion;
 	}
 
-	public void setIdIdentificacion(TipoIdentificacion idIdentificacion) {
+	public void setIdIdentificacion(int idIdentificacion) {
 		this.idIdentificacion = idIdentificacion;
 	}
 
-	public TipoPersona getTipoPersona() {
+	public int getTipoPersona() {
 		return tipoPersona;
 	}
 
-	public void setTipoPersona(TipoPersona tipoPersona) {
+	public void setTipoPersona(int tipoPersona) {
 		this.tipoPersona = tipoPersona;
+	}
+
+	public String getModUsuario() {
+		return modUsuario;
+	}
+
+	public void setModUsuario(String modUsuario) {
+		this.modUsuario = modUsuario;
 	}
 
 	public Date getModFecha() {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
-		return modUsuario;
-	}
-
-	public void setModUsuario(Usuarios modUsuario) {
-		this.modUsuario = modUsuario;
-	}
-
 	public void setModFecha(Date modFecha) {
 		this.modFecha = modFecha;
 	}
-	
-	
 
+	
 }

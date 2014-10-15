@@ -7,7 +7,7 @@ public class Temas {
 	private int idTema;
 	private String descripcion;
 	private int semanasRequeridas;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Temas() {
@@ -38,16 +38,16 @@ public class Temas {
 		this.semanasRequeridas = semanasRequeridas;
 	}
 
-	public Usuarios getModUsuario() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

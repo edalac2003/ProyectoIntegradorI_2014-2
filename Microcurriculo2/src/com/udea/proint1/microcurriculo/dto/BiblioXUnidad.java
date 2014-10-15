@@ -5,9 +5,9 @@ import java.util.Date;
 public class BiblioXUnidad {
 
 	private int id;
-	private Unidades unidad;
-	private Bibliografia bibliografia;
-	private Usuarios modUsuario;
+	private int unidad;
+	private int bibliografia;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public BiblioXUnidad() {
@@ -22,32 +22,32 @@ public class BiblioXUnidad {
 		this.id = id;
 	}
 
-	public Unidades getUnidad() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public int getUnidad() {
 		return unidad;
 	}
 
-	public void setUnidad(Unidades unidad) {
+	public void setUnidad(int unidad) {
 		this.unidad = unidad;
 	}
 
-	public Bibliografia getBibliografia() {
+	public int getBibliografia() {
 		return bibliografia;
 	}
 
-	public void setBibliografia(Bibliografia bibliografia) {
+	public void setBibliografia(int bibliografia) {
 		this.bibliografia = bibliografia;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

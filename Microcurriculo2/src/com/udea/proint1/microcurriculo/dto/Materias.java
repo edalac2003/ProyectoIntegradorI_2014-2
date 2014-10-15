@@ -14,9 +14,9 @@ public class Materias {
 	private int ht;
 	private int hp;
 	private int htp;
-	private Nucleo nucleo;
+	private int nucleo;
 	private char estado;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Materias() {
@@ -104,32 +104,32 @@ public class Materias {
 		this.htp = htp;
 	}
 
-	public Nucleo getNucleo() {
+	public char getEstado() {
+		return estado;
+	}
+
+	public int getNucleo() {
 		return nucleo;
 	}
 
-	public void setNucleo(Nucleo nucleo) {
+	public void setNucleo(int nucleo) {
 		this.nucleo = nucleo;
-	}
-
-	public char getEstado() {
-		return estado;
 	}
 
 	public void setEstado(char estado) {
 		this.estado = estado;
 	}
 
-	public Usuarios getModUsuario() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

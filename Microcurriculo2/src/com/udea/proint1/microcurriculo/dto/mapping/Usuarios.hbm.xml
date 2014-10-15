@@ -7,20 +7,19 @@
         <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />
-        </id>
-        <many-to-one name="persona" class="com.udea.proint1.microcurriculo.dto.Persona fetch="join">
+        </id>        
+        <property name="persona" type="java.lang.String">
             <column name="VR_PERSONA" />
-        </many-to-one>
-        
+        </property>        
         <property name="login" type="java.lang.String">
             <column name="LOGIN" />
         </property>
         <property name="password" type="java.lang.String">
             <column name="PASSWORD" />
-        </property>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>        
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="MODFECHA" />
         </property>

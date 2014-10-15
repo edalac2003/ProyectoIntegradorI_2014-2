@@ -8,15 +8,15 @@
             <column name="NB_ID" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="bibliografia" class="com.udea.proint1.microcurriculo.dto.Bibliografia" fetch="join">
-            <column name="NB_BIBLIOGRAFIA" />
-        </many-to-one>
-        <many-to-one name="autor" class="com.udea.proint1.microcurriculo.dto.Autores" fetch="join">
+        <property name="autor" type="int">
             <column name="NB_AUTOR" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="bibliografia" type="int">
+            <column name="NB_BIBLIOGRAFIA" />
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

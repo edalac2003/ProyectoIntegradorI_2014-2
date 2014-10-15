@@ -6,8 +6,8 @@ public class Ciudades {
 
 	private int idCiudad;
 	private String nombre;
-	private Departamentos departamento;
-	private Usuarios modUsuario;
+	private int departamento;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Ciudades() {
@@ -30,24 +30,24 @@ public class Ciudades {
 		this.nombre = nombre;
 	}
 
-	public Departamentos getDepartamento() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public int getDepartamento() {
 		return departamento;
 	}
 
-	public void setDepartamento(Departamentos departamento) {
+	public void setDepartamento(int departamento) {
 		this.departamento = departamento;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

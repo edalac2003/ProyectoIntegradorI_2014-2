@@ -11,12 +11,13 @@
         <property name="nombre" type="java.lang.String">
             <column name="VR_NOMBRE" />
         </property>
-        <many-to-one name="pais" class="com.udea.proint1.microcurriculo.dto.Paises" fetch="join">
+        
+        <property name="pais" type="int">
             <column name="NB_PAIS" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

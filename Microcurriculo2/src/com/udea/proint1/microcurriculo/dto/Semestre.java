@@ -8,7 +8,7 @@ public class Semestre {
 	private String descripcion;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Semestre() {
@@ -51,11 +51,11 @@ public class Semestre {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
 	}
 

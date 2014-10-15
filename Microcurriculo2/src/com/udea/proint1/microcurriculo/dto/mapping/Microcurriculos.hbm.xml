@@ -8,24 +8,26 @@
             <column name="VR_IDMICROCURRICULO" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="materia" class="com.udea.proint1.microcurriculo.dto.Materias" fetch="join">
+        
+        <property name="materia" type="java.lang.String">
             <column name="VR_MATERIA" />
-        </many-to-one>
+        </property>
         <property name="resumen" type="java.lang.String">
             <column name="VR_RESUMEN" />
         </property>
         <property name="metodologia" type="java.lang.String">
             <column name="VR_METODOLOGIA" />
         </property>
-        <many-to-one name="semestre" class="com.udea.proint1.microcurriculo.dto.Semestre" fetch="join">
+        
+        <property name="semestre" type="java.lang.String">
             <column name="NB_SEMESTRE" />
-        </many-to-one>
-        <many-to-one name="responsable" class="com.udea.proint1.microcurriculo.dto.Persona" fetch="join">
+        </property>
+        <property name="responsable" type="java.lang.String">
             <column name="VR_RESPONSABLE" />
-        </many-to-one>
-        <many-to-one name="modUsuario" class="com.udea.proint1.microcurriculo.dto.Usuarios" fetch="join">
+        </property>
+        <property name="modUsuario" type="java.lang.String">
             <column name="VR_MODUSUARIO" />
-        </many-to-one>
+        </property>
         <property name="modFecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>

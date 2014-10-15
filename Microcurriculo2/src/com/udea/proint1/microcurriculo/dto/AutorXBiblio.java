@@ -5,9 +5,9 @@ import java.util.Date;
 public class AutorXBiblio {
 
 	private int id;
-	private Bibliografia bibliografia;
-	private Autores autor;
-	private Usuarios modUsuario;
+	private int bibliografia;
+	private int autor;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public AutorXBiblio() {
@@ -22,32 +22,32 @@ public class AutorXBiblio {
 		this.id = id;
 	}
 
-	public Bibliografia getBibliografia() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public int getBibliografia() {
 		return bibliografia;
 	}
 
-	public void setBibliografia(Bibliografia bibliografia) {
+	public void setBibliografia(int bibliografia) {
 		this.bibliografia = bibliografia;
 	}
 
-	public Autores getAutor() {
+	public int getAutor() {
 		return autor;
 	}
 
-	public void setAutor(Autores autor) {
+	public void setAutor(int autor) {
 		this.autor = autor;
 	}
 
-	public Usuarios getModUsuario() {
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

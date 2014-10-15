@@ -5,10 +5,10 @@ import java.util.Date;
 public class Usuarios {
 
 	private int id;
-	private Persona persona;
+	private String persona;
 	private String login;
 	private String password;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	private boolean estado;
 	
@@ -22,14 +22,6 @@ public class Usuarios {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Persona getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
 	}
 
 	public String getLogin() {
@@ -48,14 +40,6 @@ public class Usuarios {
 		this.password = password;
 	}
 
-	public Usuarios getModUsuario() {
-		return modUsuario;
-	}
-
-	public void setModUsuario(Usuarios modUsuario) {
-		this.modUsuario = modUsuario;
-	}
-
 	public Date getModFecha() {
 		return modFecha;
 	}
@@ -66,6 +50,22 @@ public class Usuarios {
 
 	public boolean isEstado() {
 		return estado;
+	}
+
+	public String getPersona() {
+		return persona;
+	}
+
+	public void setPersona(String persona) {
+		this.persona = persona;
+	}
+
+	public String getModUsuario() {
+		return modUsuario;
+	}
+
+	public void setModUsuario(String modUsuario) {
+		this.modUsuario = modUsuario;
 	}
 
 	public void setEstado(boolean estado) {

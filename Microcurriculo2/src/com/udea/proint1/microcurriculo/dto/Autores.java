@@ -8,7 +8,7 @@ public class Autores {
 	private String nombres;
 	private String apellidos;
 	private Paises pais;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Autores() {
@@ -47,16 +47,16 @@ public class Autores {
 		this.pais = pais;
 	}
 
-	public Usuarios getModUsuario() {
+	public Date getModFecha() {
+		return modFecha;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public Date getModFecha() {
-		return modFecha;
 	}
 
 	public void setModFecha(Date modFecha) {

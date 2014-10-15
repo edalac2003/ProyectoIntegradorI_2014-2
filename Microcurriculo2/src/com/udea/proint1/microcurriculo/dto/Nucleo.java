@@ -6,20 +6,12 @@ public class Nucleo {
 
 	private String idNucleo;
 	private String nombre;
-	private Dependencia dependencia;
-	private Usuarios modUsuario;
+	private String dependencia;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Nucleo() {
 		
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public Dependencia getDependencia() {
-		return dependencia;
 	}
 
 	public String getIdNucleo() {
@@ -30,24 +22,32 @@ public class Nucleo {
 		this.idNucleo = idNucleo;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void setDependencia(Dependencia dependencia) {
+	public String getDependencia() {
+		return dependencia;
+	}
+
+	public void setDependencia(String dependencia) {
 		this.dependencia = dependencia;
+	}
+
+	public String getModUsuario() {
+		return modUsuario;
+	}
+
+	public void setModUsuario(String modUsuario) {
+		this.modUsuario = modUsuario;
 	}
 
 	public Date getModFecha() {
 		return modFecha;
-	}
-
-	public Usuarios getModUsuario() {
-		return modUsuario;
-	}
-
-	public void setModUsuario(Usuarios modUsuario) {
-		this.modUsuario = modUsuario;
 	}
 
 	public void setModFecha(Date modFecha) {

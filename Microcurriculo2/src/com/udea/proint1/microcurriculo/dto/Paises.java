@@ -6,7 +6,7 @@ public class Paises {
 
 	private int idPais;
 	private int nombre;
-	private Usuarios modUsuario;
+	private String modUsuario;
 	private Date modFecha;
 	
 	public Paises() {
@@ -33,16 +33,16 @@ public class Paises {
 		return modFecha;
 	}
 
-	public Usuarios getModUsuario() {
+	public void setModFecha(Date modFecha) {
+		this.modFecha = modFecha;
+	}
+
+	public String getModUsuario() {
 		return modUsuario;
 	}
 
-	public void setModUsuario(Usuarios modUsuario) {
+	public void setModUsuario(String modUsuario) {
 		this.modUsuario = modUsuario;
-	}
-
-	public void setModFecha(Date modFecha) {
-		this.modFecha = modFecha;
 	}
 
 	
