@@ -19,7 +19,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 
 	@Override
 	public void guardarMateria(Materias materia) throws ExcepcionesDAO {
-		Session session = null;
+		/*Session session = null;
 		Transaction tx = null;
 		
 		try{
@@ -29,7 +29,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 			
 		}catch (HibernateException e){
 			throw new ExcepcionesDAO();
-		}
+		}*/
 	}
 
 	@Override
