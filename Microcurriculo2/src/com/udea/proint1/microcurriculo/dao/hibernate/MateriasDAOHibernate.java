@@ -1,7 +1,9 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,7 +21,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 
 	@Override
 	public void guardarMateria(Materias materia) throws ExcepcionesDAO {
-		/*Session session = null;
+		Session session = null;
 		Transaction tx = null;
 		
 		try{
@@ -29,7 +31,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 			
 		}catch (HibernateException e){
 			throw new ExcepcionesDAO();
-		}*/
+		}
 	}
 
 	@Override
@@ -50,8 +52,20 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 
 	@Override
 	public List<Materias> listarMaterias() throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+		List<Materias> materias = new ArrayList<Materias>();
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(Materias.class);
+			
+			materias = criteria.list();
+			
+		}catch(HibernateException e){
+			
+		}
+		
+		return materias;
 	}
 
 	@Override
