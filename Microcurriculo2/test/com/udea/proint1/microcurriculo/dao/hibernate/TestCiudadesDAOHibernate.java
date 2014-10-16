@@ -27,7 +27,7 @@ public class TestCiudadesDAOHibernate {
 	@Test
 	public void testObtenerCiudad() {
 		try{
-			Ciudades ciudad = ciudadDAO.obtenerCiudad(2);
+			Ciudades ciudad = ciudadDAO.obtenerCiudad(20);
 			System.out.println(ciudad.getNombre());
 			assertTrue(true);
 		}catch(ExcepcionesDAO e){

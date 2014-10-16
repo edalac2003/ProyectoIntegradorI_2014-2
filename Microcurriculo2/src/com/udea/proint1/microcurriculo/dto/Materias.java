@@ -14,7 +14,7 @@ public class Materias {
 	private int ht;
 	private int hp;
 	private int htp;
-	private int nucleo;
+	private String nucleo;
 	private char estado;
 	private String modUsuario;
 	private Date modFecha;
@@ -108,14 +108,6 @@ public class Materias {
 		return estado;
 	}
 
-	public int getNucleo() {
-		return nucleo;
-	}
-
-	public void setNucleo(int nucleo) {
-		this.nucleo = nucleo;
-	}
-
 	public void setEstado(char estado) {
 		this.estado = estado;
 	}
@@ -134,6 +126,14 @@ public class Materias {
 
 	public void setModFecha(Date modFecha) {
 		this.modFecha = modFecha;
+	}
+
+	public String getNucleo() {
+		return nucleo;
+	}
+
+	public void setNucleo(String nucleo) {
+		this.nucleo = nucleo;
 	}
 	
 	
