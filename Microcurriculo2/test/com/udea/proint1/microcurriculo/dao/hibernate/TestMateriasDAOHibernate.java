@@ -49,7 +49,7 @@ public class TestMateriasDAOHibernate {
 		materias.setModFecha(null);
 		try{
 			materiasDAO.guardarMateria(materias);
-		}catch(HibernateException e){
+		}catch(ExcepcionesDAO e){
 			
 		}
 		
@@ -91,7 +91,7 @@ public class TestMateriasDAOHibernate {
 
 	@Test
 	public void testActualizarMateria() {
-		fail("Not yet implemented");
+		
 	}*/
 
 }
