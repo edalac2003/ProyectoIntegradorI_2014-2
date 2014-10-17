@@ -24,16 +24,33 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 @Transactional
 @ContextConfiguration(locations = "classpath:configuracion-spring.xml")
 
+/**
+ * 
+ * @author eacosta
+ *
+ */
 public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements MicrocurriculosDAO {
 	
 	public MicrocurriculosDAOHibernate() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
 	public void guardarMicrocurriculo(Microcurriculos microcurriculo)
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			
+			tx = session.beginTransaction();
+			session.save(microcurriculo);
+			tx.commit();
+			
+		}catch(HibernateException e){
+			
+		}
 
 	}
 

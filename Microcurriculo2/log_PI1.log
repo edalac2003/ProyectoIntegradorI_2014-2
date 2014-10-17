@@ -1083,3 +1083,23 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No m
 2014-10-15 23:09:18.204 - ERROR BasicPropertyAccessor$BasicSetter | expected type: int, actual value: java.lang.String
 2014-10-15 23:09:56.169 - ERROR BasicPropertyAccessor$BasicSetter | IllegalArgumentException in class: com.udea.proint1.microcurriculo.dto.Materias, setter method of property: nucleo
 2014-10-15 23:09:56.173 - ERROR BasicPropertyAccessor$BasicSetter | expected type: int, actual value: java.lang.String
+2014-10-16 17:18:32.342 - ERROR JDBCExceptionReporter | ORA-12899: value too large for column "PROINT2014-2"."TB_MIC_MICROCURRICULOS"."NB_SEMESTRE" (actual: 6, maximum: 5)
+
+2014-10-16 17:18:32.373 - ERROR JDBCExceptionReporter | ORA-12899: value too large for column "PROINT2014-2"."TB_MIC_MICROCURRICULOS"."NB_SEMESTRE" (actual: 6, maximum: 5)
+
+2014-10-16 17:19:04.913 - ERROR JDBCExceptionReporter | ORA-12899: value too large for column "PROINT2014-2"."TB_MIC_MICROCURRICULOS"."VR_MODUSUARIO" (actual: 22, maximum: 20)
+
+2014-10-16 17:19:04.923 - ERROR JDBCExceptionReporter | ORA-12899: value too large for column "PROINT2014-2"."TB_MIC_MICROCURRICULOS"."VR_MODUSUARIO" (actual: 22, maximum: 20)
+
+2014-10-16 17:19:37.612 - ERROR JDBCExceptionReporter | ORA-12899: value too large for column "PROINT2014-2"."TB_MIC_MICROCURRICULOS"."VR_RESPONSABLE" (actual: 22, maximum: 15)
+
+2014-10-16 17:19:37.622 - ERROR JDBCExceptionReporter | ORA-12899: value too large for column "PROINT2014-2"."TB_MIC_MICROCURRICULOS"."VR_RESPONSABLE" (actual: 22, maximum: 15)
+
+2014-10-16 17:23:02.116 - ERROR JDBCExceptionReporter | ORA-00001: unique constraint (PROINT2014-2.TB_MIC_MICROCURRICULOS_PK) violated
+
+2014-10-16 17:23:02.116 - ERROR JDBCExceptionReporter | ORA-00001: unique constraint (PROINT2014-2.TB_MIC_MICROCURRICULOS_PK) violated
+
+2014-10-16 22:53:59.274 - ERROR JDBCExceptionReporter | ORA-00001: unique constraint (PROINT2014-2.TB_MIC_MICROCURRICULOS_PK) violated
+
+2014-10-16 22:53:59.315 - ERROR JDBCExceptionReporter | ORA-00001: unique constraint (PROINT2014-2.TB_MIC_MICROCURRICULOS_PK) violated
+

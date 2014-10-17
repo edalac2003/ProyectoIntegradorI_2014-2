@@ -25,7 +25,11 @@
                 <value>com/udea/proint1/microcurriculo/dto/mapping/Ciudades.hbm.xml</value>
                 <value>com/udea/proint1/microcurriculo/dto/mapping/Materias.hbm.xml</value>
                 <value>com/udea/proint1/microcurriculo/dto/mapping/Microcurriculos.hbm.xml</value>
-                               
+                <value>com/udea/proint1/microcurriculo/dto/mapping/Persona.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/Unidades.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/Bibliografia.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/Objetivos.hbm.xml</value>
+                
             </list>
         </property>
        
@@ -49,5 +53,10 @@
     <bean id="microcurriculosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
          <property name="sessionFactory" ref="sessionFactory"/>  
     </bean>
+    
+    <bean id="personasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate">
+         <property name="sessionFactory" ref="sessionFactory"/>  
+    </bean>
+    
      
 </beans>

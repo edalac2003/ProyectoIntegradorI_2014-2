@@ -13,10 +13,10 @@
                         <value>jdbc:oracle:thin:@localhost:1521:XE</value>
                 </property>
                 <property name="username">
-                        <value>proint1</value>
+                        <value>proint2014-2</value>
                 </property>
                 <property name="password"> 
-                        <value>proint1</value>
+                        <value>proint2014-2</value>
                 </property>
         </bean>
         
