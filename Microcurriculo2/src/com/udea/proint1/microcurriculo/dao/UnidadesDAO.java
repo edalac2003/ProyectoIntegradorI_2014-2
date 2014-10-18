@@ -11,8 +11,6 @@ public interface UnidadesDAO {
 	
 	public Unidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO;
 	
-	public List<Unidades> listarUnidadesPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO;
-	
 	public void modificarUnidad(Unidades unidad) throws ExcepcionesDAO;
 
 }

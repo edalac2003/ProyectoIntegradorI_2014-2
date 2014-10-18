@@ -52,24 +52,7 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 		return unidad;
 	}
 
-	@Override
-	public List<Unidades> listarUnidadesPorMicrocurriculo(
-			String idMicrocurriculo) throws ExcepcionesDAO{
-		Session session = null;
-		List<Unidades> unidades = new ArrayList<Unidades>();
-		
-		try{
-			session = getSession();
-			Criteria criteria = session.createCriteria(Unidades.class);
-			unidades = criteria.list();
-						
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-		
-		return unidades;
-	}
-
+	
 	@Override
 	public void modificarUnidad(Unidades unidad) throws ExcepcionesDAO {
 		Session session = null;
