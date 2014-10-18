@@ -88,11 +88,4 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 		return personas;
 	}
 
-	@Override
-	public List<Persona> listarDocentePorNucleo(String idNucleo)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

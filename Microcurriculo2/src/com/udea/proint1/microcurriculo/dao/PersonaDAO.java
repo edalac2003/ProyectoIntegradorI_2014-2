@@ -17,6 +17,5 @@ public interface PersonaDAO {
 	
 	public List<Persona> listarPersonas() throws ExcepcionesDAO;
 	
-	public List<Persona> listarDocentePorNucleo(String idNucleo) throws ExcepcionesDAO;
 	
 }
