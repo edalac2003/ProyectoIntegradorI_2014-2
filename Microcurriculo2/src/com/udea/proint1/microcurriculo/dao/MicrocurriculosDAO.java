@@ -2,7 +2,10 @@ package com.udea.proint1.microcurriculo.dao;
 
 import java.util.List;
 
-import com.udea.proint1.microcurriculo.dto.Microcurriculos;
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /*
@@ -15,21 +18,21 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface MicrocurriculosDAO {
 
-	public void guardarMicrocurriculo(Microcurriculos microcurriculo) throws ExcepcionesDAO;
+	public void guardarMicrocurriculo(TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO;
 	
-	public Microcurriculos obtenerMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO;
+	public TbMicMicrocurriculos obtenerMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO;
 	
-	public void modificarMicrocurriculo (Microcurriculos microcurriculo) throws ExcepcionesDAO;
+	public void modificarMicrocurriculo (TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO;
 	
-	public List<Microcurriculos> listarMicrocurriculos() throws ExcepcionesDAO;
+	public List<TbMicMicrocurriculos> listarMicrocurriculos() throws ExcepcionesDAO;
 	
-	public List<Microcurriculos> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesDAO;
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesDAO;
 	
-	public List<Microcurriculos> listarMicrocurriculosPorNucleo(String idNucleo) throws ExcepcionesDAO;
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorNucleo(TbAdmNucleo nucleo) throws ExcepcionesDAO;
 	
-	public List<Microcurriculos> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesDAO;
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorMateria(TbAdmMaterias materia) throws ExcepcionesDAO;
 	
-	public List<Microcurriculos> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesDAO;
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorResponsable(TbAdmPersona responsable) throws ExcepcionesDAO;
 	
 	
 }

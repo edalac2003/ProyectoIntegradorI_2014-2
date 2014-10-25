@@ -3,11 +3,7 @@
 	<name>PI1Web</name>
 	<comment></comment>
 	<projects>
-		<project>Produccion</project>
-		<project>Microcurriculo</project>
-		<project>Dominio</project>
-		<project>Administracion</project>
-		<project>Actividad</project>
+		<project>Microcurriculo2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

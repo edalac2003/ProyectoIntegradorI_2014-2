@@ -3,6 +3,8 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapeos.Objetivos;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,7 +12,6 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.ObjetivosDAO;
-import com.udea.proint1.microcurriculo.dto.Objetivos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class ObjetivosDAOHibernate extends HibernateDaoSupport implements ObjetivosDAO {

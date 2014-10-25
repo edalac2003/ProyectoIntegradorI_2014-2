@@ -3,6 +3,8 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapeos.Unidades;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,7 +12,6 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesDAO;
-import com.udea.proint1.microcurriculo.dto.Unidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class UnidadesDAOHibernate extends HibernateDaoSupport implements UnidadesDAO {

@@ -1,12 +1,13 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import mapeos.Ciudades;
+import mapeos.Paises;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
-import com.udea.proint1.microcurriculo.dto.Ciudades;
-import com.udea.proint1.microcurriculo.dto.Paises;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class CiudadesDAOHibernate extends HibernateDaoSupport implements CiudadesDAO {

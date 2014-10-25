@@ -3,6 +3,11 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapeos.Materias;
+import mapeos.Microcurriculos;
+import mapeos.Nucleo;
+import mapeos.Persona;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -17,7 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
-import com.udea.proint1.microcurriculo.dto.Microcurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -71,8 +75,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements 
 	}
 
 	@Override
-	public void modificarMicrocurriculo(Microcurriculos microcurriculo)
-			throws ExcepcionesDAO {
+	public void modificarMicrocurriculo(Microcurriculos microcurriculo) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -129,24 +132,64 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements 
 	}
 
 	@Override
-	public List<Microcurriculos> listarMicrocurriculosPorNucleo(String idNucleo)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Microcurriculos> listarMicrocurriculosPorNucleo(Nucleo nucleo) throws ExcepcionesDAO {
+		Session session = null;
+        List<Microcurriculos> microcurriculos = new ArrayList<Microcurriculos>();
+       
+        try{
+               
+                session = getSession();
+                               
+                Query query = session.createQuery("from Microcurriculos as mic, Nucleo as nuc, Materias as mat where materia = :buscarMateria");
+               
+                query.setEntity("buscarNucleo", nucleo);
+               
+                microcurriculos = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return microcurriculos;
 	}
 
 	@Override
-	public List<Microcurriculos> listarMicrocurriculosPorMateria(String idMateria)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Microcurriculos> listarMicrocurriculosPorMateria(Materias materia) throws ExcepcionesDAO {
+		Session session = null;
+        List<Microcurriculos> microcurriculos = new ArrayList<Microcurriculos>();
+       
+        try{
+               
+                session = getSession();
+                               
+                Query query = session.createQuery("from Microcurriculos where materia = :buscarMateria");
+               
+                query.setEntity("buscarMateria", materia);
+               
+                microcurriculos = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return microcurriculos;
+
 	}
 
 	@Override
-	public List<Microcurriculos> listarMicrocurriculosPorResponsable(String idResponsable)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Microcurriculos> listarMicrocurriculosPorResponsable(Persona responsable) throws ExcepcionesDAO {
+		Session session = null;
+        List<Microcurriculos> microcurriculos = new ArrayList<Microcurriculos>();
+       
+        try{
+               
+                session = getSession();
+                               
+                Query query = session.createQuery("from Microcurriculos where responsable = :buscarResponsable");
+               
+                query.setEntity("buscarResponsable", responsable);
+               
+                microcurriculos = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return microcurriculos;
 	}
 
 }

@@ -2,7 +2,8 @@ package com.udea.proint1.microcurriculo.dao;
 
 import java.util.List;
 
-import com.udea.proint1.microcurriculo.dto.Persona;
+import mapeos.Persona;
+
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface PersonaDAO {

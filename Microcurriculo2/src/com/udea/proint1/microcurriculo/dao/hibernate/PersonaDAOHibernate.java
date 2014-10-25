@@ -3,6 +3,8 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapeos.Persona;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,7 +12,6 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
-import com.udea.proint1.microcurriculo.dto.Persona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
