@@ -2,18 +2,18 @@ package com.udea.proint1.microcurriculo.dao;
 
 import java.util.List;
 
-import com.udea.proint1.microcurriculo.dto.Subtemas;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface SubtemasDAO {
 
-	public void guardarSubtema(Subtemas subtema) throws ExcepcionesDAO;
+	public void guardarSubtema(TbMicSubtemas subtema) throws ExcepcionesDAO;
 	
-	public void modificarSubtema(Subtemas tema) throws ExcepcionesDAO;
+	public void modificarSubtema(TbMicSubtemas tema) throws ExcepcionesDAO;
 	
-	public Subtemas obtenerSubtemas(int idSubtema) throws ExcepcionesDAO;
+	public TbMicSubtemas obtenerSubtemas(int idSubtema) throws ExcepcionesDAO;
 	
-	public List<Subtemas> listarSubtemas() throws ExcepcionesDAO;
+	public List<TbMicSubtemas> listarSubtemas() throws ExcepcionesDAO;
 	
-	public List<Subtemas> listarSubtemasPorTema(int idTema) throws ExcepcionesDAO;
+	public List<TbMicSubtemas> listarSubtemasPorTema(int idTema) throws ExcepcionesDAO;
 }

@@ -3,8 +3,6 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
-import mapeos.Objetivos;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.ObjetivosDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class ObjetivosDAOHibernate extends HibernateDaoSupport implements ObjetivosDAO {
@@ -21,7 +20,7 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 	}
 
 	@Override
-	public void guardarObjetivo(Objetivos objetivo) throws ExcepcionesDAO {
+	public void guardarObjetivo(TbMicObjetivos objetivo) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -38,20 +37,20 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 	}
 
 	@Override
-	public Objetivos obtenerObjetivo(int idObjetivo) throws ExcepcionesDAO {
+	public TbMicObjetivos obtenerObjetivo(int idObjetivo) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Objetivos> listarObjetivosPorMicrocurriculo(
+	public List<TbMicObjetivos> listarObjetivosPorMicrocurriculo(
 			String idMicrocurriculo) throws ExcepcionesDAO {
 		Session session = null;
-		List<Objetivos> objetivos = new ArrayList<Objetivos>();
+		List<TbMicObjetivos> objetivos = new ArrayList<TbMicObjetivos>();
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(Objetivos.class);
+			Criteria criteria = session.createCriteria(TbMicObjetivos.class);
 			
 			objetivos = criteria.list();
 			
@@ -62,14 +61,14 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 	}
 
 	@Override
-	public List<Objetivos> listarObjetivosPorTipo(String idMicrocurriculo,
+	public List<TbMicObjetivos> listarObjetivosPorTipo(String idMicrocurriculo,
 			char tipo) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void modificarObjetivo(Objetivos objetivo) throws ExcepcionesDAO {
+	public void modificarObjetivo(TbMicObjetivos objetivo) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		

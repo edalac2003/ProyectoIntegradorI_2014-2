@@ -3,8 +3,6 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
-import mapeos.Microcurriculos;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -14,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.DepartamentosDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class DepartamentosDAOHibernate extends HibernateDaoSupport implements DepartamentosDAO {
@@ -50,7 +49,7 @@ public class DepartamentosDAOHibernate extends HibernateDaoSupport implements De
 		try{
 			session = getSession();
 			
-			Criteria criteria = session.createCriteria(Microcurriculos.class);
+			Criteria criteria = session.createCriteria(TbMicMicrocurriculos.class);
 			
 			log.info("********Obteniendo listado de Departamentos*********");
 			departamentos = criteria.list();

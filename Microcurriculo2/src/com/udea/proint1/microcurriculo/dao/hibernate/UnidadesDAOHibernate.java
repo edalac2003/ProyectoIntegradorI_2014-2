@@ -1,17 +1,12 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mapeos.Unidades;
-
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class UnidadesDAOHibernate extends HibernateDaoSupport implements UnidadesDAO {
@@ -21,7 +16,7 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 	}
 
 	@Override
-	public void guardarUnidad(Unidades unidad) throws ExcepcionesDAO {
+	public void guardarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -38,13 +33,13 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 	}
 
 	@Override
-	public Unidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
+	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
 		Session session = null;
-		Unidades unidad = null;
+		TbMicUnidades unidad = null;
 		
 		try{
 			session = getSession();
-			unidad = (Unidades)session.get(Unidades.class, idUnidad);
+			unidad = (TbMicUnidades)session.get(TbMicUnidades.class, idUnidad);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
@@ -55,7 +50,7 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 
 	
 	@Override
-	public void modificarUnidad(Unidades unidad) throws ExcepcionesDAO {
+	public void modificarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		

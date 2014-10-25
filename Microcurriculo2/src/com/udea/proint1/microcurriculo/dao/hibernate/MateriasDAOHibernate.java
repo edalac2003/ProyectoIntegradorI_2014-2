@@ -3,8 +3,6 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
-import mapeos.Materias;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class MateriasDAOHibernate extends HibernateDaoSupport implements MateriasDAO {
@@ -21,72 +20,41 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 	}
 
 	@Override
-	public void guardarMateria(Materias materia) throws ExcepcionesDAO {
-		Session session = null;
-		Transaction tx = null;
+	public void guardarMateria(TbAdmMaterias materia) throws ExcepcionesDAO {
+		// TODO Auto-generated method stub
 		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
-			session.save(materia);
-			
-		}catch (HibernateException e){
-			throw new ExcepcionesDAO();
-		}
 	}
 
 	@Override
-	public Materias obtenerMateria(String id) throws ExcepcionesDAO {
-		Session session = null;
-		Materias materia = null;
-		
-		try{
-			session = getSession();
-			materia = (Materias)session.get(Materias.class, id);
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-			
-		}		
-		return materia;
+	public TbAdmMaterias obtenerMateria(String id) throws ExcepcionesDAO {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<Materias> listarMaterias() throws ExcepcionesDAO {
-		Session session = null;
-		List<Materias> materias = new ArrayList<Materias>();
-		
-		try{
-			session = getSession();
-			Criteria criteria = session.createCriteria(Materias.class);
-			
-			materias = criteria.list();
-			
-		}catch(HibernateException e){
-			
-		}
-		
-		return materias;
+	public List<TbAdmMaterias> listarMaterias() throws ExcepcionesDAO {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<Materias> listarMateriasPorNucleo(String nucleo)
+	public List<TbAdmMaterias> listarMateriasPorNucleo(String nucleo)
 			throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Materias> listarMateriasPorSemestre(int semestre)
+	public List<TbAdmMaterias> listarMateriasPorSemestre(int semestre)
 			throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void actualizarMateria(Materias materia) throws ExcepcionesDAO {
+	public void actualizarMateria(TbAdmMaterias materia) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

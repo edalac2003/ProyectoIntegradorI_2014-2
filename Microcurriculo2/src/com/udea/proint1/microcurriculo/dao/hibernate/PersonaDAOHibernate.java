@@ -3,8 +3,6 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
-import mapeos.Persona;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
@@ -26,7 +25,7 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 	}
 
 	@Override
-	public void guardarPersona(Persona persona) throws ExcepcionesDAO {
+	public void guardarPersona(TbAdmPersona persona) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -44,19 +43,19 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 	}
 
 	@Override
-	public void modificarPersona(Persona persona) throws ExcepcionesDAO {
+	public void modificarPersona(TbAdmPersona persona) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Persona obtenerPersona(String idPersona) throws ExcepcionesDAO {
+	public TbAdmPersona obtenerPersona(String idPersona) throws ExcepcionesDAO {
 		Session session = null;
-		Persona persona = null;
+		TbAdmPersona persona = null;
 		
 		try {
 			session = getSession();
-			persona = (Persona)session.get(Persona.class, idPersona);
+			persona = (TbAdmPersona)session.get(TbAdmPersona.class, idPersona);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
@@ -66,19 +65,19 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 	}
 
 	@Override
-	public Persona obtenerPersonaPorTipo(String idPersona, int tipoPersona)
+	public TbAdmPersona obtenerPersonaPorTipo(String idPersona, int tipoPersona)
 			throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Persona> listarPersonas() throws ExcepcionesDAO {
+	public List<TbAdmPersona> listarPersonas() throws ExcepcionesDAO {
 		Session session = null;
-		List<Persona> personas = new ArrayList<Persona>();
+		List<TbAdmPersona> personas = new ArrayList<TbAdmPersona>();
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(Persona.class);
+			Criteria criteria = session.createCriteria(TbAdmPersona.class);
 			
 			personas = criteria.list();
 		}catch(HibernateException e){

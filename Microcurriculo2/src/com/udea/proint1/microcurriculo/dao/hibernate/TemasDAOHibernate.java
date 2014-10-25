@@ -1,94 +1,3 @@
-<<<<<<< HEAD
-package com.udea.proint1.microcurriculo.dao.hibernate;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import mapeos.Materias;
-import mapeos.Temas;
-
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
-import com.udea.proint1.microcurriculo.dao.TemasDAO;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
-
-public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
-
-	public TemasDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void guardarTema(Temas tema) throws ExcepcionesDAO {
-		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
-			session.save(tema);
-			
-		}catch (HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-	}
-
-	@Override
-	public List<Temas> listarTemas() throws ExcepcionesDAO {
-		Session session = null;
-		List<Temas> temas = new ArrayList<Temas>();
-		
-		try{
-			session = getSession();
-			Criteria criteria = session.createCriteria(Materias.class);
-			
-			temas = criteria.list();
-			
-		}catch(HibernateException e){
-			
-		}
-		
-		return temas;
-	}
-
-	@Override
-	public Temas obtenerTema(int idTema) throws ExcepcionesDAO {
-		Session session = null;
-		Temas tema = null;
-		
-		try{
-			session = getSession();
-			tema = (Temas)session.get(Temas.class, idTema);
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-			
-		}		
-		return tema;
-	}
-
-	@Override
-	public void actualizarTema(Temas tema) throws ExcepcionesDAO {
-		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
-			session.update(tema);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-	}
-
-}
-=======
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
 import java.util.ArrayList;
@@ -101,7 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.TemasDAO;
-import com.udea.proint1.microcurriculo.dto.Temas;
+import com.udea.proint1.microcurriculo.dto.TbMicTemas;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
@@ -119,7 +28,7 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 	 * 
 	 */
 	@Override
-	public void guardarTema(Temas tema) throws ExcepcionesDAO {
+	public void guardarTema(TbMicTemas tema) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -140,7 +49,7 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 	 * 
 	 */
 	@Override
-	public void modificarTema(Temas tema) throws ExcepcionesDAO {
+	public void modificarTema(TbMicTemas tema) throws ExcepcionesDAO {
 		Session session = null;
 		Transaction tx = null;
 		
@@ -159,13 +68,13 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 	 * 
 	 */
 	@Override
-	public Temas obtenerTema(int idTema) throws ExcepcionesDAO {
+	public TbMicTemas obtenerTema(int idTema) throws ExcepcionesDAO {
 		Session session = null;
-		Temas tema = null;
+		TbMicTemas tema = null;
 		
 		try{
 			session = getSession();
-			tema = (Temas)session.get(Temas.class, idTema);
+			tema = (TbMicTemas)session.get(TbMicTemas.class, idTema);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
@@ -178,13 +87,13 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 	 * 
 	 */
 	@Override
-	public List<Temas> listarTemas() throws ExcepcionesDAO {
+	public List<TbMicTemas> listarTemas() throws ExcepcionesDAO {
 		Session session = null;
-		List<Temas> temas = new ArrayList<Temas>();
+		List<TbMicTemas> temas = new ArrayList<TbMicTemas>();
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(Temas.class);
+			Criteria criteria = session.createCriteria(TbMicTemas.class);
 			temas = criteria.list();
 			
 		}catch(HibernateException e){
@@ -196,4 +105,3 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 	}
 
 }
->>>>>>> branch 'master' of https://github.com/edalac2003/ProyectoIntegradorI_2014-2
