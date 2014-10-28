@@ -8,9 +8,9 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface DocentesxNucleoNGC {
 	
-	public void guardarDocentexNucleo(int id, String idNucleo, String idPersona, String usuario, Date modFecha) throws ExcepcionesLogica;
+	public void guardarDocentexNucleo(TbAdmDocentesxnucleo docentexNucleo) throws ExcepcionesLogica;
 	
-	public void actualizarDocentexNucleo(String idNucleo, String idPersona, String usuario, Date modFecha) throws ExcepcionesLogica;
+	public void actualizarDocentexNucleo(TbAdmDocentesxnucleo docentexNucleo) throws ExcepcionesLogica;
 
 	public List<TbAdmDocentesxnucleo> listarDocentesxNucleo() throws ExcepcionesLogica;
 	

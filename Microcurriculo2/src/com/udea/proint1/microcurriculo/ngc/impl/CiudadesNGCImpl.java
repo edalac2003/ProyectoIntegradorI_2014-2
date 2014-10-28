@@ -13,13 +13,9 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class CiudadesNGCImpl implements CiudadesNGC {
 
-	private static Logger log=Logger.getLogger(CiudadesNGCImpl.class);
+	private static Logger log = Logger.getLogger(CiudadesNGCImpl.class);
 	
 	CiudadesDAO ciudadesDao;
-	
-	public CiudadesDAO getCiudadesDao() {
-		return ciudadesDao;
-	}
 
 	public void setCiudadesDao(CiudadesDAO ciudadesDao) {
 		this.ciudadesDao = ciudadesDao;

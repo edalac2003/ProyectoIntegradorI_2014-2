@@ -1,6 +1,5 @@
 package com.udea.proint1.microcurriculo.ngc.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate;
@@ -10,26 +9,20 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class CorrequisitosNGCImpl implements CorrequisitosNGC {
 
-	CorrequisitosDAOHibernate correquisitosDao;
+	CorrequisitosDAO correquisitosDao;
 	
 	public CorrequisitosNGCImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void guardarCorrequisito(int idCorrequisito, String idMateria1,
-			String idMateria2, int idUsuario, Date modFecha)
+	public void guardarCorrequisito(TbAdmCorrequisitos correquisito)
 			throws ExcepcionesLogica {
-		if(idCorrequisito == 0){
-			throw new ExcepcionesLogica("No se ingresó el id del nuevo microcurriculo");
-		}
-		
 
 	}
 
 	@Override
-	public void actualizarCorrequisito(String idMateria1, String idMateria2,
-			int idUsuario, Date modFecha) throws ExcepcionesLogica {
+	public void actualizarCorrequisito(TbAdmCorrequisitos correquisito) throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
 	}

@@ -1,6 +1,5 @@
 package com.udea.proint1.microcurriculo.ngc;
 
-import java.util.Date;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio;
@@ -10,7 +9,7 @@ public interface AutorxbiblioNGC {
 
 	
 	public TbMicAutorxbiblio obtenerEstados (int id) throws ExcepcionesLogica;
-	public void guardarAutorxbiblio (int id, int idBibliografia, int idAutor, String usuario, Date fecha) throws ExcepcionesLogica;
-    public void actualizarAutorxbiblio (int idBibliografia, int idAutor, String usuario, Date fecha) throws ExcepcionesLogica;
+	public void guardarAutorxbiblio (TbMicAutorxbiblio autorxBiblio) throws ExcepcionesLogica;
+    public void actualizarAutorxbiblio (TbMicAutorxbiblio autorxBiblio) throws ExcepcionesLogica;
     public List<TbMicAutorxbiblio> listarAutorxbiblio () throws ExcepcionesLogica;
 }

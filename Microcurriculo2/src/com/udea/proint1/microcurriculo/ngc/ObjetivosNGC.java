@@ -1,6 +1,5 @@
 package com.udea.proint1.microcurriculo.ngc;
 
-import java.util.Date;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
@@ -10,7 +9,7 @@ public interface ObjetivosNGC {
 
 	
 	public TbMicObjetivos obtenerSubtemas(int idObjetivo) throws ExcepcionesLogica;
-	public void guardarObjetivos (int idObjetivo, String descripcion, Character tipo,  String usuario, Date fecha) throws ExcepcionesLogica;
-    public void actualizarObjetivos (String descripcion, Character tipo,  String usuario, Date fecha) throws ExcepcionesLogica;
+	public void guardarObjetivos (TbMicObjetivos objetivo) throws ExcepcionesLogica;
+    public void actualizarObjetivos (TbMicObjetivos objetivo) throws ExcepcionesLogica;
     public List<TbMicObjetivos> listarObjetivos () throws ExcepcionesLogica;
 }

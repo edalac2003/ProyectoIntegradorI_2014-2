@@ -9,8 +9,8 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 public interface MateriasxpensumNGC {
 	
 	public TbMicMateriasxpensum obtenerMateriasxpensum (int id) throws ExcepcionesLogica;
-	public void guardarMateriasxpensum (int id, String idMateria, int idPensum, String usuario, Date fecha) throws ExcepcionesLogica;
-    public void actualizarMateriasxpensum (String idMateria, int idPensum, String usuario, Date fecha) throws ExcepcionesLogica;
+	public void guardarMateriasxpensum (TbMicMateriasxpensum materiasxPensum) throws ExcepcionesLogica;
+    public void actualizarMateriasxpensum (TbMicMateriasxpensum materiasxPensum) throws ExcepcionesLogica;
     public List<TbMicMateriasxpensum> listarMateriasxpensum () throws ExcepcionesLogica;
 
 }

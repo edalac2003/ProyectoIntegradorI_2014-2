@@ -7,7 +7,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class UnidadesNGCimpl implements UnidadesNGC {
+public class UnidadesNGCImpl implements UnidadesNGC {
 	
 private static Logger log=Logger.getLogger(UnidadesNGCImpl.class);
 	
@@ -28,15 +28,13 @@ private static Logger log=Logger.getLogger(UnidadesNGCImpl.class);
 	}
 
 	@Override
-	public void guardarUnidades(int idUnidad, String nombre, String usuario,
-			Date fecha) throws ExcepcionesLogica {
+	public void guardarUnidades(TbMicUnidades unidad) throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void actualizarUnidades(String nombre, String usuario, Date fecha)
-			throws ExcepcionesLogica {
+	public void actualizarUnidades(TbMicUnidades unidad) throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
 	}

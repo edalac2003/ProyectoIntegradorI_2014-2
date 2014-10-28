@@ -9,8 +9,8 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 public interface MicrocurriculosNGC {
 	
 	public TbMicMicrocurriculos obtenerMicrocurriculos (int idMicrocurriculo) throws ExcepcionesLogica;
-	public void guardarMicrocurriculos (int idMicrocurriculo, String idMateria, String resumen, String metodologia, int semestre, String responsable, String usuario, Date fecha) throws ExcepcionesLogica;
-    public void actualizarMicrocurriculos (String idMateria, String resumen, String metodologia, int semestre, String responsable, String usuario, Date fecha) throws ExcepcionesLogica;
+	public void guardarMicrocurriculos (TbMicMicrocurriculos microcurriculo) throws ExcepcionesLogica;
+    public void actualizarMicrocurriculos (TbMicMicrocurriculos microcurriculo) throws ExcepcionesLogica;
     public List<TbMicMicrocurriculos> listarMicrocurriculos () throws ExcepcionesLogica;
 
 }

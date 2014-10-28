@@ -18,22 +18,27 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	DependenciasDAO dependenciaDao;
 	
 	UnidadesAcademicasDAO unidadAcademicaDao;
-	
+
+	public void setDependenciaDao(DependenciasDAO dependenciaDao) {
+		this.dependenciaDao = dependenciaDao;
+	}
+
+	public void setUnidadAcademicaDao(UnidadesAcademicasDAO unidadAcademicaDao) {
+		this.unidadAcademicaDao = unidadAcademicaDao;
+	}
 
 	public DependenciaNGCImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void guardarDependencia(String id, String idUnidad, String nombre,
-			String Usuario, Date modFecha) throws ExcepcionesLogica {
+	public void guardarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void actualizarDependencia(String idUnidad, String nombre,
-			String Usuario, Date modFecha) throws ExcepcionesLogica {
+	public void actualizarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
 	}

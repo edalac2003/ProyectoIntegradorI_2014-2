@@ -4,10 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmUsuarios;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
 import com.udea.proint1.microcurriculo.ngc.UsuariosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class UnidadesxmicroNGCimpl implements UnidadesxmicroNGC {
+public class UnidadesxmicroNGCImpl implements UnidadesxmicroNGC {
 
 private static Logger log=Logger.getLogger(UnidadesxmicroNGCImpl.class);
 	
@@ -27,16 +28,14 @@ private static Logger log=Logger.getLogger(UnidadesxmicroNGCImpl.class);
 	}
 
 	@Override
-	public void guardarUsuarios(int id, int idPersona, String login,
-			String password, int estado, String usuario, Date fecha)
+	public void guardarUsuarios(TbMicUnidadesxmicro unidadesxMicro)
 			throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void actualizarUsuarios(int idPersona, String login,
-			String password, int estado, String usuario, Date fecha)
+	public void actualizarUsuarios(TbAdmUsuarios usuario)
 			throws ExcepcionesLogica {
 		// TODO Auto-generated method stub
 
