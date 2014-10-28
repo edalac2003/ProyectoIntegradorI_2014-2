@@ -1,6 +1,7 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -100,14 +101,43 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 	@Override
 	public List<TbAdmMaterias> listarMateriasPorSemestre(int semestre)
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+        List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+       
+        try{
+               
+                session = getSession();	
+                               
+                Query query = session.createQuery("from TbMicMicrocurriculos where nbSemestre = :nroSemestre");
+               
+                query.setInteger("nroSemestre", semestre);
+               
+                materias = query.list();
+                
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return materias;
 	}
 
 	@Override
 	public void actualizarMateria(TbAdmMaterias materia) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			session = getSession(true);
+
+			tx = session.beginTransaction();
+			session.update(materia);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, editar");
+		} finally {
+			if (session != null)
+				session.close();
+		}
 	}
 
 }

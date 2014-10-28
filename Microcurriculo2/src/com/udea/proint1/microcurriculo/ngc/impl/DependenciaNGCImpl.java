@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.udea.proint1.microcurriculo.dao.DependenciasDAO;
+import com.udea.proint1.microcurriculo.dao.UnidadesAcademicasDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -13,9 +15,9 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	
 	private static Logger log=Logger.getLogger(DependenciaNGCImpl.class);
 	
-	DependenciaDao dependenciaDao;
+	DependenciasDAO dependenciaDao;
 	
-	UnidadAcademicaDao unidadAcademicaDao;
+	UnidadesAcademicasDAO unidadAcademicaDao;
 	
 
 	public DependenciaNGCImpl() {

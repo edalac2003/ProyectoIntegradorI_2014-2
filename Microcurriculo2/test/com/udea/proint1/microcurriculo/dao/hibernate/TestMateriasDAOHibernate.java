@@ -1,9 +1,16 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,16 +62,16 @@ public class TestMateriasDAOHibernate {
 		
 	}
 
-	/*@Test
+	@Test
 	public void testObtenerMateria() {
 		try{
-			Materias materia = materiasDAO.obtenerMateria("20100101");
-			System.out.println(materia.getNombre());
+			TbAdmMaterias materia = materiasDAO.obtenerMateria("0000000009");
+			System.out.println(materia.getVrNombre());
 			assertTrue(true);
 		}catch(ExcepcionesDAO e){
 			
 		}
-	}*/
+	}
 
 	/*@Test
 	public void testListarMaterias() {
@@ -77,21 +84,56 @@ public class TestMateriasDAOHibernate {
 		}catch(ExcepcionesDAO e){
 			
 		}
-	}*/
-
-	/*@Test
-	public void testListarMateriasPorNucleo() {
-		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testListarMateriasPorNucleo() {
+		
+	}
+	*/
 	@Test
 	public void testListarMateriasPorSemestre() {
-		fail("Not yet implemented");
+		 
+		 List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+		 try{
+			 materias = materiasDAO.listarMateriasPorSemestre(201402);
+			 Iterator<TbAdmMaterias> iterador = materias.listIterator();
+			 while( iterador.hasNext() ) {
+				    TbAdmMaterias m = (TbAdmMaterias) iterador.next();
+				    System.out.println(m.getVrNombre());
+				   //si es necesario lo borramos con:
+				          //iterador.remove();
+			 }
+		 }catch(ExcepcionesDAO e){
+			 
+		 }
 	}
 
 	@Test
+	@Rollback(false)
 	public void testActualizarMateria() {
-		
-	}*/
+		TbAdmMaterias materia = new TbAdmMaterias();
+		materia.setVrIdmateria("0000000009");
+		materia.setVrNombre("Logica y Representación III");
+		materia.setNbSemestre(1);
+		materia.setNbCreditos(4);
+		materia.setBlHabilitable('0');
+		materia.setBlValidable('1');
+		materia.setBlClasificable('0');
+		materia.setNbHt(10);
+		materia.setNbHp(15);
+		materia.setNbHtp(12);
+		TbAdmNucleo nucleo  = new TbAdmNucleo();
+		nucleo.setVrNombre("2010");
+		materia.setTbAdmNucleo(nucleo);
+		materia.setVrModusuario("USER");
+		materia.setDtModfecha(null);
+		try {
+			materiasDAO.actualizarMateria(materia);
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

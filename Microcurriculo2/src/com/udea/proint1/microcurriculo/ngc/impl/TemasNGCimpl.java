@@ -6,8 +6,6 @@ import java.util.List;
 import com.udea.proint1.microcurriculo.dto.TbMicTemas;
 import com.udea.proint1.microcurriculo.ngc.TemasNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
-
-public class TemasNGCimpl implements TemasNGC {
 	
 	public class TemasNGCimpl implements TemasNGC {
 		

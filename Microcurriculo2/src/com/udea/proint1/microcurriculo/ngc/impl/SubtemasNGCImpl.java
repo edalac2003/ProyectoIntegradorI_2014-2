@@ -3,13 +3,13 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
 import com.udea.proint1.microcurriculo.ngc.SubtemasNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class SubtemasNGCimpl implements SubtemasNGC {
-
-public class SubtemasNGCimpl implements SubtemasNGC {
+public class SubtemasNGCImpl implements SubtemasNGC {
 		
 		private static Logger log=Logger.getLogger(SubtemasNGCImpl.class);
 		

@@ -23,8 +23,8 @@ public class TestMicrocurriculosDAOHibernate {
 	static final Logger log = Logger.getLogger(TestMicrocurriculosDAOHibernate.class);
 	@Autowired 
 	MicrocurriculosDAO microcurriculosDAO;
-	
-	/*@Test
+	/*
+	@Test
 	public void testMicrocurriculosDAOHibernate() {
 		fail("Not yet implemented");
 	}*/
@@ -49,15 +49,15 @@ public class TestMicrocurriculosDAOHibernate {
 			
 		}
 	}
-
-	/*@Test
+	/*
+	@Test
 	public void testObtenerMicrocurriculo() {
 		try{
-			Microcurriculos microcurriculo = microcurriculosDAO.obtenerMicrocurriculo("2010010101");
+			TbMicMicrocurriculos microcurriculo = microcurriculosDAO.obtenerMicrocurriculo("2010010101");
 			if (microcurriculo == null){
 				System.out.println("No se ha encontrado ninguna información");
 			}else{
-				System.out.println(microcurriculo.getMateria());
+				System.out.println(microcurriculo.getTbAdmMaterias().getVrNombre());
 			}
 		}catch(ExcepcionesDAO e){
 			
@@ -66,7 +66,7 @@ public class TestMicrocurriculosDAOHibernate {
 
 	/*@Test
 	public void testListarMicrocurriculos() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test

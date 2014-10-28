@@ -73,5 +73,11 @@
      
     <bean id="ciudadesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadesDAOHibernate">
          <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>   
+    </bean>
+    <bean id="microcurriculosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
+         <property name="sessionFactory" ref="sessionFactory"/>  
+    </bean>
+    <bean id="materiasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
+         <property name="sessionFactory" ref="sessionFactory"/>  
+    </bean>    
 </beans>

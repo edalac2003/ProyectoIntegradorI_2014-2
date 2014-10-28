@@ -3,13 +3,14 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate;
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisitos;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class CorrequisitosNGCImpl implements CorrequisitosNGC {
 
-	CorrequisitosDAO correquisitosDao;
+	CorrequisitosDAOHibernate correquisitosDao;
 	
 	public CorrequisitosNGCImpl() {
 		// TODO Auto-generated constructor stub
