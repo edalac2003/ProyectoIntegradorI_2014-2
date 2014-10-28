@@ -86,8 +86,8 @@ public class TbAdmMaterias implements java.io.Serializable {
 		return this.tbAdmNucleo;
 	}
 
-	public void setTbAdmNucleo(TbAdmNucleo tbAdmNucleo) {
-		this.tbAdmNucleo = tbAdmNucleo;
+	public void setTbAdmNucleo(TbAdmNucleo nucleo) {
+		this.tbAdmNucleo = nucleo;
 	}
 
 	public String getVrNombre() {

@@ -8,6 +8,7 @@ import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
 import com.udea.proint1.microcurriculo.dao.hibernate.DepartamentosDAOHibernate;
 import com.udea.proint1.microcurriculo.dto.TbAdmCiudades;
 import com.udea.proint1.microcurriculo.ngc.CiudadesNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class CiudadesNGCImpl implements CiudadesNGC {
@@ -34,14 +35,24 @@ public class CiudadesNGCImpl implements CiudadesNGC {
 			throw new ExcepcionesLogica("No se ha ingresado una identificación de ciudad, este está vacio");
 		}
 		TbAdmCiudades ciudad = null;
-		ciudad = ciudadesDao.obtenerCiudad(id);
+		try {
+			ciudad = ciudadesDao.obtenerCiudad(id);
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return ciudad;
 	}
 
 	@Override
 	public List<TbAdmCiudades> listarCiudades() throws ExcepcionesLogica {
 		List<TbAdmCiudades> listaCiudades = null;
-		listaCiudades = ciudadesDao.listarCiudades();
+		try {
+			listaCiudades = ciudadesDao.listarCiudades();
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return listaCiudades;
 	}
 

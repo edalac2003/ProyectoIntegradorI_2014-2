@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.ObjetivosDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -38,8 +39,17 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 
 	@Override
 	public TbMicObjetivos obtenerObjetivo(int idObjetivo) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+		TbMicObjetivos objetivo = null;
+		
+		try{
+			session = getSession();
+			objetivo = (TbMicObjetivos)session.get(TbMicObjetivos.class, idObjetivo);
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+		return objetivo;
 	}
 
 	@Override

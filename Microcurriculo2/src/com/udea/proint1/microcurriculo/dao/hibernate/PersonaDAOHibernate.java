@@ -44,7 +44,18 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 
 	@Override
 	public void modificarPersona(TbAdmPersona persona) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.update(persona);
+			tx.commit();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
 
 	}
 

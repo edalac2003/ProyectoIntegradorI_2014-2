@@ -1,7 +1,5 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import static org.junit.Assert.*;
-
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
-import com.udea.proint1.microcurriculo.dto.Microcurriculos;
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,15 +32,17 @@ public class TestMicrocurriculosDAOHibernate {
 	@Test
 	@Rollback(true)
 	public void testGuardarMicrocurriculo() {
-		Microcurriculos microcurriculo = new Microcurriculos();
-		microcurriculo.setIdMicrocurriculo("2010010101");
-		microcurriculo.setMateria("20100101");
-		microcurriculo.setResumen("Este es un resumen");
-		microcurriculo.setMetodologia("Esta es la Metodologia");
-		microcurriculo.setSemestre("20142");
-		microcurriculo.setResponsable("RESPONSABLE");
-		microcurriculo.setModUsuario("QUIEN MODIFICA");
-		microcurriculo.setModFecha(null);
+		TbMicMicrocurriculos microcurriculo = new TbMicMicrocurriculos();
+		microcurriculo.setVrIdmicrocurriculo("2010010101");
+		TbAdmMaterias materias = new TbAdmMaterias();
+		materias.setVrNombre("Logica");
+		microcurriculo.setTbAdmMaterias(materias);
+		microcurriculo.setVrResumen("Este es un resumen");
+		microcurriculo.setVrMetodologia("Esta es la Metodologia");
+		microcurriculo.setNbSemestre(20142);
+		microcurriculo.setVrResponsable("RESPONSABLE");
+		microcurriculo.setVrModusuario("QUIEN MODIFICA");
+		microcurriculo.setDtModfecha(null);
 		try{
 			microcurriculosDAO.guardarMicrocurriculo(microcurriculo);
 		}catch(ExcepcionesDAO e){

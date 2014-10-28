@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class TbMicMicroxestado implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbId;
 	private TbMicEstados tbMicEstados;
 	private TbMicMicrocurriculos tbMicMicrocurriculos;
@@ -27,7 +31,7 @@ public class TbMicMicroxestado implements java.io.Serializable {
 
 	public TbMicMicroxestado(int nbId, TbMicEstados tbMicEstados,
 			TbMicMicrocurriculos tbMicMicrocurriculos, String vrModusuario,
-			Date dtModusuario) {
+			Date dtModfecha) {
 		this.nbId = nbId;
 		this.tbMicEstados = tbMicEstados;
 		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
@@ -68,11 +72,11 @@ public class TbMicMicroxestado implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 	}
 
-	public Date getDtModusuario() {
+	public Date getDtModfecha() {
 		return this.dtModfecha;
 	}
 
-	public void setDtModusuario(Date dtModusuario) {
+	public void setDtModfecha(Date dtModusuario) {
 		this.dtModfecha = dtModusuario;
 	}
 

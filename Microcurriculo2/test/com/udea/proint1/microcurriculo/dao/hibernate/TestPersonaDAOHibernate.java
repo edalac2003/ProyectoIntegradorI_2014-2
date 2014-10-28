@@ -1,6 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
-import com.udea.proint1.microcurriculo.dto.Persona;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,15 +27,15 @@ public class TestPersonaDAOHibernate {
 		fail("Not yet implemented");
 	}
 
-	/*@Test
+	@Test
 	public void testGuardarPersona() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	public void testModificarPersona() {
 		fail("Not yet implemented");
-	}*/
+	}
 
 	/*@Test
 	public void testObtenerPersona() {
@@ -53,8 +53,8 @@ public class TestPersonaDAOHibernate {
 	@Test
 	public void testListarPersonas() {
 		try{
-			for(Persona persona: personaDAO.listarPersonas()){
-				System.out.println(persona.getApellidos()+" "+persona.getNombres());
+			for(TbAdmPersona persona: personaDAO.listarPersonas()){
+				System.out.println(persona.getVrApellidos()+" "+persona.getVrNombres());
 			}
 		}catch(ExcepcionesDAO e){
 			

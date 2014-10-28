@@ -2,6 +2,8 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +29,8 @@ public class TestCiudadesDAOHibernate {
 	@Test
 	public void testObtenerCiudad() {
 		try{
-			TbAdmCiudades ciudad = ciudadDao.obtenerCiudad(20);
-			System.out.println(ciudad.getVrNombre());
+			List <TbAdmCiudades> ciudad = ciudadDao.listarCiudades();
+			//
 			assertTrue(true);
 		}catch(ExcepcionesDAO e){
 			

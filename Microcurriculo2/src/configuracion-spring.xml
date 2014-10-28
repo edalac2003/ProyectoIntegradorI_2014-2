@@ -22,13 +22,38 @@
         <property name="mappingResources">
             <list>
                
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Ciudades.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Materias.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Microcurriculos.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Persona.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Unidades.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Bibliografia.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/Objetivos.hbm.xml</value>
+               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudades.hbm.xml</value>
+               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisitos.hbm.xml</value>
+               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamentos.hbm.xml</value>
+               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentesxnucleo.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMaterias.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPaises.hbm.xml</value>
+                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisitos.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuarios.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutores.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutorxbiblio.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstados.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriasxpensum.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculos.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxsemestre.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivos.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivosxmicro.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemas.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemas.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemasxunidad.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidades.hbm.xml</value>
+              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadesxmicro.hbm.xml</value>
                 
             </list>
         </property>
@@ -42,21 +67,11 @@
         </property>
     </bean>
    
-    <bean id="ciudadDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadesDAOHibernate">
+    <bean id="departamentosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentosDAOHibernate">
          <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    
-    <bean id="materiasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    
-    <bean id="microcurriculosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    
-    <bean id="personasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    
+    </bean>    
      
+    <bean id="ciudadesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadesDAOHibernate">
+         <property name="sessionFactory" ref="sessionFactory"/>  
+    </bean>   
 </beans>

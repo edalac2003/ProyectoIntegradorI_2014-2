@@ -69,8 +69,8 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 		return this.tbAdmMaterias;
 	}
 
-	public void setTbAdmMaterias(TbAdmMaterias tbAdmMaterias) {
-		this.tbAdmMaterias = tbAdmMaterias;
+	public void setTbAdmMaterias(TbAdmMaterias materia) {
+		this.tbAdmMaterias = materia;
 	}
 
 	public String getVrResumen() {
