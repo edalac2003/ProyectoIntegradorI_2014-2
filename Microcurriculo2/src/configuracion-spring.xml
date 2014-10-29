@@ -1,83 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-        <property name="username" value="proint2014-2"></property>
-        <property name="password" value="proint2014-2"></property>  
-    </bean>
-   
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-   
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="mappingResources">
-            <list>
-               
-               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudades.hbm.xml</value>
-               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisitos.hbm.xml</value>
-               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamentos.hbm.xml</value>
-               	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentesxnucleo.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMaterias.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPaises.hbm.xml</value>
-                <value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisitos.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuarios.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutores.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutorxbiblio.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstados.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriasxpensum.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculos.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxsemestre.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivos.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivosxmicro.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemas.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemas.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemasxunidad.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidades.hbm.xml</value>
-              	<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadesxmicro.hbm.xml</value>
-                
-            </list>
-        </property>
-       
-        <property name="hibernateProperties">
-                <props>
-                    <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
-                    <prop key="hibernate.show-sql">true</prop>
-                    <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
-                </props>
-        </property>
-    </bean>
-   
-    <bean id="departamentosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentosDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>    
-     
-    <bean id="ciudadesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadesDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    <bean id="microcurriculosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    <bean id="materiasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
-         <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>    
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="proint2014-2"></property>
+		<property name="password" value="proint2014-2"></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudades.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisitos.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamentos.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentesxnucleo.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMaterias.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPaises.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisitos.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuarios.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutores.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutorxbiblio.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstados.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriasxpensum.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculos.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxsemestre.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivos.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivosxmicro.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemas.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemas.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemasxunidad.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidades.hbm.xml
+				</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadesxmicro.hbm.xml
+				</value>
+
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show-sql">true</prop>
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="bibliografiasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiasDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="ciudadesDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadesDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="correquisitosDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="departamentosDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentosDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="dependenciasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciasDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="materiasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="microcurriculosDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="objetivosDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivosDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="paisesDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.PaisesDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="personasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="subtemasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemasDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="temasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.TemasDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="unidadesAcademicasDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesAcademicasDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="unidadesDAO"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 </beans>

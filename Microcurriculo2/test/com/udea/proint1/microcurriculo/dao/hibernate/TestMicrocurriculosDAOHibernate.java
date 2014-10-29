@@ -1,5 +1,7 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,9 +51,16 @@ public class TestMicrocurriculosDAOHibernate {
 			
 		}
 	}
-	/*
+	
 	@Test
-	public void testObtenerMicrocurriculo() {
+	@Rollback(true)
+	public void testlistarMicrocurriculosPorMateria() throws ExcepcionesDAO{
+		TbAdmMaterias materia = new TbAdmMaterias();
+		materia.setVrIdmateria("0000000009");
+		materia.setVrNombre("Logica y Representacion I");
+		List<TbMicMicrocurriculos> microcurriculos = microcurriculosDAO.listarMicrocurriculosPorMateria(materia);
+	}
+	/*public void testObtenerMicrocurriculo() {
 		try{
 			TbMicMicrocurriculos microcurriculo = microcurriculosDAO.obtenerMicrocurriculo("2010010101");
 			if (microcurriculo == null){

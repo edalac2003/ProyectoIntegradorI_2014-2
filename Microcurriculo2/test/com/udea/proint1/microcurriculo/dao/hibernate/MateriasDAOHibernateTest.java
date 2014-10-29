@@ -15,14 +15,14 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 public class MateriasDAOHibernateTest {
 
 	@Autowired
-	MateriasDAOHibernate materiaDAO;
+	MateriasDAOHibernate materiasDAO;
 	
 	@Test
 	public void testListarMateriasPorSemestre() {
 		 
 		 List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
 		 try{
-			 materias = materiaDAO.listarMateriasPorSemestre(201402);
+			 materias = materiasDAO.listarMateriasPorSemestre(201402);
 			 for ( Iterator iterador = materias.listIterator(); iterador.hasNext(); ) {
                  TbAdmMaterias mat = (TbAdmMaterias) iterador.next();
                  System.out.println("Nombre de materia: " + mat.getVrNombre());
@@ -31,7 +31,7 @@ public class MateriasDAOHibernateTest {
 			 
 		 }
 	}
-	/*
+	
 	@Test
 	public void testListarMaterias() {
 		 MateriasDAOHibernate materia = new MateriasDAOHibernate();
@@ -42,6 +42,6 @@ public class MateriasDAOHibernateTest {
 		 }catch(ExcepcionesDAO e){
 			 
 		 }
-	}*/
+	}
 
 }

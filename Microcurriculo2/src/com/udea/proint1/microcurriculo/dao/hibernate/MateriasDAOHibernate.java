@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbMicMateriasxpensum;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -47,7 +48,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 		
 		try{
 			session = getSession();
-			materia = (TbAdmMaterias)session.get(TbMicMicrocurriculos.class, idMateria);
+			materia = (TbAdmMaterias)session.get(TbAdmMaterias.class, idMateria);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
@@ -126,7 +127,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 		Transaction tx = null;
 
 		try {
-			session = getSession(true);
+			session = getSession();
 
 			tx = session.beginTransaction();
 			session.update(materia);
