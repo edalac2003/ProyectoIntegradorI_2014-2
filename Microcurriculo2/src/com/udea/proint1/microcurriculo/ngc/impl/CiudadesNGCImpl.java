@@ -16,9 +16,14 @@ public class CiudadesNGCImpl implements CiudadesNGC {
 	private static Logger log = Logger.getLogger(CiudadesNGCImpl.class);
 	
 	CiudadesDAO ciudadesDao;
+	DepartamentosDAO departamentoDao;
 
 	public void setCiudadesDao(CiudadesDAO ciudadesDao) {
 		this.ciudadesDao = ciudadesDao;
+	}
+
+	public DepartamentosDAO getDepartamentoDao() {
+		return departamentoDao;
 	}
 
 	public CiudadesNGCImpl() {
@@ -27,17 +32,31 @@ public class CiudadesNGCImpl implements CiudadesNGC {
 
 	@Override
 	public TbAdmCiudades obtenerCiudad(int id) throws ExcepcionesLogica {
+		/*
+		 * Comprobamos que el dato id no sea vacio
+		 */
 		if(id==0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de ciudad, este está vacio");
+			throw new ExcepcionesLogica("No se ha ingresado una identificación de ciudad,está vacia");
 		}
 		TbAdmCiudades ciudad = null;
+		
 		try {
+			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			ciudad = ciudadesDao.obtenerCiudad(id);
 		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("falló al invocar el metodo obtenerCiudad de la clase ciudadesDao: "+ e);
 		}
-		return ciudad;
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(ciudad == null){
+			//si está vacio tira una excepción
+			throw new ExcepcionesLogica("No se encontró ciudad con el id "+ id);
+		}else{
+			//si no esta vacio retorna la ciudad
+			return ciudad;
+		}
 	}
 
 	@Override
@@ -46,10 +65,19 @@ public class CiudadesNGCImpl implements CiudadesNGC {
 		try {
 			listaCiudades = ciudadesDao.listarCiudades();
 		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("falló al invocar el metodo listarCiudades de la clase ciudadesDao: "+ e);
 		}
-		return listaCiudades;
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaCiudades == null){
+			//si está vacio tira una excepción
+			throw new ExcepcionesLogica("No se encontraron ciudades en la tabla TbAdmCiudades");
+		}else{
+			//si no esta vacio retorna las ciudadades
+			return listaCiudades;
+		}
 	}
 
 }
