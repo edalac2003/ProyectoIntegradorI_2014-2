@@ -1,6 +1,5 @@
 package com.udea.proint1.microcurriculo.ngc;
 
-import java.util.Date;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
