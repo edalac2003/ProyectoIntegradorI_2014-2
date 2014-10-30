@@ -1,0 +1,461 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" apply="${crearMicroCtrl}">	
+	<borderlayout height="850px" >
+		<north border="0" height="100px">
+			<include id="headerIdx" src="sections/header.zul" />
+		</north>
+		
+		<center border="0">
+			<div align="center" >
+				<borderlayout height="700px">
+					<north border="0">
+						<div>
+							<include id="listMenu" src="sections/menuBar.zul" ></include>
+						</div>
+					</north>
+					
+					<center border="none">
+						<div align="center">
+							
+							<separator />
+							
+							<separator />
+							<div>
+								<tabbox width="72%">
+									<tabs style="">
+										<tab label="Información General" />
+										<tab label="Información Complementaria" />
+										<tab label="Unidades Detalladas" />
+										<tab label="Evaluaciones" />
+										<tab label="Referencias Bibliográficas" />
+									</tabs>
+									<tabpanels>
+										<tabpanel id="tabInfoBasica">
+											<grid >
+												<columns>
+													<column label="" width="15%"/>
+													<column label="" width="60%"/>												
+												</columns>
+												<rows>
+													<row>
+														<label id="nombreSemestre"  value="Semestre" />
+									                    <div>
+									                        <combobox id="idSemestre" width="15%"/>
+									                    </div>
+							                		</row>
+							                		<row>
+														Docente Responsable
+									                    <div>
+									                        <combobox id="idDocente" width="40%"/>
+									                    </div>
+							                		</row>
+													<row>
+														Id Materia
+									                    <div>
+									                        <combobox id="idMateria" width="40%"/>
+									                    </div>
+							                		</row>
+							                		
+							                		<row>
+									                    Nombre Materia
+									                    <div>
+							                        		<label sclass="hightlight">Textbox</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    Área
+									                    <div>
+							                        		<label sclass="hightlight">Area</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    Horas Teóricas
+									                    <label value="Horas Practicas " />
+									                    		                    
+							                		</row>
+							                			
+							                		<row>
+									                    <label value="Horas Teorico-Prácticas " />
+									                    <label value="Horas Clase por Semestre " />
+							                		</row>
+							                		<row>
+									                    <label value="Campo de Formación" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">Dependencia</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Validable" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">SI/NO</label>
+							                    		</div>
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Habilitable" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">SI/NO</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Clasificable" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">SI/NO</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Prerequisitos" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">prerrequisitos</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Correquisitos" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">correquisitos</label>
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Programas Vinculados" width="150px" />
+									                    <div>
+							                        		<label sclass="hightlight">Donde se Ofrece?</label>
+							                    		</div>
+							                		</row>
+												</rows>
+											</grid>
+										</tabpanel>
+										
+										<tabpanel id="tabInfoCompl">
+											<grid>
+												<columns>
+													<column value="" width="15%" />
+													<column value="" width="60%"/>
+												</columns>
+												<rows >
+													<row>
+									                    <label value="Proposito del Curso" />
+									                    <textbox value="@bind(fx.userName)"
+									                            width="100%" tabindex="1" />
+									                    
+									                </row>
+													<row>
+									                    <label value="Justificación" />
+									                    <textbox value="@bind(fx.userName)"
+									                             width="100%" tabindex="2" />
+									                    
+									                </row>
+									                <row>
+									                    <label value="Objetivo General"/>
+									                    <textbox value="@bind(fx.userName)"
+									                             width="100%" tabindex="3" />
+									                    
+									                </row>
+									                <row>
+									                    <label value="Objetivos Especificos" />
+									                    <textbox value="@bind(fx.userName)"
+									                             width="100%" tabindex="4" />
+									                    
+									                </row>
+									                <row>
+									                    <label value="Contenido Resumido" />
+									                    <textbox value="@bind(fx.userName)"
+									                             width="100%" tabindex="5" />
+									                </row>
+									                
+												</rows>
+											</grid>
+										</tabpanel>
+										
+										<tabpanel id="tabInfoUnidad">
+											<grid id="gridUnidades">
+												<columns>
+													<column label="Nombre de la Unidad" width="65%" align="left"/>
+													<column width="10%" align="center"/>
+												</columns>
+												<rows>
+													<row>
+									                    <textbox id="nombreUnidad" constraint="no empty"
+									                             width="100%" tabindex="5" />		                          
+									                    <button id="btnAdicionar" label="adicionar"  />		                    
+									                </row>
+									                <row>
+									                	<listbox id="lista">
+									                		
+									                	</listbox>
+									                </row>		                
+												</rows>
+											</grid>
+											
+										
+											<separator />
+											<div>
+												<div style="color:red;" height="25px">
+													<label value="Temas por Unidad" />
+												</div>
+												<grid id="infoTemas">
+													<columns>
+														<column label="unidad" width="20%" />
+														<column label="Tema" />
+														<column label="Tiempo (Semanas)" width="15%"/>
+														<column label="" width="10%" align="center"/>
+													</columns>
+													<rows>
+														<row>
+															<combobox value="@bind(fx.userName)"
+										                             width="100%" tabindex="5" />
+										                    <textbox value="@bind(fx.userName)"
+										                             width="100%" tabindex="5" />
+										                    <textbox value="@bind(fx.userName)" tabindex="5" />
+										                    <button label="adicionar" onClick="" />
+														</row>					
+													</rows>
+												</grid>
+												<grid >
+													<rows>
+														<row>
+															<listbox id="contenidoTemas">
+																<listhead>
+																	<listheader label="Unidad" sort="auto" width="30%"/>
+																	<listheader label="Tema" sort="auto" width="90%"/>
+																	<listheader label="Tiempo (Semanas)" sort="auto" width="40%"/>
+																</listhead>
+																<listitem>
+																	<listcell label="" />
+																	<listcell label="" />
+																</listitem>
+															</listbox>
+										                </row>
+													</rows>
+												</grid>
+											</div>
+											<separator />
+										
+											<div>
+												<div style="color:red;" height="25px">
+													<label value="Subtemas por Temas" />
+												</div>
+												<grid >
+													<columns>
+														<column label="Tema" width="30%" />
+														<column label="Subtema" />
+														<column label="" width="10%" align="center"/>
+													</columns>
+													<rows>
+														<row>
+															<combobox value="@bind(fx.userName)"
+										                             width="100%" tabindex="5" />
+										                    <textbox constraint="no empty" value="@bind(fx.userName)"
+										                             width="100%" tabindex="5" />
+										                    <button label="adicionar" onClick="" />
+														</row>					
+													</rows>
+												</grid>
+												<grid >
+													<rows>
+														<row>
+															<listbox id="contenidoSubtemas">
+																<listhead>
+																	<listheader label="Unidad" sort="auto" width="30%"/>
+																	<listheader label="Temas" sort="auto" />
+																	
+																</listhead>
+																<listitem>
+																	<listcell label="" />
+																	<listcell label="" />
+																</listitem>
+															</listbox>
+										                </row>
+													</rows>
+												</grid>
+											</div>
+										</tabpanel>
+										
+										
+										<tabpanel id="tabInfoEval">
+											<grid>
+												<columns >
+													<column label="Actividad" align="left" />
+													<column label="Porcentaje" align="center" width="15%"/>
+													<column label="Fecha Estimada" width="15%"/>
+													<column width="10%"/>
+												</columns> 
+												<rows>
+													<row>
+														<textbox value="@bind(fx.userName)" tabindex="1" width="100%"/>
+									                    <textbox value="@bind(fx.userName)" tabindex="2" />
+									                    <datebox id="db0" cols="12" format="short " width="100%" />
+									                    <button label="Adicionar" />   
+													</row>		
+												</rows>	
+											</grid>
+											
+											<grid >
+												<rows>
+													<row>
+														<listbox id="listaEvaluaciones">
+															<listhead>
+																<listheader label="Actividad" sort="auto" width="70%" align="center"/>
+																<listheader label="Porcentaje" sort="auto" width="15%" align="center"/>
+																<listheader label="Fecha Estimada" sort="auto" width="15%" align="center"/>
+															</listhead>
+															<listitem>
+																<listcell label="" />
+																<listcell label="" />
+															</listitem>
+														</listbox>
+									                </row>
+												</rows>
+											</grid>
+										
+										</tabpanel>
+										
+										<tabpanel id="infoBiblioBas">
+											<grid>												
+												<columns>
+													<column align="right" />
+													<column align="left" />
+												</columns>
+												<rows>
+													<row>
+														<label value="Nombre de la Unidad  "/>
+														<combobox value="@bind(fx.userName)" tabindex="1" />
+													</row>
+												</rows>
+											</grid>
+											
+											<separator />
+											<div style="color:red" height="30px">
+												<label value="REFERENCIAS BIBLIOGRÁFICAS" />					
+											</div>
+															
+											<grid id="infoRefBiblioBas">
+												<columns>
+													<column label="Referencia" />
+													<column label="Autor" />
+													<column label="ISBN" />
+													<column label="Pais" />
+													<column label="Tipo" />
+													<column width="10%" align="center"/>
+												</columns>
+												<rows>
+													<row>
+														<combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="0" />
+									                    <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="1" />
+									                    <textbox value="@bind(fx.userName)"
+									                            width="100%" tabindex="2" />
+							                            <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="3" />
+									                    <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="3">
+									                    	<comboitem label="Básica" />
+									                    	<comboitem label="Complementaria" />
+									                    </combobox>         
+									                    <button label="Adicionar" />
+													</row>
+												</rows>			
+											</grid>
+											
+											
+											<grid >
+												<rows>
+													<row>
+														<listbox id="listaBibliografia">
+															<listhead>
+																<listheader sort="auto" align="center" />
+																<listheader sort="auto" align="center"/>
+																<listheader sort="auto" align="center"/>
+																<listheader sort="auto" align="center"/>
+																<listheader sort="auto" width="15%" align="center"/>
+															</listhead>
+															<listitem>
+																<listcell label="" />
+																<listcell label="" />
+																<listcell label="" />
+																<listcell label="" />
+																<listcell label="" />
+															</listitem>
+														</listbox>
+									                </row>
+												</rows>
+											</grid>
+											
+											
+											
+											<separator />
+											<div style="color:red" height="30px">
+												<label value="REFERENCIAS CIBERGRÁFICAS" />
+											</div>
+											<grid id="infoRefBiblioComp">
+												<columns>
+													<column label="Nombre del Sitio" />
+													<column label="Sitio Web" />
+													<column label="Básica" width="10%" align="center"/>
+												</columns>
+												<rows>
+													<row>
+														<combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="15" />
+									                    <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="16" />
+									                    <checkbox />
+													</row>
+													<row>
+														<combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="17" />
+									                    <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="18" />
+									                    <checkbox />
+													</row>
+													<row>
+														<combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="19" />
+									                    <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="20" />
+									                    <checkbox />
+													</row>
+													<row>
+														<combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="21" />
+									                    <combobox value="@bind(fx.userName)"
+									                            width="100%" tabindex="22" />
+									                    <checkbox />
+													</row>
+													<row >
+														<label value=" "/>
+													</row>
+												</rows>			
+											</grid>
+										</tabpanel>
+					
+					
+									</tabpanels>
+								</tabbox>
+								
+								
+							</div>
+							
+							
+							<separator />
+						
+							<div>
+								<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
+								<button label="Menu Principal" width="150px" height="40px" href="index.zul" />
+							</div>
+						
+						</div>			
+					</center>	
+				</borderlayout>
+			</div>		
+		</center>
+		
+		<south border="none">
+			<include id="footerIdx" src="sections/footer.zul" />
+		</south>
+	</borderlayout>
+</window>
+
+</zk>

@@ -1,0 +1,76 @@
+<?page title="Plantilla para paginas Nuevas" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="0" width="100%">
+
+	<borderlayout height="650px" >
+		<north border="0" height="100px">
+			<include id="footerIdx" src="sections/header.zul" />
+		</north>
+		
+		<center border="none">
+			<borderlayout>
+				<north border="none">
+					<div align="center">
+						<div>
+							<include id="listMenu" src="sections/menuBar.zul" />
+						</div>
+					</div>
+				</north>
+				
+				<center border="none">
+					<div align="center">
+						<separator />
+						<div width="73%">
+							<listbox>
+								<listhead>
+									<listheader label="" align="center"/>
+								</listhead>
+								<listitem>
+									<listcell label="Criterio de Busqueda">
+										<combobox id="strCriterio">
+											<comboitem label="Nucleo" />
+											<comboitem label="Estado" />											
+										</combobox>
+									</listcell>								
+								</listitem>
+							</listbox>
+						</div>
+						<separator />
+						<div width="73%">
+							<listbox id="listaMaterias">
+								<listhead>
+									<listheader label="Cod Materia" align="center" width="15%" />
+									<listheader label="Nombre" align="center" />
+									<listheader label="Nucleo" align="center" width="15%" />
+									<listheader label="Sem" align="center" width="5%" />
+									<listheader label="HT" align="center" width="5%" />
+									<listheader label="HP" align="center" width="5%" />
+									<listheader label="HTP" align="center" width="5%" />
+									<listheader label="Microcurriculo" align="center" width="20%"/>									
+								</listhead>
+								<listitem>
+									<listcell label="" />			
+									<listcell label="" />
+									<listcell label="" />
+									<listcell label="" />
+									<listcell label="" />
+									<listcell label="" />
+									<listcell label="" />
+									<listcell label="" />											
+								</listitem>
+							</listbox>
+						</div>
+					</div>
+					
+				</center>
+			
+			</borderlayout>
+			
+		</center>
+		
+		<south border="none">
+			<include id="footerIdx" src="sections/footer.zul" />		
+		</south>	
+	</borderlayout>
+</window>
+</zk>

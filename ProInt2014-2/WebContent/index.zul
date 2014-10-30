@@ -1,0 +1,53 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<zk>
+<window border="0" width="100%">
+
+	<borderlayout height="650px" >
+		<north border="0" height="100px">
+			<include id="headerIdx" src="sections/header.zul" />
+		</north>
+		
+		<center border="0" >
+			<div align="center">
+				<menubar width="73%">
+					<menu label="Microcurriculos">
+						<menupopup>
+							<menuitem label="Crear" href="crearMic.zul"/>
+							<menu label="Busqueda">
+								<menupopup>
+									<menuitem label="Por ID" href="consultas/consultaMicID.zul"/>
+									<menuitem label="Listar Microcurriculos" href="listarMicro.zul"/>
+								</menupopup>
+							</menu>
+						</menupopup>
+					</menu>
+					<menu label="Materias">
+						<menupopup>
+							<menuitem label="Crear" />
+							<menu label="Busqueda">
+								<menupopup>
+									<menuitem label="Por ID" />
+									<menuitem label="Listar Materias" />								
+								</menupopup>
+							</menu>
+						</menupopup>
+					</menu>
+					<menu label="Docentes">
+						<menupopup>
+							<menuitem label="Crear" />
+							<menuitem label="Busqueda" />
+						</menupopup>
+					</menu>
+				</menubar>		
+			</div>
+		</center>
+		<south border="0">
+			<include id="footerIdx" src="sections/footer.zul" />		
+		</south>
+	
+	</borderlayout>
+
+</window>
+</zk>

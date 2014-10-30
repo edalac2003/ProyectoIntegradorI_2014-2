@@ -1,0 +1,10 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div id="footer">
+		<div align="center" >
+			<label value="Departamento de Ingeniería de Sistemas - Universidad de Antioquia "/>
+			<separator/>
+			<label value="Medellín - Colombia |Todos los Derechos Reservados © 2014"/>
+		</div>			
+	</div>	
+</zk>
