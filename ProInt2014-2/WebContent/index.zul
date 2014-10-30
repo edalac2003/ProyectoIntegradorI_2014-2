@@ -1,6 +1,6 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
-<?link rel="stylesheet" type="text/css" href="/style.css"?>
+
 <zk>
 <window border="0" width="100%">
 
