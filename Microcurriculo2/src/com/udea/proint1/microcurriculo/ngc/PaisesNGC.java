@@ -9,6 +9,6 @@ public interface PaisesNGC {
 	
 	public List<TbAdmPaises> listarPaises() throws ExcepcionesLogica;
 	
-	public TbAdmPaises obtenerPais() throws ExcepcionesLogica;
+	public TbAdmPaises obtenerPais(int id) throws ExcepcionesLogica;
 	
 }

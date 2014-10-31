@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
-import com.udea.proint1.microcurriculo.dao.hibernate.DepartamentosDAOHibernate;
+import com.udea.proint1.microcurriculo.dao.DepartamentosDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmCiudades;
 import com.udea.proint1.microcurriculo.ngc.CiudadesNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;

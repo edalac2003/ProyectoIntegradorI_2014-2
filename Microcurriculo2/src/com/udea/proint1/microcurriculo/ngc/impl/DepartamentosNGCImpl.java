@@ -7,8 +7,6 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.DepartamentosDAO;
 import com.udea.proint1.microcurriculo.dao.PaisesDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
-import com.udea.proint1.microcurriculo.dto.TbAdmdepartamentos;
-import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
 import com.udea.proint1.microcurriculo.ngc.DepartamentosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;

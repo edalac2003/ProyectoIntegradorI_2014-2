@@ -11,8 +11,8 @@ public interface NucleoNGC {
 	
 	public void actualizarNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica;
 
-	public List<TbAdmNucleo> obtenerNucleo(String id) throws ExcepcionesLogica;
+	public TbAdmNucleo obtenerNucleo(String id) throws ExcepcionesLogica;
 	
-	public TbAdmNucleo listarNucleos() throws ExcepcionesLogica;
+	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesLogica;
 
 }

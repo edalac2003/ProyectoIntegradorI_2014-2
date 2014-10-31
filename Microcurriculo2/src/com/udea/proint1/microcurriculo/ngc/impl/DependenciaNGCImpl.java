@@ -43,7 +43,7 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		}
 		try {
 			String id = dependencia.getVrIddependencia();
-			TbAdmDependencia dependenciaConsulta = dependenciaDao.obtenerDependencia(id);
+			TbAdmDependencia dependenciaConsulta = dependenciaDao.obtenerDependencias(id);
 		
 			if(dependenciaConsulta != null){
 				throw new ExcepcionesLogica("La dependencia a insertar ya existe");
@@ -72,7 +72,7 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		}
 		try {
 			String id = dependencia.getVrIddependencia();
-			TbAdmDependencia dependenciaConsulta = dependenciaDao.obtenerDependencia(id);
+			TbAdmDependencia dependenciaConsulta = dependenciaDao.obtenerDependencias(id);
 		
 			if(dependenciaConsulta == null){
 				throw new ExcepcionesLogica("La dependencia a actualizar no existe");
@@ -97,13 +97,12 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if((id.equals(""))||(id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de ciudad,está vacia");
+			throw new ExcepcionesLogica("No se ha ingresado una identificación de dependencia,está vacia");
 		}
 		TbAdmDependencia dependencia = null;
 		
 		try {
-			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			dependencia = dependenciaDao.obtenerDependencia(id);
+			dependencia = dependenciaDao.obtenerDependencias(id);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerDependencia de la clase dependenciaDao: "+ e);
 		}
@@ -115,7 +114,6 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 			//si está vacio tira una excepción
 			throw new ExcepcionesLogica("No se encontró dependencia con el id "+ id);
 		}else{
-			//si no esta vacio retorna la ciudad
 			return dependencia;
 		}
 	}
@@ -133,10 +131,8 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaDependencias == null){
-			//si está vacio tira una excepción
 			throw new ExcepcionesLogica("No se encontraron dependencias en la tabla TbAdmDependencia");
 		}else{
-			//si no esta vacio retorna las ciudadades
 			return listaDependencias;
 		}
 	}

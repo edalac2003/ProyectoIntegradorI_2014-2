@@ -7,7 +7,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface PersonaNGC {
 	
-	public void obtenerPersona(TbAdmPersona persona) throws ExcepcionesLogica;
+	public void guardarPersona(TbAdmPersona persona) throws ExcepcionesLogica;
 
 	public void actualizarPersona(TbAdmPersona persona) throws ExcepcionesLogica;
 
