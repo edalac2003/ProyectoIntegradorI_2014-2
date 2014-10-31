@@ -7,7 +7,7 @@
 			<include id="headerIdx" src="sections/header.zul" />
 		</north>
 		
-		<center border="0" >
+	 	<center border="0" >
 			<borderlayout>
 				<north border="none">
 					<div align="center">

@@ -55,12 +55,12 @@
 	 		   
 		</bean> 
 		
-		<bean id="microcurriculoNgc" class="com.udea.proint1.microcurriculo.ngc.MicrocurriculoNgc" > 
+		<bean id="microcurriculoNgc" class="com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC"> 
 	 		<property name="microcurriculoDAO" ref="microcurriculoDAO"></property>		
 	 		   
 		</bean>  
 		
-		<bean id="microcurriculoDAO" class="com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO"> 
+		<bean id="microcurriculoDAO" class="com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO"> 
 	 		<!-- <property name="microCurriculoInt" ref="microCurriculoInt"></property> -->		
 		</bean>      
 		
