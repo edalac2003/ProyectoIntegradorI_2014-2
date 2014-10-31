@@ -15,7 +15,7 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 	}
 
 	@Override
-	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
+	public TbMicUnidades obtenerUnidad(String idUnidad) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}

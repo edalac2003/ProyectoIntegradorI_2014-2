@@ -13,5 +13,5 @@ public interface TipoPersonaNGC {
 	
 	public List<TbAdmTipopersona> listarTipoPersona() throws ExcepcionesLogica;
 	
-	public TbAdmTipopersona obtenertipoPersona() throws ExcepcionesLogica;
+	public TbAdmTipopersona obtenerTipoPersona(int id) throws ExcepcionesLogica;
 }

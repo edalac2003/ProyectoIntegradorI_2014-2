@@ -91,7 +91,7 @@ public class DocentesxNucleoNGCImpl implements DocentesxNucleoNGC {
 			docentesxNucleoDao.actualizarDocentesxNucleo(docentesxNucleo);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarDependencia de la clase dependenciaDao: "+ e);
+			log.error("falló al invocar el metodo actualizarDocentesxNucleo de la clase docentesxNucleoDao: "+ e);
 		}
 	}
 
@@ -120,15 +120,15 @@ public class DocentesxNucleoNGCImpl implements DocentesxNucleoNGC {
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de ciudad,está vacia");
+			throw new ExcepcionesLogica("No se ha ingresado una identificación de docentesxNucleo, está vacia");
 		}
 		TbAdmDocentesxnucleo docentesxNucleo = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			docentesxNucleo = docentesxNucleoDao.obtenerDependencias(id);
+			docentesxNucleo = docentesxNucleoDao.obtenerDocentesxNucleo(id);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerDependencia de la clase dependenciaDao: "+ e);
+			log.error("falló al invocar el metodo obtenerDocentesxNucleo de la clase docentesxNucleoDao: "+ e);
 		}
 		
 		/*
@@ -136,9 +136,8 @@ public class DocentesxNucleoNGCImpl implements DocentesxNucleoNGC {
 		 */
 		if(docentesxNucleo == null){
 			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró dependencia con el id "+ id);
+			throw new ExcepcionesLogica("No se encontró docentesxNucleo con el id "+ id);
 		}else{
-			//si no esta vacio retorna la ciudad
 			return docentesxNucleo;
 		}
 	}
