@@ -1,68 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
-                                                   http://www.springframework.org/schema/beans/spring-beans.xsd
-                                                   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-                                                   http://www.springframework.org/schema/context/spring-context-2.5.xsd" xmlns:context="http://www.springframework.org/schema/context">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
         
         <!-- BEANS  CONFIGURACION DATASOURCE-->
         <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-                <property name="driverClassName">
-                        <value>oracle.jdbc.driver.OracleDriver</value>  
-                </property>
-                <property name="url">
-                        <value>jdbc:oracle:thin:@localhost:1521:XE</value>
-                </property>
-                <property name="username">
-                        <value>proint2014-2</value>
-                </property>
-                <property name="password"> 
-                        <value>proint2014-2</value>
-                </property>
+            <property name="driverClassName">
+                    <value>oracle.jdbc.driver.OracleDriver</value>  
+            </property>
+            <property name="url">
+                    <value>jdbc:oracle:thin:@localhost:1521:XE</value>
+            </property>
+            <property name="username">
+                    <value>proint2014-2</value>
+            </property>
+            <property name="password"> 
+                    <value>proint2014-2</value>
+            </property>
         </bean>
         
         <!-- BEANS CONFIGURACION HIBERNATE-->
         <bean id="factory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-                <property name="mappingResources">
-                        <list>                           
-                             
-							 <!-- Mapeos microcurriculo --> 
+            <property name="mappingResources">
+                 <list>                           
+                      
+ 					<!-- Mapeos microcurriculo --> 
 
-                        </list>
-                </property>
-                
-                <property name="hibernateProperties">
-                        <props>
-                                <prop key="hibernate.dialect">
-                                        org.hibernate.dialect.Oracle10gDialect
-                                </prop>
-                                <prop key="hibernate.show_sql">
-                                        true                                   
-                                </prop>
-                                <prop key="hibernate.transaction.factory_class">
-                                        org.hibernate.transaction.JDBCTransactionFactory
-                                </prop>
-                        </props>
-                </property>
-                
-                <property name="dataSource">
-                        <ref bean="dataSource"/>
-                </property>
+                 </list>
+            </property>
+            
+            <property name="hibernateProperties">
+                 <props>
+                      <prop key="hibernate.dialect">
+                              org.hibernate.dialect.Oracle10gDialect
+                      </prop>
+                      <prop key="hibernate.show_sql">
+                              true                                   
+                      </prop>
+                      <prop key="hibernate.transaction.factory_class">
+                              org.hibernate.transaction.JDBCTransactionFactory
+                      </prop>
+                 </props>
+            </property>
+            
+            <property name="dataSource">
+                 <ref bean="dataSource"/>
+            </property>
         </bean>
-        
-        
-        <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype"> 
-	 		 <property name="microcurriculoNgc" ref="microcurriculoNgc"></property> 	
-	 		   
-		</bean> 
-		
-		<bean id="microcurriculoNgc" class="com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC"> 
-	 		<property name="microcurriculoDAO" ref="microcurriculoDAO"></property>		
-	 		   
-		</bean>  
-		
-		<bean id="microcurriculoDAO" class="com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO"> 
-	 		<!-- <property name="microCurriculoInt" ref="microCurriculoInt"></property> -->		
-		</bean>      
-		
-		
+
+        <bean id="crearMicroCtrl"
+        	class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl"
+        	scope="prototype">
+        </bean>
 </beans>
