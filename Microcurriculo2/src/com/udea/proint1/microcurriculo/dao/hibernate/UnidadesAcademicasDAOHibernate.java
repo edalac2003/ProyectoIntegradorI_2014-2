@@ -1,8 +1,11 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesAcademicasDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -10,19 +13,44 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 
 	@Override
 	public void guardarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
+
+		try {
+			session = getSession();
+			session.save(unidad);
+			session.flush(); 
+		} catch (HibernateException e) {
+
+		}
 		
 	}
 
 	@Override
-	public TbMicUnidades obtenerUnidad(String idUnidad) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
+		Session session = null;
+		TbMicUnidades unidad = null;
+
+		try {
+			session = getSession();
+			unidad = (TbMicUnidades) session.load(TbMicUnidades.class, idUnidad);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO();
+		}
+		return unidad;
 	}
 
 	@Override
 	public void modificarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
+
+		try {
+			session = getSession();
+			this.getHibernateTemplate().update(unidad);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO();
+		}
 		
 	}
 

@@ -71,25 +71,20 @@ public class DependenciasDAOHibernate extends HibernateDaoSupport implements Dep
 		
 		return dependencia;
 	}
-	
+
 	@Override
-	public void actualizarDependencia(TbAdmDependencia dependencias) throws ExcepcionesDAO{
+	public void actualizarDependencias(TbAdmDependencia dependencias)
+			throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-
-		try {
+		
+		try{
 			session = getSession();
-
-			tx = session.beginTransaction();
-			session.update(dependencias);
-			tx.commit();
-
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, editar");
-		} finally {
-			if (session != null)
-				session.close();
+			this.getHibernateTemplate().update(dependencias);
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
 		}
+		
 	}
 
 }

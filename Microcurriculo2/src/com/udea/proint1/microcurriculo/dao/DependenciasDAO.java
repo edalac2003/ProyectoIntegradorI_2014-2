@@ -13,5 +13,6 @@ public interface DependenciasDAO {
 	
 	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesDAO;
 	
-	public void actualizarDependencia(TbAdmDependencia dependencias) throws ExcepcionesDAO;
+	public void actualizarDependencias(TbAdmDependencia dependencias) throws ExcepcionesDAO;
+	
 }

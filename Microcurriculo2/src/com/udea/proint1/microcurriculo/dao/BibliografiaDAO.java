@@ -12,5 +12,5 @@ public interface BibliografiaDAO {
 	
 	public List<TbMicBibliografia> listarBibliografiaPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO;
 	
-	public List<TbMicBibliografia> listarBibliografiaPorTipo(String idMicrocurriculo, char tipo) throws ExcepcionesDAO;
+	public List<TbMicBibliografia> listarBibliografiaPorTipo(char tipo) throws ExcepcionesDAO;
 }

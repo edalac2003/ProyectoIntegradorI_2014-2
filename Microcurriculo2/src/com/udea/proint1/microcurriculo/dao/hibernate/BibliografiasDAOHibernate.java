@@ -1,14 +1,17 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class BibliografiasDAOHibernate extends HibernateDaoSupport implements BibliografiaDAO {
@@ -21,14 +24,12 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 	public void guardarBibliografia(TbMicBibliografia bibliografia)
 			throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
+				
 		try{
-			session = getSession();
-			
-			tx = session.beginTransaction();
-			session.save(bibliografia);
-			tx.commit();
+			session = getSession();			
+			//save example - without transaction
+	        session.save(bibliografia);
+	        session.flush(); //address will not get saved without this
 			
 		}catch(HibernateException e){
 			
@@ -40,13 +41,10 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 	public void modificarBibliografia(TbMicBibliografia bibliografia)
 			throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
 		
 		try{
 			session = getSession();
-			tx = session.beginTransaction();
-			session.update(bibliografia);
-			tx.commit();
+			this.getHibernateTemplate().update(bibliografia);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
@@ -61,10 +59,25 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 	}
 
 	@Override
-	public List<TbMicBibliografia> listarBibliografiaPorTipo(
-			String idMicrocurriculo, char tipo) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TbMicBibliografia> listarBibliografiaPorTipo(char tipo) throws ExcepcionesDAO {
+		Session session = null;
+		List<TbMicBibliografia> bibliografias = new ArrayList<TbMicBibliografia>();
+
+		try {
+			session = getSession();
+
+			Query query = session
+					.createQuery("from TbMicBibliografia where blTipo = :tipoBibliografia");
+
+			query.setEntity("tipoBibliografia", tipo);
+
+			bibliografias = query.list();
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO();
+		}
+
+		return bibliografias;
 	}
 
 }

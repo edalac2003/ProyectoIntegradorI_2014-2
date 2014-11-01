@@ -26,7 +26,7 @@ public class CiudadesDAOHibernate extends HibernateDaoSupport implements Ciudade
 		
 		try{
 			session = getSession();
-			ciudad = (TbAdmCiudades)session.get(TbAdmCiudades.class, idCiudad);
+			ciudad = (TbAdmCiudades)session.load(TbAdmCiudades.class, idCiudad);
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 		}

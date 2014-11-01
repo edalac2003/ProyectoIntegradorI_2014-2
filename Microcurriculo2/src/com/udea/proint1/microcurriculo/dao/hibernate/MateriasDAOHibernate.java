@@ -26,14 +26,13 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 	@Override
 	public void guardarMateria(TbAdmMaterias materia) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
 		
 		try{
 			session = getSession();
 			
-			tx = session.beginTransaction();
+			session = getSession();
 			session.save(materia);
-			tx.commit();
+			session.flush();
 			
 		}catch(HibernateException e){
 			
@@ -48,7 +47,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 		
 		try{
 			session = getSession();
-			materia = (TbAdmMaterias)session.get(TbAdmMaterias.class, idMateria);
+			materia = (TbAdmMaterias)session.load(TbAdmMaterias.class, idMateria);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
@@ -92,10 +91,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
-		} finally {
-			if (session != null)
-				session.close();
-		}
+		} 
 		
 	}
 
@@ -124,20 +120,15 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 	@Override
 	public void actualizarMateria(TbAdmMaterias materia) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
 
 		try {
 			session = getSession();
 
-			tx = session.beginTransaction();
-			session.update(materia);
-			tx.commit();
+			session = getSession();
+			this.getHibernateTemplate().update(materia);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, editar");
-		} finally {
-			if (session != null)
-				session.close();
 		}
 	}
 

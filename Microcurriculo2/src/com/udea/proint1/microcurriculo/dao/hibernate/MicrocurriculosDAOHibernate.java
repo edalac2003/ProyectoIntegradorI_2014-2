@@ -18,39 +18,36 @@ import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @ContextConfiguration(locations = "classpath:configuracion-spring.xml")
-
 /**
  * 
  * @author eacosta
  *
  */
-public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements MicrocurriculosDAO {
-	
+public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
+		MicrocurriculosDAO {
+
 	public MicrocurriculosDAOHibernate() {
-		
+
 	}
 
 	@Override
 	public void guardarMicrocurriculo(TbMicMicrocurriculos microcurriculo)
 			throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			
-			tx = session.beginTransaction();
 			session.save(microcurriculo);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			
+			session.flush(); 
+		} catch (HibernateException e) {
+
 		}
 
 	}
@@ -60,133 +57,141 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements 
 			throws ExcepcionesDAO {
 		Session session = null;
 		TbMicMicrocurriculos microcurriculo = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			microcurriculo = (TbMicMicrocurriculos)session.get(TbMicMicrocurriculos.class, IdMicrocurriculo);
-			
-		}catch(HibernateException e){
+			microcurriculo = (TbMicMicrocurriculos) session.load(
+					TbMicMicrocurriculos.class, IdMicrocurriculo);
+
+		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
 		}
 		return microcurriculo;
 	}
 
 	@Override
-	public void modificarMicrocurriculo(TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO {
+	public void modificarMicrocurriculo(TbMicMicrocurriculos microcurriculo)
+			throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			tx = session.beginTransaction();
-			session.update(microcurriculo);
-			tx.commit();
-			
-		}catch(HibernateException e){
+			this.getHibernateTemplate().update(microcurriculo);
+
+		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
 		}
 	}
 
 	@Override
-	public List<TbMicMicrocurriculos> listarMicrocurriculos() throws ExcepcionesDAO {
-		Session session = null;
-		List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
-		
-		try{
-			session = getSession();
-			
-			Criteria criteria = session.createCriteria(TbMicMicrocurriculos.class);
-			
-			microcurriculos = criteria.list();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-		
-		return microcurriculos;
-	}
-
-	@Override
-	public List<TbMicMicrocurriculos> listarMicrocurriculosPorSemestre(String idSemestre)
+	public List<TbMicMicrocurriculos> listarMicrocurriculos()
 			throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
-		
-		try{
+
+		try {
 			session = getSession();
-			
-			Query query = session.createQuery("from Microcurriculos where idSemestre = :semestre");
-			
-			query.setEntity("Semestre", idSemestre);
-			
-			microcurriculos = query.list();
-			
-		}catch(HibernateException e){
+
+			Criteria criteria = session
+					.createCriteria(TbMicMicrocurriculos.class);
+
+			microcurriculos = criteria.list();
+
+		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
 		}
-		
+
 		return microcurriculos;
 	}
 
 	@Override
-	public List<TbMicMicrocurriculos> listarMicrocurriculosPorNucleo(TbAdmNucleo nucleo) throws ExcepcionesDAO {
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorSemestre(
+			String idSemestre) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
-       
-        try{
-               
-                session = getSession();
-                               
-                Query query = session.createQuery("from Microcurriculos as mic, Nucleo as nuc, Materias as mat where materia = :buscarMateria");
-               
-                query.setEntity("buscarNucleo", nucleo);
-               
-                microcurriculos = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        }
-        return microcurriculos;
+		List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
+
+		try {
+			session = getSession();
+
+			Query query = session
+					.createQuery("from TbMicMicrocurriculos where idSemestre = :semestre");
+
+			query.setEntity("Semestre", idSemestre);
+
+			microcurriculos = query.list();
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO();
+		}
+
+		return microcurriculos;
 	}
 
 	@Override
-	public List<TbMicMicrocurriculos> listarMicrocurriculosPorMateria(TbAdmMaterias materia) throws ExcepcionesDAO {
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorNucleo(
+			TbAdmNucleo nucleo) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
-       
-        try{
-               
-                session = getSession();
-                               
-                Query query = session.createQuery("from Microcurriculos where materia = :buscarMateria");
-               
-                query.setEntity("buscarMateria", materia);
-               
-                microcurriculos = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        }
-        return microcurriculos;
+		List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
+
+		try {
+
+			session = getSession();
+
+			Query query = session
+					.createQuery("from Microcurriculos as mic, Nucleo as nuc, Materias as mat where materia = :buscarMateria");
+
+			query.setEntity("buscarNucleo", nucleo);
+
+			microcurriculos = query.list();
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+		return microcurriculos;
+	}
+
+	@Override
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorMateria(
+			TbAdmMaterias materia) throws ExcepcionesDAO {
+		Session session = null;
+		List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
+
+		try {
+
+			session = getSession();
+
+			Query query = session
+					.createQuery("from TbMicMicrocurriculos where tbAdmMaterias.vrIdmateria = :buscarMateria");
+
+			query.setEntity("buscarMateria", materia);
+
+			microcurriculos = query.list();
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+		return microcurriculos;
 
 	}
 
 	@Override
-	public List<TbMicMicrocurriculos> listarMicrocurriculosPorResponsable(TbAdmPersona responsable) throws ExcepcionesDAO {
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorResponsable(
+			TbAdmPersona responsable) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
-       
-        try{
-               
-                session = getSession();
-                               
-                Query query = session.createQuery("from Microcurriculos where responsable = :buscarResponsable");
-               
-                query.setEntity("buscarResponsable", responsable);
-               
-                microcurriculos = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        }
-        return microcurriculos;
+		List<TbMicMicrocurriculos> microcurriculos = new ArrayList<TbMicMicrocurriculos>();
+
+		try {
+
+			session = getSession();
+
+			Query query = session
+					.createQuery("from TbMicMicrocurriculos where tbAdmPersona.vrIdpersona = :buscarResponsable");
+
+			query.setEntity("buscarResponsable", responsable);
+
+			microcurriculos = query.list();
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+		return microcurriculos;
 	}
 
 }
