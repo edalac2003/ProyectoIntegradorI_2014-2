@@ -1,4 +1,4 @@
-package com.udea.proint1.microcurriculo.ctrl;
+package com.udea.proint1.microcurriculo.ctrl2;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -11,14 +11,16 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Popup;
 import org.zkoss.zul.Textbox;
 
 
-public class CrearMicroCtrl extends GenericForwardComposer {
 
-	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
+public class CrearMicroCtrlxxx extends GenericForwardComposer {
+
+	private static Logger logger = Logger.getLogger(CrearMicroCtrlxxx.class);
 	
 	Button btnAddUnidad;
 	Button btnAddTemas;
@@ -38,11 +40,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	Textbox txtNombreUnidad;
 	Textbox txtNombreTema;
-	Textbox txtNumeroSemanas;
+	Longbox txtNumeroSemanas;
 	Textbox txtObjetivoEspecifico;
 	Textbox txtSubTemas;
 	Textbox txtActividadMicro;
-	Textbox txtPorcentajeActividad;
+	Longbox txtPorcentajeActividad;
 	Textbox txtISBNBiblio;
 	Textbox txtNombreSitioCiber;
 	Textbox txtURLSitioCiber;
@@ -110,14 +112,14 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if((!"".equals(txtActividadMicro.getValue())) && (!"".equals(txtPorcentajeActividad.getValue())) && (!"".equals(dtFechaEvaluacion.getValue()))){
 				Listitem listaItem = new Listitem();
 				Listcell celda1 = new Listcell(txtActividadMicro.getValue());
-				Listcell celda2 = new Listcell(txtPorcentajeActividad.getValue());
+				Listcell celda2 = new Listcell(txtPorcentajeActividad.getValue().toString());
 				Listcell celda3 = new Listcell(dtFechaEvaluacion.getValue().toString());
 				listaItem.appendChild(celda1);
 				listaItem.appendChild(celda2);
 				listaItem.appendChild(celda3);
 				listaEvaluaciones.appendChild(listaItem);
 				txtActividadMicro.setValue("");
-				txtPorcentajeActividad.setValue("");			
+				txtPorcentajeActividad.setValue(null);	
 			} else 
 				Messagebox.show("No es Posible adicionar a la Lista.  Campos sin Información");
 		/*} else {
@@ -164,14 +166,14 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			Listitem listaItem = new Listitem();
 			Listcell celda1 = new Listcell(cmbIdUnidad.getValue());
 			Listcell celda2 = new Listcell(txtNombreTema.getValue().toUpperCase());
-			Listcell celda3 = new Listcell(txtNumeroSemanas.getValue());
+			Listcell celda3 = new Listcell(txtNumeroSemanas.getValue().toString());
 			listaItem.appendChild(celda1);
 			listaItem.appendChild(celda2);
 			listaItem.appendChild(celda3);
 			listaTemas.appendChild(listaItem);
 			cmbIdUnidad.setValue("");
 			txtNombreTema.setValue("");
-			txtNumeroSemanas.setValue("");
+			txtNumeroSemanas.setValue(null);
 		} else {
 			Messagebox.show("No es Posible adicionar a la Lista.  Campos sin Información");
 		}

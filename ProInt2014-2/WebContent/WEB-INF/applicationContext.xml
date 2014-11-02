@@ -25,14 +25,45 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         <!-- BEANS CONFIGURACION HIBERNATE-->
-        <bean id="factory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-            <property name="mappingResources">
-                 <list>                           
-                      
- 					<!-- Mapeos microcurriculo --> 
-
-                 </list>
-            </property>
+        <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudades.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisitos.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamentos.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentesxnucleo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMaterias.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPaises.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisitos.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuarios.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutores.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutorxbiblio.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstados.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriasxpensum.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculos.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxsemestre.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivos.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivosxmicro.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemas.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemas.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemasxunidad.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidades.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadesxmicro.hbm.xml</value>
+			</list>
+		</property>
             
             <property name="hibernateProperties">
                  <props>
@@ -47,14 +78,24 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
                       </prop>
                  </props>
             </property>
-            
-            <property name="dataSource">
-                 <ref bean="dataSource"/>
-            </property>
+      
         </bean>
 
-        <bean id="crearMicroCtrl"
-        	class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl"
-        	scope="prototype">
+        <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
+        	<property name="semestresDAO" ref="semestresDAO" />
+        	<!-- <property name="materiasDAO" ref="materiasDAO" />   -->
+        </bean>
+          
+        <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
+        	<property name="sessionFactory" ref="sessionFactiry" />
+        </bean>
+        		
+        <bean id="materiasDAO" 	class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        
+        <bean id="microcurriculosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
 </beans>

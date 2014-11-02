@@ -44,9 +44,12 @@
 														<label value="Semestre" />
 									                    <div>
 									                        <combobox id="cmbIdSemestre" width="15%"/>
-									                        <label value="Nucleo" width="30%"/>
-									                        <combobox id="cmbIdNucleo" />
+									                        
 									                    </div>
+							                		</row>
+							                		<row>
+						                				<label value="Nucleo" width="30%"/>
+								                        <combobox id="cmbIdNucleo" />
 							                		</row>
 							                		<row>
 														<label value="Docente Responsable" />
@@ -151,7 +154,7 @@
 									                <row>
 									                    <label value="Objetivos Especificos" />
 									                    <div>
-										                    <textbox id="txtObjetivoEspecifico"  multiline="true"  width="84%"/>
+										                    <textbox id="txtObjetivoEspecifico"  multiline="true"   width="84%"/>
 										                    <button id="btnAddObjetivo" label="Adicionar" width="15%"/>
 									                    </div>
 									                    
@@ -206,7 +209,7 @@
 										                    <textbox id="txtNombreTema" width="100%" tabindex="5" />
 										                    
 										                    <div>
-											                    <textbox id="txtNumeroSemanas" width="30%" />
+											                    <longbox id="txtNumeroSemanas" width="30%" />
 											                    <button id="btnAddTemas" label="Adicionar" width="65%"/>
 										                    </div>										                    
 														</row>
@@ -237,9 +240,9 @@
 												</div>
 												<grid>
 													<columns>
-														<column label="Unidad" width="15%" />
-														<column label="Tema" width="20%" />
-														<column label="Subtema" width="50%"/>
+														<column label="Unidad" align="center" width="15%" />
+														<column label="Tema" align="center" width="20%" />
+														<column label="Subtema" align="center" width="50%"/>
 														
 													</columns>
 													<rows>
@@ -281,7 +284,7 @@
 												<rows>
 													<row>
 														<textbox id="txtActividadMicro" width="100%" />
-									                    <textbox id="txtPorcentajeActividad" width="100%"/>
+									                    <longbox id="txtPorcentajeActividad" width="100%"/>
 									                    <div>
 									                    	<datebox id="dtFechaEvaluacion" cols="12" format="short " width="50%" />
 									                    	<button id="btnAddEvaluacion" label="Adicionar" width="40%"/>
@@ -401,10 +404,10 @@
 													<row>
 														<listbox id="listaCibergrafia">
 															<listhead>
-																<listheader value="Unidad" />
-																<listheader value="Nombre Sitio"/>
-																<listheader value="URL Sitio"/>
-																<listheader value="Tipo"/>
+																<listheader value="Unidad" width="15%" />
+																<listheader value="Nombre Sitio" width="30"/>
+																<listheader value="URL Sitio" width="30%"/>
+																<listheader value="Tipo" width="15%"/>
 															</listhead>
 															
 														</listbox>

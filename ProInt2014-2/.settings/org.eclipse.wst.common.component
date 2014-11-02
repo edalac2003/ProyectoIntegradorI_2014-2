@@ -2,6 +2,9 @@
     <wb-module deploy-name="ProInt2014-2">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="Microcurriculo2.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Microcurriculo2/Microcurriculo2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="ProInt2014-2"/>
         <property name="java-output-path" value="/ProInt2014-2/build/classes"/>
     </wb-module>
