@@ -17,6 +17,6 @@ public interface PersonaNGC {
 	
 	public List<TbAdmPersona> listarPersonas() throws ExcepcionesLogica;
 	
-	public List<TbAdmPersona> obtenerPersonaPorTipo(TbAdmPersona tipoPersona) throws ExcepcionesLogica;
+	public List<TbAdmPersona> obtenerDocentes() throws ExcepcionesLogica;
 
 }

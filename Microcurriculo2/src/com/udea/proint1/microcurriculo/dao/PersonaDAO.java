@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.dao;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface PersonaDAO {
@@ -13,9 +14,8 @@ public interface PersonaDAO {
 	
 	public TbAdmPersona obtenerPersona(String idPersona) throws ExcepcionesDAO;
 	
-	public List<TbAdmPersona> obtenerPersonaPorTipo(TbAdmPersona tipoPersona) throws ExcepcionesDAO;
+	public List<TbAdmPersona> obtenerDocentes(TbAdmTipopersona tipoPersona) throws ExcepcionesDAO;
 	
 	public List<TbAdmPersona> listarPersonas() throws ExcepcionesDAO;
-	
 	
 }

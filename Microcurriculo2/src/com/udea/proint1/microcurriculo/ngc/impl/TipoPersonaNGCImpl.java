@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.udea.proint1.microcurriculo.dao.TipoPersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.ngc.TipoPersonaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -23,11 +24,11 @@ public class TipoPersonaNGCImpl implements TipoPersonaNGC {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/*@Override
 	public void guardarTipoPersona(TbAdmTipopersona tipoPersona) throws ExcepcionesLogica {
-		/*
+		
 		 * Comprobamos que el objeto id no esté vacio
-		 */
+		 
 		if(tipoPersona == null){
 			throw new ExcepcionesLogica("El objeto tipoPersona está vacio");
 		}
@@ -54,9 +55,9 @@ public class TipoPersonaNGCImpl implements TipoPersonaNGC {
 
 	@Override
 	public void actualizarTipoPersona(TbAdmTipopersona tipoPersona) throws ExcepcionesLogica {
-		/*
+		
 		 * Comprobamos que el objeto id no esté vacio
-		 */
+		 
 		if(tipoPersona == null){
 			throw new ExcepcionesLogica("El objeto tipoPersona está vacio");
 		}
@@ -79,13 +80,13 @@ public class TipoPersonaNGCImpl implements TipoPersonaNGC {
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarTipoPersona de la clase tipoPersonaDao: "+ e);
 		}
-	}
+	}*/
 
 	@Override
 	public List<TbAdmTipopersona> listarTipoPersona() throws ExcepcionesLogica {
 		List<TbAdmTipopersona> listaTipoPersonas = null;
 		try {
-			listaTipoPersonas = tipoPersonaDao.listarTipoPersona();
+			listaTipoPersonas = tipoPersonaDao.listarTipoPersonas();
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo listarTipoPersona de la clase tipoPersonaDao: "+ e);
 		}
