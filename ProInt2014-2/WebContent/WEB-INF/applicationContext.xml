@@ -25,8 +25,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         <!-- BEANS CONFIGURACION HIBERNATE-->
-        <bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mappingResources">
 			<list>
@@ -77,25 +76,33 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
                               org.hibernate.transaction.JDBCTransactionFactory
                       </prop>
                  </props>
-            </property>
-      
+            </property>      
         </bean>
-
-        <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
-        	<property name="semestresDAO" ref="semestresDAO" />
-        	<!-- <property name="materiasDAO" ref="materiasDAO" />   -->
-        </bean>
-          
-        <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
-        	<property name="sessionFactory" ref="sessionFactiry" />
-        </bean>
-        		
-        <bean id="materiasDAO" 	class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
+		
+		<!-- SE CREAN LOS BEANS CORRESPONDIENTES A LOS DAO's -->
+		<bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
+			<!-- <property name="sessionFactory" ref="sessionFactory" />   -->
+		</bean>
+		
+		<bean id="materiasDAO" 	class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
-        
-        
+                
         <bean id="microcurriculosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
+
+
+		<!-- AQUI SE DEFINENE LOS BEANS CORRESPONDIENTES A LA LOGICA --> 
+        <!-- <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
+        	<property name="semestreDAO" ref="semestreDAO" />
+        </bean> -->
+        		
+        
+        <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
+        <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
+        	<!-- <property name="semestreNGC" ref="semestresNGC" />  -->
+        </bean>
+        
+        
 </beans>

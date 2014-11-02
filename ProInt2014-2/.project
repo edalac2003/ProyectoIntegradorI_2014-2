@@ -3,6 +3,7 @@
 	<name>ProInt2014-2</name>
 	<comment></comment>
 	<projects>
+		<project>Microcurriculo2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
