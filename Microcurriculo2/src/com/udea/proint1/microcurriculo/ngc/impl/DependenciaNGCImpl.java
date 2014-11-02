@@ -84,7 +84,7 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		
 		try {
 			
-			dependenciaDao.actualizarDependencia(dependencia);
+			dependenciaDao.actualizarDependencias(dependencia);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarDependencia de la clase dependenciaDao: "+ e);

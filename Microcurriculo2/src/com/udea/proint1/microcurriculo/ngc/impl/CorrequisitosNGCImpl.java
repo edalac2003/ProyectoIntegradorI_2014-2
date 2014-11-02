@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dao.CorrequisitosDAO;
 import com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate;
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisitos;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitosNGC;

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
+import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -15,25 +16,25 @@ public class PersonaNGCImpl implements PersonaNGC {
 	private static Logger log=Logger.getLogger(PersonaNGCImpl.class);
 	
 	PersonaDAO personaDao;
-	TipoPersonaDAO tipoPersonaDao;
+	//TipoPersonaDAO tipoPersonaDao;
 	CiudadesDAO ciudadesDao;
-	TipoIdentificacionDAO tipoIdentificacionDao;
+	//TipoIdentificacionDAO tipoIdentificacionDao;
 
 	public void setPersonaDao(PersonaDAO personaDao) {
 		this.personaDao = personaDao;
 	}
 
-	public void setTipoPersonaDao(TipoPersonaDAO tipoPersonaDao) {
+	/*public void setTipoPersonaDao(TipoPersonaDAO tipoPersonaDao) {
 		this.tipoPersonaDao = tipoPersonaDao;
-	}
+	}*/
 
 	public void setCiudadesDao(CiudadesDAO ciudadesDao) {
 		this.ciudadesDao = ciudadesDao;
 	}
 
-	public void setTipoIdentificacionDao(TipoIdentificacionDAO tipoIdentificacionDao) {
+	/*public void setTipoIdentificacionDao(TipoIdentificacionDAO tipoIdentificacionDao) {
 		this.tipoIdentificacionDao = tipoIdentificacionDao;
-	}
+	}*/
 
 	public PersonaNGCImpl() {
 		// TODO Auto-generated constructor stub
@@ -90,7 +91,7 @@ public class PersonaNGCImpl implements PersonaNGC {
 		
 		try {
 			
-			personaDao.actualizarPersona(persona);
+			personaDao.modificarPersona(persona);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarPersona de la clase personaDao: "+ e);
@@ -139,7 +140,7 @@ public class PersonaNGCImpl implements PersonaNGC {
 		if(listaPersonas == null){
 			throw new ExcepcionesLogica("No se encontraron personas en la tabla personaDao");
 		}else{
-			return personaDao;
+			return listaPersonas;
 		}
 	}
 

@@ -22,8 +22,8 @@ public class CiudadesNGCImpl implements CiudadesNGC {
 		this.ciudadesDao = ciudadesDao;
 	}
 
-	public DepartamentosDAO getDepartamentoDao() {
-		return departamentoDao;
+	public void setDepartamentoDao(DepartamentosDAO departamentoDao) {
+		this.departamentoDao = departamentoDao;
 	}
 
 	public CiudadesNGCImpl() {

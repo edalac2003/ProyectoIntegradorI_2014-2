@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.udea.proint1.microcurriculo.dao.MateriasDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
@@ -15,15 +16,15 @@ public class MateriasNGCImpl implements MateriasNGC {
 	private static Logger log=Logger.getLogger(MateriasNGCImpl.class);
 	
 	MateriasDAO materiasDao;
-	NucleoDAO nucleoDao;
+	//NucleoDAO nucleoDao;
 
 	public void setMateriasDao(MateriasDAO materiasDao) {
 		this.materiasDao = materiasDao;
 	}
 
-	public void setNucleoDao(NucleoDAO nucleoDao) {
+	/*public void setNucleoDao(NucleoDAO nucleoDao) {
 		this.nucleoDao = nucleoDao;
-	}
+	}*/
 
 	public MateriasNGCImpl() {
 		// TODO Auto-generated constructor stub
@@ -39,7 +40,7 @@ public class MateriasNGCImpl implements MateriasNGC {
 		}
 		try {
 			String id = materia.getVrIdmateria();
-			TbAdmDependencia materiasConsulta = materiasDao.obtenerMaterias(id);
+			TbAdmMaterias materiasConsulta = materiasDao.obtenerMateria(id);
 		
 			if(materiasConsulta != null){
 				throw new ExcepcionesLogica("La materia a insertar ya existe");
@@ -68,7 +69,7 @@ public class MateriasNGCImpl implements MateriasNGC {
 		}
 		try {
 			String id = materia.getVrIdmateria();
-			TbAdmMaterias materiaConsulta = materiasDao.obtenermaterias(id);
+			TbAdmMaterias materiaConsulta = materiasDao.obtenerMateria(id);
 		
 			if(materiaConsulta == null){
 				throw new ExcepcionesLogica("El materias a actualizar no existe");
@@ -80,7 +81,7 @@ public class MateriasNGCImpl implements MateriasNGC {
 		
 		try {
 			
-			materiasDao.actualizarMaterias(materia);
+			materiasDao.actualizarMateria(materia);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarDependencia de la clase dependenciaDao: "+ e);
@@ -99,7 +100,7 @@ public class MateriasNGCImpl implements MateriasNGC {
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			materias = materiasDao.obtenerMaterias(id);
+			materias = materiasDao.obtenerMateria(id);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerMaterias de la clase materiasDao: "+ e);
 		}

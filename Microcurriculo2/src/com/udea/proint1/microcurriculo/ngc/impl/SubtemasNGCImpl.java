@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.udea.proint1.microcurriculo.dao.SubtemasDAO;
+import com.udea.proint1.microcurriculo.dao.TemasDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
 import com.udea.proint1.microcurriculo.ngc.SubtemasNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -38,7 +40,7 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			subtema = subtemasDao.obtenerSubtema(id);
+			subtema = subtemasDao.obtenerSubtemas(id);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerSubtema de la clase subtemasDao: "+ e);
 		}
@@ -64,7 +66,7 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		}
 		try {
 			int id = subtema.getNbIdsubtema();
-			TbMicSubtemas subtemaConsulta = subtemasDao.obtenerSubtema(id);
+			TbMicSubtemas subtemaConsulta = subtemasDao.obtenerSubtemas(id);
 		
 			if(subtemaConsulta != null){
 				throw new ExcepcionesLogica("El subtemaConsulta a insertar ya existe");
@@ -93,7 +95,7 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		}
 		try {
 			int id = subtema.getNbIdsubtema();
-			TbMicSubtemas subtemaConsulta = subtemasDao.obtenerSubtema(id);
+			TbMicSubtemas subtemaConsulta = subtemasDao.obtenerSubtemas(id);
 		
 			if(subtemaConsulta == null){
 				throw new ExcepcionesLogica("El subtema a actualizar no existe");
@@ -105,7 +107,7 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		
 		try {
 			
-			subtemaConsulta.actualizarSubtema(subtema);
+			subtemasDao.modificarSubtema(subtema);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarSubtema de la clase subtemasDao: "+ e);

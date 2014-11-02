@@ -34,7 +34,7 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 		}
 		try {
 			String id = unidadAcademica.getVrIdunidad();
-			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(id);
+			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(idUnidad);
 		
 			if(unidadAcademicaConsulta != null){
 				throw new ExcepcionesLogica("La unidadAcademica a insertar ya existe");

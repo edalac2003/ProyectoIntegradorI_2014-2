@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dao.UnidadesDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -19,7 +20,7 @@ private static Logger log=Logger.getLogger(UnidadesNGCImpl.class);
 
 	public void setunidadesDao(UnidadesDAO unidadesDao) {
 		this.unidadesDao = unidadesDao;
-
+	}
 
 	@Override
 	public TbMicUnidades obtenerUnicades(int idUnidad) throws ExcepcionesLogica {

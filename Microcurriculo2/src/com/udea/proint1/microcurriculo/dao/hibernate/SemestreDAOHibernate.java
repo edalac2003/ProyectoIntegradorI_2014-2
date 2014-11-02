@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dao.SemestreDAO;
@@ -21,7 +22,8 @@ public class SemestreDAOHibernate implements SemestreDAO {
 	@Override
 	public List<TbAdmSemestre> listarSemestres() throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
-		return null;
+		List<TbAdmSemestre> semestre = new ArrayList<TbAdmSemestre>();
+		return semestre;
 	}
 
 }
