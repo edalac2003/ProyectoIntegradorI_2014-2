@@ -13,7 +13,7 @@ public interface PersonaDAO {
 	
 	public TbAdmPersona obtenerPersona(String idPersona) throws ExcepcionesDAO;
 	
-	public TbAdmPersona obtenerPersonaPorTipo(String idPersona, int tipoPersona) throws ExcepcionesDAO;
+	public List<TbAdmPersona> obtenerPersonaPorTipo(TbAdmPersona tipoPersona) throws ExcepcionesDAO;
 	
 	public List<TbAdmPersona> listarPersonas() throws ExcepcionesDAO;
 	

@@ -143,5 +143,24 @@ public class PersonaNGCImpl implements PersonaNGC {
 			return listaPersonas;
 		}
 	}
+	
+	@Override
+	public List<TbAdmPersona> obtenerPersonaPorTipo(TbAdmPersona tipoPersona) throws ExcepcionesLogica{
+		List<TbAdmPersona> listaPersonas = null;
+		try {
+			listaPersonas = personaDao.obtenerPersonaPorTipo(tipoPersona);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarPersonas de la clase personaDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaPersonas == null){
+			throw new ExcepcionesLogica("No se encontraron personas de tipo docente en la tabla personaDao");
+		}else{
+			return listaPersonas;
+		}
+	}
 
 }
