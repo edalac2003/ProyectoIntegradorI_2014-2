@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.ngc;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface MateriasNGC {
@@ -14,4 +15,8 @@ public interface MateriasNGC {
 	public TbAdmMaterias obtenerMateria(String id) throws ExcepcionesLogica;
 	
 	public List<TbAdmMaterias> listarMaterias() throws ExcepcionesLogica;
+	
+	public List<TbAdmMaterias> listarMateriasxNucleo(String nucleo) throws ExcepcionesLogica;
+	
+	public List<TbAdmMaterias> listarMateriasxSemetre(int semestre) throws ExcepcionesLogica;
 }

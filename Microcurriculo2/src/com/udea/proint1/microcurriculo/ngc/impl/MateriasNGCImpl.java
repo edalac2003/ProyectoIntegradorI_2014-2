@@ -1,12 +1,17 @@
 package com.udea.proint1.microcurriculo.ngc.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
+import com.udea.proint1.microcurriculo.dao.NucleoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -16,15 +21,15 @@ public class MateriasNGCImpl implements MateriasNGC {
 	private static Logger log=Logger.getLogger(MateriasNGCImpl.class);
 	
 	MateriasDAO materiasDao;
-	//NucleoDAO nucleoDao;
+	NucleoDAO nucleoDao;
 
 	public void setMateriasDao(MateriasDAO materiasDao) {
 		this.materiasDao = materiasDao;
 	}
 
-	/*public void setNucleoDao(NucleoDAO nucleoDao) {
+	public void setNucleoDao(NucleoDAO nucleoDao) {
 		this.nucleoDao = nucleoDao;
-	}*/
+	}
 
 	public MateriasNGCImpl() {
 		// TODO Auto-generated constructor stub
@@ -135,5 +140,42 @@ public class MateriasNGCImpl implements MateriasNGC {
 			return listaMaterias;
 		}
 	}
-
+	
+	@Override
+	public List<TbAdmMaterias> listarMateriasxNucleo(String nucleo) throws ExcepcionesLogica{
+		List<TbAdmMaterias> listaMaterias = null;
+		
+		TbAdmNucleo nucleoConsulta = null;
+		
+		try {
+			nucleoConsulta = nucleoDao.obtenerNucleo(nucleo);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerNucleo de la clase NucleoDao: "+ e);
+		}
+		
+		try {
+			listaMaterias = materiasDao.listarMateriasPorNucleo(nucleoConsulta);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarMateriasPorNucleo de la clase materiasDao: "+ e);
+		}
+		
+			return listaMaterias;
+	}
+	
+	@Override
+	public List<TbAdmMaterias> listarMateriasxSemetre(int semestre) throws ExcepcionesLogica{
+		List<TbAdmMaterias> listaMaterias = null;
+		
+		if(semestre == 0){
+			throw new ExcepcionesLogica("No se ingreso un semestre");
+		}
+		
+		try{
+			listaMaterias = materiasDao.listarMateriasPorSemestre(semestre);
+		}catch (ExcepcionesDAO e){
+			log.error("Falló al invocar el metodo listarMateriasPorSemestre de la clase materiasDao: "+ e);
+		}
+		return listaMaterias;
+	}
+		
 }

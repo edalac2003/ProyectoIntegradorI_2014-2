@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.DependenciasDAO;
+import com.udea.proint1.microcurriculo.dao.NucleoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentesxnucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
@@ -70,9 +71,9 @@ public class NucleoNGCImpl implements NucleoNGC {
 		}
 		try {
 			String id = nucleo.getVrIdnucleo();
-			TbAdmDependencia dependenciaConsulta = nucleoDao.obtenerNucleo(id);
+			TbAdmNucleo nucleoConsulta = nucleoDao.obtenerNucleo(id);
 		
-			if(dependenciaConsulta == null){
+			if(nucleoConsulta == null){
 				throw new ExcepcionesLogica("El nucleo a actualizar no existe");
 			}
 		
