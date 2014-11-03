@@ -61,7 +61,15 @@
 													<row>
 														<label value="Id Materia" />
 									                    <div>
-									                        <combobox id="cmbIdMateria" width="25%"/>
+									                        <combobox id="cmbIdMateria" width="25%" >
+									                        	<comboitem label="20100101" />
+									                        	<comboitem label="20100102" />
+									                        	<comboitem label="20100103" />
+									                        	<comboitem label="20100201" />
+									                        	<comboitem label="20100202" />
+									                        	<comboitem label="20100203" />
+									                        </combobox>
+									                        
 									                        
 									                    </div>
 							                		</row>
@@ -76,6 +84,12 @@
 									                    <label value="Area" />
 									                    <div>
 							                        		<label id="lblAreaMateria" />
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Créditos" />
+									                    <div>
+							                        		<label id="lblCreditosMateria" />
 							                    		</div>
 							                		</row>
 							                		<row>

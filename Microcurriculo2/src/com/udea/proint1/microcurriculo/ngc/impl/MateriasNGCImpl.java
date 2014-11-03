@@ -93,8 +93,8 @@ public class MateriasNGCImpl implements MateriasNGC {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
-		if((id.endsWith(null))||(id.equals(""))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de ciudad,está vacia");
+		if("".equals(id) || (id.equals(null))){
+			throw new ExcepcionesLogica("No se ha ingresado un ID de Materia Valido.");
 		}
 		TbAdmMaterias materias = null;
 		

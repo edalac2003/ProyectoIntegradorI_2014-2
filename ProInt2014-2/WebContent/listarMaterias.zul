@@ -1,10 +1,11 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page title="Plantilla para paginas Nuevas" contentType="text/html;charset=UTF-8"?>
 <zk>
 <window border="0" width="100%">
 
 	<borderlayout height="650px" >
 		<north border="0" height="100px">
-			<include id="footerIdx" src="sections/header.zul" />
+			<include id="headerIdx" src="sections/header.zul" />
 		</north>
 		
 		<center border="none">
@@ -26,11 +27,17 @@
 									<listheader label="" align="center"/>
 								</listhead>
 								<listitem>
-									<listcell label="Criterio de Busqueda">
-										<combobox id="strCriterio">
+									<listcell>
+										<label value="Criterio de Busqueda" />
+										<combobox id="cmbCriterioBusqueda">
 											<comboitem label="Nucleo" />
 											<comboitem label="Estado" />											
 										</combobox>
+									</listcell>
+									<listcell>
+										<label value="Valor a Buscar" />
+										<textbox id="txtValorBuscado" />
+										<button id="btnBuscarMaterias" label="Buscar" />
 									</listcell>								
 								</listitem>
 							</listbox>
