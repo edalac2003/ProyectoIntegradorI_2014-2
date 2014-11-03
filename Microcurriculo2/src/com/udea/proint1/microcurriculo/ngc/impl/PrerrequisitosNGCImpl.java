@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dao.MateriasDAO;
+import com.udea.proint1.microcurriculo.dao.PrerrequisitosDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -14,10 +16,10 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 
 	private static Logger log=Logger.getLogger(PrerrequisitosNGCImpl.class);	
 	
-	PrerrequisitoDAO prerrequisitosDao;
+	PrerrequisitosDAO prerrequisitosDao;
 	MateriasDAO materiasDao;
 	
-	public void setPrerrequisitosDao(PrerrequisitoDAO prerrequisitosDao) {
+	public void setPrerrequisitosDao(PrerrequisitosDAO prerrequisitosDao) {
 		this.prerrequisitosDao = prerrequisitosDao;
 	}
 
@@ -39,7 +41,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		}
 		try {
 			int id = prerrequisito.getNbId();
-			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito(id);
+			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito();
 		
 			if(prerrequisitoConsulta != null){
 				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
@@ -68,7 +70,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		}
 		try {
 			int id = prerrequisito.getNbId();
-			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito(id);
+			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito();
 		
 			if(prerrequisitoConsulta == null){
 				throw new ExcepcionesLogica("El prerrequisito a actualizar no existe");
@@ -118,7 +120,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			prerrequisito = prerrequisitosDao.obtenerPrerrequisito(id);
+			prerrequisito = prerrequisitosDao.obtenerPrerrequisito();
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitosDao: "+ e);
 		}
@@ -133,6 +135,31 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 			//si no esta vacio retorna la ciudad
 			return prerrequisito;
 		}
+	}
+	
+	@Override
+	public List<TbAdmPrerrequisitos> listarPrerrequisitosxMateria(String id) throws ExcepcionesDAO{
+		List<TbAdmPrerrequisitos> listaPrerrequisitos = null;
+		
+		TbAdmMaterias materia= null;
+		
+		try {
+			materia = materiasDao.obtenerMateria(id);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerMateria de la clase materiasDao: "+ e);
+		}
+		
+		
+		try {
+			listaPrerrequisitos = prerrequisitosDao.listarPrerrequisitosxMateria(materia);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarCorrequisitosxmateria de la clase correquisitosDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaPrerrequisitos;
 	}
 
 }

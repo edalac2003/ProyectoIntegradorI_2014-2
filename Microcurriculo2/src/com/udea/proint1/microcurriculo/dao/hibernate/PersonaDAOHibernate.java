@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
@@ -76,10 +78,24 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 	}
 
 	@Override
-	public TbAdmPersona obtenerPersonaPorTipo(String idPersona, int tipoPersona)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TbAdmPersona> obtenerDocentes(TbAdmTipopersona tipoPersona) throws ExcepcionesDAO {
+		Session session = null;
+        List<TbAdmPersona> solicitudes = new ArrayList<TbAdmPersona>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from Solicitud where sucursalProceso = :tipoPersona");
+               
+        	query.setEntity("tipoPersona", tipoPersona);
+               
+            solicitudes = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return solicitudes;
+
 	}
 
 	@Override

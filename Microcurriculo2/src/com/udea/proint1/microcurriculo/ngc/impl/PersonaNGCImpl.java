@@ -6,7 +6,9 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
+import com.udea.proint1.microcurriculo.dao.TipoPersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -16,7 +18,7 @@ public class PersonaNGCImpl implements PersonaNGC {
 	private static Logger log=Logger.getLogger(PersonaNGCImpl.class);
 	
 	PersonaDAO personaDao;
-	//TipoPersonaDAO tipoPersonaDao;
+	TipoPersonaDAO tipoPersonaDao;
 	CiudadesDAO ciudadesDao;
 	//TipoIdentificacionDAO tipoIdentificacionDao;
 
@@ -24,9 +26,9 @@ public class PersonaNGCImpl implements PersonaNGC {
 		this.personaDao = personaDao;
 	}
 
-	/*public void setTipoPersonaDao(TipoPersonaDAO tipoPersonaDao) {
+	public void setTipoPersonaDao(TipoPersonaDAO tipoPersonaDao) {
 		this.tipoPersonaDao = tipoPersonaDao;
-	}*/
+	}
 
 	public void setCiudadesDao(CiudadesDAO ciudadesDao) {
 		this.ciudadesDao = ciudadesDao;
@@ -139,6 +141,34 @@ public class PersonaNGCImpl implements PersonaNGC {
 		 */
 		if(listaPersonas == null){
 			throw new ExcepcionesLogica("No se encontraron personas en la tabla personaDao");
+		}else{
+			return listaPersonas;
+		}
+	}
+	
+	@Override
+	public List<TbAdmPersona> obtenerDocentes() throws ExcepcionesLogica{
+		List<TbAdmPersona> listaPersonas = null;
+		
+		TbAdmTipopersona tipoPersona = null;
+		
+		try {
+			tipoPersona = tipoPersonaDao.obtenerTipoPersona(2);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerTipoPersona de la clase tipoPersonaDao: "+ e);
+		}
+		
+		try {
+			listaPersonas = personaDao.obtenerDocentes(tipoPersona);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarPersonas de la clase personaDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaPersonas == null){
+			throw new ExcepcionesLogica("No se encontraron personas de tipo docente en la tabla personaDao");
 		}else{
 			return listaPersonas;
 		}
