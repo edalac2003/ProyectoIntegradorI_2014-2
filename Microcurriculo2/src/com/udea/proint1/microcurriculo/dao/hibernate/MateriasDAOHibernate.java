@@ -96,8 +96,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 	}
 
 	@Override
-	public List<TbAdmMaterias> listarMateriasPorSemestre(int semestre)
-			throws ExcepcionesDAO {
+	public List<TbAdmMaterias> listarMateriasPorSemestre(int semestre) throws ExcepcionesDAO {
 		Session session = null;
         List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
        
@@ -105,7 +104,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
                
                 session = getSession();	
                                
-                Query query = session.createQuery("from TbMicMicrocurriculos where nbSemestre = :nroSemestre");
+                Query query = session.createQuery("from TbAdmCorrequisitos where nbSemestre = :nroSemestre");
                
                 query.setInteger("nroSemestre", semestre);
                
