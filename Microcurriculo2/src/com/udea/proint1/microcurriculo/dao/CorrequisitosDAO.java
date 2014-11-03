@@ -10,7 +10,9 @@ public interface CorrequisitosDAO {
 	
 	public void guardarCorrequisito(TbAdmCorrequisitos correquisitos) throws ExcepcionesDAO;
 	
-	public TbAdmCorrequisitos obtenerCorrequisitos(String id) throws ExcepcionesDAO;
+	public void actualizarCorrequisito(TbAdmCorrequisitos correquisitos) throws ExcepcionesDAO;
+	
+	public TbAdmCorrequisitos obtenerCorrequisitos(int id) throws ExcepcionesDAO;
 	
 	public List<TbAdmCorrequisitos> listarCorrequisitos() throws ExcepcionesDAO;
 	

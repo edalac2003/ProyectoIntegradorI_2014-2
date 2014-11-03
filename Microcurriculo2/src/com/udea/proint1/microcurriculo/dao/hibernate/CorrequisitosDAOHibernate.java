@@ -35,9 +35,22 @@ public class CorrequisitosDAOHibernate extends HibernateDaoSupport implements Co
 		}
 		
 	}
+	
+	@Override
+	public void actualizarCorrequisito(TbAdmCorrequisitos correquisitos) throws ExcepcionesDAO{
+		Session session = null;
+		
+		try{
+			session = getSession();
+			this.getHibernateTemplate().update(correquisitos);
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+	}
 
 	@Override
-	public TbAdmCorrequisitos obtenerCorrequisitos(String id)
+	public TbAdmCorrequisitos obtenerCorrequisitos(int id)
 			throws ExcepcionesDAO {
 		Session session = null;
 		TbAdmCorrequisitos correquisitos = null;

@@ -137,6 +137,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		}
 	}
 	
+	@Override
 	public List<TbAdmPrerrequisitos> listarPrerrequisitosxMateria(String id) throws ExcepcionesDAO{
 		List<TbAdmPrerrequisitos> listaPrerrequisitos = null;
 		
