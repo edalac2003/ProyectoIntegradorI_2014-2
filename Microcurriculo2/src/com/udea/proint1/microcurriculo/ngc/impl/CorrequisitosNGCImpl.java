@@ -6,18 +6,15 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.CorrequisitosDAO;
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
-import com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate;
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisitos;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
-import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class CorrequisitosNGCImpl implements CorrequisitosNGC {
 	
-	private static Logger log=Logger.getLogger(PrerrequisitosNGCImpl.class);	
+	private static Logger log=Logger.getLogger(CorrequisitosNGCImpl.class);	
 
 	CorrequisitosDAO correquisitosDao;
 	MateriasDAO materiasDao;
@@ -59,7 +56,7 @@ public class CorrequisitosNGCImpl implements CorrequisitosNGC {
 		return null;
 	}
 	
-	public List<TbAdmCorrequisitos> listarCorrequisitosxMatera(String id) throws ExcepcionesLogica{
+	public List<TbAdmCorrequisitos> listarCorrequisitosxMateria(String id) throws ExcepcionesLogica{
 		
 		List<TbAdmCorrequisitos> listaCorrequisitos = null;
 		

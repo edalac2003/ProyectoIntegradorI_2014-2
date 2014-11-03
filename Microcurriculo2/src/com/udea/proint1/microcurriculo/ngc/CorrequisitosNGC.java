@@ -16,5 +16,5 @@ public interface CorrequisitosNGC {
 	
 	public TbAdmCorrequisitos obtenerCorrequisito(int id) throws ExcepcionesLogica;
 	
-	public List<TbAdmCorrequisitos> listarCorrequisitosxMatera(TbAdmMaterias materia) throws ExcepcionesLogica;
+	public List<TbAdmCorrequisitos> listarCorrequisitosxMateria(String id) throws ExcepcionesLogica;
 }
