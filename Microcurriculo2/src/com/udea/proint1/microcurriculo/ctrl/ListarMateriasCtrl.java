@@ -28,6 +28,7 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 	
 	MateriasNGC materiaNGC;
 
+	
 		
 	public void setMateriaNGC(MateriasNGC materiaNGC) {
 		this.materiaNGC = materiaNGC;
@@ -35,7 +36,7 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 
 	
 	public void onClick$btnBuscarMaterias(Event event){
-
+		
 	}
 
 
