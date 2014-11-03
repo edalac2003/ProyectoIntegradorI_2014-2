@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbMicMateriasxpensum;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -77,22 +78,25 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 
 
 	@Override
-	public List<TbAdmMaterias> listarMateriasPorNucleo(String nucleo)
-			throws ExcepcionesDAO {
+	public List<TbAdmMaterias> listarMateriasPorNucleo(TbAdmNucleo nucleo) throws ExcepcionesDAO {
 		Session session = null;
+		List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
 		
 		try {
-			session = getSession(true);
-			List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
-			Query q = session.createQuery("FROM TbAdmMaterias where tbAdmNucleo.vrIdnucleo = " + nucleo);
-			q.executeUpdate();
-			materias = q.list();
-			return materias;
+			session = getSession();
+			
+			Query query = session.createQuery("FROM TbAdmMaterias where tbAdmNucleo = :nucleo");
+			
+			query.setEntity("nucleo", nucleo);
+            
+            materias = query.list();
+			
 			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		} 
 		
+		return materias;
 	}
 
 	@Override
