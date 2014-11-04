@@ -174,7 +174,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	public void llenarListaBibliografia(){
-		final Listitem listaItem = new Listitem();				
+		final Listitem listaItem = new Listitem();
+		
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {		
@@ -235,14 +236,12 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	
 	public void onClick$btnAddObjetivo(Event event){
-		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){
-			
+		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){	
 			final Listitem listaItem = new Listitem();
 			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 
 				@Override
-				public void onEvent(Event arg0) throws Exception {		
-					
+				public void onEvent(Event arg0) throws Exception {
 					eliminaListItem(listaItem);
 				}
 			});

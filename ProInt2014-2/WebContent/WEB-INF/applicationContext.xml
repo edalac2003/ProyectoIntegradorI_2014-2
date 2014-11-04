@@ -89,6 +89,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="nucleoDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.NucleoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>  -->
@@ -97,6 +101,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 		<!-- AQUI SE DEFINENE LOS BEANS CORRESPONDIENTES A LA LOGICA --> 
         <bean id="materiasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriasNGCImpl">
         	<property name="materiasDao" ref="materiasDAO" />
+        	<property name="nucleoDao" ref="nucleoDAO"></property>
         </bean>
         		
         
