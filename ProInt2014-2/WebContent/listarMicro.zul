@@ -2,7 +2,7 @@
 <zk>
 <window border="0" width="100%">
 
-	<borderlayout height="650px"  >
+	<borderlayout height="850px"  >
 		<north border="0" height="100px">
 			<include id="headerIdx" src="sections/header.zul" />
 		</north>
@@ -17,7 +17,7 @@
 					</div>
 				</north>
 				
-				<center border="none">
+				<center border="none" >
 					<div>
 						
 					</div>

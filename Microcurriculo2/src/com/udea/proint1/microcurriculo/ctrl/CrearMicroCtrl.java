@@ -1,21 +1,30 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
-import org.apache.log4j.Logger;
+import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Cell;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
 public class CrearMicroCtrl extends GenericForwardComposer {
@@ -29,6 +38,25 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Button btnAddEvaluacion;
 	Button btnAddBibliografia;
 	Button btnAddCibergrafia;
+	
+	Label lblNombreMateria;
+	Label lblAreaMateria;
+	Label lblCreditosMateria;
+	Label lblHtMateria;
+	Label lblHpMateria;
+	Label lblHtpMateria;
+	Label lblHoraClaseSemestral;
+	Label lblCampoFormacion;
+	Label lblPrerrequisitos;
+	Label lblCorrequisitos;
+	Label lblProgramasVinculados;
+	
+	
+	Checkbox ckbValidable;
+	Checkbox ckbHabilitable;
+	Checkbox ckbClasificable;
+	
+	
 	
 	Listbox listaUnidades;
 	Listbox listaTemas;
@@ -60,6 +88,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbPaisBiblio;
 	Combobox cmbTipoBibliografia;
 	Combobox cmbTipoCibergrafia;
+	Combobox cmbIdMateria;
+	
+	MateriasNGC materiasNGC;
+	
 	
 	
 	//Esto se debe incluir al momento de Guardar.  Son los DTO por medio de los cuales se comunicaran las capas
@@ -73,6 +105,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	//arg.get("objeto")
 	
 	
+	public void setMateriasNGC(MateriasNGC materiasNGC) {
+		this.materiasNGC = materiasNGC;
+	}
+
 	public void onClick$btnAddCibergrafia(Event event){
 		if (!"".equals(cmbListaUnidadBiblio.getValue())){
 			if (txtNombreSitioCiber.getValue() != null && (txtNombreSitioCiber.getValue().trim().length() > 0)){
@@ -138,7 +174,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	public void llenarListaBibliografia(){
-		final Listitem listaItem = new Listitem();				
+		final Listitem listaItem = new Listitem();
+		
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {		
@@ -199,14 +236,12 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	
 	public void onClick$btnAddObjetivo(Event event){
-		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){
-			
+		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){	
 			final Listitem listaItem = new Listitem();
 			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 
 				@Override
-				public void onEvent(Event arg0) throws Exception {		
-					
+				public void onEvent(Event arg0) throws Exception {
 					eliminaListItem(listaItem);
 				}
 			});
@@ -336,12 +371,67 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		txtSubTemas.setValue("");
 	}
 	
+	public void cargarMaterias(){
+		/*try {
+			List<TbAdmMaterias> listaMaterias = materiasNGC.listarMaterias();
+			if (listaMaterias != null){
+				for (TbAdmMaterias materia : listaMaterias){
+					Comboitem item = new Comboitem();
+					item.setLabel("prueba");
+					cmbIdMateria.appendChild(item);
+				}
+			} else {
+				System.out.println("El objeto está Vacio");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}*/
+	}
 	
 	
+	public void onSelect$cmbIdMateria(){
+		//Messagebox.show("Ingresó al Evento."+ cmbIdMateria.getValue().toString());
+		try {
+			TbAdmMaterias materia = materiasNGC.obtenerMateria(cmbIdMateria.getValue().toString());
+			if (materia != null ){
+				lblNombreMateria.setValue(materia.getVrNombre());
+				lblAreaMateria.setValue(materia.getTbAdmNucleo().getVrNombre());
+				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
+				lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
+				lblHpMateria.setValue(Integer.toString(materia.getNbHp()));
+				lblHtpMateria.setValue(Integer.toString(materia.getNbHtp()));
+				Integer horaClaseSemestral = (materia.getNbHt()+materia.getNbHp()+materia.getNbHtp())*16;
+				lblHoraClaseSemestral.setValue(Integer.toString(horaClaseSemestral));
+				if (materia.getBlValidable() == 1)
+					ckbValidable.setChecked(true);
+				else
+					ckbValidable.setChecked(false);
+				
+				if (materia.getBlHabilitable() == 1)
+					ckbHabilitable.setChecked(true);
+				else
+					ckbHabilitable.setChecked(false);
+				
+				if (materia.getBlClasificable() == 1)
+					ckbClasificable.setChecked(true);
+				else
+					ckbClasificable.setChecked(false);
+				
+				
+				
+			} else 
+				Messagebox.show("El Registro esta vacio.");
+			
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
+		cargarMaterias();
 		super.doAfterCompose(comp);
 		System.out.println("Esta es la Ventana de Crear Microcurriculo");
 

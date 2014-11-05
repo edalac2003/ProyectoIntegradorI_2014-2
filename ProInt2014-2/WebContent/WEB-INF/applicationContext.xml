@@ -89,20 +89,31 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
+        <bean id="nucleoDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.NucleoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
 			<property name="sessionFactory" ref="sessionFactory" />
-		</bean>
+		</bean>  -->
 
 
 		<!-- AQUI SE DEFINENE LOS BEANS CORRESPONDIENTES A LA LOGICA --> 
         <bean id="materiasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriasNGCImpl">
         	<property name="materiasDao" ref="materiasDAO" />
+        	<property name="nucleoDao" ref="nucleoDAO"></property>
         </bean>
         		
         
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
         <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
         	<!-- <property name="semestreNGC" ref="semestresNGC" />  -->
+        	<property name="materiasNGC" ref="materiasNGC" />
+        </bean>
+        
+        <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
+        	<!-- <property name="semestreNGC" ref="semestresNGC" />  -->
+        	<property name="materiasNGC" ref="materiasNGC" />
         </bean>
             
 </beans>
