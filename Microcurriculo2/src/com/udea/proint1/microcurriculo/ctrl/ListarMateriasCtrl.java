@@ -44,7 +44,7 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 
 	public void onClick$btnBuscarMaterias(Event event){
 		//Messagebox.show("Entro al Evento Click de BUscar");
-		
+		limpiarLista(listaMaterias);
 		if (!"".equals(cmbCriterioBusqueda.getValue()) && (cmbCriterioBusqueda.getValue() != null)){
 			if ((!"".equals(cmbValorBusqueda.getValue())) && (cmbValorBusqueda.getValue() != null)){
 				List<TbAdmMaterias> listaMaterias = null;
@@ -100,9 +100,14 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 	}
 	
 	public void limpiarLista(Listbox lista){
-		for (int i=lista.getItemCount();i==0;i++){
-			lista.removeItemAt(i);
-		}
+		lista.getItems().clear();
+		/*if (lista.getItemCount()>0){
+			Messagebox.show(Integer.toString(lista.getItemCount()));
+			for (int i=lista.getItemCount();i==0;i++){
+				lista.removeItemAt(i);
+			}	
+		}*/
+		
 	}
 
 	

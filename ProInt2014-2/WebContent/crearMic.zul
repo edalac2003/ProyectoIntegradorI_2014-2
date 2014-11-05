@@ -49,43 +49,39 @@
 							                		</row>
 							                		<row>
 						                				<label value="Nucleo" width="30%"/>
-								                        <combobox id="cmbIdNucleo" />
+								                        <div>
+								                        	<combobox id="cmbIdNucleo" />
+								                        	<label id="lblNombreNucleo" />
+								                        </div>
+								                        
 							                		</row>
 							                		<row>
 														<label value="Docente Responsable" />
 									                    <div>
-									                        <combobox id="cmbIdDocente" width="25%"/>
+									                        <combobox id="cmbIdDocente" width="25%" />
 									                        <label id="lblNombreDocente" />
 									                    </div>
 							                		</row>
 													<row>
 														<label value="Id Materia" />
 									                    <div>
-									                        <combobox id="cmbIdMateria" width="25%" >
-									                        	<comboitem label="20100101" />
-									                        	<comboitem label="20100102" />
-									                        	<comboitem label="20100103" />
-									                        	<comboitem label="20100201" />
-									                        	<comboitem label="20100202" />
-									                        	<comboitem label="20100203" />
-									                        </combobox>
-									                        
-									                        
+									                        <combobox id="cmbIdMateria" width="25%" />
+									                        <label id="lblNombreMateria" />
 									                    </div>
 							                		</row>
 							                		
-							                		<row>
+							                		<!-- <row>
 									                    <label value="Nombre Materia" />
 									                    <div>
 							                        		<label id="lblNombreMateria" />
 							                    		</div>
-							                		</row>
-							                		<row>
+							                		</row> -->
+							                		<!-- <row>
 									                    <label value="Area" />
 									                    <div>
 							                        		<label id="lblAreaMateria" />
 							                    		</div>
-							                		</row>
+							                		</row> -->
 							                		<row>
 									                    <label value="Créditos" />
 									                    <div>

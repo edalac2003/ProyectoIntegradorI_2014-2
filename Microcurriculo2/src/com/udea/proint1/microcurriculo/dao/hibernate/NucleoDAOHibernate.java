@@ -67,11 +67,8 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 
 		try {
 			session = getSession();
-
 			Criteria criteria = session.createCriteria(TbAdmNucleo.class);
-
 			nucleos = criteria.list();
-
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
 		}

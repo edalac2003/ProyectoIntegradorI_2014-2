@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -22,8 +23,14 @@ import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
+import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
+import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
+import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
@@ -50,6 +57,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Label lblPrerrequisitos;
 	Label lblCorrequisitos;
 	Label lblProgramasVinculados;
+	Label lblNombreDocente;
+	Label lblNombreNucleo;
 	
 	
 	Checkbox ckbValidable;
@@ -89,8 +98,13 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbTipoBibliografia;
 	Combobox cmbTipoCibergrafia;
 	Combobox cmbIdMateria;
+	Combobox cmbIdDocente;
+	Combobox cmbIdNucleo;
 	
 	MateriasNGC materiasNGC;
+	PersonaNGC personaNGC;
+	NucleoNGC nucleoNGC;
+	//SemestreNGC semestreNGC;
 	
 	
 	
@@ -107,6 +121,19 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	public void setMateriasNGC(MateriasNGC materiasNGC) {
 		this.materiasNGC = materiasNGC;
+	}
+
+	public void setPersonaNGC(PersonaNGC personaNGC) {
+		this.personaNGC = personaNGC;
+	}
+	
+	/*public void setSemestreNGC(SemestreNGC semestreNGC) {
+		this.semestreNGC = semestreNGC;
+	}*/
+
+	
+	public void setNucleoNGC(NucleoNGC nucleoNGC) {
+		this.nucleoNGC = nucleoNGC;
 	}
 
 	public void onClick$btnAddCibergrafia(Event event){
@@ -322,6 +349,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				eliminaListItem(listaItem);
 			}
 		});
+		
 		Listcell celda1 = new Listcell(cmbIdUnidad.getValue());
 		Listcell celda2 = new Listcell(txtNombreTema.getValue().toUpperCase());
 		Listcell celda3 = new Listcell(txtNumeroSemanas.getValue().toString());
@@ -371,13 +399,29 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		txtSubTemas.setValue("");
 	}
 	
-	public void cargarMaterias(){
-		/*try {
-			List<TbAdmMaterias> listaMaterias = materiasNGC.listarMaterias();
+	public void cargarDocentes(){
+		try {
+			List<TbAdmPersona> listaDocentes = personaNGC.listarPersonas();
+			cmbIdDocente.getItems().clear();
+			if (listaDocentes != null){
+				//Messagebox.show("Se Hallaron Registros "+listaDocentes.size());
+				for(TbAdmPersona docente : listaDocentes){
+					Comboitem item = new Comboitem(docente.getVrIdpersona());
+					cmbIdDocente.appendChild(item);
+				}
+			} else
+				Messagebox.show("No Se Hallaron Registros de Docentes");
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void cargarMaterias(String nucleo){
+		try {
+			List<TbAdmMaterias> listaMaterias = materiasNGC.listarMateriasxNucleo(nucleo);
 			if (listaMaterias != null){
 				for (TbAdmMaterias materia : listaMaterias){
-					Comboitem item = new Comboitem();
-					item.setLabel("prueba");
+					Comboitem item = new Comboitem(materia.getVrIdmateria());
 					cmbIdMateria.appendChild(item);
 				}
 			} else {
@@ -385,9 +429,57 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			}
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
+	
+	public void cargarNucleos(){
+		try {
+			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
+			cmbIdNucleo.getItems().clear();
+			if (listaNucleos != null){
+				for(TbAdmNucleo nucleo : listaNucleos){
+					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
+					cmbIdNucleo.appendChild(item);
+				}
+			} else
+				Messagebox.show("No se Encontraron Registros en la Tabla Nucleos Académicos");
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+			
+		}
+	}
+	
+	public void onSelect$cmbIdNucleo(){
+		TbAdmNucleo nucleo;
+		try {
+			nucleo = nucleoNGC.obtenerNucleo(cmbIdNucleo.getValue().toString());
+			lblNombreNucleo.setValue(nucleo.getVrNombre());
+		} catch (WrongValueException e) {
+			e.printStackTrace();
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		cmbIdMateria.getItems().clear();
+		cargarMaterias(cmbIdNucleo.getValue().toString());
+	}
+		
+	public void onSelect$cmbIdDocente(){
+		try {
+			TbAdmPersona persona = personaNGC.obtenerPersona(cmbIdDocente.getValue().toString());
+
+			if (persona != null){
+				lblNombreDocente.setValue(persona.getVrNombres() + " "+ persona.getVrApellidos());
+			} else 
+				Messagebox.show("No se Encontró el Regitro para el docente.");
+		} catch (WrongValueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExcepcionesLogica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void onSelect$cmbIdMateria(){
 		//Messagebox.show("Ingresó al Evento."+ cmbIdMateria.getValue().toString());
@@ -395,7 +487,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			TbAdmMaterias materia = materiasNGC.obtenerMateria(cmbIdMateria.getValue().toString());
 			if (materia != null ){
 				lblNombreMateria.setValue(materia.getVrNombre());
-				lblAreaMateria.setValue(materia.getTbAdmNucleo().getVrNombre());
+				//lblAreaMateria.setValue(materia.getTbAdmNucleo().getVrNombre());
 				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
 				lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
 				lblHpMateria.setValue(Integer.toString(materia.getNbHp()));
@@ -415,10 +507,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				if (materia.getBlClasificable() == 1)
 					ckbClasificable.setChecked(true);
 				else
-					ckbClasificable.setChecked(false);
-				
-				
-				
+					ckbClasificable.setChecked(false);	
 			} else 
 				Messagebox.show("El Registro esta vacio.");
 			
@@ -431,8 +520,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
-		cargarMaterias();
+		
 		super.doAfterCompose(comp);
+		//cargarMaterias();
+		cargarNucleos();
+		cargarDocentes();
 		System.out.println("Esta es la Ventana de Crear Microcurriculo");
 
 	}

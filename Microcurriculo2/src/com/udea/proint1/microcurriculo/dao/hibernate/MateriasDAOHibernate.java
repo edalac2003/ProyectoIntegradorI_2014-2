@@ -64,11 +64,8 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 		
 		try{
 			session = getSession();
-			
 			Criteria criteria = session.createCriteria(TbAdmMaterias.class);
-			
-			materias = criteria.list();
-			
+			materias = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
