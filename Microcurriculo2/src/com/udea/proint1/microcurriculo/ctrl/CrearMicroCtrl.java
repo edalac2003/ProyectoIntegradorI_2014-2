@@ -10,7 +10,6 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Cell;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -23,10 +22,10 @@ import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
@@ -45,6 +44,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Button btnAddEvaluacion;
 	Button btnAddBibliografia;
 	Button btnAddCibergrafia;
+	//Button btnGuardarMicro;
+	
 	
 	Label lblNombreMateria;
 	Label lblAreaMateria;
@@ -100,11 +101,12 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbIdMateria;
 	Combobox cmbIdDocente;
 	Combobox cmbIdNucleo;
+	Combobox cmbIdSemestre;
 	
 	MateriasNGC materiasNGC;
 	PersonaNGC personaNGC;
 	NucleoNGC nucleoNGC;
-	//SemestreNGC semestreNGC;
+	SemestreNGC semestreNGC;
 	
 	
 	
@@ -127,9 +129,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		this.personaNGC = personaNGC;
 	}
 	
-	/*public void setSemestreNGC(SemestreNGC semestreNGC) {
+	public void setSemestreNGC(SemestreNGC semestreNGC) {
 		this.semestreNGC = semestreNGC;
-	}*/
+	}
 
 	
 	public void setNucleoNGC(NucleoNGC nucleoNGC) {
@@ -295,28 +297,34 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		celda.detach();
 	}
 	
+	public void eliminaComboItem(Comboitem item){
+		item.detach();
+	}
+	
+	
+	
 	public void onClick$btnAddUnidad(Event event){
 		if(txtNombreUnidad.getValue() != null && (txtNombreUnidad.getValue().trim().length() > 0)){
 			
 			final Listitem listaItem = new Listitem();
 			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-
 				@Override
-				public void onEvent(Event arg0) throws Exception {		
-					
-					eliminaListItem(listaItem);
+				public void onEvent(Event arg0) throws Exception {
+					eliminaListItem(listaItem);					
 				}
 			});
 			
 			Listcell celda = new Listcell(txtNombreUnidad.getValue().toUpperCase());
 			listaItem.appendChild(celda);
+			llenarCombosUnidades(txtNombreUnidad.getValue().toUpperCase());
 			listaUnidades.appendChild(listaItem);
 			txtNombreUnidad.setValue("");
-		} else {
+			txtNombreUnidad.setFocus(true);
+		} else
 			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
-		}		
 	}
 	
+		
 	/**
 	 * Boton btnAddTemas Evento onClick
 	 * 
@@ -331,12 +339,21 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if (txtNombreTema.getValue() != null && (txtNombreTema.getValue().trim().length() > 0)){
 				if (txtNumeroSemanas.getValue() != null){
 					llenarListaTemas();
-				} else
+				} else {
 					Messagebox.show("Se Requiere información en el Campo <Tiempo (Semanas)>");
-			} else 
+					txtNumeroSemanas.setFocus(true);
+				}
+					
+			} else {
 				Messagebox.show("Se Requiere información en el Campo <Tema>");
-		} else
-			Messagebox.show("Se Requiere información en el Campo <Unidad>");		
+				txtNombreTema.setFocus(true);
+			}
+				
+		} else{
+			Messagebox.show("Se Requiere información en el Campo <Unidad>");
+			
+		}
+					
 	}
 	
 	public void llenarListaTemas(){
@@ -399,6 +416,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		txtSubTemas.setValue("");
 	}
 	
+	
+	
 	public void cargarDocentes(){
 		try {
 			List<TbAdmPersona> listaDocentes = personaNGC.listarPersonas();
@@ -445,9 +464,24 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			} else
 				Messagebox.show("No se Encontraron Registros en la Tabla Nucleos Académicos");
 		} catch (ExcepcionesLogica e) {
-			logger.error(e);
-			
+			logger.error(e);			
 		}
+	}
+	
+	private void cargarSemestres(){
+		try {
+			List<TbAdmSemestre> listaSemestre = semestreNGC.listarSemestres();
+			if (listaSemestre != null){
+				for (TbAdmSemestre semestre : listaSemestre){
+					Comboitem item = new Comboitem(semestre.getVrIdsemestre());
+					cmbIdSemestre.appendChild(item);
+				}
+			} else
+				Messagebox.show("No se Encontraron Registros de Semestres");
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void onSelect$cmbIdNucleo(){
@@ -464,6 +498,61 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		cargarMaterias(cmbIdNucleo.getValue().toString());
 	}
 		
+	private void llenarCombosUnidades(String unidad){
+		Comboitem item = new Comboitem(unidad);		
+		cmbIdUnidad.appendChild(item);
+		Comboitem item2 = new Comboitem(unidad);
+		cmbListaUnidades.appendChild(item2);
+	}
+	
+	/*private void recargarCombosUnidades(Listbox lista){
+		cmbIdUnidad.getItems().clear();
+		cmbListaUnidades.getItems().clear();
+		String unidad;
+		Messagebox.show("Se cargaran "+ lista.getItemCount());
+		
+		for (int i=0; i < lista.getItemCount(); i++ ){
+			unidad = lista.getItems().get(i).getValue();
+			Comboitem item = new Comboitem(unidad);
+			cmbIdUnidad.appendChild(item);
+			item = new Comboitem(unidad);
+			cmbListaUnidades.appendChild(item);
+		}		
+	}*/
+	
+	public void onSelect$cmbListaUnidades(){
+		//Messagebox.show("Estoy en el Evento Select del Combobox");
+		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
+	}
+	
+	public void onClick$cmbListaUnidades(Event event){
+		//Messagebox.show("Estoy en el Evento Select del Combobox");
+		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
+	}
+	
+	private void llenarTemasPorUnidad(Listbox lista, String Unidad){
+		//cmbListaTemas.getItems().clear();
+		//Messagebox.show("Estas en el modulo Llenar Temas por Unidad");
+		
+		for(int i=0; i < lista.getItemCount(); i++){
+			//System.out.println(lista.getItems().get(i).getLabel());
+			Listitem listaitem = new Listitem();
+			listaitem = lista.getItemAtIndex(i);
+			System.out.println(listaitem.getLabel());
+			Comboitem item = new Comboitem(Integer.toString(i));
+			cmbListaTemas.appendChild(item);
+		}
+		
+		
+	}
+	
+	/*public void onClick$cmbIdUnidad(){
+		Messagebox.show("HIZO CLICK SOBRE " +cmbIdUnidad.getId());
+		cmbIdUnidad.getItems().clear();
+	}*/
+	
+	
+	
 	public void onSelect$cmbIdDocente(){
 		try {
 			TbAdmPersona persona = personaNGC.obtenerPersona(cmbIdDocente.getValue().toString());
@@ -473,10 +562,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			} else 
 				Messagebox.show("No se Encontró el Regitro para el docente.");
 		} catch (WrongValueException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -487,7 +574,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			TbAdmMaterias materia = materiasNGC.obtenerMateria(cmbIdMateria.getValue().toString());
 			if (materia != null ){
 				lblNombreMateria.setValue(materia.getVrNombre());
-				//lblAreaMateria.setValue(materia.getTbAdmNucleo().getVrNombre());
 				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
 				lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
 				lblHpMateria.setValue(Integer.toString(materia.getNbHp()));
@@ -517,6 +603,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		
 	}
 	
+	/*public void onClick$btnGuardarMicro(){
+		Messagebox.show("HA INGRESADO A LA SECCION DE GUARDAR MICROCURRICULO");
+		// HACER VALIDACIONES DE CAMPOS VACIOS.  CUALES SON LOS CAMPOS MINIMOS PARA GUARDAR UN MICROCURRICULO?
+	}*/
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -525,6 +616,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		//cargarMaterias();
 		cargarNucleos();
 		cargarDocentes();
+		cargarSemestres();
 		System.out.println("Esta es la Ventana de Crear Microcurriculo");
 
 	}

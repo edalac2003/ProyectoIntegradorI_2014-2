@@ -17,7 +17,7 @@
 						</div>
 					</north>
 					
-					<center border="none">
+					<center border="none" autoscroll="true">
 						<div align="center">
 							
 							<separator />
@@ -70,18 +70,6 @@
 									                    </div>
 							                		</row>
 							                		
-							                		<!-- <row>
-									                    <label value="Nombre Materia" />
-									                    <div>
-							                        		<label id="lblNombreMateria" />
-							                    		</div>
-							                		</row> -->
-							                		<!-- <row>
-									                    <label value="Area" />
-									                    <div>
-							                        		<label id="lblAreaMateria" />
-							                    		</div>
-							                		</row> -->
 							                		<row>
 									                    <label value="Créditos" />
 									                    <div>
@@ -191,7 +179,7 @@
 												<rows>
 													<row>
 									                    <div>
-									                    	<textbox id="txtNombreUnidad" constraint="no empty" width="89%"/>		                          
+									                    	<textbox id="txtNombreUnidad" width="89%"/>		                          
 										                    <button id="btnAddUnidad" label="Adicionar" width="10%" />
 									                    </div>
 									                </row>
@@ -433,7 +421,7 @@
 							<separator />
 							<separator />
 						
-							<div align="center">
+							<div align="center" apply="${validarDatosCtrl}">
 								<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
 								<button id="btnMenuPrincipal" label="Menu Principal" width="150px" height="40px" href="index.zul" />
 							</div>

@@ -38,5 +38,13 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			throw new ExcepcionesDAO();
 		}
 		return listaSemestre;
+	}
+
+	@Override
+	public TbAdmSemestre obtenerSemestre(String id) throws ExcepcionesDAO {
+		
+		return null;
 	}	
+	
+	
 }

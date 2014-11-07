@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -63,7 +64,25 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
-
 	}
+
+	@Override
+	public int numeroRegistros() throws ExcepcionesDAO {
+		Session session = null;
+		int registro = 0;
+		
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(UnidadesDAOHibernate.class);
+			registro = criteria.list().size();
+			
+		} catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+		
+		return registro;
+	}
+	
+	
 
 }

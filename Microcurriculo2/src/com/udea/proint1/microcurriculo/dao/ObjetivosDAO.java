@@ -16,5 +16,7 @@ public interface ObjetivosDAO {
 	public List<TbMicObjetivos> listarObjetivosPorTipo(String idMicrocurriculo, char tipo) throws ExcepcionesDAO;
 	
 	public void modificarObjetivo(TbMicObjetivos objetivo) throws ExcepcionesDAO;
+	
+	public int numeroRegistros() throws ExcepcionesDAO;
 
 }
