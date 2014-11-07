@@ -36,7 +36,7 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	@Override
 	public void guardarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto no esté vacio
 		 */
 		if(dependencia == null){
 			throw new ExcepcionesLogica("El objeto dependencia está vacio");
@@ -65,7 +65,7 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	@Override
 	public void actualizarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto no esté vacio
 		 */
 		if(dependencia == null){
 			throw new ExcepcionesLogica("El objeto dependencia está vacio");
@@ -119,7 +119,7 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	}
 
 	@Override
-	public List<TbAdmDependencia> actualizarDependencia() throws ExcepcionesLogica {
+	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesLogica {
 		List<TbAdmDependencia> listaDependencias = null;
 		try {
 			listaDependencias = dependenciaDao.listarDependencias();

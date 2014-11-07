@@ -7,6 +7,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface MateriasDAO {
+	
 	public void guardarMateria(TbAdmMaterias materia) throws ExcepcionesDAO;
 	
 	public TbAdmMaterias obtenerMateria(String id) throws ExcepcionesDAO;

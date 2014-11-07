@@ -4,7 +4,7 @@
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmSemestre" table="TB_ADM_SEMESTRE">
-        <id name="vrIdSemestre" type="string">
+        <id name="vrIdsemestre" type="string">
             <column name="VR_IDSEMESTRE" length="5" />
             <generator class="assigned" />
         </id>

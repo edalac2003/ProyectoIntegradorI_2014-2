@@ -7,8 +7,11 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface MicroxsemestreNGC {
 
-	public TbMicMicroxsemestre obtenerMicroxsemestre (int id) throws ExcepcionesLogica;
-	public void guardarMicroxsemestre (TbMicMicroxsemestre microxSemestre) throws ExcepcionesLogica;
-    public void actualizarMicroxsemestre (TbMicMicroxsemestre microxSemestre) throws ExcepcionesLogica;
-    public List<TbMicMicroxsemestre> listarMicroxsemestre () throws ExcepcionesLogica;
+	public void guardarMicroxsemestre(TbMicMicroxsemestre microxSemestre) throws ExcepcionesLogica;
+	
+	public void actualizarMicroxsemestre(TbMicMicroxsemestre microxSemestre) throws ExcepcionesLogica;
+	
+	public TbMicMicroxsemestre obtenerMicroxsemestre(int id) throws ExcepcionesLogica;
+	
+	public List<TbMicMicroxsemestre> listarMicroxsemestre() throws ExcepcionesLogica;
 }

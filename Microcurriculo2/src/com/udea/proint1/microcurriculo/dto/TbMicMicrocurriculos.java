@@ -13,8 +13,9 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 
 	private String vrIdmicrocurriculo;
 	private TbAdmMaterias tbAdmMaterias;
+	private String vrProposito;
+	private String vrJustificacion;
 	private String vrResumen;
-	private String vrMetodologia;
 	private int nbSemestre;
 	private String vrResponsable;
 	private String vrModusuario;
@@ -39,14 +40,16 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 
 	public TbMicMicrocurriculos(String vrIdmicrocurriculo,
 			TbAdmMaterias tbAdmMaterias, String vrResumen,
+			String vrProposito,String vrJustificacion,
 			String vrMetodologia, int nbSemestre, String vrResponsable,
 			String vrModusuario, Date dtModfecha, Set tbMicMicroxsemestres,
 			Set tbMicObjetivosxmicros, Set tbMicUnidadesxmicros,
 			Set tbMicMicroxestados) {
 		this.vrIdmicrocurriculo = vrIdmicrocurriculo;
 		this.tbAdmMaterias = tbAdmMaterias;
+		this.vrProposito = vrProposito;
+		this.vrJustificacion = vrJustificacion;
 		this.vrResumen = vrResumen;
-		this.vrMetodologia = vrMetodologia;
 		this.nbSemestre = nbSemestre;
 		this.vrResponsable = vrResponsable;
 		this.vrModusuario = vrModusuario;
@@ -79,14 +82,6 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 
 	public void setVrResumen(String vrResumen) {
 		this.vrResumen = vrResumen;
-	}
-
-	public String getVrMetodologia() {
-		return this.vrMetodologia;
-	}
-
-	public void setVrMetodologia(String vrMetodologia) {
-		this.vrMetodologia = vrMetodologia;
 	}
 
 	public int getNbSemestre() {
@@ -151,6 +146,22 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 
 	public void setTbMicMicroxestados(Set tbMicMicroxestados) {
 		this.tbMicMicroxestados = tbMicMicroxestados;
+	}
+
+	public String getVrProposito() {
+		return vrProposito;
+	}
+
+	public void setVrProposito(String vrProposito) {
+		this.vrProposito = vrProposito;
+	}
+
+	public String getVrJustificacion() {
+		return vrJustificacion;
+	}
+
+	public void setVrJustificacion(String vrJustificacion) {
+		this.vrJustificacion = vrJustificacion;
 	}
 
 }
