@@ -86,7 +86,7 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
                
         	session = getSession();
                                
-        	Query query = session.createQuery("from Solicitud where sucursalProceso = :tipoPersona");
+        	Query query = session.createQuery("from TbAdmPersona where tbAdmTipopersona = :tipoPersona");
                
         	query.setEntity("tipoPersona", tipoPersona);
                
