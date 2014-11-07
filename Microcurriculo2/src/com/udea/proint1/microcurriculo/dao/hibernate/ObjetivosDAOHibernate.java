@@ -53,6 +53,23 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 	}
 
 	@Override
+	public int numeroRegistros() throws ExcepcionesDAO {
+		Session session = null;
+		int registro = 0;
+			
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicObjetivos.class);
+			registro = criteria.list().size();
+			
+		} catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+		
+		return registro;
+	}
+	
+	@Override
 	public List<TbMicObjetivos> listarObjetivosPorMicrocurriculo(
 			String idMicrocurriculo) throws ExcepcionesDAO {
 		Session session = null;
@@ -91,7 +108,10 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
-
 	}
+
+	
+	
+	
 
 }

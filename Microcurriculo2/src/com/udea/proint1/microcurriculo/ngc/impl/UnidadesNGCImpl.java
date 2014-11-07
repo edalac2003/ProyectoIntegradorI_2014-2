@@ -3,14 +3,17 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.udea.proint1.microcurriculo.dao.UnidadesDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class UnidadesNGCImpl implements UnidadesNGC {
 	
-private static Logger log=Logger.getLogger(UnidadesNGCImpl.class);
+private static Logger log = Logger.getLogger(UnidadesNGCImpl.class);
 	
 	UnidadesDAO unidadesDao;
 	
@@ -45,5 +48,19 @@ private static Logger log=Logger.getLogger(UnidadesNGCImpl.class);
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int numeroRegistros() throws ExcepcionesLogica {
+		int registro = 0;
+		try {
+			registro = unidadesDao.numeroRegistros();
+		} catch (ExcepcionesDAO e) {
+			e.printStackTrace();
+		}
+		
+		return registro;
+	}
+	
+	
 
 }

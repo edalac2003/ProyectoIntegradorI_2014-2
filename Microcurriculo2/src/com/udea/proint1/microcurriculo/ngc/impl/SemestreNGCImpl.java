@@ -3,7 +3,9 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.w3c.dom.ls.LSInput;
 
+import com.udea.proint1.microcurriculo.dao.SemestreDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
@@ -29,7 +31,7 @@ public class SemestreNGCImpl implements SemestreNGC {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
-		if(semestre == null){
+		/*if(semestre == null){
 			throw new ExcepcionesLogica("El objeto semestre está vacio");
 		}
 		try {
@@ -50,7 +52,7 @@ public class SemestreNGCImpl implements SemestreNGC {
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarSemestre de la clase semestreDao: "+ e);
-		}
+		}*/
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class SemestreNGCImpl implements SemestreNGC {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
-		if(semestre == null){
+		/*if(semestre == null){
 			throw new ExcepcionesLogica("El objeto semestre está vacio");
 		}
 		try {
@@ -79,7 +81,7 @@ public class SemestreNGCImpl implements SemestreNGC {
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarSemestre de la clase semestreDao: "+ e);
-		}
+		}*/
 	}
 
 	@Override
@@ -94,6 +96,7 @@ public class SemestreNGCImpl implements SemestreNGC {
 		
 		try {
 			semestre = semestreDao.obtenerSemestre(id);
+			
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerSemestre de la clase semestreDao: "+ e);
 		}
@@ -115,17 +118,18 @@ public class SemestreNGCImpl implements SemestreNGC {
 		try {
 			listaSemestres = semestreDao.listarSemestres();
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarSemestres de la clase semestreDao: "+ e);
+			log.error("fall� al invocar el metodo listarSemestres de la clase semestreDao: "+ e);
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
-		if(listaSemestres == null){
-			throw new ExcepcionesLogica("No se encontraron semestres en la tabla TbAdmSemestre");
-		}else{
+		if (listaSemestres != null)
 			return listaSemestres;
-		}
+		else
+			throw new ExcepcionesLogica("No se encontraron semestres en la tabla TbAdmSemestre");
+		
+		
 	}
 
 }

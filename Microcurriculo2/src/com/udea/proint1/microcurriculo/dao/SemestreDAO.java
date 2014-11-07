@@ -11,4 +11,6 @@ public interface SemestreDAO {
 	
 	public List<TbAdmSemestre> listarSemestres() throws ExcepcionesDAO;
 	
+	public TbAdmSemestre obtenerSemestre(String id) throws ExcepcionesDAO;
+	
 }

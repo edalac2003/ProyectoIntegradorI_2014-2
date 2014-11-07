@@ -101,6 +101,14 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="objetivosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivosDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="unidadesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>  -->
@@ -120,20 +128,36 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="nucleoDao" ref="nucleoDAO" />
         </bean>
         
-        <!-- <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
+        <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
         	<property name="semestreDao" ref="semestreDAO" />
-        	
-        </bean> -->
+        </bean>
         
+        <bean id="objetivosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivosNGCImpl">
+        	<property name="objetivosDao" ref="objetivosDAO" />
+        </bean>
         		
+        <bean id="unidadesNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadesNGCImpl">
+        	<property name="unidadesDao" ref="unidadesDAO" />
+        </bean>
         
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
         <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
-        	<!-- <property name="semestreNGC" ref="semestresNGC" />  -->
         	<property name="materiasNGC" ref="materiasNGC" />
         	<property name="personaNGC" ref="personaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
-        	<!-- <property name="semestreNGC" ref="semestreNGC" />  -->
+        	<property name="semestreNGC" ref="semestreNGC" />
+        </bean>
+        
+        <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
+        	<property name="materiasNGC" ref="materiasNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="objetivosNGC" ref="objetivosNGC" />
+        	<property name="unidadesNGC" ref="unidadesNGC" />
+        	<!-- 
+        	
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	  -->
         </bean>
         
         <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
