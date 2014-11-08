@@ -174,4 +174,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="microxsemestreDao"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxSemestreDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 </beans>
