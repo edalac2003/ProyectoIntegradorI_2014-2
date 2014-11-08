@@ -2,6 +2,8 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dao.GuardarMicrocurriculoDAO;
+import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicAutores;
 import com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
@@ -22,6 +24,10 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 
+	MicrocurriculosDAO microcurriculosDao;
+	
+	GuardarMicrocurriculoDAO guardarMicroDao;
+	
 	public GuardarMicrocurriculoNGCImpl() {
 		// TODO Auto-generated constructor stub
 	}
@@ -39,8 +45,18 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			TbMicMicrocurriculos microcurriculo,
 			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre)
 			throws ExcepcionesDAO {
+		String idMicro;
+		TbMicMicrocurriculos microConsulta;
 		
 		try{
+			
+			idMicro = microcurriculo.getVrIdmicrocurriculo();
+			microConsulta = microcurriculosDao.obtenerMicrocurriculo(idMicro);
+			if(microcurriculo != null){
+				new ExcepcionesLogica("El microcurriculo a guardar ya existe");
+			}
+			guardarMicroDao.guardarMicroxlotes(temas, temasxunidad, autores, subtemas, unidades, unidadesxmicro, biblioxunidad, autorxbiblio, 
+					objetivos, objetivosxmicro, bibliografia, microcurriculo, microxEstado, microxSemestre);
 			
 		}catch(ExcepcionesDAO e){
 			

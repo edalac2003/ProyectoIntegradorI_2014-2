@@ -14,5 +14,7 @@ public interface MicroxSemestreDAO {
 	public TbMicMicroxsemestre obtenerMicroxsemestre(int id) throws ExcepcionesDAO;
 	
 	public List<TbMicMicroxsemestre> listarMicroxsemestre() throws ExcepcionesDAO;
+	
+	public int ContarMicrosxsemestre() throws ExcepcionesDAO;
 
 }

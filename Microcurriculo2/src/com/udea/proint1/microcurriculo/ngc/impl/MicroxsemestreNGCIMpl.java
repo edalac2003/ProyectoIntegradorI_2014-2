@@ -146,5 +146,18 @@ public class MicroxsemestreNGCIMpl implements MicroxsemestreNGC {
 			return listaMicrosxsemestre;
 		}
 	}
+	
+	@Override
+	public int ContarMicrosxsemestre() throws ExcepcionesLogica{
+		int registros = 0;
+		
+		try{
+			registros = microxsemestreDao.ContarMicrosxsemestre();
+		}catch(ExcepcionesDAO e){
+			log.error("falló al invocar el metodo ContarMicrosxsemestre de la clase microxsemestreDao: "+ e);
+		}
+		
+		return registros;
+	}
 
 }
