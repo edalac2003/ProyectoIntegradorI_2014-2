@@ -34,14 +34,14 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 	public void guardarMicroxlotes(List<TbMicTemas> temas,
 			List<TbMicTemasxunidad> temasxunidades, List<TbMicAutores> autores,
 			List<TbMicSubtemas> subtemas, List<TbMicUnidades> unidades,
-			List<TbMicUnidadesxmicro> unidadesxmicro,
+			List<TbMicUnidadesxmicro> unidadesxmicros,
 			List<TbMicBiblioxunidad> biblioxunidades,
-			List<TbMicAutorxbiblio> autorxbiblio,
+			List<TbMicAutorxbiblio> autorxbiblios,
 			List<TbMicObjetivos> objetivos,
-			List<TbMicObjetivosxmicro> objetivosxmicro,
+			List<TbMicObjetivosxmicro> objetivosxmicros,
 			List<TbMicBibliografia> bibliografia,
 			TbMicMicrocurriculos microcurriculo,
-			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre)
+			TbMicMicroxestado microxEstados, TbMicMicroxsemestre microxSemestre)
 			throws ExcepcionesDAO {
 		
 		Session session = null;
@@ -50,20 +50,20 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		try{
 			session = getSession();
 			tx = session.beginTransaction();
+			
+			session.save(microcurriculo);
+			
 			for(TbMicTemas tema:temas){
 				session.save(tema);
 			}
 			for(TbMicBibliografia biblio:bibliografia){
 				session.save(biblio);
 			}
-			for(TbMicTemas tema:temas){
-				session.save(tema);
+			for(TbMicSubtemas subtema:subtemas){
+				session.save(subtema);
 			}
 			for(TbMicAutores autor:autores){
 				session.save(autor);
-			}
-			for(TbMicSubtemas subtema:subtemas){
-				session.save(subtema);
 			}
 			for(TbMicUnidades unidad:unidades){
 				session.save(unidad);
@@ -74,9 +74,23 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			for(TbMicBiblioxunidad biblioxunidad:biblioxunidades){
 				session.save(biblioxunidad);
 			}
-			for(TbMicBiblioxunidad biblioxunidad:biblioxunidades){
-				session.save(biblioxunidad);
+			for(TbMicAutorxbiblio autorxbiblio:autorxbiblios){
+				session.save(autorxbiblio);
 			}
+			for(TbMicUnidadesxmicro unidadesxmicro:unidadesxmicros){
+				session.save(unidadesxmicro);
+			}
+			for(TbMicObjetivos objetivo:objetivos){
+				session.save(objetivo);
+			}
+			for(TbMicObjetivosxmicro objetivosxmicro:objetivosxmicros){
+				session.save(objetivosxmicro);
+			}
+			
+			session.save(microxEstados);
+			
+			session.save(microxSemestre);
+
 			tx.commit();
 			
 		}catch(HibernateException e){

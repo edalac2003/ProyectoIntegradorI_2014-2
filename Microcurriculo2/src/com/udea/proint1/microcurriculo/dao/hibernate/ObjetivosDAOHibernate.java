@@ -110,8 +110,4 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 		}
 	}
 
-	
-	
-	
-
 }

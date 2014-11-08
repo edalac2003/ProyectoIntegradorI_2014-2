@@ -149,8 +149,13 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<bean id="personasDAO"
+	<bean id="personaDao"
 		class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="tipoPersonaDao"
+		class="com.udea.proint1.microcurriculo.dao.hibernate.TipoPersonaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
