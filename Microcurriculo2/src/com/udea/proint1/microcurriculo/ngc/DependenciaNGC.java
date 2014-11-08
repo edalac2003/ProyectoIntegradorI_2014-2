@@ -13,6 +13,6 @@ public interface DependenciaNGC {
 
 	public TbAdmDependencia obtenerDependencia(String id) throws ExcepcionesLogica;
 	
-	public List<TbAdmDependencia> actualizarDependencia() throws ExcepcionesLogica;
+	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesLogica;
 
 }

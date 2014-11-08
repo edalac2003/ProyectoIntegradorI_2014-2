@@ -58,7 +58,6 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 
 	@Override
 	public List<TbAdmMaterias> listarMaterias() throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
 		Session session = null;
 		List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
 		
@@ -128,7 +127,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 			this.getHibernateTemplate().update(materia);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, editar");
+			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
 		}
 	}
 

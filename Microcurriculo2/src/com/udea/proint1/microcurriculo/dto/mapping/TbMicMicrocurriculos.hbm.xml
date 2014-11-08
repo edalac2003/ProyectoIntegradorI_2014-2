@@ -11,11 +11,14 @@
         <many-to-one name="tbAdmMaterias" class="com.udea.proint1.microcurriculo.dto.TbAdmMaterias" fetch="select">
             <column name="VR_MATERIA" length="10" not-null="true" />
         </many-to-one>
+        <property name="vrProposito" type="string">
+            <column name="VR_PROPOSITO" length="512" />
+        </property>
+        <property name="vrJustificacion" type="string">
+            <column name="VR_JUSTIFICACION" length="512" />
+        </property>
         <property name="vrResumen" type="string">
             <column name="VR_RESUMEN" length="512" />
-        </property>
-        <property name="vrMetodologia" type="string">
-            <column name="VR_METODOLOGIA" length="512" />
         </property>
         <property name="nbSemestre" type="int">
             <column name="NB_SEMESTRE" precision="22" scale="0" not-null="true" />
