@@ -55,7 +55,7 @@ private static Logger log = Logger.getLogger(UnidadesNGCImpl.class);
 		try {
 			registro = unidadesDao.numeroRegistros();
 		} catch (ExcepcionesDAO e) {
-			e.printStackTrace();
+			throw new ExcepcionesLogica("Se produjo un Error al Contar los Registros de la Tabla Unidades.");
 		}
 		
 		return registro;

@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -106,7 +107,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * @param event
 	 */
 	public void onClick$btnGuardarMicro(Event event){		
-		List<TbMicUnidades> prueba = empaquetarUnidades();
+		List<TbMicUnidades> listaUnidades = empaquetarUnidades();
+		TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
 		
 		/*if (comprobarInformacionGeneral()){
 			if (comprobarInformacionComplementaria()){
@@ -137,28 +139,33 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	TbMicMicroxsemestre microxSemestre (id, microcurriculo, semestre, modusuario, modfecha)
 	*/
 	
+	@SuppressWarnings("null")
 	private List<TbMicUnidades> empaquetarUnidades(){
-		List<TbMicUnidades> lista = null;
+		List<TbMicUnidades> lista = new ArrayList<TbMicUnidades>();
 		TbMicUnidades unidad = null;
 		int registro = 0;
+		int numRegistro = 0;
 		Date fecha = new Date();
-		Messagebox.show("SE ESTAN EMPAQUETANDO LAS UNIDADES. . . ");
-		for(int i=0; i < listaUnidades.getItemCount(); i++){
-			try {
-				registro = unidadesNGC.numeroRegistros()+i+1;
-			} catch (ExcepcionesLogica e) {
-				e.printStackTrace();
-			}
-			unidad.setNbIdunidad(registro);
-			unidad.setVrNombre(listaUnidades.getItems().get(i).getLabel());
-			unidad.setVrModusuario("USER");
-			unidad.setDtModfecha(fecha);
-			lista.add(unidad);
-			System.out.println("reg :"+registro+"  nombre : "+ listaUnidades.getItems().get(i).getValue());
+		String nombreUnidad = "";
+		String modUsuario = "USER";
+		logger.assertLog(true, "Empaquetando Lista Unidades");
+		try {
+			numRegistro = unidadesNGC.numeroRegistros();
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
 		}
 		
+		for(int i=0; i < listaUnidades.getItemCount(); i++){
+			registro = 	numRegistro + i + 1;	
+			nombreUnidad = listaUnidades.getItems().get(i).getLabel();
+			System.out.println("reg :"+registro+"  nombre : "+ nombreUnidad);
+			unidad = new TbMicUnidades(registro, nombreUnidad, modUsuario, fecha);
+			lista.add(unidad);			
+		}
+		logger.assertLog(true, "Se adicionaron Elementos a la Lista.");
 		return lista;
 	}
+	
 	
 	private List<TbMicObjetivos> empaquetarObjetivos(){
 		List<TbMicObjetivos> listaObjetivos = null;
@@ -199,7 +206,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 					if (responsable != null){
 						microcurriculo.setVrIdmicrocurriculo(codigoMicrocurriculo);
 						microcurriculo.setTbAdmMaterias(materia);
-						microcurriculo.setVrMetodologia(txtPropositoMicro.getValue());
+						microcurriculo.setVrJustificacion(txtJustificacionMicro.getValue());
 						//AQUI DEBE IR EL CAMPO JUSTIFICACION
 						microcurriculo.setVrResumen(txtResumenMicro.getValue());
 						//AQUI HAY UN ERROR CON ESTE TIPO DE DATOS, DEBERIA SER DE TIPO TBADMSEMESTRE

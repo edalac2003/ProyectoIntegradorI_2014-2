@@ -70,16 +70,13 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 	public int numeroRegistros() throws ExcepcionesDAO {
 		Session session = null;
 		int registro = 0;
-		
 		try {
 			session = getSession();
 			Criteria criteria = session.createCriteria(UnidadesDAOHibernate.class);
-			registro = criteria.list().size();
-			
+			registro = criteria.list().size();			
 		} catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-		
+			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro");
+		}		
 		return registro;
 	}
 	

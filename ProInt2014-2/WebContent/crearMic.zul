@@ -184,7 +184,12 @@
 									                    </div>
 									                </row>
 									                <row>
-									                	<listbox id="listaUnidades" ></listbox>
+									                	<listbox id="listaUnidades" >
+									                		<listitem label="UNIDAD 1" />
+									                		<listitem label="UNIDAD 2" />
+									                		<listitem label="UNIDAD 3" />
+									                		<listitem label="UNIDAD 4" />
+									                	</listbox>
 									                </row>		                
 												</rows>
 											</grid>

@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.ctrl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.w3c.dom.ls.LSInput;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
@@ -10,6 +11,7 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Cell;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -138,6 +140,14 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		this.nucleoNGC = nucleoNGC;
 	}
 
+	
+	/**
+	 * Este evento ocurre cuando se hace click en sobre el boton <AddCibergrafia>.
+	 * 
+	 * Captura y valora los valores y los adiciona al ListBox Listacibergrafia a traves del método llenarListaCibergrafia
+	 * 
+	 * @param event
+	 */
 	public void onClick$btnAddCibergrafia(Event event){
 		if (!"".equals(cmbListaUnidadBiblio.getValue())){
 			if (txtNombreSitioCiber.getValue() != null && (txtNombreSitioCiber.getValue().trim().length() > 0)){
@@ -158,12 +168,14 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}
 	}
 	
+	/**
+	 * Este Metodo se encarga de llenar 
+	 */
 	public void llenarListaCibergrafia(){
 		final Listitem listaItem = new Listitem();				
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
-			public void onEvent(Event arg0) throws Exception {		
-				
+			public void onEvent(Event arg0) throws Exception {						
 				eliminaListItem(listaItem);
 			}
 		});
@@ -293,19 +305,24 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		Executions.createComponentsDirectly("/dsd/listarMicro.zul", "zul", null, arg);
 	}*/
 	
-	public void eliminaListItem(Listitem celda){
-		celda.detach();
-	}
-	
-	public void eliminaComboItem(Comboitem item){
+	public void eliminaListItem(Listitem item){		
+		if(item.getParent() == listaUnidades){
+			item.detach();
+			recargarCombosUnidades(listaUnidades);
+		}
 		item.detach();
 	}
 	
-	
-	
 	public void onClick$btnAddUnidad(Event event){
-		if(txtNombreUnidad.getValue() != null && (txtNombreUnidad.getValue().trim().length() > 0)){
-			
+		llenarListaUnidades(txtNombreUnidad.getValue());
+	}
+	
+	public void onOK$txtNombreUnidad(){
+		llenarListaUnidades(txtNombreUnidad.getValue());
+	}
+
+	private void llenarListaUnidades(String nombreUnidad){
+		if(nombreUnidad != null && (nombreUnidad.trim().length() > 0)){			
 			final Listitem listaItem = new Listitem();
 			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 				@Override
@@ -314,9 +331,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				}
 			});
 			
-			Listcell celda = new Listcell(txtNombreUnidad.getValue().toUpperCase());
+			Listcell celda = new Listcell(nombreUnidad.toUpperCase());
 			listaItem.appendChild(celda);
-			llenarCombosUnidades(txtNombreUnidad.getValue().toUpperCase());
+			llenarCombosUnidades(nombreUnidad.toUpperCase());
 			listaUnidades.appendChild(listaItem);
 			txtNombreUnidad.setValue("");
 			txtNombreUnidad.setFocus(true);
@@ -324,7 +341,36 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
 	}
 	
-		
+	
+	
+	public void onOK$cmbIdUnidad(){
+		txtNombreTema.setFocus(true);
+	}
+	
+	public void onOK$txtNombreTema(){
+		txtNumeroSemanas.setFocus(true);
+	}
+	
+	public void onOK$txtNumeroSemanas(){
+		validarCamposTemas(cmbIdUnidad.getValue(), txtNombreUnidad.getValue(), Integer.parseInt(txtNumeroSemanas.getValue().toString()));
+		cmbIdUnidad.setFocus(true);
+	}
+	
+	public void onOK$cmbListaUnidades(){
+		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
+		cmbListaTemas.setFocus(true);
+	}
+	
+	public void onOK$cmbListaTemas(){
+		txtSubTemas.setFocus(true);
+	}
+	
+	public void onOK$txtSubTemas(){
+		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
+		cmbListaUnidades.setFocus(true);
+	}
+	
+	
 	/**
 	 * Boton btnAddTemas Evento onClick
 	 * 
@@ -333,29 +379,36 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	 * 
 	 * @param event
 	 */
-	public void onClick$btnAddTemas(Event event){
-		
+	public void onClick$btnAddTemas(Event event){		
+		validarCamposTemas(cmbIdUnidad.getValue(), txtNombreUnidad.getValue(), Integer.parseInt(txtNumeroSemanas.getValue().toString()));		
+	}
+	
+	
+	/*
+	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
+	 * lista previa validación de contenido existente.
+	 * 
+	 */
+	private void validarCamposTemas(String idUnidad, String nombreTema, int numeroSemanas){
 		if (cmbIdUnidad.getValue() != null && (cmbIdUnidad.getValue().trim().length() > 0)){
 			if (txtNombreTema.getValue() != null && (txtNombreTema.getValue().trim().length() > 0)){
 				if (txtNumeroSemanas.getValue() != null){
 					llenarListaTemas();
+					cmbListaUnidades.setSelectedIndex(-1);
+					cmbListaUnidades.setValue("");					
 				} else {
 					Messagebox.show("Se Requiere información en el Campo <Tiempo (Semanas)>");
 					txtNumeroSemanas.setFocus(true);
-				}
-					
+				}					
 			} else {
 				Messagebox.show("Se Requiere información en el Campo <Tema>");
 				txtNombreTema.setFocus(true);
-			}
-				
+			}				
 		} else{
-			Messagebox.show("Se Requiere información en el Campo <Unidad>");
-			
-		}
-					
+			Messagebox.show("Se Requiere información en el Campo <Unidad>");			
+		}		
 	}
-	
+		
 	public void llenarListaTemas(){
 		final Listitem listaItem = new Listitem();
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
@@ -381,10 +434,16 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	public void onClick$btnAddSubTema(Event event){
+		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
+	}
+	
+	private void validarCamposSubtemas(String listaUnidades, String listaTemas, String subTema){
 		if (cmbListaUnidades.getValue() != null && (cmbListaUnidades.getValue().trim().length() > 0)){
 			if (cmbListaTemas.getValue() != null && (cmbListaTemas.getValue().trim().length() > 0)){
 				if (txtSubTemas.getValue() != null && (txtSubTemas.getValue().trim().length() > 0)){
 					llenarListaSubTemas();
+					cmbListaUnidades.setSelectedIndex(-1);
+					cmbListaTemas.setSelectedIndex(-1);
 				} else
 					Messagebox.show("Se Requiere información en el Campo <Subtema>");
 			} else
@@ -394,6 +453,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	public void llenarListaSubTemas(){
+		//listaSubtemas.getItems().clear();
 		final Listitem listaItem = new Listitem();
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 
@@ -503,60 +563,58 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		cmbIdUnidad.appendChild(item);
 		Comboitem item2 = new Comboitem(unidad);
 		cmbListaUnidades.appendChild(item2);
+		Comboitem item3 = new Comboitem(unidad);
+		cmbListaUnidadBiblio.appendChild(item3);
 	}
 	
-	/*private void recargarCombosUnidades(Listbox lista){
+	private void recargarCombosUnidades(Listbox lista){
 		cmbIdUnidad.getItems().clear();
 		cmbListaUnidades.getItems().clear();
-		String unidad;
-		Messagebox.show("Se cargaran "+ lista.getItemCount());
+		cmbListaUnidadBiblio.getItems().clear();
+		cmbListaTemas.getItems().clear();
+		String celda;
 		
 		for (int i=0; i < lista.getItemCount(); i++ ){
-			unidad = lista.getItems().get(i).getValue();
-			Comboitem item = new Comboitem(unidad);
+			Listitem listaItem = (Listitem)lista.getChildren().get(0); 
+			celda = listaItem.getLabel();
+			Comboitem item = new Comboitem(celda);
 			cmbIdUnidad.appendChild(item);
-			item = new Comboitem(unidad);
-			cmbListaUnidades.appendChild(item);
+			Comboitem item2 = new Comboitem(celda);
+			cmbListaUnidades.appendChild(item2); 
+			Comboitem item3 = new Comboitem(celda);
+			cmbListaUnidadBiblio.appendChild(item3);
 		}		
-	}*/
+	}
 	
 	public void onSelect$cmbListaUnidades(){
 		//Messagebox.show("Estoy en el Evento Select del Combobox");
 		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
 	}
-	
-	public void onClick$cmbListaUnidades(Event event){
-		//Messagebox.show("Estoy en el Evento Select del Combobox");
-		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
-	}
-	
-	private void llenarTemasPorUnidad(Listbox lista, String Unidad){
-		//cmbListaTemas.getItems().clear();
-		//Messagebox.show("Estas en el modulo Llenar Temas por Unidad");
 		
-		for(int i=0; i < lista.getItemCount(); i++){
-			//System.out.println(lista.getItems().get(i).getLabel());
-			Listitem listaitem = new Listitem();
-			listaitem = lista.getItemAtIndex(i);
-			System.out.println(listaitem.getLabel());
-			Comboitem item = new Comboitem(Integer.toString(i));
+	private void llenarTemasPorUnidad(Listbox lista, String unidad){
+		cmbListaTemas.getItems().clear();
+		
+		for(int i=1; i <= listaTemas.getItemCount(); i++){
+			Listitem listaitem = (Listitem)lista.getChildren().get(i);
+			Listcell celdaUnidades = (Listcell)listaitem.getChildren().get(0);
+			Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);
+			Comboitem item = new Comboitem(celdaTemas.getLabel());
+			
 			cmbListaTemas.appendChild(item);
-		}
-		
-		
+			
+			/*if (celdaUnidades.getLabel().trim() == unidad){
+				System.out.println("prueba : " +celdaUnidades.getLabel() +"  "+ celdaTemas.getLabel());
+			} else{
+				System.out.println("NO ES IGUAL "+ celdaUnidades.getLabel().length()+" que "+ unidad.length());
+			}	*/		
+		}	
 	}
-	
-	/*public void onClick$cmbIdUnidad(){
-		Messagebox.show("HIZO CLICK SOBRE " +cmbIdUnidad.getId());
-		cmbIdUnidad.getItems().clear();
-	}*/
 	
 	
 	
 	public void onSelect$cmbIdDocente(){
 		try {
 			TbAdmPersona persona = personaNGC.obtenerPersona(cmbIdDocente.getValue().toString());
-
 			if (persona != null){
 				lblNombreDocente.setValue(persona.getVrNombres() + " "+ persona.getVrApellidos());
 			} else 
