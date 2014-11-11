@@ -41,6 +41,12 @@
 												</columns>
 												<rows>
 													<row>
+														<label value="Código Microcurriculo" />
+									                    <div>
+									                        <label id="idMicrocurriculo" value="Codigo" style="color:red; font-weight:bold"/>									                        
+									                    </div>
+							                		</row>
+													<row>
 														<label value="Semestre" />
 									                    <div>
 									                        <combobox id="cmbIdSemestre" width="15%"/>
@@ -139,15 +145,15 @@
 												<rows >
 													<row>
 									                    <label value="Proposito del Curso" />
-									                    <textbox id="txtPropositoMicro" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtPropositoMicro" value="proposito" multiline="true" width="100%"/>									                    
 									                </row>
 													<row>
 									                    <label value="Justificación" />
-									                    <textbox id="txtJustificacionMicro" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtJustificacionMicro" value="justificacion" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivo General" />
-									                    <textbox id="txtObjetivoGeneral" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtObjetivoGeneral" value="objetivo general" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivos Especificos" />
@@ -160,11 +166,14 @@
 									                <row>
 									                	<div></div>
 									                	<listbox id="listaObjetivosEspecificos">
+									                		<listitem label="Especifico 1" />
+									                		<listitem label="Especifico 2" />
+									                		<listitem label="Especifico 3" />
 									                	</listbox>
 									                </row>
 									                <row>
 									                    <label value="Contenido Resumido" />
-									                    <textbox id="txtResumenMicro" multiline="true" width="100%"/>
+									                    <textbox id="txtResumenMicro" value="Resumen" multiline="true" width="100%"/>
 									                </row>
 									                
 												</rows>

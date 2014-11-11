@@ -82,33 +82,35 @@ public class SemestreNGCImpl implements SemestreNGC {
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarSemestre de la clase semestreDao: "+ e);
 		}*/
+		
 	}
 
 	@Override
 	public TbAdmSemestre obtenerSemestre(String id) throws ExcepcionesLogica {
+		TbAdmSemestre semestre = null;
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
-		if((id.equals(""))||(id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de semestre, está vacia");
-		}
-		TbAdmSemestre semestre = null;
-		
-		try {
-			semestre = semestreDao.obtenerSemestre(id);
+		if((id.trim().length() > 0) && (id != null)){
+			try {
+				semestre = semestreDao.obtenerSemestre(id);
+			} catch (ExcepcionesDAO e) {
+				log.error("Problemas al invocar el metodo obtenerSemestre de la clase semestreDao: "+ e);
+			}
 			
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerSemestre de la clase semestreDao: "+ e);
-		}
+		} else
+			throw new ExcepcionesLogica("El ID de Semestre est� vacio.");
+		
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
-		if(semestre == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró semestre con el id "+ id);
-		}else{
+		if(semestre != null){			
 			return semestre;
+			
+		}else{
+			//Se lanza una Excepcion en caso que el Semestre no se encuentre
+			throw new ExcepcionesLogica("No se encontr� semestre con el id "+ id);
 		}
 	}
 

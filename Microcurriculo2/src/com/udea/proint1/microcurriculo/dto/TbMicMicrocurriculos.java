@@ -39,6 +39,22 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 		this.vrResponsable = vrResponsable;
 		this.vrModusuario = vrModusuario;
 	}
+	
+	public TbMicMicrocurriculos(String vrIdmicrocurriculo,
+			TbAdmMaterias tbAdmMaterias, String vrProposito,
+			String vrJustificacion, String vrResumen, int nbSemestre,
+			String vrResponsable, String vrModusuario, Date dtModfecha) {
+		super();
+		this.vrIdmicrocurriculo = vrIdmicrocurriculo;
+		this.tbAdmMaterias = tbAdmMaterias;
+		this.vrProposito = vrProposito;
+		this.vrJustificacion = vrJustificacion;
+		this.vrResumen = vrResumen;
+		this.nbSemestre = nbSemestre;
+		this.vrResponsable = vrResponsable;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
+	}
 
 	public TbMicMicrocurriculos(String vrIdmicrocurriculo,
 			TbAdmMaterias tbAdmMaterias, String vrResumen,

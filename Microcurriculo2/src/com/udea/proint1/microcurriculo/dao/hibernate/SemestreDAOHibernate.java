@@ -42,8 +42,21 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 
 	@Override
 	public TbAdmSemestre obtenerSemestre(String id) throws ExcepcionesDAO {
+		TbAdmSemestre semestre = null;
+		Session session = null;
 		
-		return null;
+		try{
+			session = getSession();
+			semestre = (TbAdmSemestre)session.load(TbAdmSemestre.class, id);
+			
+		}catch (HibernateException e){
+			throw new ExcepcionesDAO(e);
+		}
+		
+		
+		
+		
+		return semestre;
 	}	
 	
 	

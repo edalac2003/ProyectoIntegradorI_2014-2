@@ -14,6 +14,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -108,7 +109,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 */
 	public void onClick$btnGuardarMicro(Event event){		
 		List<TbMicUnidades> listaUnidades = empaquetarUnidades();
-		TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
+		//TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
+		List<TbMicObjetivos> listaObjetivos = empaquetarObjetivos();
 		
 		/*if (comprobarInformacionGeneral()){
 			if (comprobarInformacionComplementaria()){
@@ -148,7 +150,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		Date fecha = new Date();
 		String nombreUnidad = "";
 		String modUsuario = "USER";
-		logger.assertLog(true, "Empaquetando Lista Unidades");
+		logger.info("Empaquetando Lista Unidades");
 		try {
 			numRegistro = unidadesNGC.numeroRegistros();
 		} catch (ExcepcionesLogica e) {
@@ -158,20 +160,44 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		for(int i=0; i < listaUnidades.getItemCount(); i++){
 			registro = 	numRegistro + i + 1;	
 			nombreUnidad = listaUnidades.getItems().get(i).getLabel();
-			System.out.println("reg :"+registro+"  nombre : "+ nombreUnidad);
 			unidad = new TbMicUnidades(registro, nombreUnidad, modUsuario, fecha);
 			lista.add(unidad);			
 		}
-		logger.assertLog(true, "Se adicionaron Elementos a la Lista.");
+		logger.info("Se adicionaron Elementos a la Lista." + lista.size());
 		return lista;
 	}
 	
 	
+	@SuppressWarnings("null")
 	private List<TbMicObjetivos> empaquetarObjetivos(){
-		List<TbMicObjetivos> listaObjetivos = null;
-		//int idObjetivo = objetivosNGC.numeroRegistros()+1;
+		List<TbMicObjetivos> listaObjetivos = new ArrayList<TbMicObjetivos>();
+		TbMicObjetivos objetivo = null;
+		Date fecha = new Date();
+		int registrosObjetivo = 0;
+		int registro = 0;
+		String celdaObjetivo = "";
 		
+		try {
+			registrosObjetivo = objetivosNGC.numeroRegistros()+1;
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
 		
+		if((txtObjetivoGeneral.getValue().trim().length() > 0) && (txtObjetivoGeneral != null)){
+			objetivo = new TbMicObjetivos(registrosObjetivo, txtObjetivoGeneral.getValue(), '1', "USER", fecha);
+			listaObjetivos.add(objetivo);
+			for (int i=0; i<listaObjetivosEspecificos.getItemCount(); i++){
+				registro = registrosObjetivo + i + 1;
+				celdaObjetivo = listaObjetivosEspecificos.getItems().get(i).getLabel();
+				objetivo = new TbMicObjetivos(registro, celdaObjetivo, '0', "USER", fecha);
+				System.out.println(i+"  "+fecha);
+				listaObjetivos.add(objetivo);
+			}
+			System.out.println("Elemntos Adicionados : "+listaObjetivos.size());
+		} else {
+			Messagebox.show("Sin Información en el Campo Objetivo General.");
+			txtObjetivoGeneral.setFocus(true);
+		}		
 		return listaObjetivos;
 	}
 	
@@ -183,7 +209,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	private TbMicMicrocurriculos empaquetarMicrocurriculo(){
 		TbMicMicrocurriculos microcurriculo = new TbMicMicrocurriculos();
-		String codigoMicrocurriculo = asignarIdMicrocurriculo(cmbIdSemestre.getValue(), cmbIdMateria.getValue());
+		String codigoMicrocurriculo = "";
 		TbAdmMaterias materia = null;
 		TbAdmSemestre semestre = null;
 		TbAdmPersona responsable = null;
@@ -199,23 +225,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
-		
+		codigoMicrocurriculo = asignarIdMicrocurriculo(cmbIdSemestre.getValue().toString(), cmbIdMateria.getValue().toString());
 		if ( codigoMicrocurriculo != null){
 			if (materia != null){
 				if (semestre != null){
 					if (responsable != null){
-						microcurriculo.setVrIdmicrocurriculo(codigoMicrocurriculo);
-						microcurriculo.setTbAdmMaterias(materia);
-						microcurriculo.setVrJustificacion(txtJustificacionMicro.getValue());
-						//AQUI DEBE IR EL CAMPO JUSTIFICACION
-						microcurriculo.setVrResumen(txtResumenMicro.getValue());
-						//AQUI HAY UN ERROR CON ESTE TIPO DE DATOS, DEBERIA SER DE TIPO TBADMSEMESTRE
-						microcurriculo.setNbSemestre(0);
-						//Este Campo no deberia ser de tipo TDADMPERSONA?
-						microcurriculo.setVrResponsable(responsable.getVrIdpersona());;
-						microcurriculo.setVrModusuario("USER");
-						microcurriculo.setDtModfecha(null);
-						microcurriculo.setDtModfecha(fecha);
+						microcurriculo = new TbMicMicrocurriculos(codigoMicrocurriculo, materia, txtPropositoMicro.getValue(), 
+								txtJustificacionMicro.getValue(), txtResumenMicro.getValue(), 0, 
+								responsable.getVrIdpersona(), "USER", fecha);
+						Messagebox.show("El Objeto Microcurriculo se Creó Correctamente");
 					}
 				}
 			}
@@ -224,14 +242,24 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return microcurriculo;
 	}
 	
-	private String asignarIdMicrocurriculo(String semestre, String materia){
+	private String asignarIdMicrocurriculo(String idsemestre, String idmateria){
 		String codigo = null;
-		if ((materia.trim().length() > 0) && (materia != null)){
-			if (semestre.trim().length() > 0){
-				codigo = materia.toString().toUpperCase()+"-"+semestre.toString().toUpperCase();
-			} else
-				Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor de la Materia es Incorrecto.");
-		} else
+		TbAdmSemestre semestre = null;
+		TbAdmMaterias materia = null;
+		
+		try {
+			semestre = semestreNGC.obtenerSemestre(idsemestre);
+			materia = materiasNGC.obtenerMateria(idmateria);
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
+		if (semestre != null){
+			if (materia != null){
+				codigo = materia.getVrIdmateria().toUpperCase() + "-" + semestre.getVrIdsemestre().toUpperCase();	
+			}else
+				Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor de la Materia es Incorrecto.");					
+		}else
 			Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor del semestre es Incorrecto.");
 		
 		return codigo;
