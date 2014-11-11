@@ -21,9 +21,18 @@ public class TbMicTemas implements java.io.Serializable {
 	public TbMicTemas() {
 	}
 
-	public TbMicTemas(int nbIdtema) {
+	
+
+	public TbMicTemas(int nbIdtema, String vrDescripcion, String vrModusuario,
+			Date dtModfecha) {
+		super();
 		this.nbIdtema = nbIdtema;
+		this.vrDescripcion = vrDescripcion;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
 	}
+
+
 
 	public TbMicTemas(int nbIdtema, String vrDescripcion,
 			String vrModusuario, Date dtModfecha, Set tbMicSubtemases,

@@ -104,4 +104,23 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 		return temas;
 	}
 
+	@Override
+	public int contarRegistros() throws ExcepcionesDAO {
+		int registro = 0;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicTemas.class);
+			registro = criteria.list().size();
+			
+		} catch(HibernateException e){
+			throw new ExcepcionesDAO("DAO : No es posible retornar un valor numerico de los registros.");
+		}	
+		
+		return registro;
+	}
+	
+	
+
 }

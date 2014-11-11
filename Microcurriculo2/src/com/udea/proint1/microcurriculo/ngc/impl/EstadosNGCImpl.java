@@ -1,0 +1,66 @@
+package com.udea.proint1.microcurriculo.ngc.impl;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.udea.proint1.microcurriculo.dao.EstadosDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicEstados;
+import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
+
+public class EstadosNGCImpl implements EstadosNGC {
+
+	private static Logger logger = Logger.getLogger(EstadosNGCImpl.class);
+	
+	EstadosDAO estadosDao;
+	
+	
+	public void setEstadosDao(EstadosDAO estadosDao) {
+		this.estadosDao = estadosDao;
+	}
+
+	public EstadosNGCImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public TbMicEstados obtenerEstados(int idEstado) throws ExcepcionesLogica {
+		TbMicEstados estado = null;
+		
+		try {
+			estado = estadosDao.obtenerEstado(idEstado);
+		} catch (ExcepcionesDAO e) {
+			logger.error("Se presentaron errores para Encontrar el Estado Solicitado.");
+		}
+		
+		if (estado != null){
+			return estado;
+		} else {
+			logger.error("Registro no hallado.  Se devolverá nulo.");
+			return null;
+		}
+		
+		
+	}
+
+	@Override
+	public void guardarEstados(TbMicEstados estado) throws ExcepcionesLogica {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actualizarEstados(TbMicEstados estado) throws ExcepcionesLogica {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<TbMicEstados> listarEstados() throws ExcepcionesLogica {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

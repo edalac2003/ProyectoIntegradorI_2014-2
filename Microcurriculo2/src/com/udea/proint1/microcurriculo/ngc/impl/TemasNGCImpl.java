@@ -128,4 +128,19 @@ public class TemasNGCImpl implements TemasNGC {
 		}
 	}
 
+	@Override
+	public int contarRegistros() throws ExcepcionesLogica {
+		int registro = 0;
+		
+		try {
+			registro = temasDao.contarRegistros();
+		} catch (ExcepcionesDAO e) {
+			throw new ExcepcionesLogica("NGC : Se produjo un Error al intentar Contar los Registros de Temas.");
+		}
+		
+		return registro;
+	}
+	
+	
+
 }

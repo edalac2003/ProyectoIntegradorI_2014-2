@@ -12,15 +12,6 @@
         </layout>
     </appender>
     
-    <appender name="ARCHIVO2" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="trazaGuardar.log"/>
-        <param name="MaxFileSize" value="100Mb"/>
-        <param name="MaxBackupIndex" value="5"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} - %p %C{1} | %m%n"/>
-        </layout>
-    </appender>
-    
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">        
         <layout class="org.apache.log4j.PatternLayout">
            
@@ -65,14 +56,12 @@
 	<!-- LOGS DE EVENTOS PARA CRUD's -->
 	<logger name="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl">
     	<level value="INFO" />
-    	<appender-ref ref="ARCHIVO2"/>
     </logger>
 	
 	<root>
         <level value="ERROR"/>             
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ARCHIVO"/>
-        <appender-ref ref="ARCHIVO2"/>
     </root>   
     
 </log4j:configuration>

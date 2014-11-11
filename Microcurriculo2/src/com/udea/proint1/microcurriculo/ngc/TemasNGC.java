@@ -11,5 +11,6 @@ public interface TemasNGC {
 	public void guardarTemas (TbMicTemas tema) throws ExcepcionesLogica;
     public void actualizarTema (TbMicTemas tema) throws ExcepcionesLogica;
     public List<TbMicTemas> listarTemas () throws ExcepcionesLogica;
+    public int contarRegistros() throws ExcepcionesLogica;
 
 }

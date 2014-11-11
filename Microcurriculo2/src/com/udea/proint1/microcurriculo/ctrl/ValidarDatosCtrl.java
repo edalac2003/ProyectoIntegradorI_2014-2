@@ -14,21 +14,29 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import com.sun.mail.handlers.message_rfc822;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
+import com.udea.proint1.microcurriculo.dto.TbMicEstados;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
+import com.udea.proint1.microcurriculo.dto.TbMicTemas;
+import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
+import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivosNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.TemasNGC;
+import com.udea.proint1.microcurriculo.ngc.TemasxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
@@ -75,6 +83,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	PersonaNGC personaNGC;
 	ObjetivosNGC objetivosNGC;
 	UnidadesNGC unidadesNGC;
+	EstadosNGC estadosNGC;
+	TemasNGC temasNGC;
+	TemasxUnidadNGC temasxUnidadNGC;
+	
 	
 	/*
 	 * Definición de Metodos Setter de Objetos de Negocio.
@@ -99,6 +111,20 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	public void setUnidadesNGC(UnidadesNGC unidadesNGC) {
 		this.unidadesNGC = unidadesNGC;
 	}
+	
+
+	public void setEstadosNGC(EstadosNGC estadosNGC) {
+		this.estadosNGC = estadosNGC;
+	}
+
+	
+	public void setTemasNGC(TemasNGC temasNGC) {
+		this.temasNGC = temasNGC;
+	}
+
+	public void setTemasxUnidadNGC(TemasxUnidadNGC temasxUnidadNGC) {
+		this.temasxUnidadNGC = temasxUnidadNGC;
+	}
 
 	/**
 	 * Evento onClick del Boton Guardar Microcurriculo
@@ -108,11 +134,27 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * @param event
 	 */
 	public void onClick$btnGuardarMicro(Event event){		
-		List<TbMicUnidades> listaUnidades = empaquetarUnidades();
-		//TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
-		List<TbMicObjetivos> listaObjetivos = empaquetarObjetivos();
+		//Aqui se va a empaquetar todo.
+		//List<TbMicUnidades> listaUnidades = empaquetarUnidades();
 		
-		/*if (comprobarInformacionGeneral()){
+		
+		//TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
+		//List<TbMicObjetivos> listaObjetivos = empaquetarObjetivos();
+		
+		//TbMicMicroxsemestre microxSemestre = empaquetarMicroPorSemestre(microcurriculo, estado);
+		List<TbMicTemas> listaTemas = empaquetarListaTemas();
+		
+		
+		
+		//Se debe establecer el orden en el que se iran guardando los registros.
+		//Primero.  Guardar el Microcurriculo.
+		
+		
+		
+	}
+	
+	public void verificarCampos(){
+		if (comprobarInformacionGeneral()){
 			if (comprobarInformacionComplementaria()){
 				if (comprobarUnidadesDetalladas()){
 					if (comprobarEvaluaciones()){
@@ -122,7 +164,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 					} 
 				} 
 			} 
-		} 	*/	
+		} 		
 	}
 	
 	/*List<TbMicTemas> temas
@@ -137,9 +179,48 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	List<TbMicObjetivosxmicro> objetivosxmicro,
 	List<TbMicBibliografia> bibliografia,
 	TbMicMicrocurriculos microcurriculo(ID, materia, resumen, metodologia, semestre, responsable, modusuario, modfecha)
-	TbMicMicroxestado microxEstado,
+	TbMicMicroxestado microxEstado (Id, microcurriculo, estado, modusuario, modfecha)
 	TbMicMicroxsemestre microxSemestre (id, microcurriculo, semestre, modusuario, modfecha)
 	*/
+	
+	private List<TbMicTemasxunidad> listaTemasxUnidad(){
+		List<TbMicTemasxunidad> lista = new ArrayList<TbMicTemasxunidad>();
+		TbMicTemasxunidad temaxUnidad = null;
+		
+		for (int i = 0; i<listaSubtemas.getItemCount();i++){
+			Listitem listaitem = (Listitem)listaSubtemas.getChildren().get(i);
+			Listcell celdas = (Listcell)listaitem.getChildren().get(2);
+			
+		}
+		
+		return lista;
+	}
+	
+	private List<TbMicTemas> empaquetarListaTemas(){
+		List<TbMicTemas> lista = new ArrayList<TbMicTemas>();
+		Date fecha = new Date();
+		
+		int registro = 0;
+		//int contador = 0;
+		
+		try {
+			registro = temasNGC.contarRegistros();
+		} catch (ExcepcionesLogica e) {
+			System.out.println("Ctrl : Problemas para obtener el numero de registros de Temas.");
+			//logger.error("Error al intentar contar los Registros de la Tabla Temas.");
+		}
+				
+		for (int i=0;i<listaTemas.getItemCount(); i++){
+			Listitem listaitem = (Listitem)listaTemas.getChildren().get(i+1);
+			Listcell celdas = (Listcell)listaitem.getChildren().get(1);
+			int contador = registro + i + 1;
+			TbMicTemas tema = new TbMicTemas(contador, celdas.getLabel(), "USER", fecha);
+			lista.add(tema);			
+		}
+		Messagebox.show("Registros almacenados en la lista : " + lista.size());
+		
+		return lista;
+	}
 	
 	@SuppressWarnings("null")
 	private List<TbMicUnidades> empaquetarUnidades(){
@@ -193,7 +274,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				System.out.println(i+"  "+fecha);
 				listaObjetivos.add(objetivo);
 			}
-			System.out.println("Elemntos Adicionados : "+listaObjetivos.size());
+			logger.info("Elementos Adicionados en la Lista Objetivos : "+listaObjetivos.size());
 		} else {
 			Messagebox.show("Sin Información en el Campo Objetivo General.");
 			txtObjetivoGeneral.setFocus(true);
@@ -201,9 +282,14 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return listaObjetivos;
 	}
 	
+	
+	
 	//QUEDA PENDIENTE PORQUE NO ENCONTRE EL DAO
-	private TbMicMicroxsemestre empaquetarMicroPorSemestre(){
-		TbMicMicroxsemestre registro = null;		
+	//TbMicMicroxsemestre microxSemestre (id, microcurriculo, semestre, modusuario, modfecha)
+	private TbMicMicroxsemestre empaquetarMicroPorSemestre(TbMicMicrocurriculos microcurriculo, TbMicEstados estado){
+		TbMicMicroxsemestre registro = null;
+		
+			
 		return registro;
 	}
 	
@@ -240,6 +326,20 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		} else
 			Messagebox.show("No se pudo crear el objeto Microcurriculo");
 		return microcurriculo;
+	}
+	
+	private TbMicEstados obtenerEstado(){
+		TbMicEstados estado = null;
+		try {
+			estado = estadosNGC.obtenerEstados(1);
+		} catch (ExcepcionesLogica e) {
+			logger.info("El Registro Solicitado no fue Hallado en la Base de Datos.");
+		}
+		if (estado != null){			
+			Messagebox.show("Se Encontró Registro de Estado : "+estado.getNbIdestado()+" "+estado.getVrDescripcion());
+			
+		}
+		return estado;
 	}
 	
 	private String asignarIdMicrocurriculo(String idsemestre, String idmateria){

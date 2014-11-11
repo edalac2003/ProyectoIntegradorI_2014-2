@@ -136,6 +136,7 @@
 										</tabpanel>
 										
 										<tabpanel id="tabInfoCompl">
+											
 											<grid>
 												<columns>
 													<column value="" width="15%" />
@@ -238,7 +239,26 @@
 																	<listheader width="60" />
 																	<listheader width="18%" />
 																</listhead>
-																
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="3"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 2"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="2"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 2"/>
+																	<listcell label="3"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 3"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="1"/>
+																</listitem>
 															</listbox>
 										                </row>
 													</rows>
@@ -278,6 +298,26 @@
 																	<listheader width="20%" />
 																	<listheader width="50%" />
 																</listhead>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="SubTema 1"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="SubTema 2"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 2"/>
+																	<listcell label="SubTema 1"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 2"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="SubTema 1"/>
+																</listitem>
 															</listbox>
 										                </row>
 													</rows>
