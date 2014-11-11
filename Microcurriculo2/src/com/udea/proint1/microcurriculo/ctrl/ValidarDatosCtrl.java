@@ -142,8 +142,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		//List<TbMicObjetivos> listaObjetivos = empaquetarObjetivos();
 		
 		//TbMicMicroxsemestre microxSemestre = empaquetarMicroPorSemestre(microcurriculo, estado);
-		List<TbMicTemas> listaTemas = empaquetarListaTemas();
-		
+		//List<TbMicTemas> listaTemas = empaquetarListaTemas();
+		List<TbMicTemasxunidad> listaTemasxUnidad = empaquetarTemasxUnidad();
 		
 		
 		//Se debe establecer el orden en el que se iran guardando los registros.
@@ -183,25 +183,34 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	TbMicMicroxsemestre microxSemestre (id, microcurriculo, semestre, modusuario, modfecha)
 	*/
 	
-	private List<TbMicTemasxunidad> listaTemasxUnidad(){
+	private List<TbMicTemasxunidad> empaquetarTemasxUnidad(){
 		List<TbMicTemasxunidad> lista = new ArrayList<TbMicTemasxunidad>();
 		TbMicTemasxunidad temaxUnidad = null;
+		int registro = 0;
+		
+		try {
+			registro = temasxUnidadNGC.contarRegistros();
+		} catch (ExcepcionesLogica e) {
+			System.out.println("No es posible obtener el numero de Registros de la Tabla TemasxUnidad.");
+		}
 		
 		for (int i = 0; i<listaSubtemas.getItemCount();i++){
+			int contador = registro + i + 1;
 			Listitem listaitem = (Listitem)listaSubtemas.getChildren().get(i);
-			Listcell celdas = (Listcell)listaitem.getChildren().get(2);
-			
+			Listcell unidades = (Listcell)listaitem.getChildren().get(0);
+			Listcell temas = (Listcell)listaitem.getChildren().get(1);
+			Listcell semanas = (Listcell)listaitem.getChildren().get(2);
+			temaxUnidad = new TbMicTemasxunidad();
 		}
 		
 		return lista;
 	}
 	
-	private List<TbMicTemas> empaquetarListaTemas(){
+	private List<TbMicTemas> empaquetarTemas(){
 		List<TbMicTemas> lista = new ArrayList<TbMicTemas>();
 		Date fecha = new Date();
 		
 		int registro = 0;
-		//int contador = 0;
 		
 		try {
 			registro = temasNGC.contarRegistros();
