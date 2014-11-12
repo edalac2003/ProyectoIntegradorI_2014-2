@@ -25,6 +25,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluaciones;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
@@ -33,6 +34,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionesNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionxmicroNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivosNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
@@ -85,10 +87,12 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	PersonaNGC personaNGC;
 	ObjetivosNGC objetivosNGC;
 	UnidadesNGC unidadesNGC;
+	
 	EstadosNGC estadosNGC;
 	TemasNGC temasNGC;
 	TemasxUnidadNGC temasxUnidadNGC;
 	EvaluacionesNGC evaluacionesNGC;
+	EvaluacionxmicroNGC evaluacionxMicro;
 	
 	
 	/*
@@ -130,6 +134,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	public void setEvaluacionesNGC(EvaluacionesNGC evaluacionesNGC) {
 		this.evaluacionesNGC = evaluacionesNGC;
 	}
+	
+	public void setEvaluacionxMicro(EvaluacionxmicroNGC evaluacionxMicro) {
+		this.evaluacionxMicro = evaluacionxMicro;
+	}
 
 	/**
 	 * Evento onClick del Boton Guardar Microcurriculo
@@ -140,10 +148,12 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 */
 	public void onClick$btnGuardarMicro(Event event){		
 		//Aqui se va a empaquetar todo.
+		TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
 		//List<TbMicUnidades> listaUnidades = empaquetarUnidades();
 		
+		List<TbMicEvaluaciones> listaEvaluaciones = empaquetarEvaluaciones(microcurriculo);
 		
-		//TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
+		
 		//List<TbMicObjetivos> listaObjetivos = empaquetarObjetivos();
 		
 		//TbMicMicroxsemestre microxSemestre = empaquetarMicroPorSemestre(microcurriculo, estado);
@@ -153,14 +163,14 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		//Se debe establecer el orden en el que se iran guardando los registros.
 		//Primero.  Guardar el Microcurriculo.
-		if (verificarCampos()== 1){
+		/*if (verificarCampos()== 1){
 			Messagebox.show("Registro Guardado Satisfactoriamente.  Puede Cambiar su estado cuando lo desee.");
 		} else {
 			if (verificarCampos() == 0){
 				Messagebox.show("Se guardará el registro de Microcurriculos con la información Mínima requerida. \n"+"El estado del Microcurriculo es <EN BORRADOR>");
 			}else
 				Messagebox.show("No se puede Guardar el registro Microcurriculo porque no cumple con la información mínima requerida.");
-		}
+		}*/
 		
 		
 	}
@@ -225,18 +235,32 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return lista;
 	}*/
 	
-	private List<TbMicEvaluaciones> empaquetarEvaluaciones(){
+	private List<TbMicEvaluaciones> empaquetarEvaluaciones(TbMicMicrocurriculos microcurriculo){
 		List<TbMicEvaluaciones> lista = new ArrayList<TbMicEvaluaciones>();
+		List<TbMicEvaluacionxmicro> lista2 = new ArrayList<TbMicEvaluacionxmicro>();
 		TbMicEvaluaciones evaluacion = null;
+		TbMicEvaluacionxmicro evaluacionxMicro = null;
+		int registros = 0;
+		Date fecha = new Date();
+		
+		try {
+			registros = evaluacionesNGC.contarRegistros();
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
 		
 		for(int i=0;i<listaEvaluaciones.getItemCount();i++){
+			int contador = registros + i + 1; 
 			Listitem listaitem = (Listitem)listaEvaluaciones.getChildren().get(i+1);
 			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
 			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
 			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
-			
+			Date fechaEstimada = new Date(celdaFecha.getLabel());
+			evaluacion = new TbMicEvaluaciones(contador, celdaEvaluacion.getLabel(), "USER", fecha);
+			evaluacionxMicro = new TbMicEvaluacionxmicro(contador, evaluacion, microcurriculo, Integer.parseInt(celdaPorcentaje.getLabel()), fechaEstimada, "USER", fecha);
+			lista.add(evaluacion);
+			lista2.add(evaluacionxMicro);
 		}
-		
 		return lista;
 	}
 	

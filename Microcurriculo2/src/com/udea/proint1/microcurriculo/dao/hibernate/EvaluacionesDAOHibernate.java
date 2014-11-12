@@ -67,6 +67,21 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 	}
 
 	@Override
+	public int contarRegistros() throws ExcepcionesDAO {
+		int registro = 0;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicEvaluaciones.class);
+			registro = criteria.list().size();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}		
+		return registro;
+	}
+
+	@Override
 	public void actualizarEvaluaciones(TbMicEvaluaciones evaluacion) throws ExcepcionesDAO {
 		Session session = null;
 

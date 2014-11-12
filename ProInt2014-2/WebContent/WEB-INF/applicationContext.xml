@@ -125,6 +125,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="evaluacionesxMicroDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionxmicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <bean id="unidadAcademicaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesAcademicasDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
@@ -188,6 +192,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="evaluacionesDao" ref="evaluacionesDAO" />
         </bean>
         
+        <bean id="evaluacionesxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionesNGCImpl">
+        	<property name="evaluacionesxMicroDao" ref="evaluacionesxMicroDAO" />
+        </bean>
+        
         <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl">
         	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
         </bean>
@@ -228,6 +236,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="temasNGC" ref="temasNGC" />
         	<property name="temasxUnidadNGC" ref="temasxUnidadNGC" />
         	<property name="evaluacionesNGC" ref="evaluacionesNGC" />
+        	<property name="evaluacionesxMicroNGC" ref="evaluacionesxMicroNGC" />
         	<!-- 
         	
         	<property name="nucleoNGC" ref="nucleoNGC" />

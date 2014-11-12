@@ -3,6 +3,8 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 import com.udea.proint1.microcurriculo.dao.EvaluacionesDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
@@ -128,5 +130,19 @@ public class EvaluacionesNGCImpl implements EvaluacionesNGC {
 			return listaEvaluaciones;
 		}
 	}
+
+	@Override
+	public int contarRegistros() throws ExcepcionesLogica {
+		int registros = 0;
+			
+		try {
+			registros = evaluacionesDao.contarRegistros();
+		} catch (ExcepcionesDAO e) {
+			e.printStackTrace();
+		}
+		return registros;
+	}
+	
+	
 
 }

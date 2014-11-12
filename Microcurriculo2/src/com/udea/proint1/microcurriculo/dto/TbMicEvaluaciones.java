@@ -24,6 +24,15 @@ public class TbMicEvaluaciones implements java.io.Serializable {
 		this.nbIdevaluacion = nbIdevaluacion;
 		this.vrDescripcion = vrDescripcion;
 	}
+	
+	public TbMicEvaluaciones(int nbIdevaluacion, String vrDescripcion,
+			String vrModusuario, Date dtModfecha) {
+		super();
+		this.nbIdevaluacion = nbIdevaluacion;
+		this.vrDescripcion = vrDescripcion;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
+	}
 
 	public TbMicEvaluaciones(int nbIdevaluacion, String vrDescripcion,
 			String vrModusuario, Date dtModfecha, Set tbMicMicroxevaluaciones) {
