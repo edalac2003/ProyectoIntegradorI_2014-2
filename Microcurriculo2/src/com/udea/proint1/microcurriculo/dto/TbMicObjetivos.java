@@ -21,9 +21,19 @@ public class TbMicObjetivos implements java.io.Serializable {
 	public TbMicObjetivos() {
 	}
 
-	public TbMicObjetivos(int nbIdobjetivo) {
+	
+
+	public TbMicObjetivos(int nbIdobjetivo, String vrDescripcion,
+			Character blTipo, String vrModusuario, Date dtModfecha) {
+		super();
 		this.nbIdobjetivo = nbIdobjetivo;
+		this.vrDescripcion = vrDescripcion;
+		this.blTipo = blTipo;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
 	}
+
+
 
 	public TbMicObjetivos(int nbIdobjetivo, String vrDescripcion,
 			Character blTipo, String vrModusuario, Date dtModfecha,

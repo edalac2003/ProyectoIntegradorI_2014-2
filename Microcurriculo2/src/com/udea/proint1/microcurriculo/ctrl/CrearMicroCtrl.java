@@ -661,21 +661,16 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		
 	}
 	
-	/*public void onClick$btnGuardarMicro(){
-		Messagebox.show("HA INGRESADO A LA SECCION DE GUARDAR MICROCURRICULO");
-		// HACER VALIDACIONES DE CAMPOS VACIOS.  CUALES SON LOS CAMPOS MINIMOS PARA GUARDAR UN MICROCURRICULO?
-	}*/
-	
+		
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
-		//cargarMaterias();
 		cargarNucleos();
 		cargarDocentes();
 		cargarSemestres();
-		System.out.println("Esta es la Ventana de Crear Microcurriculo");
+		logger.info("Esta es la Ventana de Crear Microcurriculo");
 
 	}
 

@@ -17,4 +17,6 @@ public interface TemasXUnidadDAO {
 	
 	public List<TbMicTemasxunidad> ListarTodoTemaXunidad() throws ExcepcionesDAO;
 	
+	public int contarRegistros() throws ExcepcionesDAO;
+	
 }

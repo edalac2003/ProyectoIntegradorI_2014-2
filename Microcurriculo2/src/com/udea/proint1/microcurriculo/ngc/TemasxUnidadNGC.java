@@ -11,5 +11,6 @@ public interface TemasxUnidadNGC {
 	public void guardarTemasxUnidad (TbMicTemasxunidad temasxUnidad) throws ExcepcionesLogica;
     public void actualizarTemaxUnidad (TbMicTemasxunidad temasxUnidad) throws ExcepcionesLogica;
     public List<TbMicTemasxunidad> listarTemasxUnidad () throws ExcepcionesLogica;
+    public int contarRegistros() throws ExcepcionesLogica;
 
 }

@@ -41,6 +41,12 @@
 												</columns>
 												<rows>
 													<row>
+														<label value="Código Microcurriculo" />
+									                    <div>
+									                        <label id="idMicrocurriculo" value="Codigo" style="color:red; font-weight:bold"/>									                        
+									                    </div>
+							                		</row>
+													<row>
 														<label value="Semestre" />
 									                    <div>
 									                        <combobox id="cmbIdSemestre" width="15%"/>
@@ -130,6 +136,7 @@
 										</tabpanel>
 										
 										<tabpanel id="tabInfoCompl">
+											
 											<grid>
 												<columns>
 													<column value="" width="15%" />
@@ -139,15 +146,15 @@
 												<rows >
 													<row>
 									                    <label value="Proposito del Curso" />
-									                    <textbox id="txtPropositoMicro" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtPropositoMicro" value="proposito" multiline="true" width="100%"/>									                    
 									                </row>
 													<row>
 									                    <label value="Justificación" />
-									                    <textbox id="txtJustificacionMicro" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtJustificacionMicro" value="justificacion" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivo General" />
-									                    <textbox id="txtObjetivoGeneral" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtObjetivoGeneral" value="objetivo general" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivos Especificos" />
@@ -160,11 +167,14 @@
 									                <row>
 									                	<div></div>
 									                	<listbox id="listaObjetivosEspecificos">
+									                		<listitem label="Especifico 1" />
+									                		<listitem label="Especifico 2" />
+									                		<listitem label="Especifico 3" />
 									                	</listbox>
 									                </row>
 									                <row>
 									                    <label value="Contenido Resumido" />
-									                    <textbox id="txtResumenMicro" multiline="true" width="100%"/>
+									                    <textbox id="txtResumenMicro" value="Resumen" multiline="true" width="100%"/>
 									                </row>
 									                
 												</rows>
@@ -229,7 +239,26 @@
 																	<listheader width="60" />
 																	<listheader width="18%" />
 																</listhead>
-																
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="3"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 2"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="2"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 2"/>
+																	<listcell label="3"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 3"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="1"/>
+																</listitem>
 															</listbox>
 										                </row>
 													</rows>
@@ -269,6 +298,26 @@
 																	<listheader width="20%" />
 																	<listheader width="50%" />
 																</listhead>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="SubTema 1"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="SubTema 2"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 1"/>
+																	<listcell label="TEMA 2"/>
+																	<listcell label="SubTema 1"/>
+																</listitem>
+																<listitem>
+																	<listcell label="UNIDAD 2"/>
+																	<listcell label="TEMA 1"/>
+																	<listcell label="SubTema 1"/>
+																</listitem>
 															</listbox>
 										                </row>
 													</rows>
