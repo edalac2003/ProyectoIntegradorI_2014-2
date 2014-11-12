@@ -43,7 +43,7 @@
 											</caption>
 
 											<hbox align="center">
-												Nombre
+												<label value="Nombre"></label>
 												<textbox instant="true"
 													id="txtFiltrarMateria" tabindex="1" />
 											</hbox>
@@ -59,7 +59,7 @@
 													name="model">
 													<listitem>
 														<listcell
-															label="materias">
+															label="${each.vrNombre}">
 														</listcell>
 													</listitem>
 												</template>
@@ -78,110 +78,95 @@
 												</columns>
 												<rows>
 													<row>
-														<label>
-															Código
-														</label>
-														<listbox
-															id="ltbTipoId" tabindex="2" width="50%" rows="1"
-															mold="select" height="20px" />
-													</row>
-													<row>
-														<label>
-															Núcleo
+														<label value="Código">
 														</label>
 														<textbox
-															id="txtNumeroId" tabindex="3" width="50%"
+															id="txtCodigo" tabindex="3" width="50%"
 															constraint="no empty" />
 													</row>
 													<row>
-														<label>
-															Materia
+														<label value="Núcleo">
 														</label>
-
-														<listbox
-															id="idMaterias" tabindex="9" rows="1" mold="select"
-															height="20px" width="50%">
-														</listbox>
+														<div width="50%"> 	<listbox
+																id="ltbNucleo" tabindex="2" width="100%" rows="1"
+																mold="select" height="20px" />
+																<textbox id="txtNucleo" tabindex="4" width="100%"
+																constraint="no empty" visible="false"></textbox>
+														</div>
 													</row>
 													<row>
-														<label>
-															Semestre
+														<label value="Materia">
+														</label>
+
+														<textbox
+															id="txtMateria" tabindex="5" width="50%"
+															constraint="no empty" />													</row>
+													<row>
+														<label value="Semestre">
 														</label>
 														<textbox
-															id="txtSemestre" tabindex="4" width="50%"
+															id="txtSemestre" tabindex="6" width="50%"
 															constraint="no empty" />
 													</row>
 													<row>
-														<label>
-															Créditos
+														<label value="Créditos">
 														</label>
 
 														<textbox
-															id="txtCreditos" tabindex="5" width="50%"
+															id="txtCreditos" tabindex="7" width="50%"
 															constraint="no empty" />
 													</row>
 													<row>
-														<label>
-															Habilitable
+														<label value="Habilitable">
 														</label>
 
 														<textbox
-															id="txtHabilitable" tabindex="6" width="50%" />
+															id="txtHabilitable" tabindex="8" width="50%" />
 													</row>
 													<row>
-														<label>
-															Validable
+														<label value="Validable">
 														</label>
 
 														<textbox
-															id="txtValidable" tabindex="7" width="50%" />
+															id="txtValidable" tabindex="9" width="50%" />
 													</row>
 													<row>
-														<label>
-															Clasificable
+														<label value="Clasificable">
 														</label>
 														<textbox
-															id="txtClasificable" tabindex="8" width="50%" />
+															id="txtClasificable" tabindex="10" width="50%" />
 													</row>
 													<row>
-														<label>
-															Horas
-															Teóricas
+														<label value="Horas Teóricas">
 														</label>
 
 														<textbox
-															id="txtHt" tabindex="8" width="50%" />
+															id="txtHt" tabindex="11" width="50%" />
 
 													</row>
 													<row>
-														<label>
-															Horas
-															Prácticas
+														<label value="Horas Prácticas">
 														</label>
 
 														<textbox
-															id="txtHp" tabindex="8" width="50%" />
+															id="txtHp" tabindex="12" width="50%" />
 
 													</row>
 
 													<row>
-														<label>
-															Horas
-															Teórico
-															Prácticas
+														<label value="Horas Teórico Prácticas">
 														</label>
 
 														<textbox
-															id="txtHtp" tabindex="8" width="50%" />
+															id="txtHtp" tabindex="13" width="50%" />
 
 													</row>
 													<row>
-														<label>
-															Estado
+														<label value="Estado">
 														</label>
 
 														<textbox
-															id="txtEstado" tabindex="8" width="50%" />
+															id="txtEstado" tabindex="14" width="50%" />
 
 													</row>
 												</rows>

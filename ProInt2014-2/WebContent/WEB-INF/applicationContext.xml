@@ -226,6 +226,11 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="semestreNGC" ref="semestreNGC" />
         </bean>
         
+        <bean id="crearMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMateriaCtrl" scope="prototype">
+        	<property name="materiasNGC" ref="materiasNGC" />
+        	<property name="nucleosNGC" ref="nucleoNGC" />
+        </bean>
+        
         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
         	<property name="materiasNGC" ref="materiasNGC" />
         	<property name="personaNGC" ref="personaNGC" />
