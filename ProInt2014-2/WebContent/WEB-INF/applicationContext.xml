@@ -200,10 +200,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="microcurriculosDao" ref="microcurriculosDAO" />
         </bean>
         
-        <bean id="estadosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EstadosNGCImpl">
-        	<property name="estadosDao" ref="estadosDao" />
-        </bean>
-        
         <bean id="correquisitosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CorrequisitosNGCImpl">
         	<property name="correquisitosDao" ref="correquisitosDao" />
         	<property name="materiasDao" ref="materiasDAO" />

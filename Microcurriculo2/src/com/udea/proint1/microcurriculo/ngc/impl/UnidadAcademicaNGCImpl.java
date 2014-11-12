@@ -27,21 +27,21 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 	@Override
 	public void guardarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no est√© vacio
+		 * Comprobamos que el objeto id no estÈ vacio
 		 */
 		if(unidadAcademica == null){
-			throw new ExcepcionesLogica("El objeto unidadAcademica est√° vacio");
+			throw new ExcepcionesLogica("El objeto unidadAcademica est· vacio");
 		}
 		try {
 			String id = unidadAcademica.getVrIdunidad();
-			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(idUnidad);
+			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(id);
 		
 			if(unidadAcademicaConsulta != null){
 				throw new ExcepcionesLogica("La unidadAcademica a insertar ya existe");
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+			log.error("fallÛ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		try {
@@ -49,17 +49,17 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			unidadAcademicaDao.guardarUnidad(unidadAcademica);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo guardarUnidad de la clase unidadAcademicaDao: "+ e);
+			log.error("fallÛ al invocar el metodo guardarUnidad de la clase unidadAcademicaDao: "+ e);
 		}
 	}
 
 	@Override
 	public void actualizarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no est√© vacio
+		 * Comprobamos que el objeto id no estÈ vacio
 		 */
 		if(unidadAcademica == null){
-			throw new ExcepcionesLogica("El objeto unidadAcademica est√° vacio");
+			throw new ExcepcionesLogica("El objeto unidadAcademica est· vacio");
 		}
 		try {
 			String id = unidadAcademica.getVrIdunidad();
@@ -70,15 +70,15 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+			log.error("fallÛ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		try {
 			
-			unidadAcademicaDao.actualizarUnidadAcademica(unidadAcademica);
+			unidadAcademicaDao.modificarUnidad(unidadAcademica);;
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo actualizarUnidadAcademica de la clase unidadAcademicaDao: "+ e);
+			log.error("fallÛ al invocar el metodo actualizarUnidadAcademica de la clase unidadAcademicaDao: "+ e);
 		}
 	}
 
@@ -88,22 +88,22 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if((id.equals(""))||(id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificaci√≥n de unidadAcademica, est√° vacia");
+			throw new ExcepcionesLogica("No se ha ingresado una identificaciÛn de unidadAcademica, est· vacia");
 		}
 		TbAdmUnidadAcademica unidadAcademica = null;
 		
 		try {
 			unidadAcademica = unidadAcademicaDao.obtenerUnidad(id);
 		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+			log.error("fallÛ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en √©l.
+		 * Confirmamos si el objeto retornado tiene elementos en Èl.
 		 */
 		if(unidadAcademica == null){
-			//si est√° vacio tira una excepci√≥n
-			throw new ExcepcionesLogica("No se encontr√≥ unidadAcademica con el id "+ id);
+			//si est· vacio tira una excepciÛn
+			throw new ExcepcionesLogica("No se encontrÛ unidadAcademica con el id "+ id);
 		}else{
 			return unidadAcademica;
 		}
@@ -113,13 +113,13 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 	public List<TbAdmUnidadAcademica> listarUnidadAcademicas() throws ExcepcionesLogica {
 		List<TbAdmUnidadAcademica> listaUnidadAcademicas = null;
 		try {
-			listaUnidadAcademicas = unidadAcademicaDao.listarUnidadesAcademicas();
+			listaUnidadAcademicas = unidadAcademicaDao.listarUnidades();
 		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo listarUnidadesAcademicas de la clase unidadAcademicaDao: "+ e);
+			log.error("fallÛ al invocar el metodo listarUnidadesAcademicas de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en √©l.
+		 * Confirmamos si el objeto retornado tiene elementos en Èl.
 		 */
 		if(listaUnidadAcademicas == null){
 			throw new ExcepcionesLogica("No se encontraron Unidades Academicas en la tabla TbAdmUnidadAcademica");

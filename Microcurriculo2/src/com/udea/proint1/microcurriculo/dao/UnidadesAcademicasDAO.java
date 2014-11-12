@@ -1,13 +1,17 @@
 package com.udea.proint1.microcurriculo.dao;
 
-import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
+import java.util.List;
+
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface UnidadesAcademicasDAO {
 	
-	public void guardarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO;
+	public void guardarUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO;
 	
-	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO;
+	public TbAdmUnidadAcademica obtenerUnidad(String idUnidad) throws ExcepcionesDAO;
 	
-	public void modificarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO;
+	public void modificarUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO;
+	
+	public List<TbAdmUnidadAcademica> listarUnidades() throws ExcepcionesDAO;
 }

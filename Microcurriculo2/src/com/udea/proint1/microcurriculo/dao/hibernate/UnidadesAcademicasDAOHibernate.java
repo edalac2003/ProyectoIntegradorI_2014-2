@@ -1,10 +1,17 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesAcademicasDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -12,12 +19,12 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implements UnidadesAcademicasDAO{
 
 	@Override
-	public void guardarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
+	public void guardarUnidad(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesDAO {
 		Session session = null;
 
 		try {
 			session = getSession();
-			session.save(unidad);
+			session.save(unidadAcademica);
 			session.flush(); 
 		} catch (HibernateException e) {
 
@@ -26,13 +33,13 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 	}
 
 	@Override
-	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
+	public TbAdmUnidadAcademica obtenerUnidad(String idUnidad) throws ExcepcionesDAO {
 		Session session = null;
-		TbMicUnidades unidad = null;
+		TbAdmUnidadAcademica unidad = null;
 
 		try {
 			session = getSession();
-			unidad = (TbMicUnidades) session.load(TbMicUnidades.class, idUnidad);
+			unidad = (TbAdmUnidadAcademica) session.load(TbAdmUnidadAcademica.class, idUnidad);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
@@ -41,7 +48,7 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 	}
 
 	@Override
-	public void modificarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
+	public void modificarUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO {
 		Session session = null;
 
 		try {
@@ -52,6 +59,24 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 			throw new ExcepcionesDAO();
 		}
 		
+	}
+	
+	@Override
+	public List<TbAdmUnidadAcademica> listarUnidades() throws ExcepcionesDAO{
+		Session session = null;
+        List<TbAdmUnidadAcademica> unidadesAcademicas = new ArrayList<TbAdmUnidadAcademica>();
+        
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbAdmUnidadAcademica.class);
+			
+			unidadesAcademicas = criteria.list();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+			
+		}
+		
+		return unidadesAcademicas;
 	}
 
 }
