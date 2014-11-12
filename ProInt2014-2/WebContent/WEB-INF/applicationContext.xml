@@ -125,6 +125,21 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="unidadAcademicaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesAcademicasDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="dependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciasDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="correquisitosDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="prerrequisitosDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PrerrequisitosDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
         
         <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
 			<property name="sessionFactory" ref="sessionFactory" />
@@ -173,6 +188,31 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="evaluacionesDao" ref="evaluacionesDAO" />
         </bean>
         
+        <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl">
+        	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
+        </bean>
+        
+        <bean id="dependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DependenciaNGCImpl">
+        	<property name="dependenciaDao" ref="dependenciaDao" />
+        </bean>
+        
+        <bean id="microcurriculosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculosNGCImpl">
+        	<property name="microcurriculosDao" ref="microcurriculosDAO" />
+        </bean>
+        
+        <bean id="estadosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EstadosNGCImpl">
+        	<property name="estadosDao" ref="estadosDao" />
+        </bean>
+        
+        <bean id="correquisitosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CorrequisitosNGCImpl">
+        	<property name="correquisitosDao" ref="correquisitosDao" />
+        	<property name="materiasDao" ref="materiasDAO" />
+        </bean>
+        
+        <bean id="prerrequisitosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PrerrequisitosNGCImpl">
+        	<property name="prerrequisitosDao" ref="prerrequisitosDao" />
+        	<property name="materiasDao" ref="materiasDAO" />
+        </bean>
         
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
         <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
@@ -203,6 +243,17 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="materiasNGC" ref="materiasNGC" />
         	<property name="personaNGC" ref="personaNGC" />
         	<!-- <property name="semestreNGC" ref="semestreNGC" />  -->
+        </bean>
+        
+        <bean id="consultarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ConsultarMicroCtrl" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="materiasNGC" ref="materiasNGC" />
+        	<property name="microcurriculosNGC" ref="microcurriculosNGC" />
+        	<property name="estadosNGC" ref="estadosNGC" />
+        	<property name="correquisitosNGC" ref="correquisitosNGC" />
+        	<property name="prerrequisitosNGC" ref="prerrequisitosNGC" />
         </bean>
             
 </beans>
