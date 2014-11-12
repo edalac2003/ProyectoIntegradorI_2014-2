@@ -1,0 +1,200 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window border="normal" apply="${crearMateriaCtrl}">
+		<borderlayout height="900px">
+
+			<north border="0" height="100px">
+				<include id="headerIdx" src="sections/header.zul" />
+			</north>
+
+			<center border="0">
+				<borderlayout>
+					<north>
+						<div>
+							<include id="listMenu" src="sections/menuBar.zul" ></include>
+						</div>
+					</north>
+					<center>
+						
+						<div align="center">
+					<hlayout width="100%" height="600px;">
+						<hbox spacing="15px">
+							<groupbox mold="3d" width="300px"
+								height="430px;">
+								<caption>
+									<div style="float:left;">
+										<image src="/img/materias.png" />
+										<label value="Buscar Materia" />
+									</div>
+									<div style="float:right;">
+										<image id="imgAddNew"
+											src="/img/add-icon.png" />
+									</div>
+								</caption>
+
+								<hbox align="center">
+									Nombre
+									<textbox instant="true"
+										id="txtFiltrarAutor" tabindex="1" />
+								</hbox>
+
+								<listbox id="listBoxAutores"
+									emptyMessage="Sin registros" height="86%"
+									style="margin-top:10px" rows="9">
+									<listhead>
+										<listheader label="lkjgglkjg" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="lhl">
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</groupbox>
+
+
+
+
+							<groupbox mold="3d" width="800px"
+								height="100%">
+								<caption image="/img/crearMateria.png"
+									label="Crear Materia" />
+
+								<grid>
+									<columns>
+										<column width="50%" />
+										<column width="30%" />
+									</columns>
+									<rows>
+										<row>
+											<span class="requerido">
+												* Codigo
+											</span>
+											<listbox id="ltbTipoId"
+												tabindex="2" width="50%" rows="1" mold="select"
+												height="20px" />
+										</row>
+										<row>
+											<span class="requerido">
+												* Núcleo
+											</span>
+											<textbox id="txtNumeroId"
+												tabindex="3" width="50%" constraint="no empty" />
+										</row>
+										<row>
+											<span class="requerido">
+												*Materia
+											</span>
+
+											<listbox id="idMaterias"
+												tabindex="9" rows="1" mold="select" height="20px"
+												width="50%">
+											</listbox>
+										</row>
+										<row>
+											<span class="requerido">
+												* Semestre
+											</span>
+
+											<textbox id="txtSemestre"
+												tabindex="4" width="90%" constraint="no empty" />
+										</row>
+										<row>
+											<span class="requerido">
+												* Créditos
+											</span>
+
+											<textbox id="txtCreditos"
+												tabindex="5" width="90%" constraint="no empty" />
+										</row>
+										<row>
+											<span class="requerido">
+												Habilitable
+											</span>
+
+											<textbox id="txtHabilitable"
+												tabindex="6" width="90%" />
+										</row>
+										<row>
+											<span class="requerido">
+												Validable
+											</span>
+
+											<textbox id="txtValidable"
+												tabindex="7" width="90%" />
+										</row>
+										<row>
+											<span class="requerido">
+												Clasificable
+											</span>
+
+											<textbox
+												id="txtClasificable" tabindex="8" width="50%" />
+
+										</row>
+										<row>
+											<span class="requerido">
+												Horas Teóricas
+											</span>
+
+											<textbox id="txtHt"
+												tabindex="8" width="50%" />
+
+										</row>
+										<row>
+											<span class="requerido">
+												Horas Prácticas
+											</span>
+
+											<textbox id="txtHp"
+												tabindex="8" width="50%" />
+
+										</row>
+
+										<row>
+											<span class="requerido">
+												Horas Teórico Prácticas
+											</span>
+
+											<textbox id="txtHtp"
+												tabindex="8" width="50%" />
+
+										</row>
+										<row>
+											<span class="requerido">
+												Estado
+											</span>
+
+											<textbox id="txtEstado"
+												tabindex="8" width="50%" />
+
+										</row>
+									</rows>
+								</grid>
+								<separator height="20px;" />
+
+								<div align="center">
+									<button id="btnGuardar"
+										label="Guardar Materia" tabindex="10">
+									</button>
+									<button id="btnActualizar"
+										label="Actualizar Materia" visible="false" tabindex="11">
+									</button>
+								</div>
+							</groupbox>
+						</hbox>
+					</hlayout>
+				</div>
+					</center>
+				</borderlayout>
+				
+			</center>
+
+			<south border="none">
+				<include id="footerIdx" src="sections/footer.zul" />
+			</south>
+		</borderlayout>
+	</window>
+</zk>
