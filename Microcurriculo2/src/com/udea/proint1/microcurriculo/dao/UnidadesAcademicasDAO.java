@@ -14,4 +14,5 @@ public interface UnidadesAcademicasDAO {
 	public void modificarUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO;
 	
 	public List<TbAdmUnidadAcademica> listarUnidades() throws ExcepcionesDAO;
+	
 }
