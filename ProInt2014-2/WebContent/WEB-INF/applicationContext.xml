@@ -117,9 +117,14 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="temasxUnidadDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.TemasXUnidadDAOHibernate">
+        <bean id="temasxUnidadDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.TemasxUnidadDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
+        
+        <bean id="evaluacionesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionesDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         
         <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
 			<property name="sessionFactory" ref="sessionFactory" />
@@ -164,6 +169,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="temasxunidadDao" ref="temasxUnidadDAO" />
         </bean>
         
+        <bean id="evaluacionesNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionesNGCImpl">
+        	<property name="evaluacionesDao" ref="evaluacionesDAO" />
+        </bean>
         
         
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
@@ -183,6 +191,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadosNGC" ref="estadosNGC" />
         	<property name="temasNGC" ref="temasNGC" />
         	<property name="temasxUnidadNGC" ref="temasxUnidadNGC" />
+        	<property name="evaluacionesNGC" ref="evaluacionesNGC" />
         	<!-- 
         	
         	<property name="nucleoNGC" ref="nucleoNGC" />

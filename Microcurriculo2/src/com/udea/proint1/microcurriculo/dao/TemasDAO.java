@@ -13,6 +13,8 @@ public interface TemasDAO {
 	
 	public TbMicTemas obtenerTema(int idTema) throws ExcepcionesDAO;
 	
+	public TbMicTemas obtenerTemaxNombre(String nombre) throws ExcepcionesDAO;
+	
 	public List<TbMicTemas> listarTemas() throws ExcepcionesDAO;
 	
 	public int contarRegistros() throws ExcepcionesDAO;

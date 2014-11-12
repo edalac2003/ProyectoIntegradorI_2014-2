@@ -24,6 +24,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluaciones;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
@@ -31,6 +32,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicTemas;
 import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionesNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivosNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
@@ -86,6 +88,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	EstadosNGC estadosNGC;
 	TemasNGC temasNGC;
 	TemasxUnidadNGC temasxUnidadNGC;
+	EvaluacionesNGC evaluacionesNGC;
 	
 	
 	/*
@@ -112,11 +115,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.unidadesNGC = unidadesNGC;
 	}
 	
-
 	public void setEstadosNGC(EstadosNGC estadosNGC) {
 		this.estadosNGC = estadosNGC;
 	}
-
 	
 	public void setTemasNGC(TemasNGC temasNGC) {
 		this.temasNGC = temasNGC;
@@ -124,6 +125,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 
 	public void setTemasxUnidadNGC(TemasxUnidadNGC temasxUnidadNGC) {
 		this.temasxUnidadNGC = temasxUnidadNGC;
+	}
+	
+	public void setEvaluacionesNGC(EvaluacionesNGC evaluacionesNGC) {
+		this.evaluacionesNGC = evaluacionesNGC;
 	}
 
 	/**
@@ -143,28 +148,38 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		//TbMicMicroxsemestre microxSemestre = empaquetarMicroPorSemestre(microcurriculo, estado);
 		//List<TbMicTemas> listaTemas = empaquetarListaTemas();
-		List<TbMicTemasxunidad> listaTemasxUnidad = empaquetarTemasxUnidad();
+		//List<TbMicTemasxunidad> listaTemasxUnidad = empaquetarTemasxUnidad();
 		
 		
 		//Se debe establecer el orden en el que se iran guardando los registros.
 		//Primero.  Guardar el Microcurriculo.
-		
+		if (verificarCampos()== 1){
+			Messagebox.show("Registro Guardado Satisfactoriamente.  Puede Cambiar su estado cuando lo desee.");
+		} else {
+			if (verificarCampos() == 0){
+				Messagebox.show("Se guardará el registro de Microcurriculos con la información Mínima requerida. \n"+"El estado del Microcurriculo es <EN BORRADOR>");
+			}else
+				Messagebox.show("No se puede Guardar el registro Microcurriculo porque no cumple con la información mínima requerida.");
+		}
 		
 		
 	}
 	
-	public void verificarCampos(){
+	public int verificarCampos(){
+		int estado = -1;
 		if (comprobarInformacionGeneral()){
 			if (comprobarInformacionComplementaria()){
 				if (comprobarUnidadesDetalladas()){
 					if (comprobarEvaluaciones()){
 						if (comprobarReferencias()){
-							Messagebox.show("FELICIDADES!!!! \n TODOS LOS CAMPOS SE VERIFICARON CORRECTAMENTE.");
+							estado = 1;
 						} 
 					} 
-				} 
+				}
+				estado = 0;
 			} 
-		} 		
+		}
+		return estado;
 	}
 	
 	/*List<TbMicTemas> temas
@@ -183,9 +198,11 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	TbMicMicroxsemestre microxSemestre (id, microcurriculo, semestre, modusuario, modfecha)
 	*/
 	
-	private List<TbMicTemasxunidad> empaquetarTemasxUnidad(){
+	/*private List<TbMicTemasxunidad> empaquetarTemasxUnidad(){
 		List<TbMicTemasxunidad> lista = new ArrayList<TbMicTemasxunidad>();
 		TbMicTemasxunidad temaxUnidad = null;
+		TbMicTemas tema = null;
+		TbMicUnidades unidad = null;
 		int registro = 0;
 		
 		try {
@@ -197,10 +214,27 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		for (int i = 0; i<listaSubtemas.getItemCount();i++){
 			int contador = registro + i + 1;
 			Listitem listaitem = (Listitem)listaSubtemas.getChildren().get(i);
-			Listcell unidades = (Listcell)listaitem.getChildren().get(0);
-			Listcell temas = (Listcell)listaitem.getChildren().get(1);
-			Listcell semanas = (Listcell)listaitem.getChildren().get(2);
+			Listcell celdaUnidades = (Listcell)listaitem.getChildren().get(0);
+			Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);
+			Listcell celdaSemanas = (Listcell)listaitem.getChildren().get(2);
+			tema = temasNGC.
 			temaxUnidad = new TbMicTemasxunidad();
+			
+		}
+		
+		return lista;
+	}*/
+	
+	private List<TbMicEvaluaciones> empaquetarEvaluaciones(){
+		List<TbMicEvaluaciones> lista = new ArrayList<TbMicEvaluaciones>();
+		TbMicEvaluaciones evaluacion = null;
+		
+		for(int i=0;i<listaEvaluaciones.getItemCount();i++){
+			Listitem listaitem = (Listitem)listaEvaluaciones.getChildren().get(i+1);
+			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
+			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
+			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
+			
 		}
 		
 		return lista;

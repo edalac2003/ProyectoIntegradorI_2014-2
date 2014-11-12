@@ -131,17 +131,19 @@
 									                    <label value="Programas Vinculados" width="150px" />
 									                    <label id="lblProgramasVinculados" />
 							                		</row>
+							                		<row>
+									                    <label value="Estado Actual" width="150px" />
+									                    <combobox id="cmbEstadoActual" />
+							                		</row>
 												</rows>
 											</grid>
 										</tabpanel>
 										
 										<tabpanel id="tabInfoCompl">
-											
 											<grid>
 												<columns>
 													<column value="" width="15%" />
 													<column value="" width="70%"/>
-													
 												</columns>
 												<rows >
 													<row>
@@ -165,7 +167,6 @@
 									                    
 									                </row>
 									                <row>
-									                	<div></div>
 									                	<listbox id="listaObjetivosEspecificos">
 									                		<listitem label="Especifico 1" />
 									                		<listitem label="Especifico 2" />
@@ -233,7 +234,7 @@
 												<grid >
 													<rows>
 														<row>
-															<listbox id="listaTemas">
+															<listbox id="listaTemas" autopaging="true">
 																<listhead>
 																	<listheader width="18%" />
 																	<listheader width="60" />
@@ -292,7 +293,7 @@
 												<grid >
 													<rows>
 														<row>
-															<listbox id="listaSubtemas">
+															<listbox id="listaSubtemas" autopaging="true">
 																<listhead>
 																	<listheader width="15%" />
 																	<listheader width="20%" />
@@ -348,12 +349,37 @@
 											<grid >
 												<rows>
 													<row>
-														<listbox id="listaEvaluaciones">
+														<listbox id="listaEvaluaciones" autopaging="true">
 															<listhead>
 																<listheader sort="auto" width="60%" align="center"/>
 																<listheader sort="auto" width="10%" align="center"/>
 																<listheader sort="auto" width="30%" align="center"/>
 															</listhead>
+															<listitem>
+																<listcell label="EVALUACION 1" />
+																<listcell label="20%" />
+																<listcell label="01/01/2010" />
+															</listitem>
+															<listitem>
+																<listcell label="EVALUACION 2" />
+																<listcell label="20%" />
+																<listcell label="01/02/2010" />
+															</listitem>
+															<listitem>
+																<listcell label="EVALUACION 3" />
+																<listcell label="20%" />
+																<listcell label="01/03/2010" />
+															</listitem>
+															<listitem>
+																<listcell label="EVALUACION 4" />
+																<listcell label="20%" />
+																<listcell label="01/04/2010" />
+															</listitem>
+															<listitem>
+																<listcell label="EVALUACION 5" />
+																<listcell label="20%" />
+																<listcell label="01/06/2010" />
+															</listitem>
 															
 														</listbox>
 									                </row>
@@ -467,19 +493,9 @@
 												</rows>
 											</grid>
 										</tabpanel>
-					
-					
 									</tabpanels>
 								</tabbox>
-							</div>
-							<separator />
-							<separator />
-						
-							<div align="center" apply="${validarDatosCtrl}">
-								<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
-								<button id="btnMenuPrincipal" label="Menu Principal" width="150px" height="40px" href="index.zul" />
-							</div>
-						
+							</div>	
 						</div>			
 					</center>	
 				</borderlayout>
@@ -487,7 +503,17 @@
 		</center>
 		
 		<south border="none">
-			<include id="footerIdx" src="sections/footer.zul" />
+			<div>
+				<div align="center" apply="${validarDatosCtrl}">
+					<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
+					<button id="btnMenuPrincipal" label="Menu Principal" width="150px" height="40px" href="index.zul" />
+				</div>
+				<separator />
+				<separator />
+				<div>
+					<include id="footerIdx" src="sections/footer.zul" />
+				</div>	
+			</div>						
 		</south>
 	</borderlayout>
 </window>

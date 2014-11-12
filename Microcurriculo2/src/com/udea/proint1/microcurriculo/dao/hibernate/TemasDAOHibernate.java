@@ -74,12 +74,29 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 		
 		try{
 			session = getSession();
-			tema = (TbMicTemas)session.get(TbMicTemas.class, idTema);
+			tema = (TbMicTemas)session.get(TbMicTemas.class, idTema);			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}				
+		return tema;
+	}
+
+	
+	
+	@Override
+	public TbMicTemas obtenerTemaxNombre(String nombre) throws ExcepcionesDAO {
+		TbMicTemas tema = null;
+		Session session = null;
+		
+		try {
+			session = getSession();
+			//Criteria criteria = session.createQuery("FROM TbMicTemasxUnidad t WHERE t.");
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
-				
+		
+		
 		return tema;
 	}
 
