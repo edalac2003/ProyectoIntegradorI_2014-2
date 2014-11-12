@@ -211,7 +211,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 					cmbIdEstado.appendChild(item);
 				}
 			}else{
-				Messagebox.show("No se hallaron microcurriculos");
+				//Messagebox.show("No se hallaron estados");
 			}
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
