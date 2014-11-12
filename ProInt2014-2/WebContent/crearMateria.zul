@@ -9,187 +9,201 @@
 			</north>
 
 			<center border="0">
-				<borderlayout>
-					<north>
-						<div>
-							<include id="listMenu" src="sections/menuBar.zul" ></include>
-						</div>
-					</north>
-					<center>
-						
-						<div align="center">
-					<hlayout width="100%" height="600px;">
-						<hbox spacing="15px">
-							<groupbox mold="3d" width="300px"
-								height="430px;">
-								<caption>
-									<div style="float:left;">
-										<image src="/img/materias.png" />
-										<label value="Buscar Materia" />
-									</div>
-									<div style="float:right;">
-										<image id="imgAddNew"
-											src="/img/add-icon.png" />
-									</div>
-								</caption>
+				<div align="center">
+					<borderlayout height="750px">
+						<north border="0">
+							<div>
+								<include id="listMenu"
+									src="sections/menuBar.zul">
+								</include>
+							</div>
+						</north>
+						<center border="none" autoscroll="true">
 
-								<hbox align="center">
-									Nombre
-									<textbox instant="true"
-										id="txtFiltrarAutor" tabindex="1" />
-								</hbox>
+							<div align="center">
+								<separator />
+								<separator />
+								<hlayout width="100%" height="600px;">
+									<hbox spacing="15px">
+										<groupbox mold="3d"
+											width="300px" height="430px;">
+											<caption>
+												<div
+													style="float:left;">
+													<image
+														src="/img/materias.png" />
+													<label
+														value="Buscar Materia" />
+												</div>
+												<div
+													style="float:right;">
+													<image
+														id="imgAddNew" src="/img/add-icon.png" />
+												</div>
+											</caption>
 
-								<listbox id="listBoxAutores"
-									emptyMessage="Sin registros" height="86%"
-									style="margin-top:10px" rows="9">
-									<listhead>
-										<listheader label="lkjgglkjg" />
-									</listhead>
-									<template name="model">
-										<listitem>
-											<listcell label="lhl">
-											</listcell>
-										</listitem>
-									</template>
-								</listbox>
-							</groupbox>
+											<hbox align="center">
+												Nombre
+												<textbox instant="true"
+													id="txtFiltrarMateria" tabindex="1" />
+											</hbox>
 
-
-
-
-							<groupbox mold="3d" width="800px"
-								height="100%">
-								<caption image="/img/crearMateria.png"
-									label="Crear Materia" />
-
-								<grid>
-									<columns>
-										<column width="50%" />
-										<column width="30%" />
-									</columns>
-									<rows>
-										<row>
-											<span class="requerido">
-												* Codigo
-											</span>
-											<listbox id="ltbTipoId"
-												tabindex="2" width="50%" rows="1" mold="select"
-												height="20px" />
-										</row>
-										<row>
-											<span class="requerido">
-												* Núcleo
-											</span>
-											<textbox id="txtNumeroId"
-												tabindex="3" width="50%" constraint="no empty" />
-										</row>
-										<row>
-											<span class="requerido">
-												*Materia
-											</span>
-
-											<listbox id="idMaterias"
-												tabindex="9" rows="1" mold="select" height="20px"
-												width="50%">
+											<listbox id="listBoxMaterias"
+												emptyMessage="Sin registros" height="86%"
+												style="margin-top:10px" rows="9">
+												<listhead>
+													<listheader
+														label="Materias" />
+												</listhead>
+												<template
+													name="model">
+													<listitem>
+														<listcell
+															label="materias">
+														</listcell>
+													</listitem>
+												</template>
 											</listbox>
-										</row>
-										<row>
-											<span class="requerido">
-												* Semestre
-											</span>
+										</groupbox>
 
-											<textbox id="txtSemestre"
-												tabindex="4" width="90%" constraint="no empty" />
-										</row>
-										<row>
-											<span class="requerido">
-												* Créditos
-											</span>
+										<groupbox mold="3d"
+											width="600px" height="100%">
+											<caption
+												image="/img/crearMateria.png" label="Crear Materia" />
 
-											<textbox id="txtCreditos"
-												tabindex="5" width="90%" constraint="no empty" />
-										</row>
-										<row>
-											<span class="requerido">
-												Habilitable
-											</span>
+											<grid>
+												<columns>
+													<column width="20%" />
+													<column width="30%" />
+												</columns>
+												<rows>
+													<row>
+														<label>
+															Código
+														</label>
+														<listbox
+															id="ltbTipoId" tabindex="2" width="50%" rows="1"
+															mold="select" height="20px" />
+													</row>
+													<row>
+														<label>
+															Núcleo
+														</label>
+														<textbox
+															id="txtNumeroId" tabindex="3" width="50%"
+															constraint="no empty" />
+													</row>
+													<row>
+														<label>
+															Materia
+														</label>
 
-											<textbox id="txtHabilitable"
-												tabindex="6" width="90%" />
-										</row>
-										<row>
-											<span class="requerido">
-												Validable
-											</span>
+														<listbox
+															id="idMaterias" tabindex="9" rows="1" mold="select"
+															height="20px" width="50%">
+														</listbox>
+													</row>
+													<row>
+														<label>
+															Semestre
+														</label>
+														<textbox
+															id="txtSemestre" tabindex="4" width="50%"
+															constraint="no empty" />
+													</row>
+													<row>
+														<label>
+															Créditos
+														</label>
 
-											<textbox id="txtValidable"
-												tabindex="7" width="90%" />
-										</row>
-										<row>
-											<span class="requerido">
-												Clasificable
-											</span>
+														<textbox
+															id="txtCreditos" tabindex="5" width="50%"
+															constraint="no empty" />
+													</row>
+													<row>
+														<label>
+															Habilitable
+														</label>
 
-											<textbox
-												id="txtClasificable" tabindex="8" width="50%" />
+														<textbox
+															id="txtHabilitable" tabindex="6" width="50%" />
+													</row>
+													<row>
+														<label>
+															Validable
+														</label>
 
-										</row>
-										<row>
-											<span class="requerido">
-												Horas Teóricas
-											</span>
+														<textbox
+															id="txtValidable" tabindex="7" width="50%" />
+													</row>
+													<row>
+														<label>
+															Clasificable
+														</label>
+														<textbox
+															id="txtClasificable" tabindex="8" width="50%" />
+													</row>
+													<row>
+														<label>
+															Horas
+															Teóricas
+														</label>
 
-											<textbox id="txtHt"
-												tabindex="8" width="50%" />
+														<textbox
+															id="txtHt" tabindex="8" width="50%" />
 
-										</row>
-										<row>
-											<span class="requerido">
-												Horas Prácticas
-											</span>
+													</row>
+													<row>
+														<label>
+															Horas
+															Prácticas
+														</label>
 
-											<textbox id="txtHp"
-												tabindex="8" width="50%" />
+														<textbox
+															id="txtHp" tabindex="8" width="50%" />
 
-										</row>
+													</row>
 
-										<row>
-											<span class="requerido">
-												Horas Teórico Prácticas
-											</span>
+													<row>
+														<label>
+															Horas
+															Teórico
+															Prácticas
+														</label>
 
-											<textbox id="txtHtp"
-												tabindex="8" width="50%" />
+														<textbox
+															id="txtHtp" tabindex="8" width="50%" />
 
-										</row>
-										<row>
-											<span class="requerido">
-												Estado
-											</span>
+													</row>
+													<row>
+														<label>
+															Estado
+														</label>
 
-											<textbox id="txtEstado"
-												tabindex="8" width="50%" />
+														<textbox
+															id="txtEstado" tabindex="8" width="50%" />
 
-										</row>
-									</rows>
-								</grid>
-								<separator height="20px;" />
+													</row>
+												</rows>
+											</grid>
+											<separator height="20px;" />
 
-								<div align="center">
-									<button id="btnGuardar"
-										label="Guardar Materia" tabindex="10">
-									</button>
-									<button id="btnActualizar"
-										label="Actualizar Materia" visible="false" tabindex="11">
-									</button>
-								</div>
-							</groupbox>
-						</hbox>
-					</hlayout>
+											<div align="center">
+												<button id="btnGuardar"
+													label="Guardar Materia" tabindex="10">
+												</button>
+												<button
+													id="btnActualizar" label="Actualizar Materia"
+													visible="false" tabindex="11">
+												</button>
+											</div>
+										</groupbox>
+									</hbox>
+								</hlayout>
+							</div>
+						</center>
+					</borderlayout>
 				</div>
-					</center>
-				</borderlayout>
-				
 			</center>
 
 			<south border="none">
