@@ -2,7 +2,7 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 
 <zk>
-<window border="normal" apply="">	
+<window border="normal" apply="${consultarMicroCtrl}">	
 	<borderlayout height="900px" >
 		<north border="0" height="100px">
 			<include id="headerIdx" src="sections/header.zul" />
@@ -41,44 +41,57 @@
 												</columns>
 												<rows>
 													<row>
-														<label value="Semestre" />
-									                    <div>
-									                        <combobox id="cmbIdSemestre" width="15%"/>
-									                        
-									                    </div>
+						                				<label value="Unidad Academica" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbIdUnidadAcademica" width="50%"/>
+								                        	<label id="lblNbreUnidadAcademica"/>
+								                        </div>
+							                		</row>
+							                		<row>
+						                				<label value="Departamento" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbIdDepartamento" width="50%"/>
+								                        	<label id="lblNbreDepartamento"/>
+								                        </div>
 							                		</row>
 							                		<row>
 						                				<label value="Nucleo" width="30%"/>
-								                        <combobox id="cmbIdNucleo" />
+						                				<div>
+								                        	<combobox id="cmbIdNucleo" width="50%"/>
+								                        	<label id="lblNbreNucleo"/>
+								                        </div>
+							                		</row>
+													<row>
+														<label value="Materia" />
+									                    <div>
+									                        <combobox id="cmbIdMateria" width="50%" />
+									                        <label id="lblNbreMateria" />   
+									                    </div>
+							                		</row>
+							                		<row>
+						                				<label value="Estado" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbIdEstado" width="50%"/>
+								                        	<label id="lblNbreEstado"/>
+								                        </div>
+							                		</row>
+							                		<row>
+						                				<label value="Microcurriculo" width="30%"/>
+								                        <combobox id="cmbIdMicrocurriculo" width="50%"/>
 							                		</row>
 							                		<row>
 														<label value="Docente Responsable" />
 									                    <div>
-									                        <combobox id="cmbIdDocente" width="25%"/>
 									                        <label id="lblNombreDocente" />
-									                    </div>
-							                		</row>
-													<row>
-														<label value="Id Materia" />
-									                    <div>
-									                        <combobox id="cmbIdMateria" width="25%" >
-									                        	<comboitem label="20100101" />
-									                        	<comboitem label="20100102" />
-									                        	<comboitem label="20100103" />
-									                        	<comboitem label="20100201" />
-									                        	<comboitem label="20100202" />
-									                        	<comboitem label="20100203" />
-									                        </combobox>
-									                        
-									                        
 									                    </div>
 							                		</row>
 							                		
 							                		<row>
-									                    <label value="Nombre Materia" />
+														<label value="Semestre" />
 									                    <div>
-							                        		<label id="lblNombreMateria" />
-							                    		</div>
+									                        <label id="lblSemestre"/>
+									                        
+									                    </div>
 							                		</row>
 							                		<row>
 									                    <label value="Area" />
@@ -189,7 +202,7 @@
 										
 										<tabpanel id="tabInfoUnidad">
 											<grid id="gridUnidades">
-												<columns>
+												<!--<columns>
 													<column label="Nombre de la Unidad" width="100%" align="center" />
 												</columns>
 												<rows>
@@ -202,13 +215,13 @@
 									                <row>
 									                	<listbox id="listaUnidades" ></listbox>
 									                </row>		                
-												</rows>
+												</rows>-->
 											</grid>
 											
 										
 											<separator />
 											<div>
-												<div style="color:red;" height="25px">
+												<div style="" height="25px">
 													<label value="Temas por Unidad" />
 												</div>
 												<grid id="infoTemas">
@@ -218,7 +231,7 @@
 														<column label="Tiempo (Semanas)" width="15%" align="center"/>
 													</columns>
 													<rows>
-														<row>
+														<!--<row>
 															<combobox id="cmbIdUnidad" width="100%" tabindex="5" />
 										                    <textbox id="txtNombreTema" width="100%" tabindex="5" />
 										                    
@@ -226,7 +239,7 @@
 											                    <longbox id="txtNumeroSemanas" width="30%" />
 											                    <button id="btnAddTemas" label="Adicionar" width="65%"/>
 										                    </div>										                    
-														</row>
+														</row> -->
 																		
 													</rows>
 													
@@ -249,7 +262,7 @@
 											<separator />
 										
 											<div>
-												<div style="color:red;" height="25px">
+												<div style="" height="25px">
 													<label value="Subtemas por Temas" />
 												</div>
 												<grid>
@@ -259,7 +272,7 @@
 														<column label="Subtema" align="center" width="50%"/>
 														
 													</columns>
-													<rows>
+													<!-- <rows>
 														<row>
 															<combobox id="cmbListaUnidades" width="100%"/>
 										                    <combobox id="cmbListaTemas" width="100%"/>
@@ -269,7 +282,7 @@
 										                    </div>
 										                    
 														</row>					
-													</rows>
+													</rows>-->
 												</grid>
 												<grid >
 													<rows>
@@ -295,7 +308,7 @@
 													<column label="Porcentaje" align="center" width="10%"/>
 													<column label="Fecha Estimada" align="center" width="30%"/>
 												</columns> 
-												<rows>
+												<!--<rows>
 													<row>
 														<textbox id="txtActividadMicro" width="100%" />
 									                    <longbox id="txtPorcentajeActividad" width="100%"/>
@@ -304,7 +317,7 @@
 									                    	<button id="btnAddEvaluacion" label="Adicionar" width="40%"/>
 									                    </div>
 													</row>		
-												</rows>	
+												</rows>-->
 											</grid>
 											
 											<grid >
@@ -325,7 +338,7 @@
 										</tabpanel>
 										
 										<tabpanel id="infoBiblioBas">
-											<grid>
+											<!-- <grid>
 												<columns>
 													<column label="Nombre de la Unidad" align="center" />
 												</columns>												
@@ -334,14 +347,14 @@
 														<combobox id="cmbListaUnidadBiblio" width="50%" />
 													</row>
 												</rows>
-											</grid>
+											</grid>-->
 											
 											<separator />
-											<div style="color:red" height="30px">
+											<div style="" height="30px">
 												<label value="REFERENCIAS BIBLIOGRÁFICAS" />					
 											</div>
 															
-											<grid id="infoRefBiblioBas">
+											<!-- <grid id="infoRefBiblioBas">
 												<columns>
 													<column label="Referencia" align="center"/>
 													<column label="Autor" align="center"/>
@@ -366,7 +379,7 @@
 									                    
 													</row>
 												</rows>			
-											</grid>
+											</grid>-->
 											
 											
 											<grid >
@@ -388,7 +401,7 @@
 												</rows>
 											</grid>
 											<separator />
-											<div style="color:red" height="30px">
+											<div style="" height="30px">
 												<label value="REFERENCIAS CIBERGRÁFICAS" />
 											</div>
 											<grid id="infoRefBiblioComp">
@@ -397,7 +410,7 @@
 													<column label="Sitio Web" align="center" width="40%"/>
 													<column label="Tipo" align="center" width="20%" />
 												</columns>
-												<rows>
+												<!-- <rows>
 													<row>
 														<textbox id="txtNombreSitioCiber" width="100%"/>
 									                    <textbox id="txtURLSitioCiber" width="100%"/>
@@ -411,7 +424,7 @@
 													</row>
 													
 													
-												</rows>			
+												</rows>-->			
 											</grid>
 											<grid >
 												<rows>
@@ -438,7 +451,7 @@
 							<separator />
 						
 							<div align="center">
-								<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
+								<!--<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />-->
 								<button id="btnMenuPrincipal" label="Menu Principal" width="150px" height="40px" href="index.zul" />
 							</div>
 						
