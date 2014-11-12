@@ -154,7 +154,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		this.txtHt.setText(materiaSeleccionada.getNbHt()+"");
 		this.txtHp.setText(materiaSeleccionada.getNbHp()+"");
 		this.txtHtp.setText(materiaSeleccionada.getNbHtp()+"");
-		this.txtEstado.setText(materiaSeleccionada.getBlEstado()==1?"Si":"No");
+		this.txtEstado.setText(materiaSeleccionada.getBlEstado()==1?"Activa":"Inactiva");
 		
 		this.btnActualizar.setVisible(true);
 		this.btnGuardar.setVisible(false);
