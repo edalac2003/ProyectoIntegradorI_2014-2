@@ -181,5 +181,27 @@ public class MateriasNGCImpl implements MateriasNGC {
 		}
 		return listaMaterias;
 	}
+	
+	@Override
+	public List<TbAdmMaterias> buscarMaterias(String buscar) throws ExcepcionesLogica{
+		if(buscar.equals("")||(buscar.equals(null))){
+			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+		}
+		List<TbAdmMaterias> listaMaterias = null;
+		try {
+			listaMaterias = materiasDao.buscarMaterias(buscar);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo buscarMaterias de la clase materiasDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaMaterias == null){
+			throw new ExcepcionesLogica("No se encontraron materias en la tabla TbAdmMaterias");
+		}else{
+			return listaMaterias;
+		}
+	}
 		
 }

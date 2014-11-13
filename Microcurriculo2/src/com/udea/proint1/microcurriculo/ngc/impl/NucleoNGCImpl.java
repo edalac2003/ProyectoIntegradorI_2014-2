@@ -18,15 +18,15 @@ public class NucleoNGCImpl implements NucleoNGC {
 	private static Logger log=Logger.getLogger(NucleoNGCImpl.class);
 	
 	NucleoDAO nucleoDao;
-	DependenciasDAO dependenciasDAO;
+	//DependenciasDAO dependenciasDAO;
 
 	public void setNucleoDao(NucleoDAO nucleoDao) {
 		this.nucleoDao = nucleoDao;
 	}
 
-	public void setDependenciasDAO(DependenciasDAO dependenciasDAO) {
+	/*public void setDependenciasDAO(DependenciasDAO dependenciasDAO) {
 		this.dependenciasDAO = dependenciasDAO;
-	}
+	}*/
 
 	public NucleoNGCImpl() {
 		// TODO Auto-generated constructor stub
@@ -131,6 +131,28 @@ public class NucleoNGCImpl implements NucleoNGC {
 		 */
 		if(listaNucleos == null){
 			throw new ExcepcionesLogica("No se encontraron dependencias en la tabla TbAdmDependencia");
+		}else{
+			return listaNucleos;
+		}
+	}
+	
+	@Override
+	public List<TbAdmNucleo> buscarNucleos(String buscar) throws ExcepcionesLogica{
+		if(buscar.equals("")||(buscar.equals(null))){
+			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+		}
+		List<TbAdmNucleo> listaNucleos = null;
+		try {
+			listaNucleos = nucleoDao.buscarNucleos(buscar);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo buscarNucleos de la clase nucleoDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaNucleos == null){
+			throw new ExcepcionesLogica("No se encontraron nucleos en la tabla TbAdmNucleo");
 		}else{
 			return listaNucleos;
 		}

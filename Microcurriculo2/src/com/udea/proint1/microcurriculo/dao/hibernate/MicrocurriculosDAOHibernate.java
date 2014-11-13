@@ -116,7 +116,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			Query query = session
 					.createQuery("from TbMicMicrocurriculos where idSemestre = :semestre");
 
-			query.setEntity("Semestre", idSemestre);
+			query.setString("Semestre", idSemestre);
 
 			microcurriculos = query.list();
 
@@ -138,7 +138,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 
 			Query query = session
-					.createQuery("from Microcurriculos as mic, Nucleo as nuc, Materias as mat where materia = :buscarMateria");
+					.createQuery("from TbMicMicrocurriculos where tbAdmNucleo = :buscarNucleo");
 
 			query.setEntity("buscarNucleo", nucleo);
 
@@ -160,7 +160,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 
 			Query query = session
-					.createQuery("from TbMicMicrocurriculos where tbAdmMaterias.vrIdmateria = :buscarMateria");
+					.createQuery("from TbMicMicrocurriculos where tbAdmMaterias = :buscarMateria");
 
 			query.setEntity("buscarMateria", materia);
 
@@ -183,7 +183,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 
 			Query query = session
-					.createQuery("from TbMicMicrocurriculos where tbAdmPersona.vrIdpersona = :buscarResponsable");
+					.createQuery("from TbMicMicrocurriculos where tbAdmPersona= :buscarResponsable");
 
 			query.setEntity("buscarResponsable", responsable);
 

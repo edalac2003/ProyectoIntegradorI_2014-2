@@ -222,6 +222,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         
         <bean id="microcurriculosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculosNGCImpl">
         	<property name="microcurriculosDao" ref="microcurriculosDAO" />
+        	<property name="materiasDao" ref="materiasDAO" />
+        	<property name="nucleoDao" ref="nucleoDAO" />
+        	<property name="personaDao" ref="personaDAO" />
         </bean>
         
         <bean id="correquisitosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CorrequisitosNGCImpl">

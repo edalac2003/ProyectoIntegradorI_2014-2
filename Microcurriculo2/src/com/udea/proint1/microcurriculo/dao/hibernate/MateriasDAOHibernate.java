@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbMicMateriasxpensum;
@@ -129,6 +130,27 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
 		}
+	}
+	
+	@Override
+	public List<TbAdmMaterias> buscarMaterias(String buscar) throws ExcepcionesDAO{
+		Session session = null;
+        List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+        
+        try{
+               
+                session = getSession();	
+                               
+                Query query = session.createQuery("from TbAdmMaterias where vrIdmateria  like :materia%");
+               
+                query.setString("materia", buscar);
+               
+                materias = query.list();
+                
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return materias;
 	}
 
 }

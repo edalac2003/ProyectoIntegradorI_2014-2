@@ -6,7 +6,13 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.MateriasDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
+import com.udea.proint1.microcurriculo.dao.NucleoDAO;
+import com.udea.proint1.microcurriculo.dao.PersonaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisitos;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -20,6 +26,10 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 	
 	MateriasDAO materiasDao;
 	
+	NucleoDAO nucleoDao;
+	
+	PersonaDAO personaDao;
+	
 	public void setMicrocurriculosDao(MicrocurriculosDAO microcurriculosDao) {
 		this.microcurriculosDao = microcurriculosDao;
 	}
@@ -30,6 +40,14 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 
 	public MicrocurriculosNGCImpl() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public void setNucleoDao(NucleoDAO nucleoDao) {
+		this.nucleoDao = nucleoDao;
+	}
+
+	public void setPersonaDao(PersonaDAO personaDao) {
+		this.personaDao = personaDao;
 	}
 
 	@Override
@@ -134,6 +152,114 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 		}else{
 			return listaMicrocurriculos;
 		}
+	}
+	
+	@Override
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesLogica{
+		List<TbMicMicrocurriculos> listaMicrocurriculos = null;
+			
+		if(idSemestre.equals("")||(idSemestre.equals(null))){
+			throw new ExcepcionesLogica("No se envio un id de semestre a consultar"); 
+		}
+		
+		try {
+			listaMicrocurriculos = microcurriculosDao.listarMicrocurriculosPorSemestre(idSemestre);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarMicrocurriculosPorSemestre de la clase microcurriculosDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaMicrocurriculos;
+	}
+	
+	@Override
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorNucleo(String idNucleo) throws ExcepcionesLogica{
+		List<TbMicMicrocurriculos> listaMicrocurriculos = null;
+		
+		TbAdmNucleo nucleo= null;
+		
+		if(idNucleo.equals("")||(idNucleo.equals(null))){
+			throw new ExcepcionesLogica("No se envio un id de nucleo a consultar"); 
+		}
+		
+		try {
+			nucleo = nucleoDao.obtenerNucleo(idNucleo);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+		}
+		
+		if(nucleo == null){
+			throw new ExcepcionesLogica("NO existe nucleo a consultar"); 
+		}
+		
+		try {
+			listaMicrocurriculos = microcurriculosDao.listarMicrocurriculosPorNucleo(nucleo);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarMicrocurriculosPorNucleo de la clase microcurriculosDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaMicrocurriculos;
+	}
+	
+	@Override
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
+		List<TbMicMicrocurriculos> listaMicrocurriculos = null;
+		
+		TbAdmMaterias materia= null;
+		
+		try {
+			materia = materiasDao.obtenerMateria(idMateria);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerMateria de la clase materiasDao: "+ e);
+		}
+		
+		if(materia == null){
+			throw new ExcepcionesLogica("NO existe materia a consultar"); 
+		}
+		
+		try {
+			listaMicrocurriculos = microcurriculosDao.listarMicrocurriculosPorMateria(materia);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarMicrocurriculosPorMateria de la clase microcurriculosDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaMicrocurriculos;
+	}
+	
+	@Override
+	public List<TbMicMicrocurriculos> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesLogica{
+		List<TbMicMicrocurriculos> listaMicrocurriculos = null;
+		
+		TbAdmPersona responsable= null;
+		
+		try {
+			responsable = personaDao.obtenerPersona(idResponsable);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerPersona de la clase personaDao: "+ e);
+		}
+		
+		if(responsable == null){
+			throw new ExcepcionesLogica("NO existe responsable a consultar"); 
+		}
+		
+		try {
+			listaMicrocurriculos = microcurriculosDao.listarMicrocurriculosPorResponsable(responsable);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarMicrocurriculosPorResponsable de la clase microcurriculosDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaMicrocurriculos;
 	}
 
 }

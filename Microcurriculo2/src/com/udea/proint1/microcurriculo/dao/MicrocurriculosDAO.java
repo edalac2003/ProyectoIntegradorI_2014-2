@@ -34,5 +34,4 @@ public interface MicrocurriculosDAO {
 	
 	public List<TbMicMicrocurriculos> listarMicrocurriculosPorResponsable(TbAdmPersona responsable) throws ExcepcionesDAO;
 	
-	
 }

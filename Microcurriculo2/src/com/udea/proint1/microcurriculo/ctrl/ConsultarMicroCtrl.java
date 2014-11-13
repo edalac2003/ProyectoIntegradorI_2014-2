@@ -223,6 +223,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		try {
 			TbAdmUnidadAcademica unidadAcademica = unidadAcademicaNGC.obtenerUnidadAcademica(id);
 			lblNbreUnidadAcademica.setValue(unidadAcademica.getVrNombre());
+			recargarDepartamentos(id);
+			recargarNucleos(id);
+			recargarMaterias(id);
+			recargarMicrocurriculos(id);
 		} catch (ExcepcionesLogica e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -245,6 +249,9 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		try {
 			TbAdmDependencia departamento = dependenciaNGC.obtenerDependencia(id);
 			lblNbreDepartamento.setValue(departamento.getVrNombre());
+			recargarNucleos(id);
+			recargarMaterias(id);
+			recargarMicrocurriculos(id);
 		} catch (ExcepcionesLogica e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -257,6 +264,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		try {
 			TbAdmMaterias materia = materiasNGC.obtenerMateria(id);
 			lblNbreMateria.setValue(materia.getVrNombre());
+			recargarMicrocurriculos(id);
 		} catch (ExcepcionesLogica e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,6 +276,8 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		try {
 			TbAdmNucleo nucleo = nucleoNGC.obtenerNucleo(id);
 			lblNbreNucleo.setValue(nucleo.getVrNombre());
+			recargarMaterias(id);
+			recargarMicrocurriculos(id);
 		} catch (ExcepcionesLogica e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -277,6 +287,78 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void onSelect$cmbIdMicrocurriculo(){
 		String id = cmbIdMicrocurriculo.getValue().toString();
 		obtenerMicro(id);
+	}
+	
+	public void recargarDepartamentos(String buscaDepartamentos){
+		try {
+			List<TbAdmDependencia> listaDependencias = dependenciaNGC.buscarDependencias(buscaDepartamentos);
+			cmbIdDepartamento.getItems().clear();
+			
+			if(listaDependencias != null){
+				for(TbAdmDependencia dependencia: listaDependencias){
+					Comboitem item = new Comboitem(dependencia.getVrIddependencia());
+					cmbIdDepartamento.appendChild(item);
+				}
+			}else{
+				
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void recargarNucleos(String buscaNucleos){
+		try {
+			List<TbAdmNucleo> listaNucleos = nucleoNGC.buscarNucleos(buscaNucleos);
+			cmbIdNucleo.getItems().clear();
+			
+			if(listaNucleos != null){
+				for(TbAdmNucleo nucleo: listaNucleos){
+					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
+					cmbIdNucleo.appendChild(item);
+				}
+			}else{
+				Messagebox.show("No se hallaron nucleos");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void recargarMaterias(String buscaMaterias){
+		try {
+			List<TbAdmMaterias> listaMaterias = materiasNGC.buscarMaterias(buscaMaterias);
+			cmbIdMateria.getItems().clear();
+			
+			if(listaMaterias != null){
+				for(TbAdmMaterias materia: listaMaterias){
+					Comboitem item = new Comboitem(materia.getVrIdmateria());
+					cmbIdMateria.appendChild(item);
+				}
+			}else{
+				Messagebox.show("No se hallaron materias");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void recargarMicrocurriculos(String buscaMicrocurriculos){
+		try {
+			List<TbMicMicrocurriculos> listaMicrocurriculos = microcurriculosNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
+			cmbIdMicrocurriculo.getItems().clear();
+			
+			if(listaMicrocurriculos != null){
+				for(TbMicMicrocurriculos microcurriculo: listaMicrocurriculos){
+					Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
+					cmbIdMicrocurriculo.appendChild(item);
+				}
+			}else{
+				Messagebox.show("No se hallaron microcurriculos");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void obtenerMicro(String id){

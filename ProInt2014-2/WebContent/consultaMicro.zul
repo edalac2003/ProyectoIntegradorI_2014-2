@@ -43,41 +43,41 @@
 													<row>
 						                				<label value="Unidad Academica" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdUnidadAcademica" width="50%"/>
+								                        	<combobox id="cmbIdUnidadAcademica" width="25%"/>
 								                        	<label id="lblNbreUnidadAcademica"/>
 								                        </div>
 							                		</row>
 							                		<row>
 						                				<label value="Departamento" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdDepartamento" width="50%"/>
+								                        	<combobox id="cmbIdDepartamento" width="25%"/>
 								                        	<label id="lblNbreDepartamento"/>
 								                        </div>
 							                		</row>
 							                		<row>
 						                				<label value="Nucleo" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdNucleo" width="50%"/>
+								                        	<combobox id="cmbIdNucleo" width="25%"/>
 								                        	<label id="lblNbreNucleo"/>
 								                        </div>
 							                		</row>
 													<row>
 														<label value="Materia" />
 									                    <div>
-									                        <combobox id="cmbIdMateria" width="50%" />
+									                        <combobox id="cmbIdMateria" width="25%" />
 									                        <label id="lblNbreMateria" />   
 									                    </div>
 							                		</row>
 							                		<row>
 						                				<label value="Estado" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdEstado" width="50%"/>
+								                        	<combobox id="cmbIdEstado" width="25%"/>
 								                        	<label id="lblNbreEstado"/>
 								                        </div>
 							                		</row>
 							                		<row>
 						                				<label value="Microcurriculo" width="30%"/>
-								                        <combobox id="cmbIdMicrocurriculo" width="50%"/>
+								                        <combobox id="cmbIdMicrocurriculo" width="25%"/>
 							                		</row>
 							                		<row>
 														<label value="Docente Responsable" />
