@@ -92,12 +92,29 @@ public class SubtemasDAOHibernate extends HibernateDaoSupport implements Subtema
 	}
 
 	@Override
-	public List<TbMicSubtemas> listarSubtemasPorTema(int idTema)
-			throws ExcepcionesDAO {
+	public List<TbMicSubtemas> listarSubtemas(int idTema) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicSubtemas> subtemas = new ArrayList<TbMicSubtemas>();
 		
 		return null;
 	}
 
+	@Override
+	public int contarRegistros() throws ExcepcionesDAO {
+		int registro = 0;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicSubtemas.class);
+			registro = criteria.list().size();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO("Se presentaron errores al contar los Registros de la Tabla Subtemas.");
+		}
+				
+		return registro;
+	}
+
+	
 }

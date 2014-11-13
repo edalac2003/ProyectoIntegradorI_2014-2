@@ -43,7 +43,7 @@
 													<row>
 														<label value="Código Microcurriculo" />
 									                    <div>
-									                        <label id="idMicrocurriculo" value="Codigo" style="color:red; font-weight:bold"/>									                        
+									                        <label id="lblidMicrocurriculo" value="Codigo" style="color:red; font-weight:bold"/>									                        
 									                    </div>
 							                		</row>
 													<row>
@@ -64,7 +64,7 @@
 							                		<row>
 														<label value="Docente Responsable" />
 									                    <div>
-									                        <combobox id="cmbIdDocente" width="25%" />
+									                        <combobox id="cmbIdDocente" width="25%" droppable="2"/>
 									                        <label id="lblNombreDocente" />
 									                    </div>
 							                		</row>
@@ -133,7 +133,7 @@
 							                		</row>
 							                		<row>
 									                    <label value="Estado Actual" width="150px" />
-									                    <combobox id="cmbEstadoActual" />
+									                    <combobox id="cmbEstadoActual" disabled="true" droppable="2"/>
 							                		</row>
 												</rows>
 											</grid>
@@ -167,6 +167,7 @@
 									                    
 									                </row>
 									                <row>
+									                	<div></div>
 									                	<listbox id="listaObjetivosEspecificos">
 									                		<listitem label="Especifico 1" />
 									                		<listitem label="Especifico 2" />
@@ -331,7 +332,7 @@
 											<grid>
 												<columns >
 													<column label="Actividad" align="center" width="60%"/>
-													<column label="Porcentaje" align="center" width="10%"/>
+													<column label="Porcentaje (%)" align="center" width="10%"/>
 													<column label="Fecha Estimada" align="center" width="30%"/>
 												</columns> 
 												<rows>
@@ -357,27 +358,27 @@
 															</listhead>
 															<listitem>
 																<listcell label="EVALUACION 1" />
-																<listcell label="20%" />
+																<listcell label="20" />
 																<listcell label="01/01/2010" />
 															</listitem>
 															<listitem>
 																<listcell label="EVALUACION 2" />
-																<listcell label="20%" />
+																<listcell label="20" />
 																<listcell label="01/02/2010" />
 															</listitem>
 															<listitem>
 																<listcell label="EVALUACION 3" />
-																<listcell label="20%" />
+																<listcell label="20" />
 																<listcell label="01/03/2010" />
 															</listitem>
 															<listitem>
 																<listcell label="EVALUACION 4" />
-																<listcell label="20%" />
+																<listcell label="20" />
 																<listcell label="01/04/2010" />
 															</listitem>
 															<listitem>
 																<listcell label="EVALUACION 5" />
-																<listcell label="20%" />
+																<listcell label="20" />
 																<listcell label="01/06/2010" />
 															</listitem>
 															

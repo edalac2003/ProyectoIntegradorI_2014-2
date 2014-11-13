@@ -76,7 +76,7 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 			Criteria criteria = session.createCriteria(TbMicEvaluaciones.class);
 			registro = criteria.list().size();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO("DAO : Se presentaron Errores al Contar los Registros de la Tabla Evaluaciones.");
 		}		
 		return registro;
 	}

@@ -17,7 +17,6 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 	private static Logger log=Logger.getLogger(SubtemasNGCImpl.class);
 		
 	SubtemasDAO subtemasDao;
-		
 	TemasDAO temasDao;
 		
 	public void setsubtemasDao(SubtemasDAO subtemasDao) {
@@ -132,5 +131,20 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 			return listaSubtemas;
 		}
 	}
+
+	@Override
+	public int contarRegistros() throws ExcepcionesLogica {
+		int registro = 0;
+		
+		try {
+			registro = subtemasDao.contarRegistros();
+		} catch (ExcepcionesDAO e) {
+			throw new ExcepcionesLogica("Se presentaron errores al intentar obtener el numero de Registros de la tabla Subtemas.");
+		}
+		
+		return registro;
+	}
+	
+	
 
 }

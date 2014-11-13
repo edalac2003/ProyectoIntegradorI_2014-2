@@ -11,5 +11,7 @@ public interface SubtemasNGC {
 	public void guardarSubtemas (TbMicSubtemas subtema) throws ExcepcionesLogica;
     public void actualizarSubtemas (TbMicSubtemas subtema) throws ExcepcionesLogica;
     public List<TbMicSubtemas> listarSubtemas () throws ExcepcionesLogica;
+    
+    public int contarRegistros() throws ExcepcionesLogica;
 
 }

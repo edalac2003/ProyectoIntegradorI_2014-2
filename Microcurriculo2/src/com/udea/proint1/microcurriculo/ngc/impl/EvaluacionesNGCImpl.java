@@ -138,7 +138,7 @@ public class EvaluacionesNGCImpl implements EvaluacionesNGC {
 		try {
 			registros = evaluacionesDao.contarRegistros();
 		} catch (ExcepcionesDAO e) {
-			e.printStackTrace();
+			throw new ExcepcionesLogica("NGC : Se presentaron errores al intentar Obtener el numero de Registros de la Tabla Evaluaciones.");
 		}
 		return registros;
 	}

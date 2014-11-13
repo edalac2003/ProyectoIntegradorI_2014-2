@@ -153,6 +153,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="subtemasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemasDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>  -->
@@ -234,6 +238,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="unidadesxMicroDao" ref="unidadesxMicroDAO" />
         </bean>
         
+        <bean id="subtemasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemasNGCImpl">
+        	<property name="subtemasDao" ref="subtemasDAO" />
+        </bean>
+        
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
         <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
         	<property name="materiasNGC" ref="materiasNGC" />
@@ -261,6 +269,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="evaluacionesNGC" ref="evaluacionesNGC" />
         	<property name="evaluacionesxMicroNGC" ref="evaluacionesxMicroNGC" />
         	<property name="objetivosxMicroNGC" ref="objetivosxMicroNGC" />
+        	<property name="subtemasNGC" ref="subtemasNGC" />
         	
         	<!-- 
         	

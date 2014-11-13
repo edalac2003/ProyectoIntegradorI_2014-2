@@ -71,6 +71,24 @@ public class TbMicEvaluacionxmicro implements java.io.Serializable {
 			TbMicMicrocurriculos tbMicMicrocurriculos) {
 		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
 	}
+	
+	
+
+	public int getNbPorcentaje() {
+		return nbPorcentaje;
+	}
+
+	public void setNbPorcentaje(int nbPorcentaje) {
+		this.nbPorcentaje = nbPorcentaje;
+	}
+
+	public Date getDtFechaestimada() {
+		return dtFechaestimada;
+	}
+
+	public void setDtFechaestimada(Date dtFechaestimada) {
+		this.dtFechaestimada = dtFechaestimada;
+	}
 
 	public String getVrModusuario() {
 		return this.vrModusuario;
