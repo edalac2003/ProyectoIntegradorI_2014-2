@@ -279,6 +279,22 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		obtenerMicro(id);
 	}
 	
+	public void recargarDepartamentos(String buscaDepartamentos){
+		
+	}
+	
+	public void recargarNucleos(String buscaNucleos){
+		
+	}
+	
+	public void recargarMaterias(String buscaMaterias){
+		
+	}
+	
+	public void recargarMicrocurriculos(String buscaMicrocurriculos){
+		
+	}
+	
 	public void obtenerMicro(String id){
 		try {
 			TbMicMicrocurriculos microcurriculo = microcurriculosNGC.obtenerMicrocurriculos(id);
