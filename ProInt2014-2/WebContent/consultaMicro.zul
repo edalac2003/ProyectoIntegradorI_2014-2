@@ -20,7 +20,7 @@
 					<center border="none">
 						<div align="center">
 							
-							<separator />
+							<separator /> 
 							
 							<separator />
 							<div>
@@ -92,12 +92,6 @@
 									                        <label id="lblSemestre"/>
 									                        
 									                    </div>
-							                		</row>
-							                		<row>
-									                    <label value="Area" />
-									                    <div>
-							                        		<label id="lblAreaMateria" />
-							                    		</div>
 							                		</row>
 							                		<row>
 									                    <label value="Créditos" />
