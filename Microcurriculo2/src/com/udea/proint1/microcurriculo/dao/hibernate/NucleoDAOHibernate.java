@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -74,6 +76,27 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 		}
 
 		return nucleos;
+	}
+	
+	@Override
+	public List<TbAdmNucleo> buscarNucleos(String buscar) throws ExcepcionesDAO{
+		Session session = null;
+        List<TbAdmNucleo> nucleos = new ArrayList<TbAdmNucleo>();
+        
+        try{
+               
+                session = getSession();	
+                               
+                Query query = session.createQuery("from TbAdmNucleo where vrIdnucleo  like :nucleo%");
+               
+                query.setString("nucleo", buscar);
+               
+                nucleos = query.list();
+                
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return nucleos;
 	}
 
 }

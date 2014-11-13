@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface MateriasNGC {
@@ -19,4 +20,7 @@ public interface MateriasNGC {
 	public List<TbAdmMaterias> listarMateriasxNucleo(String nucleo) throws ExcepcionesLogica;
 	
 	public List<TbAdmMaterias> listarMateriasxSemetre(int semestre) throws ExcepcionesLogica;
+	
+	public List<TbAdmMaterias> buscarMaterias(String buscar) throws ExcepcionesLogica;
+	
 }

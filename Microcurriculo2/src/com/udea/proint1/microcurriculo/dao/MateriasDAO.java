@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.dao;
 
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -19,4 +20,6 @@ public interface MateriasDAO {
 	public List<TbAdmMaterias> listarMateriasPorSemestre(int semestre) throws ExcepcionesDAO;
 	
 	public void actualizarMateria(TbAdmMaterias materia) throws ExcepcionesDAO;
+	
+	public List<TbAdmMaterias> buscarMaterias(String buscar) throws ExcepcionesDAO;
 }
