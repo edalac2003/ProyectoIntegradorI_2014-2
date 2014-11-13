@@ -32,6 +32,7 @@ import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadesxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
@@ -109,6 +110,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	PersonaNGC personaNGC;
 	NucleoNGC nucleoNGC;
 	SemestreNGC semestreNGC;
+	
 	
 	
 	
