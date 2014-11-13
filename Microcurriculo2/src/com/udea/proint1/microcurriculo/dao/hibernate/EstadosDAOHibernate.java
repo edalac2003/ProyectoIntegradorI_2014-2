@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.EstadosDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluaciones;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosDAO {
@@ -69,8 +70,18 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 
 	@Override
 	public List<TbMicEstados> listarEstados() throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+		List<TbMicEstados> estados = new ArrayList<TbMicEstados>();
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicEstados.class);
+			estados = criteria.list();			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+		
+		return estados;
 	}
 
 }

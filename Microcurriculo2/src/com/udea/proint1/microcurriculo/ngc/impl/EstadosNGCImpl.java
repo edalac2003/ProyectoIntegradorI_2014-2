@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.EstadosDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -59,8 +60,21 @@ public class EstadosNGCImpl implements EstadosNGC {
 
 	@Override
 	public List<TbMicEstados> listarEstados() throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
-		return null;
+		List<TbMicEstados> listaEstados = null;
+		try {
+			listaEstados = estadosDao.listarEstados();
+		} catch (ExcepcionesDAO e) {
+			logger.error("falló al invocar el metodo listarEstados de la clase estadosDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaEstados == null){
+			throw new ExcepcionesLogica("No se encontraron estados en la tabla TbMicEstados");
+		}else{
+			return listaEstados;
+		}
 	}
 
 }
