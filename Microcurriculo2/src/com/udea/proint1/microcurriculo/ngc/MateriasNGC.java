@@ -8,7 +8,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface MateriasNGC {
 
-	public void guardarMateria(TbAdmMaterias materia) throws ExcepcionesLogica;
+	public boolean guardarMateria(TbAdmMaterias materia) throws ExcepcionesLogica;
 	
 	public void actualizarMateria(TbAdmMaterias materia) throws ExcepcionesLogica;
 	

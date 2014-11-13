@@ -104,9 +104,12 @@
 													<row>
 														<label value="Semestre">
 														</label>
-														<textbox
-															id="txtSemestre" tabindex="6" width="50%"
-															constraint="no empty" />
+														<div width="50%"> 	<listbox
+																id="ltbSemestre" tabindex="2" width="100%" rows="1"
+																mold="select" height="20px" />
+																<textbox id="txtSemestre" tabindex="4" width="100%"
+																constraint="no empty" visible="false"></textbox>
+														</div>
 													</row>
 													<row>
 														<label value="Créditos">

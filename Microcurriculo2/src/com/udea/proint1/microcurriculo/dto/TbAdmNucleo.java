@@ -21,7 +21,11 @@ public class TbAdmNucleo implements java.io.Serializable {
 
 	public TbAdmNucleo() {
 	}
-
+	
+	public TbAdmNucleo(String vrIdnucleo) {
+		this.vrIdnucleo = vrIdnucleo;
+	}
+	
 	public TbAdmNucleo(String vrIdnucleo, TbAdmDependencia tbAdmDependencia) {
 		this.vrIdnucleo = vrIdnucleo;
 		this.tbAdmDependencia = tbAdmDependencia;

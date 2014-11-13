@@ -36,17 +36,19 @@ public class MateriasNGCImpl implements MateriasNGC {
 	}
 
 	@Override
-	public void guardarMateria(TbAdmMaterias materia) throws ExcepcionesLogica {
+	public boolean guardarMateria(TbAdmMaterias materia) throws ExcepcionesLogica {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
+		
+		boolean correcto = false;
 		if(materia == null){
 			throw new ExcepcionesLogica("El objeto materias está vacio");
 		}
 		try {
 			String id = materia.getVrIdmateria();
+			log.info("Id materia:" + id);
 			TbAdmMaterias materiasConsulta = materiasDao.obtenerMateria(id);
-		
 			if(materiasConsulta != null){
 				throw new ExcepcionesLogica("La materia a insertar ya existe");
 			}
@@ -58,10 +60,12 @@ public class MateriasNGCImpl implements MateriasNGC {
 		try {
 			
 			materiasDao.guardarMateria(materia);
+			correcto = true;
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarDependencia de la clase dependenciaDao: "+ e);
 		}
+		return correcto;
 	}
 
 	@Override
