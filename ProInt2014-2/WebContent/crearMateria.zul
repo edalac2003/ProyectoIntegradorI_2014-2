@@ -88,7 +88,7 @@
 														<label value="Núcleo">
 														</label>
 														<div width="50%"> 	<listbox
-																id="ltbNucleo" tabindex="2" width="100%" rows="1"
+																id="ltbNucleo" tabindex="4" width="100%" rows="1"
 																mold="select" height="20px" />
 																<textbox id="txtNucleo" tabindex="4" width="100%"
 																constraint="no empty" visible="false"></textbox>
@@ -105,9 +105,9 @@
 														<label value="Semestre">
 														</label>
 														<div width="50%"> 	<listbox
-																id="ltbSemestre" tabindex="2" width="100%" rows="1"
+																id="ltbSemestre" tabindex="6" width="100%" rows="1"
 																mold="select" height="20px" />
-																<textbox id="txtSemestre" tabindex="4" width="100%"
+																<textbox id="txtSemestre" tabindex="6" width="100%"
 																constraint="no empty" visible="false"></textbox>
 														</div>
 													</row>
@@ -178,11 +178,11 @@
 
 											<div align="center">
 												<button id="btnGuardar"
-													label="Guardar Materia" tabindex="10">
+													label="Guardar Materia" tabindex="15">
 												</button>
 												<button
 													id="btnActualizar" label="Actualizar Materia"
-													visible="false" tabindex="11">
+													visible="false" tabindex="15">
 												</button>
 											</div>
 										</groupbox>
