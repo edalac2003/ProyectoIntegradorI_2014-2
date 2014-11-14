@@ -126,6 +126,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	SubtemasNGC subtemasNGC;
 	
 	
+	
 	/*
 	 * Definición de Metodos Setter de Objetos de Negocio.
 	 */
@@ -236,8 +237,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		for(TbMicSubtemas subT : listaSubtemas){
 			//System.out.print(subT.getTbMicTemas().getVrDescripcion()+" ");
 			System.out.println(subT.getVrDescripcion()+" ");
-			
 		}
+		
+		System.out.println("LISTANDO REFERENCIAS BIBLIOGRAFICAS \n");
+		
 		
 		
 		
@@ -266,9 +269,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				cmbEstadoActual.setDisabled(true);
 			}
 			
-		}*/
-		
-		
+		}*/		
 	}
 	
 	public int verificarCampos(){
@@ -278,8 +279,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				if (comprobarUnidadesDetalladas()){
 					if (comprobarEvaluaciones()){
 						if (comprobarReferencias()){
-							estado = 1;
-							
+							estado = 1;							
 						} 
 					} 
 				}

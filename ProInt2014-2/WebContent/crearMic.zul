@@ -444,9 +444,32 @@
 																<listheader label="Autor"/>
 																<listheader label="ISBN"/>
 																<listheader label="Pais"/>
-																<listheader label="Tipo"/>
-																
+																<listheader label="Tipo"/>																
 															</listhead>
+															<listitem>
+																<listcell label="UNIDAD 1" />
+																<listcell label="REFERENCIA 1" />
+																<listcell label="AUTOR 1" />
+																<listcell label="ISBN 1" />
+																<listcell label="COLOMBIA" />
+																<listcell label="BASICA" />
+															</listitem>
+															<listitem>
+																<listcell label="UNIDAD 1" />
+																<listcell label="REFERENCIA 2" />
+																<listcell label="AUTOR 2" />
+																<listcell label="ISBN 2" />
+																<listcell label="COLOMBIA" />
+																<listcell label="BASICA" />
+															</listitem>
+															<listitem>
+																<listcell label="UNIDAD 1" />
+																<listcell label="REFERENCIA 3" />
+																<listcell label="AUTOR 3" />
+																<listcell label="ISBN 3" />
+																<listcell label="COLOMBIA" />
+																<listcell label="BASICA" />
+															</listitem>
 															
 														</listbox>
 									                </row>
@@ -474,8 +497,6 @@
 										                    <button id="btnAddCibergrafia" label="Adicionar" width="45%"/>
 									                    </div>
 													</row>
-													
-													
 												</rows>			
 											</grid>
 											<grid >
@@ -488,7 +509,30 @@
 																<listheader value="URL Sitio" width="30%"/>
 																<listheader value="Tipo" width="15%"/>
 															</listhead>
-															
+															<listitem>
+																<listcell label="UNIDAD 1" />
+																<listcell label="Sitio Web 1" />
+																<listcell label="http://www.sitioweb1.com" />
+																<listcell label="BASICA" />
+															</listitem>
+															<listitem>
+																<listcell label="UNIDAD 1" />
+																<listcell label="Sitio Web 2" />
+																<listcell label="http://www.sitioweb1.com" />
+																<listcell label="BASICA" />
+															</listitem>
+															<listitem>
+																<listcell label="UNIDAD 2" />
+																<listcell label="Sitio Web 3" />
+																<listcell label="http://www.sitioweb1.com" />
+																<listcell label="BASICA" />
+															</listitem>
+															<listitem>
+																<listcell label="UNIDAD 3" />
+																<listcell label="Sitio Web 4" />
+																<listcell label="http://www.sitioweb1.com" />
+																<listcell label="BASICA" />
+															</listitem>
 														</listbox>
 									                </row>
 												</rows>

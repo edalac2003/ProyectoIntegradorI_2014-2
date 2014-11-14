@@ -37,11 +37,10 @@ public class PaisesNGCImpl implements PaisesNGC {
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
-		if(listaPaises == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontraron paises en la tabla TbAdmPaises");
-		}else{
+		if (listaPaises != null){
 			return listaPaises;
+		}else {
+			throw new ExcepcionesLogica("No se encontraron paises en la tabla TbAdmPaises");
 		}
 	}
 
