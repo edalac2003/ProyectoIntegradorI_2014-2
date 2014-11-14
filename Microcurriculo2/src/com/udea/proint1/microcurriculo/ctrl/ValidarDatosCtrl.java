@@ -25,6 +25,7 @@ import com.sun.mail.handlers.message_rfc822;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
+import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluaciones;
@@ -39,6 +40,8 @@ import com.udea.proint1.microcurriculo.dto.TbMicTemas;
 import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
+import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
+import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionesNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxmicroNGC;
@@ -124,6 +127,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	EvaluacionxmicroNGC evaluacionesxMicroNGC;
 	UnidadesxMicroNGC unidadesxMicroNGC;
 	SubtemasNGC subtemasNGC;
+	BibliografiaNGC bibliografiaNGC;
+	BiblioxunidadNGC biblioxUnidadNGC;
 	
 	
 	/*
@@ -236,8 +241,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		for(TbMicSubtemas subT : listaSubtemas){
 			//System.out.print(subT.getTbMicTemas().getVrDescripcion()+" ");
 			System.out.println(subT.getVrDescripcion()+" ");
-			
 		}
+		
+		System.out.println("LISTANDO REFERENCIAS BIBLIOGRAFICAS \n");
+		
 		
 		
 		
@@ -266,9 +273,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				cmbEstadoActual.setDisabled(true);
 			}
 			
-		}*/
-		
-		
+		}*/		
 	}
 	
 	public int verificarCampos(){
@@ -278,8 +283,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				if (comprobarUnidadesDetalladas()){
 					if (comprobarEvaluaciones()){
 						if (comprobarReferencias()){
-							estado = 1;
-							
+							estado = 1;							
 						} 
 					} 
 				}
@@ -387,6 +391,61 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			subtema = new TbMicSubtemas(contador, tema, celdaSubtema.getLabel().toString(), modUsuario, modFecha);
 			lista.add(subtema);
 		}
+		return lista;
+	}
+	
+	private List<TbMicBibliografia> empaquetarBibliografias(TbMicUnidades unidad){
+		List<TbMicBibliografia> lista = null;
+		TbMicBibliografia bibliografia = null;
+		TbMicBiblioxunidad biblioxUnidad = null;
+		int registro = 0;
+		int registro2 = 0;
+		int contador = 0;
+		char tipoBibliografia;
+		
+		try {
+			registro = bibliografiaNGC.contarRegistros();
+			registro2 = biblioxUnidadNGC.contarRegistros();
+			lista = new ArrayList<TbMicBibliografia>();
+			listadoBibliografiaxUnidad = new ArrayList<TbMicBiblioxunidad>();
+			
+		} catch (ExcepcionesLogica e) {			
+			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Bibliobrafia x Unidad.");
+		}
+		
+		
+		for(int i=0; i<listaBibliografia.getItemCount(); i++){
+			contador = registro + i + 1;
+			Listitem listaitem = (Listitem)listaBibliografia.getChildren().get(i+1);
+			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
+			Listcell celdaReferencia = (Listcell)listaitem.getChildren().get(1);
+			Listcell celdaAutor = (Listcell)listaitem.getChildren().get(2);
+			Listcell celdaISBN = (Listcell)listaitem.getChildren().get(3);
+			Listcell celdaPais = (Listcell)listaitem.getChildren().get(4);
+			Listcell celdaTipo = (Listcell)listaitem.getChildren().get(5);
+			if (celdaTipo.getLabel().toUpperCase() == "BASICA"){
+				tipoBibliografia = '1';
+			}else 
+				tipoBibliografia = '0';
+			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), "", 
+					celdaISBN.getLabel().toString().toUpperCase(), tipoBibliografia, modUsuario, modFecha);
+			
+			
+			lista.add(bibliografia);	
+		}
+		registro = contador;
+		
+		for(int i=0; i<listaCibergrafia.getItemCount();i++){
+			contador = registro + i + 1;
+			Listitem listaItem = (Listitem)listaCibergrafia.getChildren().get(i);
+			Listcell celdaUnidades = (Listcell)listaItem.getChildren().get(0);
+			Listcell celdaReferencia = (Listcell)listaItem.getChildren().get(1);
+			Listcell celdaSitio = (Listcell)listaItem.getChildren().get(2);
+			Listcell celdaTipo = (Listcell)listaItem.getChildren().get(3);
+			
+		}
+		
+		
 		return lista;
 	}
 	
@@ -528,9 +587,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			if (materia != null){
 				if (semestre != null){
 					if (responsable != null){
-						microcurriculo = new TbMicMicrocurriculos(codigoMicrocurriculo, materia, txtPropositoMicro.getValue(), 
-								txtJustificacionMicro.getValue(), txtResumenMicro.getValue(), 0, 
-								responsable.getVrIdpersona(), modUsuario, modFecha);
+						microcurriculo = new TbMicMicrocurriculos(codigoMicrocurriculo, materia, txtPropositoMicro.toString(), 
+								txtJustificacionMicro.toString(), txtResumenMicro.toString(), responsable, modUsuario, modFecha);
 						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
 						cmbEstadoActual.setValue(obtenerEstado());
 						Messagebox.show("El Objeto Microcurriculo se Creó Correctamente");

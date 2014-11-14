@@ -26,10 +26,12 @@ import org.zkoss.zul.Textbox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPaises;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
+import com.udea.proint1.microcurriculo.ngc.PaisesNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadesxMicroNGC;
@@ -110,6 +112,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	PersonaNGC personaNGC;
 	NucleoNGC nucleoNGC;
 	SemestreNGC semestreNGC;
+	PaisesNGC paisesNGC;
 	
 	
 	
@@ -141,8 +144,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void setNucleoNGC(NucleoNGC nucleoNGC) {
 		this.nucleoNGC = nucleoNGC;
 	}
-
 	
+	public void setPaisesNGC(PaisesNGC paisesNGC) {
+		this.paisesNGC = paisesNGC;
+	}
+
 	/**
 	 * Este evento ocurre cuando se hace click en sobre el boton <AddCibergrafia>.
 	 * 
@@ -543,8 +549,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
+	
 	
 	public void onSelect$cmbIdNucleo(){
 		TbAdmNucleo nucleo;
@@ -588,8 +595,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}		
 	}
 	
+	
+	
 	public void onSelect$cmbListaUnidades(){
-		//Messagebox.show("Estoy en el Evento Select del Combobox");
 		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
 	}
 		
@@ -672,6 +680,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		cargarNucleos();
 		cargarDocentes();
 		cargarSemestres();
+		
 		logger.info("Esta es la Ventana de Crear Microcurriculo");
 
 	}

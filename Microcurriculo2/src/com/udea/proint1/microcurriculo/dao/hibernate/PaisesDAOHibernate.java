@@ -38,11 +38,8 @@ public class PaisesDAOHibernate extends HibernateDaoSupport implements PaisesDAO
 		
 		try{
 			session = getSession();
-			
 			Criteria criteria = session.createCriteria(TbAdmPaises.class);
-			
-			paises = criteria.list();
-			
+			paises = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
