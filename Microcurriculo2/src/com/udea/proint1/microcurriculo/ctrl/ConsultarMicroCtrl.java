@@ -259,7 +259,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(materia.equals("")||(materia.equals(null))){
 				recargarMicrosxEstado(idNum);
 			}else{
-				//recargarMicrosxMateriasEstados(idNum, materia);
+				recargarMicrosxMateriasEstados(idNum, materia);
 			}
 			
 		} catch (ExcepcionesLogica e) {
@@ -319,8 +319,37 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void recargarMicrosxEstado(int id){
 		try {
-			TbMicEstados estado = estadosNGC.obtenerEstados(id);
-			//List<TbMicMicroxestado> microsxEstado = 
+			List<TbMicMicroxestado> listamicrosxEstado = microxestadoNGC.listarMicrosxestado(id);
+			cmbIdMicrocurriculo.getItems().clear();
+			
+			if(listamicrosxEstado != null){
+				for(TbMicMicroxestado microxEstado: listamicrosxEstado){
+					Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculos().getVrIdmicrocurriculo());
+					cmbIdMicrocurriculo.appendChild(item);
+				}
+			}else{
+				Messagebox.show("No se hallaron microcurriculos");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void recargarMicrosxMateriasEstados(int id, String materia){
+		try {
+			List<TbMicMicroxestado> listamicrosxEstado = microxestadoNGC.listarMicrosxestado(id);
+			cmbIdMicrocurriculo.getItems().clear();
+			
+			if(listamicrosxEstado != null){
+				for(TbMicMicroxestado microxEstado: listamicrosxEstado){
+					if((microxEstado.getTbMicMicrocurriculos().getTbAdmMaterias().getVrIdmateria()).equals(materia)){
+						Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculos().getVrIdmicrocurriculo());
+						cmbIdMicrocurriculo.appendChild(item);
+					}
+				}
+			}else{
+				Messagebox.show("No se hallaron microcurriculos");
+			}
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
@@ -338,7 +367,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 					cmbIdDepartamento.appendChild(item);
 				}
 			}else{
-				
+				Messagebox.show("No se hallaron departamentos");
 			}
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
