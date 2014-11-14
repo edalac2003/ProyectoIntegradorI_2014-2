@@ -234,10 +234,19 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	public void onSelect$cmbIdEstado(){
-		int id = Integer.parseInt(cmbIdEstado.getValue().toString());
+		String id = cmbIdEstado.getValue().toString();
+		int idNum = Integer.parseInt(id);
+		String materia = cmbIdMateria.getValue().toString();
 		try {
-			TbMicEstados estado = estadosNGC.obtenerEstados(id);
+			TbMicEstados estado = estadosNGC.obtenerEstados(idNum);
 			lblNbreEstado.setValue(estado.getVrDescripcion());
+			
+			if(materia.equals("")||(materia.equals(null))){
+				recargarMicrosxEstado(id);
+			}else{
+				recargarMicrosxMateriasEstados(id, materia);
+			}
+			
 		} catch (ExcepcionesLogica e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
