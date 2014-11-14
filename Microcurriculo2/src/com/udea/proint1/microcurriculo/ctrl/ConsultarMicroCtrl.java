@@ -20,11 +20,13 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitosNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxestadoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitosNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
@@ -73,6 +75,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	EstadosNGC estadosNGC;
 	CorrequisitosNGC correquisitosNGC;
 	PrerrequisitosNGC prerrequisitosNGC;
+	MicroxestadoNGC microxestadoNGC;
 
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -106,6 +109,14 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		this.prerrequisitosNGC = prerrequisitosNGC;
 	}
 
+	public void setMicroxestadoNGC(MicroxestadoNGC microxestadoNGC) {
+		this.microxestadoNGC = microxestadoNGC;
+	}
+
+	/**
+	 * Metodos inciales al cargar la pagina y que llenan los combobox
+	 */
+	
 	public void cargarUnidadesAcademicas(){
 		try {
 			List<TbAdmUnidadAcademica> listaUnidadesAca = unidadAcademicaNGC.listarUnidadAcademicas();
@@ -218,6 +229,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	/**
+	 * Eventos que actualizan los combobox de acuerdo a la selección
+	 */
+	
 	public void onSelect$cmbIdUnidadAcademica(){
 		String id = cmbIdUnidadAcademica.getValue().toString();
 		try {
@@ -242,9 +257,9 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			lblNbreEstado.setValue(estado.getVrDescripcion());
 			
 			if(materia.equals("")||(materia.equals(null))){
-				recargarMicrosxEstado(id);
+				recargarMicrosxEstado(idNum);
 			}else{
-				recargarMicrosxMateriasEstados(id, materia);
+				//recargarMicrosxMateriasEstados(idNum, materia);
 			}
 			
 		} catch (ExcepcionesLogica e) {
@@ -296,6 +311,19 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void onSelect$cmbIdMicrocurriculo(){
 		String id = cmbIdMicrocurriculo.getValue().toString();
 		obtenerMicro(id);
+	}
+	
+	/**
+	 * Metodos a implementar por los eventos y que hacer el reload de los combobox
+	 */
+	
+	public void recargarMicrosxEstado(int id){
+		try {
+			TbMicEstados estado = estadosNGC.obtenerEstados(id);
+			//List<TbMicMicroxestado> microsxEstado = 
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void recargarDepartamentos(String buscaDepartamentos){
@@ -374,6 +402,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	/**
+	 * Metodo implementado para llenar los espacios en el microcurriculo a consultar
+	 */
+	
 	public void obtenerMicro(String id){
 		try {
 			TbMicMicrocurriculos microcurriculo = microcurriculosNGC.obtenerMicrocurriculos(id);
@@ -425,6 +457,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Metodo principal del controlador
+	 */
 	
 	@SuppressWarnings("unchecked")
 	@Override

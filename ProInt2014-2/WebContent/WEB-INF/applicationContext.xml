@@ -318,6 +318,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadosNGC" ref="estadosNGC" />
         	<property name="correquisitosNGC" ref="correquisitosNGC" />
         	<property name="prerrequisitosNGC" ref="prerrequisitosNGC" />
+        	<property name="microxestadoNGC" ref="microxEstadoNGC" />
         </bean>
             
 </beans>
