@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -53,13 +54,13 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 	}
 
 	@Override
-	public List<TbMicBibliografia> listarBibliografiaPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO {
+	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<TbMicBibliografia> listarBibliografiaPorTipo(char tipo) throws ExcepcionesDAO {
+	public List<TbMicBibliografia> listarBibliografia(char tipo) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicBibliografia> bibliografias = new ArrayList<TbMicBibliografia>();
 
@@ -79,5 +80,25 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 
 		return bibliografias;
 	}
+
+	@Override
+	public int contarRegistros() throws ExcepcionesDAO {
+		int registro = 0;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
+			registro = criteria.list().size();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO("Problemas para contar el numero de registros de la tabla Bibliografias");
+		}
+		
+		
+		return registro;
+	}
+	
+	
 
 }

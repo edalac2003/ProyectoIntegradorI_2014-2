@@ -10,7 +10,9 @@ public interface BibliografiaDAO {
 	
 	public void modificarBibliografia(TbMicBibliografia bibliografia) throws ExcepcionesDAO;
 	
-	public List<TbMicBibliografia> listarBibliografiaPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO;
+	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo) throws ExcepcionesDAO;
 	
-	public List<TbMicBibliografia> listarBibliografiaPorTipo(char tipo) throws ExcepcionesDAO;
+	public List<TbMicBibliografia> listarBibliografia(char tipo) throws ExcepcionesDAO;
+	
+	public int contarRegistros() throws ExcepcionesDAO;
 }
