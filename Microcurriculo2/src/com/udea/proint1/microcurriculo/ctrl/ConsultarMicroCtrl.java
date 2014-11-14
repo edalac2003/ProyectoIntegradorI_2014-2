@@ -291,6 +291,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void recargarDepartamentos(String buscaDepartamentos){
 		try {
+			buscaDepartamentos = buscaDepartamentos + "%";
 			List<TbAdmDependencia> listaDependencias = dependenciaNGC.buscarDependencias(buscaDepartamentos);
 			cmbIdDepartamento.getItems().clear();
 			
@@ -309,6 +310,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void recargarNucleos(String buscaNucleos){
 		try {
+			buscaNucleos = buscaNucleos+"%";
 			List<TbAdmNucleo> listaNucleos = nucleoNGC.buscarNucleos(buscaNucleos);
 			cmbIdNucleo.getItems().clear();
 			
@@ -327,6 +329,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void recargarMaterias(String buscaMaterias){
 		try {
+			buscaMaterias = buscaMaterias + "%";
 			List<TbAdmMaterias> listaMaterias = materiasNGC.buscarMaterias(buscaMaterias);
 			cmbIdMateria.getItems().clear();
 			
@@ -345,6 +348,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void recargarMicrocurriculos(String buscaMicrocurriculos){
 		try {
+			buscaMicrocurriculos = buscaMicrocurriculos + "%";
 			List<TbMicMicrocurriculos> listaMicrocurriculos = microcurriculosNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
 			cmbIdMicrocurriculo.getItems().clear();
 			
