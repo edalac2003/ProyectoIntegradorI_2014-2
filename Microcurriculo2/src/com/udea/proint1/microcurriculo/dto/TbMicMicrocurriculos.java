@@ -18,8 +18,7 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 	private String vrProposito;
 	private String vrJustificacion;
 	private String vrResumen;
-	private int nbSemestre;
-	private String vrResponsable;
+	private TbAdmPersona tbAdmPersona;
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbMicMicroxsemestres = new HashSet(0);
@@ -31,27 +30,25 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 	}
 
 	public TbMicMicrocurriculos(String vrIdmicrocurriculo,
-			TbAdmMaterias tbAdmMaterias, int nbSemestre,
-			String vrResponsable, String vrModusuario) {
+			TbAdmMaterias tbAdmMaterias,
+			TbAdmPersona tbAdmPersona, String vrModusuario) {
 		this.vrIdmicrocurriculo = vrIdmicrocurriculo;
 		this.tbAdmMaterias = tbAdmMaterias;
-		this.nbSemestre = nbSemestre;
-		this.vrResponsable = vrResponsable;
+		this.tbAdmPersona = tbAdmPersona;
 		this.vrModusuario = vrModusuario;
 	}
 	
 	public TbMicMicrocurriculos(String vrIdmicrocurriculo,
 			TbAdmMaterias tbAdmMaterias, String vrProposito,
-			String vrJustificacion, String vrResumen, int nbSemestre,
-			String vrResponsable, String vrModusuario, Date dtModfecha) {
+			String vrJustificacion, String vrResumen,
+			TbAdmPersona tbAdmPersona, String vrModusuario, Date dtModfecha) {
 		super();
 		this.vrIdmicrocurriculo = vrIdmicrocurriculo;
 		this.tbAdmMaterias = tbAdmMaterias;
 		this.vrProposito = vrProposito;
 		this.vrJustificacion = vrJustificacion;
 		this.vrResumen = vrResumen;
-		this.nbSemestre = nbSemestre;
-		this.vrResponsable = vrResponsable;
+		this.tbAdmPersona = tbAdmPersona;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
@@ -59,7 +56,7 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 	public TbMicMicrocurriculos(String vrIdmicrocurriculo,
 			TbAdmMaterias tbAdmMaterias, String vrResumen,
 			String vrProposito,String vrJustificacion,
-			String vrMetodologia, int nbSemestre, String vrResponsable,
+			String vrMetodologia, TbAdmPersona tbAdmPersona,
 			String vrModusuario, Date dtModfecha, Set tbMicMicroxsemestres,
 			Set tbMicObjetivosxmicros, Set tbMicUnidadesxmicros,
 			Set tbMicMicroxestados) {
@@ -68,8 +65,7 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 		this.vrProposito = vrProposito;
 		this.vrJustificacion = vrJustificacion;
 		this.vrResumen = vrResumen;
-		this.nbSemestre = nbSemestre;
-		this.vrResponsable = vrResponsable;
+		this.tbAdmPersona = tbAdmPersona;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 		this.tbMicMicroxsemestres = tbMicMicroxsemestres;
@@ -102,20 +98,12 @@ public class TbMicMicrocurriculos implements java.io.Serializable {
 		this.vrResumen = vrResumen;
 	}
 
-	public int getNbSemestre() {
-		return this.nbSemestre;
+	public TbAdmPersona getTbAdmPersona() {
+		return tbAdmPersona;
 	}
 
-	public void setNbSemestre(int nbSemestre) {
-		this.nbSemestre = nbSemestre;
-	}
-
-	public String getVrResponsable() {
-		return this.vrResponsable;
-	}
-
-	public void setVrResponsable(String vrResponsable) {
-		this.vrResponsable = vrResponsable;
+	public void setTbAdmPersona(TbAdmPersona tbAdmPersona) {
+		this.tbAdmPersona = tbAdmPersona;
 	}
 
 	public String getVrModusuario() {
