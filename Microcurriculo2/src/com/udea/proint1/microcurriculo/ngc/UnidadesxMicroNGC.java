@@ -9,6 +9,8 @@ public interface UnidadesxMicroNGC {
 
 	public void guardarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro) throws ExcepcionesLogica;
 	
+	public void guardarUnidadXmicro(List<TbMicUnidadesxmicro> listaUnidadxMicro) throws ExcepcionesLogica;
+		
 	public void modificarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro) throws ExcepcionesLogica;
 	
 	public TbMicUnidadesxmicro obtenerUnidadXmicro(String idMicrocurriculo, int idUnidad) throws ExcepcionesLogica;

@@ -542,17 +542,20 @@
 								</tabbox>
 							</div>	
 						</div>			
-					</center>	
+					</center>
+					<south border="none">
+						<div align="center" apply="${validarDatosCtrl}">
+							<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
+							<button id="btnMenuPrincipal" label="Menu Principal" width="150px" height="40px" href="index.zul" />
+						</div>	
+					</south>	
 				</borderlayout>
 			</div>		
 		</center>
 		
 		<south border="none">
 			<div>
-				<div align="center" apply="${validarDatosCtrl}">
-					<button id="btnGuardarMicro" label="Guardar Registro" width="150px" height="40px" />
-					<button id="btnMenuPrincipal" label="Menu Principal" width="150px" height="40px" href="index.zul" />
-				</div>
+				
 				<separator />
 				<separator />
 				<div>

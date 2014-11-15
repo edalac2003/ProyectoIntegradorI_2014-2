@@ -3,6 +3,8 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.text.html.ListView;
+
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.SubtemasDAO;
@@ -82,6 +84,19 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarSubtema de la clase subtemasDao: "+ e);
 		}
+	}
+	
+	
+	@Override
+	public void guardarSubtemas(List<TbMicSubtemas> listaSubtema) throws ExcepcionesLogica {
+		if (listaSubtema != null){
+			for(TbMicSubtemas subtema : listaSubtema)
+				guardarSubtemas(subtema);
+			
+		}else{
+			throw new ExcepcionesLogica();
+		}
+		
 	}
 
 	@Override

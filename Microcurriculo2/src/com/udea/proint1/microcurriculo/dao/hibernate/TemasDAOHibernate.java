@@ -44,6 +44,17 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 
 	}
 
+	@Override
+	public void guardarTema(List<TbMicTemas> listaTema) throws ExcepcionesDAO {
+		if(listaTema != null){
+			for(TbMicTemas tema : listaTema){
+				guardarTema(tema);
+			}
+		}else{
+			throw new ExcepcionesDAO();
+		}
+	}
+
 	
 	/**
 	 * 
@@ -64,6 +75,8 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 		}
 	}
 
+	
+	
 	/**
 	 * 
 	 */

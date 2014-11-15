@@ -9,9 +9,13 @@ public interface UnidadesXMicroDAO {
 
 	public void guardarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro) throws ExcepcionesDAO;
 	
+	public void guardarUnidadXmicro(List<TbMicUnidadesxmicro> listaUnidadxMicro) throws ExcepcionesDAO;
+	
 	public void modificarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro) throws ExcepcionesDAO;
 	
 	public TbMicUnidadesxmicro obtenerUnidadXmicro(String idMicrocurriculo, int idUnidad) throws ExcepcionesDAO;
+	
+	public TbMicUnidadesxmicro obtenerUnidadXmicro(int idUnidad) throws ExcepcionesDAO;
 	
 	public List<TbMicUnidadesxmicro> listarUnidadesXmicro(String idMicrocurriculo) throws ExcepcionesDAO;
 	

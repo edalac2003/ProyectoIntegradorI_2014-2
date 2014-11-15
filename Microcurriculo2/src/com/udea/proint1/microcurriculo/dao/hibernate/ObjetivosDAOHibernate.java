@@ -36,6 +36,18 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 		}
 
 	}
+	
+	
+	@Override
+	public void guardarObjetivos(List<TbMicObjetivos> listaObjetivo) throws ExcepcionesDAO {
+		if (listaObjetivo != null){
+			for(TbMicObjetivos objetivo : listaObjetivo){
+				guardarObjetivo(objetivo);
+			}
+		}else {
+			throw new ExcepcionesDAO("El Objeto <Lista Objetivos> no tiene información valida.");
+		}
+	}
 
 	@Override
 	public TbMicObjetivos obtenerObjetivo(int idObjetivo) throws ExcepcionesDAO {

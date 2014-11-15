@@ -9,6 +9,8 @@ public interface SubtemasDAO {
 
 	public void guardarSubtema(TbMicSubtemas subtema) throws ExcepcionesDAO;
 	
+	public void guardarSubtema(List<TbMicSubtemas> listaSubtema) throws ExcepcionesDAO;
+	
 	public void modificarSubtema(TbMicSubtemas tema) throws ExcepcionesDAO;
 	
 	public TbMicSubtemas obtenerSubtemas(int idSubtema) throws ExcepcionesDAO;

@@ -9,6 +9,9 @@ public interface ObjetivosNGC {
 	
 	public TbMicObjetivos obtenerSubtemas(int idObjetivo) throws ExcepcionesLogica;
 	public void guardarObjetivos (TbMicObjetivos objetivo) throws ExcepcionesLogica;
+	
+	public void guardarObjetivos (List<TbMicObjetivos> listaObjetivo) throws ExcepcionesLogica;
+	
     public void actualizarObjetivos (TbMicObjetivos objetivo) throws ExcepcionesLogica;
     public List<TbMicObjetivos> listarObjetivos () throws ExcepcionesLogica;
     public int numeroRegistros() throws ExcepcionesLogica;

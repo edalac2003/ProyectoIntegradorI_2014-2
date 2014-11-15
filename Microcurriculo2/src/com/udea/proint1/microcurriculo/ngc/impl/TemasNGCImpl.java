@@ -22,6 +22,7 @@ public class TemasNGCImpl implements TemasNGC {
 		this.temasDao = temasDao;
 	}
 
+	
 	@Override
 	public TbMicTemas obtenerTemas(int id) throws ExcepcionesLogica {
 		/*
@@ -65,20 +66,32 @@ public class TemasNGCImpl implements TemasNGC {
 		
 			if(temasConsulta != null){
 				throw new ExcepcionesLogica("El tema a insertar ya existe");
-			}
-		
+			}		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerTema de la clase temasDao: "+ e);
 		}
 		
-		try {
-			
-			temasDao.guardarTema(tema);
-		
+		try {			
+			temasDao.guardarTema(tema);		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarTema de la clase temasDao: "+ e);
 		}
 	}
+	
+	
+
+	@Override
+	public void guardarTemas(List<TbMicTemas> listaTema) throws ExcepcionesLogica {
+		if(listaTema != null){
+			for(TbMicTemas tema : listaTema)
+				guardarTemas(tema);
+
+		}else{
+			throw new ExcepcionesLogica();
+		}
+			
+	}
+
 
 	@Override
 	public void actualizarTema(TbMicTemas tema) throws ExcepcionesLogica {

@@ -9,6 +9,8 @@ public interface TemasDAO {
 	
 	public void guardarTema(TbMicTemas tema) throws ExcepcionesDAO;
 	
+	public void guardarTema(List<TbMicTemas> listaTema) throws ExcepcionesDAO;
+	
 	public void modificarTema(TbMicTemas tema) throws ExcepcionesDAO;
 	
 	public TbMicTemas obtenerTema(int idTema) throws ExcepcionesDAO;

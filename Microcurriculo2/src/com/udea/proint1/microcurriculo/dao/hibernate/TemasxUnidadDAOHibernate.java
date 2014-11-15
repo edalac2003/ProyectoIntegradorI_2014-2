@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.TemasXUnidadDAO;
@@ -19,10 +20,31 @@ public class TemasxUnidadDAOHibernate extends HibernateDaoSupport implements Tem
 	}
 
 	@Override
-	public void guardarTemasXUnidad(TbMicTemasxunidad temaXunidad)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-
+	public void guardarTemasXUnidad(TbMicTemasxunidad temaXunidad)	throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.save(temaXunidad);
+			tx.commit();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+	}
+	
+	
+	@Override
+	public void guardarTemasXUnidad(List<TbMicTemasxunidad> listaTemaxUnidad) throws ExcepcionesDAO {
+		if(listaTemaxUnidad != null){
+			for(TbMicTemasxunidad txU : listaTemaxUnidad)
+				guardarTemasXUnidad(txU);
+			
+		}else{
+			throw new ExcepcionesDAO();
+		}
 	}
 
 	@Override
@@ -33,11 +55,24 @@ public class TemasxUnidadDAOHibernate extends HibernateDaoSupport implements Tem
 	}
 
 	@Override
-	public TbMicTemasxunidad obtenerTemaXunidad(int idTema, int idUnidad)
-			throws ExcepcionesDAO {
-		
-		
+	public TbMicTemasxunidad obtenerTemaXunidad(int idTema, int idUnidad) throws ExcepcionesDAO {
 		return null;
+	}
+	
+	
+	@Override
+	public TbMicTemasxunidad obtenerTemaXunidad(int idTemaxUnidad)	throws ExcepcionesDAO {
+		TbMicTemasxunidad temaxUnidad = null;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			temaxUnidad = (TbMicTemasxunidad)session.get(TbMicTemasxunidad.class, idTemaxUnidad);
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}		
+		
+		return temaxUnidad;
 	}
 
 	@Override

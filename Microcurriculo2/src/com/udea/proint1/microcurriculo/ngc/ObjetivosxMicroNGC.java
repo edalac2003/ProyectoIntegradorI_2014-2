@@ -10,9 +10,13 @@ public interface ObjetivosxMicroNGC {
 	
 	public void guardarObjetivosxMicro(TbMicObjetivosxmicro objetivoxMicro) throws ExcepcionesLogica;
 	
+	public void guardarObjetivosxMicro(List<TbMicObjetivosxmicro> listaObjetivoxMicro) throws ExcepcionesLogica;
+	
 	public void modificarObjetivoxMicro(TbMicObjetivosxmicro objetivoxMicro) throws ExcepcionesLogica;
 	
 	public TbMicObjetivosxmicro obtenerObjetivoxMicro(String idMicrocurriculo, int idObjetivo) throws ExcepcionesLogica;
+	
+	public TbMicObjetivosxmicro obtenerObjetivoxMicro(int idObjetivo) throws ExcepcionesLogica;
 	
 	public List<TbMicObjetivosxmicro> listarObjetivosxMicro() throws ExcepcionesLogica;
 	

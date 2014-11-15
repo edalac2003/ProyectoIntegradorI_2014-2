@@ -113,6 +113,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="unidadesxMicroDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesxMicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <bean id="estadosDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.EstadosDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
@@ -149,9 +153,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="unidadesxMicroDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesxMicroDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
+        
         
         <bean id="subtemasDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemasDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
@@ -165,18 +167,19 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="biblioxUnidadDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.BiblioxUnidadDAOHibernate">
+        <bean id="microxestadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxEstadoDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="microxsemestreDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxSemestreDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="biblioxUnidadDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.BiblioxUnidadDAOHibernate">
+               	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
         
         
-        <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
-			<property name="sessionFactory" ref="sessionFactory" />
-		</bean>  -->
-		
-
-
 		<!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LA LOGICA --> 
         <bean id="materiasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriasNGCImpl">
         	<property name="materiasDao" ref="materiasDAO" />
@@ -209,7 +212,11 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         		
         <bean id="unidadesNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadesNGCImpl">
         	<property name="unidadesDao" ref="unidadesDAO" />
-        </bean>
+        </bean> 
+        
+        <bean id="unidadesxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadesxMicroNGCImpl">
+        	<property name="unidadesxMicroDao" ref="unidadesxMicroDAO" />
+        </bean> 
         
         <bean id="temasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemasNGCImpl">
         	<property name="temasDao" ref="temasDAO" />
@@ -257,9 +264,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="materiasDao" ref="materiasDAO" />
         </bean>
         
-        <bean id="unidadesxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadesxMicroNGCImpl">
-        	<property name="unidadesxMicroDao" ref="unidadesxMicroDAO" />
-        </bean>
+        
         
         <bean id="subtemasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemasNGCImpl">
         	<property name="subtemasDao" ref="subtemasDAO" />
@@ -269,9 +274,19 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="bibliografiaDao" ref="bibliografiaDAO" />
         </bean>
         
+
         <bean id="biblioxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BiblioxUnidadNGCImpl">
         	<property name="biblioxUnidadDao" ref="biblioxUnidadDAO" />
+		</bean>
+		
+        <bean id="microxEstadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxestadoNGCImpl">
+        	<property name="microxestadoDao" ref="microxestadoDao" />
+        	<property name="estadosDao" ref="estadosDAO" />
         </bean>
+        
+        <bean id="microxSemestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxsemestreNGCIMpl">
+        	<property name="microxsemestreDao" ref="microxsemestreDao" />
+		</bean>
         
         
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
@@ -306,11 +321,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="subtemasNGC" ref="subtemasNGC" />
         	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
-        	
-        	<!-- 
-        	
-        	<property name="nucleoNGC" ref="nucleoNGC" />
-        	  -->
+        	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
+        	<property name="microxSemestreNGC" ref="microxSemestreNGC" />
         </bean>
         
         <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
@@ -329,6 +341,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadosNGC" ref="estadosNGC" />
         	<property name="correquisitosNGC" ref="correquisitosNGC" />
         	<property name="prerrequisitosNGC" ref="prerrequisitosNGC" />
+        	<property name="microxestadoNGC" ref="microxEstadoNGC" />
         </bean>
             
 </beans>

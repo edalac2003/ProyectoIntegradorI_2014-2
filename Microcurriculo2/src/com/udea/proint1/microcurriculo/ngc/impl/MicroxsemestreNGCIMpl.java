@@ -18,11 +18,10 @@ public class MicroxsemestreNGCIMpl implements MicroxsemestreNGC {
 	private static Logger log=Logger.getLogger(MicroxsemestreNGCIMpl.class);
 	
 	MicroxSemestreDAO microxsemestreDao;
-	
 	MicrocurriculosDAO microcurriculosDao;
-	
 	SemestreDAO semestreDao;
 
+	
 	public void setMicroxsemestreDao(MicroxSemestreDAO microxsemestreDao) {
 		this.microxsemestreDao = microxsemestreDao;
 	}
@@ -35,10 +34,8 @@ public class MicroxsemestreNGCIMpl implements MicroxsemestreNGC {
 		this.semestreDao = semestreDao;
 	}
 
-	public MicroxsemestreNGCIMpl() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
+	
 	@Override
 	public void guardarMicroxsemestre(TbMicMicroxsemestre microxSemestre)
 			throws ExcepcionesLogica {
@@ -69,6 +66,7 @@ public class MicroxsemestreNGCIMpl implements MicroxsemestreNGC {
 		}
 	}
 
+	
 	@Override
 	public void actualizarMicroxsemestre(TbMicMicroxsemestre microxSemestre)
 			throws ExcepcionesLogica {

@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.runner.RunWith;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +48,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			session.save(microcurriculo);
 			session.flush(); 
 		} catch (HibernateException e) {
-
+			throw new ExcepcionesDAO("Error al Intentar guardar el Registro Microcurriculo en la Base de Datos.");			
 		}
 
 	}

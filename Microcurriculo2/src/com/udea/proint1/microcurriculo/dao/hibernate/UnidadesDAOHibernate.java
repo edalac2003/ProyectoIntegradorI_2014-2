@@ -1,5 +1,7 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,10 +13,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class UnidadesDAOHibernate extends HibernateDaoSupport implements UnidadesDAO {
-
-	public UnidadesDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void guardarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
@@ -30,9 +28,23 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
-
+	}
+	
+	
+	@Override
+	public void guardarUnidad(List<TbMicUnidades> listaUnidad) throws ExcepcionesDAO {
+		if (listaUnidad != null){
+			for(TbMicUnidades unidad : listaUnidad){
+				guardarUnidad(unidad);
+			}
+		}else{
+			throw new ExcepcionesDAO();
+		}
+			
+		
 	}
 
+	
 	@Override
 	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
 		Session session = null;

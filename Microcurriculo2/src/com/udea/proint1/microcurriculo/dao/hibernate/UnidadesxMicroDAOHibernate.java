@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesXMicroDAO;
@@ -18,11 +19,32 @@ public class UnidadesxMicroDAOHibernate extends HibernateDaoSupport implements U
 	}
 
 	@Override
-	public void guardarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-
+	public void guardarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.save(unidadXmicro);
+			tx.commit();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}	
 	}
+	
+	@Override
+	public void guardarUnidadXmicro(List<TbMicUnidadesxmicro> listaUnidadxMicro) throws ExcepcionesDAO {
+		if(listaUnidadxMicro != null){
+			for (TbMicUnidadesxmicro unidadxMicro : listaUnidadxMicro){
+				guardarUnidadXmicro(unidadxMicro);
+			}
+		}else{
+			throw new ExcepcionesDAO();
+		}
+	}
+	
+	
 
 	@Override
 	public void modificarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro)
@@ -32,15 +54,31 @@ public class UnidadesxMicroDAOHibernate extends HibernateDaoSupport implements U
 	}
 
 	@Override
-	public TbMicUnidadesxmicro obtenerUnidadXmicro(String idMicrocurriculo,
-			int idUnidad) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+	public TbMicUnidadesxmicro obtenerUnidadXmicro(String idMicrocurriculo,	int idUnidad) throws ExcepcionesDAO {
 		return null;
+	}
+	
+
+	@Override
+	public TbMicUnidadesxmicro obtenerUnidadXmicro(int idUnidadxMicro) throws ExcepcionesDAO {
+		TbMicUnidadesxmicro unidadxMicro = null;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			unidadxMicro = (TbMicUnidadesxmicro)session.get(TbMicUnidadesxmicro.class, idUnidadxMicro);
+			if (unidadxMicro != null)
+				return unidadxMicro;
+			else
+				return null;
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
 	}
 
 	@Override
-	public List<TbMicUnidadesxmicro> listarUnidadesXmicro(
-			String idMicrocurriculo) throws ExcepcionesDAO {
+	public List<TbMicUnidadesxmicro> listarUnidadesXmicro(String idMicrocurriculo) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}

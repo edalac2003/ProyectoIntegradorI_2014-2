@@ -38,9 +38,7 @@ public class TemasxUnidadNGCImpl implements TemasxUnidadNGC {
 
 	
 	@Override
-	public TbMicTemasxunidad obtenerTemasxUnidad(int id)
-			throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
+	public TbMicTemasxunidad obtenerTemasxUnidad(int id) throws ExcepcionesLogica {
 		return null;
 	}
 
@@ -49,28 +47,36 @@ public class TemasxUnidadNGCImpl implements TemasxUnidadNGC {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
-		/*if(temasxunidad == null){
-			throw new ExcepcionesLogica("El objeto temasxunidad está vacio");
+		TbMicTemasxunidad temaxUnidadTmp = null;
+		if (temasxunidad != null){
+			try {
+				temaxUnidadTmp = temasxunidadDao.obtenerTemaXunidad(temasxunidad.getNbId());
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica();
+			}			
+		}else{
+			throw new ExcepcionesLogica();
 		}
-		try {
-			int id = temasxunidad.getNbId();
-			TbMicTemasxunidad temasxunidadConsulta = temasxunidadDao.obtenerTemasxunidad(id);
 		
-			if(temasxunidadConsulta != null){
-				throw new ExcepcionesLogica("El temasxunidad a insertar ya existe");
+		if(temaxUnidadTmp == null){
+			try {
+				temasxunidadDao.guardarTemasXUnidad(temasxunidad);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica();
 			}
+		}else{
+			throw new ExcepcionesLogica();
+		}
+	}
+
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitosDao: "+ e);
+	@Override
+	public void guardarTemasxUnidad(List<TbMicTemasxunidad> listaTemasxUnidad) throws ExcepcionesLogica {
+		if (listaTemasxUnidad != null){
+			for(TbMicTemasxunidad txU : listaTemasxUnidad)
+				guardarTemasxUnidad(txU);
 		}
 		
-		try {
-			
-			prerrequisitosDao.guardarPrerrequisito(prerrequisito);
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTemasxunidad de la clase temasxunidadDao: "+ e);
-		}*/
 	}
 
 	@Override

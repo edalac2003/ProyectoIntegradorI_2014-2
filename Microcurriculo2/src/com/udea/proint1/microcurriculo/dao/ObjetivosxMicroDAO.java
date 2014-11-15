@@ -11,9 +11,13 @@ public interface ObjetivosxMicroDAO {
 	
 	public void guardarObjetivosxMicro(TbMicObjetivosxmicro objetivoxMicro) throws ExcepcionesDAO;
 	
+	public void guardarObjetivosxMicro(List<TbMicObjetivosxmicro> listaObjetivoxMicro) throws ExcepcionesDAO;
+	
 	public void modificarObjetivoxMicro(TbMicObjetivosxmicro objetivoxMicro) throws ExcepcionesDAO;
 	
 	public TbMicObjetivosxmicro obtenerObjetivoxMicro(String idMicrocurriculo, int idObjetivo) throws ExcepcionesDAO;
+	
+	public TbMicObjetivosxmicro obtenerObjetivoxMicro(int idObjetivo) throws ExcepcionesDAO;
 	
 	public List<TbMicObjetivosxmicro> listarObjetivosxMicro() throws ExcepcionesDAO;
 	

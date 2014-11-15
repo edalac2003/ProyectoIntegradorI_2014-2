@@ -8,9 +8,15 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 public interface TemasxUnidadNGC {
 	
 	public TbMicTemasxunidad obtenerTemasxUnidad(int id) throws ExcepcionesLogica;
+	
 	public void guardarTemasxUnidad (TbMicTemasxunidad temasxUnidad) throws ExcepcionesLogica;
+	
+	public void guardarTemasxUnidad (List<TbMicTemasxunidad> listaTemasxUnidad) throws ExcepcionesLogica;
+	
     public void actualizarTemaxUnidad (TbMicTemasxunidad temasxUnidad) throws ExcepcionesLogica;
+    
     public List<TbMicTemasxunidad> listarTemasxUnidad () throws ExcepcionesLogica;
+    
     public int contarRegistros() throws ExcepcionesLogica;
 
 }

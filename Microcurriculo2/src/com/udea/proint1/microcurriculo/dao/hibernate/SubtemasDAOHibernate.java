@@ -38,7 +38,19 @@ public class SubtemasDAOHibernate extends HibernateDaoSupport implements Subtema
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 		}
+	}
+	
+	
 
+	@Override
+	public void guardarSubtema(List<TbMicSubtemas> listaSubtema)	throws ExcepcionesDAO {
+		if(listaSubtema != null){
+			for(TbMicSubtemas subtema : listaSubtema)
+				guardarSubtema(subtema);
+				
+		}else{
+			throw new ExcepcionesDAO();
+		}
 	}
 
 	@Override

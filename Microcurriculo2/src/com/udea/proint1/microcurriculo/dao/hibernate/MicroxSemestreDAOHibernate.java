@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MicroxSemestreDAO;
@@ -22,16 +23,15 @@ public class MicroxSemestreDAOHibernate extends HibernateDaoSupport implements M
 	}
 
 	@Override
-	public void guardarMicroxsemestre(TbMicMicroxsemestre microxSemestre)
-			throws ExcepcionesDAO {
+	public void guardarMicroxsemestre(TbMicMicroxsemestre microxSemestre) throws ExcepcionesDAO {
 		Session session = null;
+		Transaction tx = null;
 		
 		try{
 			session = getSession();
-			
-			session = getSession();
+			tx = session.beginTransaction();
 			session.save(microxSemestre);
-			session.flush();
+			tx.commit();
 			
 		}catch(HibernateException e){
 			
@@ -90,14 +90,10 @@ public class MicroxSemestreDAOHibernate extends HibernateDaoSupport implements M
 	@Override
 	public int ContarMicrosxsemestre() throws ExcepcionesDAO{
 		int registros;
-		Session session = null;
-       
-        try{
-               
-        	session = getSession();
-                               
-        	Query query = session.createQuery("select count(*)from TbMicMicroxsemestre");
-               
+		Session session = null;       
+        try{               
+        	session = getSession();           
+        	Query query = session.createQuery("select count(*)from TbMicMicroxsemestre");               
             registros = (query.uniqueResult()).hashCode();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);

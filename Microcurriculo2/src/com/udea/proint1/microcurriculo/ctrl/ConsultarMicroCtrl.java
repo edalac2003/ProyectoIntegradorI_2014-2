@@ -20,11 +20,13 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicEstados;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitosNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxestadoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitosNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
@@ -73,6 +75,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	EstadosNGC estadosNGC;
 	CorrequisitosNGC correquisitosNGC;
 	PrerrequisitosNGC prerrequisitosNGC;
+	MicroxestadoNGC microxestadoNGC;
 
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -106,6 +109,14 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		this.prerrequisitosNGC = prerrequisitosNGC;
 	}
 
+	public void setMicroxestadoNGC(MicroxestadoNGC microxestadoNGC) {
+		this.microxestadoNGC = microxestadoNGC;
+	}
+
+	/**
+	 * Metodos inciales al cargar la pagina y que llenan los combobox
+	 */
+	
 	public void cargarUnidadesAcademicas(){
 		try {
 			List<TbAdmUnidadAcademica> listaUnidadesAca = unidadAcademicaNGC.listarUnidadAcademicas();
@@ -218,6 +229,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	/**
+	 * Eventos que actualizan los combobox de acuerdo a la selección
+	 */
+	
 	public void onSelect$cmbIdUnidadAcademica(){
 		String id = cmbIdUnidadAcademica.getValue().toString();
 		try {
@@ -234,10 +249,19 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	public void onSelect$cmbIdEstado(){
-		int id = Integer.parseInt(cmbIdEstado.getValue().toString());
+		String id = cmbIdEstado.getValue().toString();
+		int idNum = Integer.parseInt(id);
+		String materia = cmbIdMateria.getValue().toString();
 		try {
-			TbMicEstados estado = estadosNGC.obtenerEstados(id);
+			TbMicEstados estado = estadosNGC.obtenerEstados(idNum);
 			lblNbreEstado.setValue(estado.getVrDescripcion());
+			
+			if(materia.equals("")||(materia.equals(null))){
+				recargarMicrosxEstado(idNum);
+			}else{
+				recargarMicrosxMateriasEstados(idNum, materia);
+			}
+			
 		} catch (ExcepcionesLogica e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -289,6 +313,48 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		obtenerMicro(id);
 	}
 	
+	/**
+	 * Metodos a implementar por los eventos y que hacer el reload de los combobox
+	 */
+	
+	public void recargarMicrosxEstado(int id){
+		try {
+			List<TbMicMicroxestado> listamicrosxEstado = microxestadoNGC.listarMicrosxestado(id);
+			cmbIdMicrocurriculo.getItems().clear();
+			
+			if(listamicrosxEstado != null){
+				for(TbMicMicroxestado microxEstado: listamicrosxEstado){
+					Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculos().getVrIdmicrocurriculo());
+					cmbIdMicrocurriculo.appendChild(item);
+				}
+			}else{
+				Messagebox.show("No se hallaron microcurriculos");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void recargarMicrosxMateriasEstados(int id, String materia){
+		try {
+			List<TbMicMicroxestado> listamicrosxEstado = microxestadoNGC.listarMicrosxestado(id);
+			cmbIdMicrocurriculo.getItems().clear();
+			
+			if(listamicrosxEstado != null){
+				for(TbMicMicroxestado microxEstado: listamicrosxEstado){
+					if((microxEstado.getTbMicMicrocurriculos().getTbAdmMaterias().getVrIdmateria()).equals(materia)){
+						Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculos().getVrIdmicrocurriculo());
+						cmbIdMicrocurriculo.appendChild(item);
+					}
+				}
+			}else{
+				Messagebox.show("No se hallaron microcurriculos");
+			}
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void recargarDepartamentos(String buscaDepartamentos){
 		try {
 			buscaDepartamentos = buscaDepartamentos + "%";
@@ -301,7 +367,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 					cmbIdDepartamento.appendChild(item);
 				}
 			}else{
-				
+				Messagebox.show("No se hallaron departamentos");
 			}
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
@@ -365,6 +431,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	/**
+	 * Metodo implementado para llenar los espacios en el microcurriculo a consultar
+	 */
+	
 	public void obtenerMicro(String id){
 		try {
 			TbMicMicrocurriculos microcurriculo = microcurriculosNGC.obtenerMicrocurriculos(id);
@@ -416,6 +486,10 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Metodo principal del controlador
+	 */
 	
 	@SuppressWarnings("unchecked")
 	@Override

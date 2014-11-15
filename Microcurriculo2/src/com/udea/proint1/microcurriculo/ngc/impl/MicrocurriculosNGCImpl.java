@@ -23,11 +23,8 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 	private static Logger log=Logger.getLogger(DependenciaNGCImpl.class);
 
 	MicrocurriculosDAO microcurriculosDao;
-	
 	MateriasDAO materiasDao;
-	
 	NucleoDAO nucleoDao;
-	
 	PersonaDAO personaDao;
 	
 	public void setMicrocurriculosDao(MicrocurriculosDAO microcurriculosDao) {
@@ -50,6 +47,7 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 		this.personaDao = personaDao;
 	}
 
+	
 	@Override
 	public TbMicMicrocurriculos obtenerMicrocurriculos(String idMicrocurriculo) throws ExcepcionesLogica {
 		/*
@@ -77,34 +75,28 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 		}
 	}
 
+	
 	@Override
 	public void guardarMicrocurriculos(TbMicMicrocurriculos microcurriculo) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no est√© vacio
+		 * Comprobamos que el objeto Microcurriculo no estÈ Vacio.
 		 */
-		if(microcurriculo == null){
-			throw new ExcepcionesLogica("El objeto microcurriculo est√° vacio");
-		}
-		try {
-			String id = microcurriculo.getVrIdmicrocurriculo();
-			TbMicMicrocurriculos microcurriculosConsulta = microcurriculosDao.obtenerMicrocurriculo(id);
-		
-			if(microcurriculosConsulta != null){
-				throw new ExcepcionesLogica("El microcurriculo a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo obtenerMicrocurriculo de la clase microcurriculosDao: "+ e);
-		}
-		
-		try {
-			
-			microcurriculosDao.guardarMicrocurriculo(microcurriculo);
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo guardarMicrocurriculo de la clase microcurriculosDao: "+ e);
+		if(microcurriculo != null){
+			try {
+				TbMicMicrocurriculos microTMP = microcurriculosDao.obtenerMicrocurriculo(microcurriculo.getVrIdmicrocurriculo().toString());
+				if (microTMP == null){
+					microcurriculosDao.guardarMicrocurriculo(microcurriculo);
+				}else{
+					throw new ExcepcionesLogica("El Microcurriculo que desea guardar ya se enceuntra en la Base de Datos.");
+				}
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica();
+			}			
+		}else{
+			throw new ExcepcionesLogica("No es posible guardar. El objeto Microcurriculo no contiene informaciÛn v·lida.");
 		}
 	}
+	
 
 	@Override
 	public void actualizarMicrocurriculos(TbMicMicrocurriculos microcurriculo) throws ExcepcionesLogica {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.ObjetivosxMicroDAO;
@@ -18,10 +19,31 @@ public class ObjetivosxMicroDAOHibernate extends HibernateDaoSupport implements 
 	}
 
 	@Override
-	public void guardarObjetivosxMicro(TbMicObjetivosxmicro objetivoxMicro)
-			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+	public void guardarObjetivosxMicro(TbMicObjetivosxmicro objetivoxMicro)	throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.save(objetivoxMicro);
+			tx.commit();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO("Error al intentar guardar el objeto <ObjetivoxMicrocurriculo>.");
+		}
 
+	}
+	
+	
+	@Override
+	public void guardarObjetivosxMicro(List<TbMicObjetivosxmicro> listaObjetivoxMicro) throws ExcepcionesDAO {
+		if(listaObjetivoxMicro != null){
+			for(TbMicObjetivosxmicro objetivoxMicro : listaObjetivoxMicro){
+				guardarObjetivosxMicro(objetivoxMicro);
+			}
+		}else{
+			throw new ExcepcionesDAO("El objeto <Lista ObjetivosxMicro> no tiene información válida.");
+		}
 	}
 
 	@Override
@@ -32,10 +54,26 @@ public class ObjetivosxMicroDAOHibernate extends HibernateDaoSupport implements 
 	}
 
 	@Override
-	public TbMicObjetivosxmicro obtenerObjetivoxMicro(String idMicrocurriculo,
-			int idObjetivo) throws ExcepcionesDAO {
+	public TbMicObjetivosxmicro obtenerObjetivoxMicro(String idMicrocurriculo, int idObjetivo) throws ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+
+	@Override
+	public TbMicObjetivosxmicro obtenerObjetivoxMicro(int idObjetivo) throws ExcepcionesDAO {
+		TbMicObjetivosxmicro objetivoxmicro = null;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			objetivoxmicro = (TbMicObjetivosxmicro)session.get(TbMicObjetivosxmicro.class, idObjetivo);
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+		
+		return objetivoxmicro;
 	}
 
 	@Override
