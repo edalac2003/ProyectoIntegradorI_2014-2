@@ -46,6 +46,7 @@ import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionesNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxmicroNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
+import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivosNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivosxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
@@ -129,14 +130,19 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	SubtemasNGC subtemasNGC;
 	BibliografiaNGC bibliografiaNGC;
 	BiblioxunidadNGC biblioxUnidadNGC;
-	
+	MicrocurriculosNGC microcurriculoNGC;
 	
 	/*
 	 * Definición de Metodos Setter de Objetos de Negocio.
 	 */
 
+	
 	public void setMateriasNGC(MateriasNGC materiasNGC) {
 		this.materiasNGC = materiasNGC;
+	}
+
+	public void setMicrocurriculoNGC(MicrocurriculosNGC microcurriculoNGC) {
+		this.microcurriculoNGC = microcurriculoNGC;
 	}
 
 	public void setSemestreNGC(SemestreNGC semestreNGC) {
@@ -187,6 +193,14 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.subtemasNGC = subtemasNGC;
 	}
 
+	public void setBibliografiaNGC(BibliografiaNGC bibliografiaNGC) {
+		this.bibliografiaNGC = bibliografiaNGC;
+	}
+
+	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
+		this.biblioxUnidadNGC = biblioxUnidadNGC;
+	}
+
 	/**
 	 * Evento onClick del Boton Guardar Microcurriculo
 	 * 
@@ -204,46 +218,19 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		List<TbMicEvaluaciones> listaEvaluaciones = empaquetarEvaluaciones(microcurriculo);
 		List<TbMicTemas> listaTemas = empaquetarTemas(listaUnidades);
 		List<TbMicSubtemas> listaSubtemas = empaquetarSubtemas(listaTemas);
-		
-		System.out.println("LISTANDO UNIDADES \n");
-		for (TbMicUnidades unidad : listaUnidades){
-			System.out.println(unidad.getVrNombre()+" "+unidad.getNbIdunidad());
+		List<TbMicBibliografia> listaBibliografia = empaquetarBibliografias(listaUnidades);
+				
+		if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
+			if (verificarCampos() == 1){
+				Messagebox.show("Registro guardado satisfactoriamente. \n Puede cambiar el Estado del Microcurriculo cuando lo desee.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
+			} else if (verificarCampos() == 0){
+				Messagebox.show("El registro de Microcurriculos se guardará con la información mínima necesaria. \n El estado de este será <BORRADOR> y no podrá ser cambiado hasta que complete toda la información.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
+				
+			} else
+				Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
+		} else {
+			Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la información ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
 		}
-		System.out.println("LISTANDO UNIDADES X MICROCURRICULOS \n");
-		for (TbMicUnidadesxmicro uxM: listadoUnidadesxMicro){
-			System.out.println(uxM.getTbMicMicrocurriculos().getVrIdmicrocurriculo()+" "+uxM.getTbMicMicrocurriculos().getTbAdmMaterias().getVrNombre()+" "+uxM.getTbMicUnidades().getVrNombre());
-		}
-		System.out.println("LISTANDO OBJETIVOS X MICROCURRICULOS \n");
-		for (TbMicObjetivosxmicro oxM : listadoObjetivosxMicro){
-			System.out.println(oxM.getTbMicMicrocurriculos().getVrIdmicrocurriculo()+" "+oxM.getTbMicObjetivos().getVrDescripcion()+" "+oxM.getTbMicObjetivos().getBlTipo());
-		}
-		
-		System.out.println("LISTANDO EVALUACIONES X MICROCURRICULOS \n");
-		for (TbMicEvaluacionxmicro exM : listadoEvaluacionesxMicro){
-			System.out.println(exM.getTbMicMicrocurriculos().getVrIdmicrocurriculo()+" "+exM.getTbMicEvaluaciones().getVrDescripcion()+" "+exM.getDtFechaestimada());
-			
-		}
-		
-		System.out.println("LISTANDO TEMAS\n");
-		for(TbMicTemas tema : listaTemas){
-			System.out.print(tema.getNbIdtema());
-			System.out.println(tema.getVrDescripcion());
-		}
-		
-		System.out.println("LISTANDO TEMAS X UNIDAD \n");
-		for(TbMicTemasxunidad txU : listadoTemasxUnidad){
-			//System.out.print(txU.getTbMicUnidades().getVrNombre()+" ");
-			System.out.print(txU.getTbMicTemas().getVrDescripcion()+" ");
-			System.out.println(txU.getNbSemanasRequeridas());
-		}
-		
-		System.out.println("LISTANDO SUBTEMAS \n");
-		for(TbMicSubtemas subT : listaSubtemas){
-			//System.out.print(subT.getTbMicTemas().getVrDescripcion()+" ");
-			System.out.println(subT.getVrDescripcion()+" ");
-		}
-		
-		System.out.println("LISTANDO REFERENCIAS BIBLIOGRAFICAS \n");
 		
 		
 		
@@ -260,6 +247,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		//List<TbMicTemasxunidad> listaTemasxUnidad = empaquetarTemasxUnidad();
 				
 		//Se debe establecer el orden en el que se iran guardando los registros.
+
 		//Primero.  Guardar el Microcurriculo.
 		/*if (verificarCampos()== 1){
 			Messagebox.show("Registro Guardado Satisfactoriamente.  Puede Cambiar su estado cuando lo desee.");
@@ -279,10 +267,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	public int verificarCampos(){
 		int estado = -1;
 		if (comprobarInformacionGeneral()){
+			System.out.println("Informacion general.  Validada");
 			if (comprobarInformacionComplementaria()){
+				System.out.println("Informacion complementaria.  Validada");
 				if (comprobarUnidadesDetalladas()){
+					System.out.println("Informacion de unidades.  Validada");
 					if (comprobarEvaluaciones()){
+						System.out.println("Informacion evaluaciones.  Validada");
 						if (comprobarReferencias()){
+							System.out.println("Informacion referencias.  Validada");
 							estado = 1;							
 						} 
 					} 
@@ -293,6 +286,23 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return estado;
 	}
 	
+	private boolean existeMicrocurriculo(String idMicrocurriculo){
+		TbMicMicrocurriculos micro = null;
+		boolean estado = false;
+		
+		try {
+			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
+		} catch (ExcepcionesLogica e) {
+			logger.error("Se ha producido un Error al intenar obtener un Registro desde la tabla Microcurriculos.");
+		}
+		
+		if (micro == null)
+			estado = true;
+		else
+			estado = false;		
+		return estado;
+		
+	}
 	
 		
 	private List<TbMicEvaluaciones> empaquetarEvaluaciones(TbMicMicrocurriculos microcurriculo){
@@ -333,14 +343,12 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicTemas tema = null;
 		TbMicTemasxunidad temaxUnidad = null;
 		TbMicUnidades unidad = null;
-		
 		int registro = 0;
 		
 		try {
 			registro = temasNGC.contarRegistros();
 			lista = new ArrayList<TbMicTemas>();
-			listadoTemasxUnidad = new ArrayList<TbMicTemasxunidad>();
-			
+			listadoTemasxUnidad = new ArrayList<TbMicTemasxunidad>();			
 		} catch (ExcepcionesLogica e) {
 			logger.error("Error al intentar contar los Registros de la Tabla Temas.");
 		}
@@ -359,8 +367,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			lista.add(tema);
 			listadoTemasxUnidad.add(temaxUnidad);
 		}
-		Messagebox.show("Registros almacenados en la lista : " + lista.size()+"\n En la Otra lista : "+listadoTemasxUnidad.size());
-		
 		return lista;
 	}
 	
@@ -394,7 +400,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return lista;
 	}
 	
-	private List<TbMicBibliografia> empaquetarBibliografias(TbMicUnidades unidad){
+	private List<TbMicBibliografia> empaquetarBibliografias(List<TbMicUnidades> listaUnidades){
 		List<TbMicBibliografia> lista = null;
 		TbMicBibliografia bibliografia = null;
 		TbMicBiblioxunidad biblioxUnidad = null;
@@ -429,23 +435,32 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				tipoBibliografia = '0';
 			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), "", 
 					celdaISBN.getLabel().toString().toUpperCase(), tipoBibliografia, modUsuario, modFecha);
+			TbMicUnidades unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
+			biblioxUnidad = new TbMicBiblioxunidad(contador, bibliografia, unidad, modUsuario, modFecha);
 			
-			
-			lista.add(bibliografia);	
+			lista.add(bibliografia);
+			listadoBibliografiaxUnidad.add(biblioxUnidad);
 		}
 		registro = contador;
 		
 		for(int i=0; i<listaCibergrafia.getItemCount();i++){
 			contador = registro + i + 1;
-			Listitem listaItem = (Listitem)listaCibergrafia.getChildren().get(i);
-			Listcell celdaUnidades = (Listcell)listaItem.getChildren().get(0);
+			Listitem listaItem = (Listitem)listaCibergrafia.getChildren().get(i+1);
+			Listcell celdaUnidad = (Listcell)listaItem.getChildren().get(0);
 			Listcell celdaReferencia = (Listcell)listaItem.getChildren().get(1);
 			Listcell celdaSitio = (Listcell)listaItem.getChildren().get(2);
 			Listcell celdaTipo = (Listcell)listaItem.getChildren().get(3);
-			
-		}
-		
-		
+			if (celdaTipo.getLabel().toUpperCase() == "BASICA"){
+				tipoBibliografia = '1';
+			}else 
+				tipoBibliografia = '0';
+			TbMicUnidades unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
+			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), 
+					celdaSitio.getLabel().toString(), null, tipoBibliografia, modUsuario, modFecha);
+			biblioxUnidad = new TbMicBiblioxunidad(contador, bibliografia, unidad, modUsuario, modFecha);
+			lista.add(bibliografia);
+			listadoBibliografiaxUnidad.add(biblioxUnidad);			
+		}	
 		return lista;
 	}
 	
@@ -458,9 +473,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	private TbMicUnidades obtenerUnidad(List<TbMicUnidades> lista, String nombre){
 		TbMicUnidades unidad = null;
 		Iterator<TbMicUnidades> iterator = lista.iterator();
-		while (iterator.hasNext() && (unidad == null)){
-			System.out.println(iterator.next());
-			if(iterator.next().getVrNombre().trim().toUpperCase() == nombre.trim().toUpperCase()){
+		while (iterator.hasNext() && (unidad == null)){			
+			if(nombre.equals(iterator.next().getVrNombre()) ){				
 				unidad = iterator.next();
 			}
 		}		
@@ -560,6 +574,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return listaObjetivos;
 	}
 	
+	
 	/*
 	 * Este método se encarga de empaquetar la información y devolver un Objeto de tipo Microcurriculo
 	 *  
@@ -591,7 +606,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 								txtJustificacionMicro.toString(), txtResumenMicro.toString(), responsable, modUsuario, modFecha);
 						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
 						cmbEstadoActual.setValue(obtenerEstado());
-						Messagebox.show("El Objeto Microcurriculo se Creó Correctamente");
 					}
 				}
 			}
@@ -599,6 +613,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			Messagebox.show("No se pudo crear el objeto Microcurriculo");
 		return microcurriculo;
 	}
+	
+	
 	
 	/*
 	 * Obtiene la Descripcion de un estado que se asignará al Microcurriculo.

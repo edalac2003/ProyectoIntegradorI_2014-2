@@ -11,9 +11,9 @@ import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
-public class BiblioxUnidadDAOImpl extends HibernateDaoSupport implements BiblioxUnidadDAO {
+public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements BiblioxUnidadDAO {
 
-	public BiblioxUnidadDAOImpl() {
+	public BiblioxUnidadDAOHibernate() {
 		// TODO Auto-generated constructor stub
 	}
 

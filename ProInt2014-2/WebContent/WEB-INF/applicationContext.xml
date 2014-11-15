@@ -160,10 +160,15 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         <bean id="paisesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.PaisesDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
-        
-        <bean id="paisesDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.PaisesDAOHibernate">
+                   
+        <bean id="bibliografiaDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiasDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
+        
+        <bean id="biblioxUnidadDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.BiblioxUnidadDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         
         
         <!-- <bean id="semestreDAO" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
@@ -235,7 +240,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         
-        <bean id="microcurriculosNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculosNGCImpl">
+        <bean id="microcurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculosNGCImpl">
         	<property name="microcurriculosDao" ref="microcurriculosDAO" />
         	<property name="materiasDao" ref="materiasDAO" />
         	<property name="nucleoDao" ref="nucleoDAO" />
@@ -258,8 +263,15 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         
         <bean id="subtemasNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemasNGCImpl">
         	<property name="subtemasDao" ref="subtemasDAO" />
+        </bean>        
+           
+        <bean id="bibliografiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BibliografiaNGCImpl">
+        	<property name="bibliografiaDao" ref="bibliografiaDAO" />
         </bean>
         
+        <bean id="biblioxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BiblioxUnidadNGCImpl">
+        	<property name="biblioxUnidadDao" ref="biblioxUnidadDAO" />
+        </bean>
         
         
         <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
@@ -278,6 +290,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="materiasNGC" ref="materiasNGC" />
         	<property name="personaNGC" ref="personaNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
@@ -291,6 +304,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="evaluacionesxMicroNGC" ref="evaluacionesxMicroNGC" />
         	<property name="objetivosxMicroNGC" ref="objetivosxMicroNGC" />
         	<property name="subtemasNGC" ref="subtemasNGC" />
+        	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         	
         	<!-- 
         	
