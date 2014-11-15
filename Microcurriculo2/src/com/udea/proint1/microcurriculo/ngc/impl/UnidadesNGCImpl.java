@@ -14,7 +14,7 @@ import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class UnidadesNGCImpl extends HibernateDaoSupport implements UnidadesNGC {
+public class UnidadesNGCImpl  implements UnidadesNGC {
 	
 private static Logger log = Logger.getLogger(UnidadesNGCImpl.class);
 	

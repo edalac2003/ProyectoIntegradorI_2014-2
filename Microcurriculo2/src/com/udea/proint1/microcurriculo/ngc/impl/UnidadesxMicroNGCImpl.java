@@ -13,7 +13,7 @@ import com.udea.proint1.microcurriculo.ngc.UnidadesxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class UnidadesxMicroNGCImpl extends HibernateDaoSupport implements UnidadesxMicroNGC {
+public class UnidadesxMicroNGCImpl  implements UnidadesxMicroNGC {
 	
 	UnidadesXMicroDAO unidadesxMicroDao;
 	
