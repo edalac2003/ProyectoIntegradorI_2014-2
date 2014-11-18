@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.GuardarMicrocurriculoDAO;
@@ -25,10 +26,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport implements GuardarMicrocurriculoDAO {
-
-	public GuardarMicrocurriculoDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void guardarMicroxlotes(List<TbMicTemas> temas,
@@ -95,8 +92,41 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			
 		}catch(HibernateException e){
 			tx.rollback();
+			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente.");
 		}
-
 	}
 
+	
+	@Override
+	public void guardarMicroMiniLote(TbMicMicrocurriculos microcurriculo,
+			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
+			List<TbMicObjetivos> listaObjetivos,
+			List<TbMicObjetivosxmicro> listaObjetivosxMicro)
+			throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			
+			session.save(microcurriculo);
+			session.save(microxEstado);
+			session.save(microxSemestre);
+			for(TbMicObjetivos objetivo : listaObjetivos){
+				session.save(objetivo);
+			}
+			
+			for(TbMicObjetivosxmicro objetivoxMicro : listaObjetivosxMicro){
+				session.save(objetivoxMicro);
+			}
+			
+			tx.commit();			
+		}catch(HibernateException e){
+			tx.rollback();
+			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente.");
+		}		
+	}
 }

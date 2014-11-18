@@ -27,5 +27,16 @@ public interface GuardarMicrocurriculoDAO {
 			List<TbMicObjetivosxmicro> objetivosxmicro, List<TbMicBibliografia> bibliografia,
 			TbMicMicrocurriculos microcurriculo,TbMicMicroxestado microxEstado, 
 			TbMicMicroxsemestre microxSemestre) throws ExcepcionesDAO;
+	
+//	
+//	microcurriculoNGC.guardarMicrocurriculos(microcurriculo);
+//	microxEstadoNGC.guardarMicroxestado(microxEstado);
+//	microxSemestreNGC.guardarMicroxsemestre(microxSemestre);
+//	objetivosNGC.guardarObjetivos(listaObjetivos);
+//	objetivosxMicroNGC.guardarObjetivosxMicro(listadoObjetivosxMicro);	
+	
+	
+	public void guardarMicroMiniLote(TbMicMicrocurriculos microcurriculo, TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
+			List<TbMicObjetivos> listaObjetivos, List<TbMicObjetivosxmicro> listaObjetivosxMicro) throws ExcepcionesDAO;
 
 }

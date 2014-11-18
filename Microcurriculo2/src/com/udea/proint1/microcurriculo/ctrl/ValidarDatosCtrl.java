@@ -240,7 +240,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
 			if (verificarCampos() == 1){
 				Messagebox.show("Registro guardado satisfactoriamente. \n Puede cambiar el Estado del Microcurriculo cuando lo desee.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
-				/*try {
+				try {
 					microcurriculoNGC.guardarMicrocurriculos(microcurriculo);
 					microxEstadoNGC.guardarMicroxestado(microxEstado);
 					microxSemestreNGC.guardarMicroxsemestre(microxSemestre);
@@ -251,9 +251,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 					temasNGC.guardarTemas(listaTemas);
 					temasxUnidadNGC.guardarTemasxUnidad(listadoTemasxUnidad);
 					subtemasNGC.guardarSubtemas(listaSubtemas);
+					
 				} catch (ExcepcionesLogica e) {
 					logger.error("Error al intentar guardar el objeto <Microcurriculo>");
-				}*/
+				}
 				
 				
 				
