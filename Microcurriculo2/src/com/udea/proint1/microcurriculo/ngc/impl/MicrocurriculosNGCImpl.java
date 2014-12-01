@@ -27,16 +27,18 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 	NucleoDAO nucleoDao;
 	PersonaDAO personaDao;
 	
+	
+	public MicrocurriculosNGCImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	public void setMicrocurriculosDao(MicrocurriculosDAO microcurriculosDao) {
 		this.microcurriculosDao = microcurriculosDao;
 	}
 
 	public void setMateriasDao(MateriasDAO materiasDao) {
 		this.materiasDao = materiasDao;
-	}
-
-	public MicrocurriculosNGCImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setNucleoDao(NucleoDAO nucleoDao) {
@@ -53,26 +55,23 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
-		if((idMicrocurriculo.equals(""))||(idMicrocurriculo.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de microcurriculo, está vacia");
-		}
 		TbMicMicrocurriculos microcurriculo = null;
 		
-		try {
-			microcurriculo = microcurriculosDao.obtenerMicrocurriculo(idMicrocurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculosDao: "+ e);
+		if(!("".equals(idMicrocurriculo)) && (idMicrocurriculo.trim().length() > 0) ){
+			try {
+				microcurriculo = microcurriculosDao.obtenerMicrocurriculo(idMicrocurriculo);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica("NGC : Ocurri� un error al intentar obtener el microcurriculo.");
+			}			
+		}else{
+			throw new ExcepcionesLogica("La informaci�n de IdMicrocurriculo no es v�lida o est� vacia.");
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
-		if(microcurriculo == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró microcurriculo con el id "+ idMicrocurriculo);
-		}else{
-			return microcurriculo;
-		}
+		System.out.println("El valor del microcurriculo a retornar es : "+ microcurriculo);
+		return microcurriculo;
 	}
 
 	
@@ -81,13 +80,15 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 		/*
 		 * Comprobamos que el objeto Microcurriculo no est� Vacio.
 		 */
+		System.out.println("INGRESO AL GUARDAR MICROCURRICULO EN LA PARTE DE NEGOCIO.");
+		
 		if(microcurriculo != null){
 			try {
 				TbMicMicrocurriculos microTMP = microcurriculosDao.obtenerMicrocurriculo(microcurriculo.getVrIdmicrocurriculo().toString());
 				if (microTMP == null){
 					microcurriculosDao.guardarMicrocurriculo(microcurriculo);
 				}else{
-					throw new ExcepcionesLogica("El Microcurriculo que desea guardar ya se enceuntra en la Base de Datos.");
+					throw new ExcepcionesLogica("El Microcurriculo que desea guardar ya se encuentra en la Base de Datos.");
 				}
 			} catch (ExcepcionesDAO e) {
 				throw new ExcepcionesLogica();
@@ -103,28 +104,28 @@ public class MicrocurriculosNGCImpl implements MicrocurriculosNGC {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
-		if(microcurriculo == null){
-			throw new ExcepcionesLogica("El objeto microcurriculo está vacio");
-		}
-		try {
-			String id = microcurriculo.getVrIdmicrocurriculo();
-			TbMicMicrocurriculos microcurriculoConsulta = microcurriculosDao.obtenerMicrocurriculo(id);
-		
-			if(microcurriculoConsulta == null){
-				throw new ExcepcionesLogica("El microcurriculo a actualizar no existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculosDao: "+ e);
-		}
-		
-		try {
-			
-			microcurriculosDao.modificarMicrocurriculo(microcurriculo);
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarMicrocurriculo de la clase microcurriculosDao: "+ e);
-		}
+//		if(microcurriculo == null){
+//			throw new ExcepcionesLogica("El objeto microcurriculo está vacio");
+//		}
+//		try {
+//			String id = microcurriculo.getVrIdmicrocurriculo();
+//			TbMicMicrocurriculos microcurriculoConsulta = microcurriculosDao.obtenerMicrocurriculo(id);
+//		
+//			if(microcurriculoConsulta == null){
+//				throw new ExcepcionesLogica("El microcurriculo a actualizar no existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculosDao: "+ e);
+//		}
+//		
+//		try {
+//			
+//			microcurriculosDao.modificarMicrocurriculo(microcurriculo);
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo modificarMicrocurriculo de la clase microcurriculosDao: "+ e);
+//		}
 	}
 
 	@Override

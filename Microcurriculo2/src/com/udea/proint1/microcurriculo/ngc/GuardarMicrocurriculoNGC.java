@@ -17,6 +17,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface GuardarMicrocurriculoNGC {
 	
@@ -26,6 +27,9 @@ public interface GuardarMicrocurriculoNGC {
 			List<TbMicAutorxbiblio> autorxbiblio, List<TbMicObjetivos> objetivos, 
 			List<TbMicObjetivosxmicro> objetivosxmicro, List<TbMicBibliografia> bibliografia,
 			TbMicMicrocurriculos microcurriculo,TbMicMicroxestado microxEstado, 
-			TbMicMicroxsemestre microxSemestre) throws ExcepcionesDAO;
+			TbMicMicroxsemestre microxSemestre) throws ExcepcionesLogica;
+	
+	public void guardarMicroMiniLote(TbMicMicrocurriculos microcurriculo, TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
+			List<TbMicObjetivos> listaObjetivos, List<TbMicObjetivosxmicro> listaObjetivosxMicro) throws ExcepcionesLogica;
 
 }

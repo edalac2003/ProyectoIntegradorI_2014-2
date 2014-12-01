@@ -25,7 +25,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-@ContextConfiguration(locations = "classpath:configuracion-spring.xml")
+//@ContextConfiguration(locations = "classpath:configuracion-spring.xml")
 /**
  * 
  * @author eacosta
@@ -54,31 +54,33 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 	}
 
 	@Override
-	public TbMicMicrocurriculos obtenerMicrocurriculo(String IdMicrocurriculo)
-			throws ExcepcionesDAO {
-		Session session = null;
-		TbMicMicrocurriculos microcurriculo = null;
-
-		try {
-			session = getSession();
-			microcurriculo = (TbMicMicrocurriculos) session.load(
-					TbMicMicrocurriculos.class, IdMicrocurriculo);
-
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
-		}
-		return microcurriculo;
+	public TbMicMicrocurriculos obtenerMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO {
+//		Session session = null;
+//		TbMicMicrocurriculos microcurriculo = null;
+		
+		System.out.println("DAO : Se va a buscar el ID : " + idMicrocurriculo);
+//		try {
+//			session = getSession();
+//			Query query = session.createQuery("from TbMicMicrocurriculo where idMicrocurriculo = :id");
+//			query.setEntity("id", idMicrocurriculo);
+//			
+//			microcurriculo = (TbMicMicrocurriculos)query.uniqueResult();
+//			
+////			microcurriculo = (TbMicMicrocurriculos)session.get(TbMicMicrocurriculos.class, idMicrocurriculo);
+//		} catch (HibernateException e) {
+//			System.out.println("PASO ALGO AL CONSULTAR EL MICROCURRICULO");
+//			throw new ExcepcionesDAO("Se produjo un Error al intentar recuperar registro de Microcurriculo.");
+//		}
+//		return microcurriculo;
+		return null;
 	}
 
 	@Override
-	public void modificarMicrocurriculo(TbMicMicrocurriculos microcurriculo)
-			throws ExcepcionesDAO {
+	public void modificarMicrocurriculo(TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO {
 		Session session = null;
-
 		try {
 			session = getSession();
 			this.getHibernateTemplate().update(microcurriculo);
-
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
 		}

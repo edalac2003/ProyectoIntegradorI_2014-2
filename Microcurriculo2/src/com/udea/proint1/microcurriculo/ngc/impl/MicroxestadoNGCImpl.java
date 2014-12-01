@@ -170,12 +170,11 @@ public class MicroxestadoNGCImpl implements MicroxestadoNGC {
 
 	@Override
 	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
+		int registro = 0;		
 		try {
 			registro = microxestadoDao.contarRegistros();
 		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica();
+			throw new ExcepcionesLogica("NGC : Ocurrió un error al contar los registros de MicroxEstado.");
 		}
 		
 		return registro;

@@ -1,6 +1,12 @@
 package com.udea.proint1.microcurriculo.util.exception;
 
+import org.apache.log4j.Logger;
+
+import com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl;
+
 public class ExcepcionesLogica extends Exception {
+	
+	private static Logger logger=Logger.getLogger(PersonaNGCImpl.class);
 
 	public ExcepcionesLogica() {
 		// TODO Auto-generated constructor stub
@@ -8,7 +14,7 @@ public class ExcepcionesLogica extends Exception {
 
 	public ExcepcionesLogica(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		logger.error(message);
 	}
 
 	public ExcepcionesLogica(Throwable cause) {

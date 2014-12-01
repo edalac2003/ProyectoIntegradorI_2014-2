@@ -13,16 +13,15 @@
 				<borderlayout height="750px">
 					<north border="0">
 						<div>
-							<include id="listMenu" src="sections/menuBar.zul" ></include>
+							<include id="listMenu" src="sections/menuBar.zul" />
 						</div>
 					</north>
 					
 					<center border="none" autoscroll="true">
-						<div align="center">
-							
+						<div align="center">				
+							<separator />							
 							<separator />
 							
-							<separator />
 							<div>
 								<tabbox width="72%">
 									<tabs style="">

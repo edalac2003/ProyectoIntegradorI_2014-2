@@ -1,14 +1,20 @@
 package com.udea.proint1.microcurriculo.util.exception;
 
-public class ExcepcionesDAO extends Exception {
+import org.apache.log4j.Logger;
 
+import com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl;
+
+public class ExcepcionesDAO extends Exception {
+	
+	private static Logger logger=Logger.getLogger(ExcepcionesDAO.class);
+	
 	public ExcepcionesDAO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ExcepcionesDAO(String arg0) {
 		super(arg0);
-		// TODO Auto-generated constructor stub
+		logger.info(arg0);
 	}
 
 	public ExcepcionesDAO(Throwable arg0) {

@@ -1,7 +1,11 @@
 package com.udea.proint1.microcurriculo.ngc.impl;
 
+
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl;
 import com.udea.proint1.microcurriculo.dao.GuardarMicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicAutores;
@@ -22,15 +26,24 @@ import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
+
+
+
 public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 
+	private static Logger logger = Logger.getLogger(ValidarDatosCtrl.class);
+	
 	MicrocurriculosDAO microcurriculosDao;
+	GuardarMicrocurriculoDAO guardarMicrocurriculoDao;
 	
-	GuardarMicrocurriculoDAO guardarMicroDao;
-	
-	public GuardarMicrocurriculoNGCImpl() {
-		// TODO Auto-generated constructor stub
+	public void setMicrocurriculosDao(MicrocurriculosDAO microcurriculosDao) {
+		this.microcurriculosDao = microcurriculosDao;
 	}
+	
+	public void setGuardarMicrocurriculoDao(GuardarMicrocurriculoDAO guardarMicrocurriculoDao) {
+		this.guardarMicrocurriculoDao = guardarMicrocurriculoDao;
+	}
+
 
 	@Override
 	public void guardarMicroxlotes(List<TbMicTemas> temas,
@@ -44,24 +57,62 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			List<TbMicBibliografia> bibliografia,
 			TbMicMicrocurriculos microcurriculo,
 			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre)
-			throws ExcepcionesDAO {
-		String idMicro;
-		TbMicMicrocurriculos microConsulta;
+			throws ExcepcionesLogica {
 		
-		try{
-			
+		String idMicro;
+		TbMicMicrocurriculos consulta = null;
+		
+		try{			
 			idMicro = microcurriculo.getVrIdmicrocurriculo();
-			microConsulta = microcurriculosDao.obtenerMicrocurriculo(idMicro);
-			if(microcurriculo != null){
-				new ExcepcionesLogica("El microcurriculo a guardar ya existe");
-			}
-			guardarMicroDao.guardarMicroxlotes(temas, temasxunidad, autores, subtemas, unidades, unidadesxmicro, biblioxunidad, autorxbiblio, 
-					objetivos, objetivosxmicro, bibliografia, microcurriculo, microxEstado, microxSemestre);
+			consulta = microcurriculosDao.obtenerMicrocurriculo(idMicro);
+			//System.out.println("El valor del Microcurriculo en Guardar x Lote : " + microConsulta);
 			
+			System.out.println("Estoy listo para llamar el metodo guardar DAO.");
+//			if(microcurriculo != null){
+//				//SI YA EXISTE, ACTUALICELO!!!!
+//				new ExcepcionesLogica("El microcurriculo a guardar ya existe");
+//			} 
+//			guardarMicrocurriculoDao.guardarMicroxlotes(temas, temasxunidad, autores, subtemas, unidades, unidadesxmicro, biblioxunidad, 
+//					autorxbiblio, objetivos, objetivosxmicro, bibliografia, microcurriculo, microxEstado, microxSemestre);
 		}catch(ExcepcionesDAO e){
+			logger.error("Error al intentar Guardar el registro de Microcurriculo.");
+		}
+	}
+
+
+
+
+	@Override
+	public void guardarMicroMiniLote(TbMicMicrocurriculos microcurriculo,
+			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
+			List<TbMicObjetivos> listaObjetivos,
+			List<TbMicObjetivosxmicro> listaObjetivosxMicro)
+			throws ExcepcionesLogica {
+		
+		TbMicMicrocurriculos micro = null;
+		
+		try {
+			micro = microcurriculosDao.obtenerMicrocurriculo(microcurriculo.getVrIdmicrocurriculo());
+		} catch (ExcepcionesDAO e1) {
 			
 		}
-
+		
+		if (micro == null){
+			//Se debe guardar un nuevo microcurriculo.
+			try{
+				guardarMicrocurriculoDao.guardarMicroMiniLote(microcurriculo, microxEstado, microxSemestre, listaObjetivos, listaObjetivosxMicro);	
+			}catch(ExcepcionesDAO e){
+				System.out.println("");
+			}
+			
+		} else {
+			//Se debe actualizar el microcurriculo existente.
+			
+		
+		}
+		
 	}
+	
+	
 
 }

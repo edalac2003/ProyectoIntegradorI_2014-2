@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import oracle.sql.DATE;
-
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
@@ -21,7 +19,6 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import com.sun.mail.handlers.message_rfc822;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
@@ -45,6 +42,7 @@ import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionesNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxmicroNGC;
+import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxestadoNGC;
@@ -58,7 +56,6 @@ import com.udea.proint1.microcurriculo.ngc.TemasNGC;
 import com.udea.proint1.microcurriculo.ngc.TemasxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadesxMicroNGC;
-import com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 /**
@@ -85,8 +82,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	private static List<TbMicObjetivosxmicro> listadoObjetivosxMicro;
 	private static List<TbMicBiblioxunidad> listadoBibliografiaxUnidad;
 	private static List<TbMicEstados> listadoEstado;
-	
-	
+		
 	Button btnGuardarMicro;
 	
 	Combobox cmbIdSemestre;
@@ -137,6 +133,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	MicrocurriculosNGC microcurriculoNGC;
 	MicroxestadoNGC microxEstadoNGC;
 	MicroxsemestreNGC microxSemestreNGC;
+	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
 	
 	/*
 	 * Definición de Metodos Setter de Objetos de Negocio.
@@ -214,6 +211,11 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	public void setMicroxSemestreNGC(MicroxsemestreNGC microxSemestreNGC) {
 		this.microxSemestreNGC = microxSemestreNGC;
 	}
+		
+	public void setGuardarMicrocurriculoNGC(
+			GuardarMicrocurriculoNGC guardarMicrocurriculoNGC) {
+		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
+	}
 
 	/**
 	 * Evento onClick del Boton Guardar Microcurriculo
@@ -234,44 +236,23 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		List<TbMicTemas> listaTemas = empaquetarTemas(listaUnidades);
 		List<TbMicSubtemas> listaSubtemas = empaquetarSubtemas(listaTemas);
 		List<TbMicBibliografia> listaBibliografia = empaquetarBibliografias(listaUnidades);
-		
-		
-				
+						
 		if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
 			if (verificarCampos() == 1){
-				Messagebox.show("Registro guardado satisfactoriamente. \n Puede cambiar el Estado del Microcurriculo cuando lo desee.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
+				System.out.println("Los campos estan completos.");
 				try {
-					microcurriculoNGC.guardarMicrocurriculos(microcurriculo);
-					microxEstadoNGC.guardarMicroxestado(microxEstado);
-					microxSemestreNGC.guardarMicroxsemestre(microxSemestre);
-					objetivosNGC.guardarObjetivos(listaObjetivos);
-					objetivosxMicroNGC.guardarObjetivosxMicro(listadoObjetivosxMicro);
-					unidadesNGC.guardarUnidades(listaUnidades);
-					unidadesxMicroNGC.guardarUnidadXmicro(listadoUnidadesxMicro);
-					temasNGC.guardarTemas(listaTemas);
-					temasxUnidadNGC.guardarTemasxUnidad(listadoTemasxUnidad);
-					subtemasNGC.guardarSubtemas(listaSubtemas);
-					
+					guardarMicrocurriculoNGC.guardarMicroxlotes(listaTemas, listadoTemasxUnidad, null, listaSubtemas, listaUnidades, listadoUnidadesxMicro, listadoBibliografiaxUnidad, null, listaObjetivos, listadoObjetivosxMicro, listaBibliografia, microcurriculo, microxEstado, microxSemestre);
+					Messagebox.show("Registro guardado satisfactoriamente. \n Puede cambiar el Estado del Microcurriculo cuando lo desee.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
 				} catch (ExcepcionesLogica e) {
 					logger.error("Error al intentar guardar el objeto <Microcurriculo>");
 				}
-				
-				
-				
-			} else if (verificarCampos() == 0){
-				Messagebox.show("El registro de Microcurriculos se guardará con la información mínima necesaria. \n El estado de este será <BORRADOR> y no podrá ser cambiado hasta que complete toda la información.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
+			} else if (verificarCampos() == 0){				
 				try {
-					microcurriculoNGC.guardarMicrocurriculos(microcurriculo);
-					microxEstadoNGC.guardarMicroxestado(microxEstado);
-					microxSemestreNGC.guardarMicroxsemestre(microxSemestre);
-					objetivosNGC.guardarObjetivos(listaObjetivos);
-					objetivosxMicroNGC.guardarObjetivosxMicro(listadoObjetivosxMicro);					
-					
+					guardarMicrocurriculoNGC.guardarMicroMiniLote(microcurriculo, microxEstado, microxSemestre, listaObjetivos, listadoObjetivosxMicro);
+					Messagebox.show("El registro de Microcurriculos se guardará con la información mínima necesaria. \n El estado de este será <BORRADOR> y no podrá ser cambiado hasta que complete toda la información.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
 				} catch (ExcepcionesLogica e) {
 					logger.error("Error al intentar guardar el objeto <Microcurriculo>");
-				}
-				
-				
+				}				
 			} else
 				Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 		} else {
@@ -302,16 +283,17 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicMicrocurriculos micro = null;
 		boolean estado = false;
 		
-		try {
-			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se ha producido un Error al intenar obtener un Registro desde la tabla Microcurriculos.");
-		}
-		
-		if (micro == null)
-			estado = true;
-		else
-			estado = false;		
+//		try {
+//			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
+//		} catch (ExcepcionesLogica e) {
+//			System.out.println("AQUI PASÓ ALGUNA COSA.  HAY QUE REVISAR.!!!");
+//			logger.error("Se ha producido un Error al intentar obtener un Registro desde la tabla Microcurriculos.");
+//		}
+//		
+//		if (micro == null)
+//			estado = false;
+//		else
+//			estado = true;		
 		return estado;
 		
 	}
@@ -322,10 +304,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicEstados estado = null;
 		
 		try {
-			registro = microxEstadoNGC.contarRegistros();
-			estado = estadosNGC.obtenerEstados(1);
+			registro = microxEstadoNGC.contarRegistros();			
 		} catch (ExcepcionesLogica e) {
 			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Microcurriculo x Estado.");
+		}
+		
+		try {
+			estado = estadosNGC.obtenerEstados(1);
+		} catch (ExcepcionesLogica e) {
+			logger.error("Error al obtener el objeto Estado.");
 		}
 		
 		if(estado != null){
@@ -376,7 +363,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
 			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
 			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
-			System.out.println(celdaEvaluacion.getLabel()+" "+celdaPorcentaje.getLabel()+" "+celdaFecha.getLabel());
 			Date fechaEstimada = new Date(celdaFecha.getLabel());
 			evaluacion = new TbMicEvaluaciones(contador, celdaEvaluacion.getLabel(), modUsuario, modFecha);
 			evaluacionxMicro = new TbMicEvaluacionxmicro(contador, evaluacion, microcurriculo, Integer.parseInt(celdaPorcentaje.getLabel()), fechaEstimada, modUsuario, modFecha);
@@ -556,9 +542,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		int contador = 0;
 		int registro = 0;
 		String nombreUnidad = "";
-		
-		logger.info("Empaquetando Lista Unidades");
-		
 		try {
 			registro = unidadesNGC.numeroRegistros();
 		} catch (ExcepcionesLogica e) {
@@ -570,11 +553,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			nombreUnidad = listaUnidades.getItems().get(i).getLabel();
 			unidad = new TbMicUnidades(contador, nombreUnidad, modUsuario, modFecha);
 			unidadxMicro = new TbMicUnidadesxmicro(contador, unidad, microcurriculo, modUsuario, modFecha);
-			
 			lista.add(unidad);
 			listadoUnidadesxMicro.add(unidadxMicro);
 		}
-		logger.info("Se adicionaron Elementos a la Lista." + lista.size());
 		return lista;
 	}
 	
