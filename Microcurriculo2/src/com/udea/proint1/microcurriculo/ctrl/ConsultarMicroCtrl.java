@@ -125,6 +125,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaUnidadesAca != null){
 				for(TbAdmUnidadAcademica unidad: listaUnidadesAca){
 					Comboitem item = new Comboitem(unidad.getVrIdunidad());
+					item.setDescription(unidad.getVrNombre());
 					cmbIdUnidadAcademica.appendChild(item);
 				}
 			}else{

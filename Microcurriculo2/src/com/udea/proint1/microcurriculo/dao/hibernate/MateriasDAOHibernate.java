@@ -140,8 +140,11 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
         try{
                
                 session = getSession();	
+                //buscar = buscar.substring(0, buscar.length() - 2);
                                
                 Query query = session.createQuery("from TbAdmMaterias where vrIdmateria  like :materia");
+//                Query query = session.createQuery("from TbAdmMaterias mat where mat.vrNucleo = :materia");
+                
                
                 query.setString("materia", buscar);
                
