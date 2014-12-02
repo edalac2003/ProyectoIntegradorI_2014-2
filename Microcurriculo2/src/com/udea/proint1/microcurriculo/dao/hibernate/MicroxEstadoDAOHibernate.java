@@ -22,20 +22,15 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 	@Override
 	public void guardarMicroxestado(TbMicMicroxestado microxEstado) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			tx = session.beginTransaction();
 			session.save(microxEstado);
-			tx.commit();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
-
-	
-	
 	
 	@Override
 	public void actualizarMicroxestado(TbMicMicroxestado microxEstado)
@@ -43,8 +38,6 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 		Session session = null;
 
 		try {
-			session = getSession();
-
 			session = getSession();
 			this.getHibernateTemplate().update(microxEstado);
 
@@ -63,7 +56,7 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			microxEstado = (TbMicMicroxestado)session.load(TbMicMicroxestado.class, id);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return microxEstado;
 	}
@@ -78,7 +71,7 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			Criteria criteria = session.createCriteria(TbMicMicroxestado.class);
 			microsxestado = criteria.list();			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return microsxestado;

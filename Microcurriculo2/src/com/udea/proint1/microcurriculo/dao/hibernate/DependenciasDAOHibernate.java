@@ -22,20 +22,14 @@ public class DependenciasDAOHibernate extends HibernateDaoSupport implements Dep
 	public void guardarDependencia(TbAdmDependencia dependencias)
 			throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			
-			tx = session.beginTransaction();
-			session.save(dependencias);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			
-		}
 
-		
+		try {
+			session = getSession();
+			session.save(dependencias);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
 	}
 
 	@Override
@@ -49,7 +43,7 @@ public class DependenciasDAOHibernate extends HibernateDaoSupport implements Dep
 			dependencia = (TbAdmDependencia)session.get(TbAdmDependencia.class, id);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return dependencia;
 	}
@@ -67,7 +61,7 @@ public class DependenciasDAOHibernate extends HibernateDaoSupport implements Dep
 			dependencia = criteria.list();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return dependencia;
@@ -83,7 +77,7 @@ public class DependenciasDAOHibernate extends HibernateDaoSupport implements Dep
 			this.getHibernateTemplate().update(dependencias);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 	}

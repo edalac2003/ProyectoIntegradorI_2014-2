@@ -13,5 +13,5 @@ public interface UsuariosDAO {
 	
 	public List<TbAdmUsuarios> listarUsuarios() throws ExcepcionesDAO;
 	
-	public void actualizarUsuarios(TbAdmUsuarios usurios) throws ExcepcionesDAO;
+	public void actualizarUsuarios(TbAdmUsuarios usuario) throws ExcepcionesDAO;
 }

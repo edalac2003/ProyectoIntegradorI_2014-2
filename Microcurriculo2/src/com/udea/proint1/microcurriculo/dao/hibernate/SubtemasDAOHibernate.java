@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.SubtemasDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
+import com.udea.proint1.microcurriculo.dto.TbMicTemas;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
@@ -27,29 +30,13 @@ public class SubtemasDAOHibernate extends HibernateDaoSupport implements Subtema
 	@Override
 	public void guardarSubtema(TbMicSubtemas subtema) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
-			session.save(subtema);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-	}
-	
-	
 
-	@Override
-	public void guardarSubtema(List<TbMicSubtemas> listaSubtema)	throws ExcepcionesDAO {
-		if(listaSubtema != null){
-			for(TbMicSubtemas subtema : listaSubtema)
-				guardarSubtema(subtema);
-				
-		}else{
-			throw new ExcepcionesDAO();
+		try {
+			session = getSession();
+			session.save(subtema);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -65,11 +52,10 @@ public class SubtemasDAOHibernate extends HibernateDaoSupport implements Subtema
 			tx.commit();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 
 	}
-	
 
 	@Override
 	public TbMicSubtemas obtenerSubtemas(int idTema) throws ExcepcionesDAO {
@@ -104,11 +90,23 @@ public class SubtemasDAOHibernate extends HibernateDaoSupport implements Subtema
 	}
 
 	@Override
-	public List<TbMicSubtemas> listarSubtemas(int idTema) throws ExcepcionesDAO {
+	public List<TbMicSubtemas> listarSubtemasxTema(TbMicTemas tema) throws ExcepcionesDAO {
 		Session session = null;
-		List<TbMicSubtemas> subtemas = new ArrayList<TbMicSubtemas>();
-		
-		return null;
+        List<TbMicSubtemas> subtemas = new ArrayList<TbMicSubtemas>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicSubtemas where tbMicTemas = :tema");
+               
+        	query.setEntity("tema", tema);
+               
+        	subtemas = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return subtemas;
 	}
 
 	@Override
@@ -122,7 +120,7 @@ public class SubtemasDAOHibernate extends HibernateDaoSupport implements Subtema
 			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO("Se presentaron errores al contar los Registros de la Tabla Subtemas.");
+			throw new ExcepcionesDAO("Se presentaron errores al contar los Registros de la Tabla Subtemas. "+e);
 		}
 				
 		return registro;

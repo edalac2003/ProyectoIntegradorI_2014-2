@@ -48,7 +48,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			session.save(microcurriculo);
 			session.flush(); 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("Error al Intentar guardar el Registro Microcurriculo en la Base de Datos.");			
+			throw new ExcepcionesDAO("Error al Intentar guardar el Registro Microcurriculo en la Base de Datos. "+e);			
 		}
 
 	}
@@ -69,7 +69,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 ////			microcurriculo = (TbMicMicrocurriculos)session.get(TbMicMicrocurriculos.class, idMicrocurriculo);
 //		} catch (HibernateException e) {
 //			System.out.println("PASO ALGO AL CONSULTAR EL MICROCURRICULO");
-//			throw new ExcepcionesDAO("Se produjo un Error al intentar recuperar registro de Microcurriculo.");
+//			throw new ExcepcionesDAO("Se produjo un Error al intentar recuperar registro de Microcurriculo. "+e);
 //		}
 //		return microcurriculo;
 		return null;
@@ -82,7 +82,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 			this.getHibernateTemplate().update(microcurriculo);
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -101,7 +101,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			microcurriculos = criteria.list();
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 
 		return microcurriculos;
@@ -124,7 +124,7 @@ public class MicrocurriculosDAOHibernate extends HibernateDaoSupport implements
 			microcurriculos = query.list();
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 
 		return microcurriculos;

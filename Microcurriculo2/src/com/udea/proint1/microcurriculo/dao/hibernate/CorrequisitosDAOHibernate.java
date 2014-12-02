@@ -31,7 +31,7 @@ public class CorrequisitosDAOHibernate extends HibernateDaoSupport implements Co
 			tx.commit();
 			
 		}catch(HibernateException e){
-			
+			throw new ExcepcionesDAO(e);
 		}
 		
 	}
@@ -45,7 +45,7 @@ public class CorrequisitosDAOHibernate extends HibernateDaoSupport implements Co
 			this.getHibernateTemplate().update(correquisitos);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -60,7 +60,7 @@ public class CorrequisitosDAOHibernate extends HibernateDaoSupport implements Co
 			correquisitos = (TbAdmCorrequisitos)session.get(TbAdmCorrequisitos.class, id);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return correquisitos;
 	}
@@ -78,7 +78,7 @@ public class CorrequisitosDAOHibernate extends HibernateDaoSupport implements Co
 			correquisitos = criteria.list();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return correquisitos;

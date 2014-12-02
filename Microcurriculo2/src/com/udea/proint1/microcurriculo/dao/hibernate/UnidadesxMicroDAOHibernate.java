@@ -1,14 +1,19 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesXMicroDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -21,43 +26,29 @@ public class UnidadesxMicroDAOHibernate extends HibernateDaoSupport implements U
 	@Override
 	public void guardarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			tx = session.beginTransaction();
 			session.save(unidadXmicro);
-			tx.commit();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}	
 	}
 	
 	@Override
-	public void guardarUnidadXmicro(List<TbMicUnidadesxmicro> listaUnidadxMicro) throws ExcepcionesDAO {
-		if(listaUnidadxMicro != null){
-			for (TbMicUnidadesxmicro unidadxMicro : listaUnidadxMicro){
-				guardarUnidadXmicro(unidadxMicro);
-			}
-		}else{
-			throw new ExcepcionesDAO();
-		}
-	}
-	
-	
-
-	@Override
 	public void modificarUnidadXmicro(TbMicUnidadesxmicro unidadXmicro)
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
 
-	}
+		try {
+			session = getSession();
+			this.getHibernateTemplate().update(unidadXmicro);
 
-	@Override
-	public TbMicUnidadesxmicro obtenerUnidadXmicro(String idMicrocurriculo,	int idUnidad) throws ExcepcionesDAO {
-		return null;
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
 	}
-	
 
 	@Override
 	public TbMicUnidadesxmicro obtenerUnidadXmicro(int idUnidadxMicro) throws ExcepcionesDAO {
@@ -73,21 +64,46 @@ public class UnidadesxMicroDAOHibernate extends HibernateDaoSupport implements U
 				return null;
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
 	@Override
-	public List<TbMicUnidadesxmicro> listarUnidadesXmicro(String idMicrocurriculo) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TbMicUnidadesxmicro> listarUnidadesXMicroxMicro(TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO {
+		Session session = null;
+        List<TbMicUnidadesxmicro> unidadesXMicro = new ArrayList<TbMicUnidadesxmicro>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicUnidadesxmicro where tbMicMicrocurriculos = :microcurriculo");
+               
+        	query.setEntity("microcurriculo", microcurriculo);
+               
+        	unidadesXMicro = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return unidadesXMicro;
 	}
 
 	@Override
 	public List<TbMicUnidadesxmicro> listarTodoUnidadesXmicro()
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+        List<TbMicUnidadesxmicro> unidadesXMicro = new ArrayList<TbMicUnidadesxmicro>();
+        
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbAdmUnidadAcademica.class);
+			
+			unidadesXMicro = criteria.list();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO(e);
+			
+		}
+		return unidadesXMicro;
 	}
 
 	@Override
@@ -100,10 +116,9 @@ public class UnidadesxMicroDAOHibernate extends HibernateDaoSupport implements U
 			Criteria criteria = session.createCriteria(TbMicUnidadesxmicro.class);
 			registro = criteria.list().size();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO("Se produjo un Error al Intentar contar los Registros de la Tabla Unidades x Microcurriculo.");
+			throw new ExcepcionesDAO("Se produjo un Error al Intentar contar los Registros de la Tabla Unidades x Microcurriculo. "+e);
 		}
-				
-		
+	
 		return registro;
 	}
 	

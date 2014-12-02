@@ -80,7 +80,7 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 	@Override
 	public List<TbAdmPersona> obtenerDocentes(TbAdmTipopersona tipoPersona) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmPersona> solicitudes = new ArrayList<TbAdmPersona>();
+        List<TbAdmPersona> personas = new ArrayList<TbAdmPersona>();
        
         try{
                
@@ -90,12 +90,11 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
                
         	query.setEntity("tipoPersona", tipoPersona);
                
-            solicitudes = query.list();
+        	personas = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
         }
-        return solicitudes;
-
+        return personas;
 	}
 
 	@Override
@@ -108,8 +107,7 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 			
 			personas = criteria.list();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-			
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return personas;

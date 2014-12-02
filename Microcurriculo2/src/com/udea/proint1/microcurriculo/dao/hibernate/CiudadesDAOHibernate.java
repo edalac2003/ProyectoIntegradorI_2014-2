@@ -47,7 +47,7 @@ public class CiudadesDAOHibernate extends HibernateDaoSupport implements Ciudade
 			ciudades = criteria.list();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return ciudades;

@@ -31,7 +31,7 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 			session.flush();
 			
 		}catch(HibernateException e){
-			
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 			evaluacion = (TbMicEvaluaciones)session.load(TbMicEvaluaciones.class, id);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return evaluacion;
 	}
@@ -60,7 +60,7 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 			Criteria criteria = session.createCriteria(TbMicEvaluaciones.class);
 			evaluaciones = criteria.list();			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return evaluaciones;
@@ -76,7 +76,7 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 			Criteria criteria = session.createCriteria(TbMicEvaluaciones.class);
 			registro = criteria.list().size();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : Se presentaron Errores al Contar los Registros de la Tabla Evaluaciones.");
+			throw new ExcepcionesDAO("DAO : Se presentaron Errores al Contar los Registros de la Tabla Evaluaciones. "+e);
 		}		
 		return registro;
 	}
@@ -92,7 +92,7 @@ public class EvaluacionesDAOHibernate extends HibernateDaoSupport implements Eva
 			this.getHibernateTemplate().update(evaluacion);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+ e);
 		}
 	}
 

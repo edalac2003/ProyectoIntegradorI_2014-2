@@ -25,16 +25,13 @@ public class MicroxSemestreDAOHibernate extends HibernateDaoSupport implements M
 	@Override
 	public void guardarMicroxsemestre(TbMicMicroxsemestre microxSemestre) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			tx = session.beginTransaction();
 			session.save(microxSemestre);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -45,12 +42,10 @@ public class MicroxSemestreDAOHibernate extends HibernateDaoSupport implements M
 
 		try {
 			session = getSession();
-
-			session = getSession();
 			this.getHibernateTemplate().update(microxSemestre);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+e);
 		}
 	}
 
@@ -65,7 +60,7 @@ public class MicroxSemestreDAOHibernate extends HibernateDaoSupport implements M
 			microxSemestre = (TbMicMicroxsemestre)session.load(TbMicMicroxsemestre.class, id);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return microxSemestre;
 	}
@@ -81,7 +76,7 @@ public class MicroxSemestreDAOHibernate extends HibernateDaoSupport implements M
 			Criteria criteria = session.createCriteria(TbMicMicroxsemestre.class);
 			microsxsemestre = criteria.list();			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return microsxsemestre;

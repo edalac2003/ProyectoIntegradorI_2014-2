@@ -23,15 +23,13 @@ public class EvaluacionxmicroDAOHibernate extends HibernateDaoSupport implements
 	public void guardarEvaluacionesxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesDAO {
 		Session session = null;
 		
-		try{
-			session = getSession();
-			
+		try{			
 			session = getSession();
 			session.save(evaluacionxMicro);
 			session.flush();
 			
 		}catch(HibernateException e){
-			
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -45,7 +43,7 @@ public class EvaluacionxmicroDAOHibernate extends HibernateDaoSupport implements
 			evaluacionxMicro = (TbMicEvaluacionxmicro)session.load(TbMicEvaluacionxmicro.class, id);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return evaluacionxMicro;
 	}
@@ -60,7 +58,7 @@ public class EvaluacionxmicroDAOHibernate extends HibernateDaoSupport implements
 			Criteria criteria = session.createCriteria(TbMicEvaluacionxmicro.class);
 			evaluacionesxMicro = criteria.list();			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return evaluacionesxMicro;
@@ -77,7 +75,7 @@ public class EvaluacionxmicroDAOHibernate extends HibernateDaoSupport implements
 			this.getHibernateTemplate().update(evaluacionxMicro);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+e);
 		}
 	}
 

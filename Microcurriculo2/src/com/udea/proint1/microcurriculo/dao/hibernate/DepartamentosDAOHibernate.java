@@ -34,8 +34,8 @@ public class DepartamentosDAOHibernate extends HibernateDaoSupport implements De
 			departamento = (TbAdmDepartamentos)session.get(TbAdmDepartamentos.class, id);
 			
 		}catch(HibernateException e){
-			log.error("Falló al obtener departamento", e);
-			throw new ExcepcionesDAO();	
+			log.error("Falla al obtener departamento", e);
+			throw new ExcepcionesDAO(e);	
 		}
 				
 		return departamento;
@@ -55,8 +55,8 @@ public class DepartamentosDAOHibernate extends HibernateDaoSupport implements De
 			departamentos = criteria.list();
 			
 		}catch(HibernateException e){
-			log.error("Falló al obtener lista de departamentos", e);
-			throw new ExcepcionesDAO();
+			log.error("Falla al obtener lista de departamentos", e);
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return departamentos;
@@ -65,20 +65,13 @@ public class DepartamentosDAOHibernate extends HibernateDaoSupport implements De
 	@Override
 	public void modificarDepartamentos(TbAdmDepartamentos departamento) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			tx = session.beginTransaction();
-			log.info("********Se está actualizando Departamento*********");
-			session.update(departamento);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			tx.rollback();
-			log.error("Hubo error al momento de actualizar Departamento", e);
-			throw new ExcepcionesDAO();
-			
+			this.getHibernateTemplate().update(departamento);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
 

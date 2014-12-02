@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.TemasDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicTemas;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -24,41 +26,19 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void guardarTema(TbMicTemas tema) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
+
 		try {
 			session = getSession();
-			tx = session.beginTransaction();
 			session.save(tema);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-
-	}
-
-	@Override
-	public void guardarTema(List<TbMicTemas> listaTema) throws ExcepcionesDAO {
-		if(listaTema != null){
-			for(TbMicTemas tema : listaTema){
-				guardarTema(tema);
-			}
-		}else{
-			throw new ExcepcionesDAO();
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
-	
-	/**
-	 * 
-	 */
 	@Override
 	public void modificarTema(TbMicTemas tema) throws ExcepcionesDAO {
 		Session session = null;
@@ -71,15 +51,10 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 			tx.commit();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
-	
-	
-	/**
-	 * 
-	 */
 	@Override
 	public TbMicTemas obtenerTema(int idTema) throws ExcepcionesDAO {
 		Session session = null;
@@ -89,7 +64,7 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 			session = getSession();
 			tema = (TbMicTemas)session.get(TbMicTemas.class, idTema);			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}				
 		return tema;
 	}
@@ -97,25 +72,25 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 	
 	
 	@Override
-	public TbMicTemas obtenerTemaxNombre(String nombre) throws ExcepcionesDAO {
-		TbMicTemas tema = null;
+	public List<TbMicTemas> obtenerTemaxNombre(String nombre) throws ExcepcionesDAO {
 		Session session = null;
-		
-		try {
-			session = getSession();
-			//Criteria criteria = session.createQuery("FROM TbMicTemasxUnidad t WHERE t.");
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-		
-		
-		return tema;
+        List<TbMicTemas> temas = new ArrayList<TbMicTemas>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicTemas where vrDescripcion = :nombre");
+               
+        	query.setString("nombre", nombre);
+               
+        	temas = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return temas;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public List<TbMicTemas> listarTemas() throws ExcepcionesDAO {
 		Session session = null;
@@ -127,7 +102,7 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 			temas = criteria.list();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 			
 		}
 		
@@ -145,12 +120,10 @@ public class TemasDAOHibernate extends HibernateDaoSupport implements TemasDAO {
 			registro = criteria.list().size();
 			
 		} catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : No es posible retornar un valor numerico de los registros.");
+			throw new ExcepcionesDAO("DAO : No es posible retornar un valor numerico de los registros. "+e);
 		}	
 		
 		return registro;
 	}
-	
-	
 
 }

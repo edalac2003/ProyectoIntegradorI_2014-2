@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,6 +13,7 @@ import com.udea.proint1.microcurriculo.dao.PrerrequisitosDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisitos;
 import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class PrerrequisitosDAOHibernate extends HibernateDaoSupport implements PrerrequisitosDAO {
@@ -44,28 +46,62 @@ public class PrerrequisitosDAOHibernate extends HibernateDaoSupport implements P
 	@Override
 	public List<TbAdmPrerrequisitos> listarPrerrequisitos()
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+        List<TbAdmPrerrequisitos> prerrequisitos = new ArrayList<TbAdmPrerrequisitos>();
+        
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbAdmPrerrequisitos.class);
+			
+			prerrequisitos = criteria.list();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO(e);
+			
+		}
+		return prerrequisitos;
 	}
 
 	@Override
-	public TbAdmPrerrequisitos obtenerPrerrequisito() throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public TbAdmPrerrequisitos obtenerPrerrequisito(int id) throws ExcepcionesDAO {
+		Session session = null;
+		TbAdmPrerrequisitos prerrequisito = null;
+
+		try {
+			session = getSession();
+			prerrequisito = (TbAdmPrerrequisitos) session.load(TbAdmPrerrequisitos.class, id);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+		return prerrequisito;
 	}
 
 	@Override
 	public void guardarPrerrequisito(TbAdmPrerrequisitos prerrequisito)
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
 
+		try {
+			session = getSession();
+			session.save(prerrequisito);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
 	}
 
 	@Override
 	public void actualizarPrerrequisito(TbAdmPrerrequisitos prerrequisito)
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
 
+		try {
+			session = getSession();
+			this.getHibernateTemplate().update(prerrequisito);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
 	}
 
 }

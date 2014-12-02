@@ -22,8 +22,15 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 
 	@Override
 	public void guardarEstado(TbMicEstados estado) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
 
+		try {
+			session = getSession();
+			session.save(estado);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
 	}
 
 	@Override
@@ -36,13 +43,10 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 			estado = (TbMicEstados)session.load(TbMicEstados.class, idEstado);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-		
+			throw new ExcepcionesDAO(e);
+		}		
 		return estado;
 	}
-	
-	
 
 	@Override
 	public TbMicEstados obtenerEstadoxNombre(String nombre)
@@ -58,7 +62,7 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 			listaEstados = query.list();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		if(listaEstados != null){
@@ -78,7 +82,7 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 			Criteria criteria = session.createCriteria(TbMicEstados.class);
 			estados = criteria.list();			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return estados;

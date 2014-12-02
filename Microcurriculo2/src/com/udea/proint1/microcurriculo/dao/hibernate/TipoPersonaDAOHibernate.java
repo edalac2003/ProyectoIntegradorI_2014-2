@@ -31,7 +31,6 @@ public class TipoPersonaDAOHibernate extends HibernateDaoSupport implements Tipo
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 		}
-			
 		return tipoPersona;
 	}
 

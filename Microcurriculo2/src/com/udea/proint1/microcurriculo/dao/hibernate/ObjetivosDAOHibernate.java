@@ -23,29 +23,13 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 	@Override
 	public void guardarObjetivo(TbMicObjetivos objetivo) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
-			session.save(objetivo);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
 
-	}
-	
-	
-	@Override
-	public void guardarObjetivos(List<TbMicObjetivos> listaObjetivo) throws ExcepcionesDAO {
-		if (listaObjetivo != null){
-			for(TbMicObjetivos objetivo : listaObjetivo){
-				guardarObjetivo(objetivo);
-			}
-		}else {
-			throw new ExcepcionesDAO("El Objeto <Lista Objetivos> no tiene información valida.");
+		try {
+			session = getSession();
+			session.save(objetivo);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -59,7 +43,7 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 			objetivo = (TbMicObjetivos)session.get(TbMicObjetivos.class, idObjetivo);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return objetivo;
 	}
@@ -75,7 +59,7 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 			registro = criteria.list().size();
 			
 		} catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return registro;
@@ -94,7 +78,7 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 			objetivos = criteria.list();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return objetivos;
 	}
@@ -118,7 +102,7 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 			tx.commit();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 	}
 

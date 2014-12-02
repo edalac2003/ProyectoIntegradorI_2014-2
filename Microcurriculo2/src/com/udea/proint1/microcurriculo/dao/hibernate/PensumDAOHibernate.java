@@ -8,20 +8,20 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.udea.proint1.microcurriculo.dao.UsuariosDAO;
+import com.udea.proint1.microcurriculo.dao.PensumDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbAdmUsuarios;
+import com.udea.proint1.microcurriculo.dto.TbMicPensum;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
-public class UsuariosDAOHibernate extends HibernateDaoSupport implements UsuariosDAO {
+public class PensumDAOHibernate extends HibernateDaoSupport implements PensumDAO {
 
 	@Override
-	public void guardarUsuarios(TbAdmUsuarios usuario) throws ExcepcionesDAO {
+	public void guardarPensum(TbMicPensum pensum) throws ExcepcionesDAO {
 		Session session = null;
 
 		try {
 			session = getSession();
-			session.save(usuario);
+			session.save(pensum);
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
@@ -29,44 +29,44 @@ public class UsuariosDAOHibernate extends HibernateDaoSupport implements Usuario
 	}
 
 	@Override
-	public TbAdmUsuarios obtenerUsuarios(int id) throws ExcepcionesDAO {
+	public TbMicPensum obtenerPensum(int id) throws ExcepcionesDAO {
 		Session session = null;
-		TbAdmUsuarios usuario = null;
+		TbMicPensum pensum = null;
 
 		try {
 			session = getSession();
-			usuario = (TbAdmUsuarios) session.load(TbAdmUsuarios.class, id);
+			pensum = (TbMicPensum) session.load(TbMicPensum.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		}
-		return usuario;
+		return pensum;
 	}
 
 	@Override
-	public List<TbAdmUsuarios> listarUsuarios() throws ExcepcionesDAO {
+	public List<TbMicPensum> listarPensum() throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmUsuarios> usuarios = new ArrayList<TbAdmUsuarios>();
+        List<TbMicPensum> pensums = new ArrayList<TbMicPensum>();
         
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbAdmUsuarios.class);
+			Criteria criteria = session.createCriteria(TbMicPensum.class);
 			
-			usuarios = criteria.list();
+			pensums = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
 		}
-		return usuarios;
+		return pensums;
 	}
 
 	@Override
-	public void actualizarUsuarios(TbAdmUsuarios usuario) throws ExcepcionesDAO {
+	public void actualizarPensum(TbMicPensum pensum) throws ExcepcionesDAO {
 		Session session = null;
 
 		try {
 			session = getSession();
-			this.getHibernateTemplate().update(usuario);
+			this.getHibernateTemplate().update(pensum);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);

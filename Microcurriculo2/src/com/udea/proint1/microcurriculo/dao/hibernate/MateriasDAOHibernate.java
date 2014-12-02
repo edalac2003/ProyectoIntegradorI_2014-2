@@ -31,13 +31,11 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 		
 		try{
 			session = getSession();
-			
-			session = getSession();
 			session.save(materia);
 			session.flush();
 			
 		}catch(HibernateException e){
-			
+			throw new ExcepcionesDAO(e);
 		}
 		
 	}
@@ -52,7 +50,7 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 			materia = (TbAdmMaterias)session.get(TbAdmMaterias.class, idMateria);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return materia;
 	}
@@ -67,9 +65,8 @@ public class MateriasDAOHibernate extends HibernateDaoSupport implements Materia
 			Criteria criteria = session.createCriteria(TbAdmMaterias.class);
 			materias = criteria.list();			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
-		
 		return materias;
 	}
 

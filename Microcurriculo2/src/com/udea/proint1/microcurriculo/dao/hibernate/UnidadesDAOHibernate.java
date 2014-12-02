@@ -17,33 +17,15 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 	@Override
 	public void guardarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
-			session.save(unidad);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
-		}
-	}
-	
-	
-	@Override
-	public void guardarUnidad(List<TbMicUnidades> listaUnidad) throws ExcepcionesDAO {
-		if (listaUnidad != null){
-			for(TbMicUnidades unidad : listaUnidad){
-				guardarUnidad(unidad);
-			}
-		}else{
-			throw new ExcepcionesDAO();
-		}
-			
-		
-	}
 
+		try {
+			session = getSession();
+			session.save(unidad);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+	}
 	
 	@Override
 	public TbMicUnidades obtenerUnidad(int idUnidad) throws ExcepcionesDAO {
@@ -55,7 +37,7 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 			unidad = (TbMicUnidades)session.get(TbMicUnidades.class, idUnidad);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		
 		return unidad;
@@ -65,16 +47,13 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 	@Override
 	public void modificarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO {
 		Session session = null;
-		Transaction tx = null;
-		
-		try{
+
+		try {
 			session = getSession();
-			tx = session.beginTransaction();
-			session.update(unidad);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			this.getHibernateTemplate().update(unidad);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -87,7 +66,7 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 			Criteria criteria = session.createCriteria(UnidadesDAOHibernate.class);
 			registro = criteria.list().size();			
 		} catch(HibernateException e){
-			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro");
+			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro "+e);
 		}		
 		return registro;
 	}

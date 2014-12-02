@@ -114,7 +114,7 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		}catch(HibernateException e){
 			tx.rollback();
 			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
-					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente.");
+					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente. "+e);
 		}*/
 	}
 
@@ -147,7 +147,7 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		}catch(HibernateException e){
 			tx.rollback();
 			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
-					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente.");
+					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente. "+e);
 		}	*/	
 	}
 }

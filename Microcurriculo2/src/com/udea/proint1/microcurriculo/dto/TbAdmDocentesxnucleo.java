@@ -13,7 +13,10 @@ public class TbAdmDocentesxnucleo implements java.io.Serializable {
 	private TbAdmNucleo tbAdmNucleo;
 	private TbAdmPersona tbAdmPersona;
 	private String vrModusuario;
-	private Date vrModfecha;
+	private String vrOficina;
+	private String vrHorarioatencion;
+	private String vrHorarioclases;
+	private Date dtModfecha;
 
 	public TbAdmDocentesxnucleo() {
 	}
@@ -26,12 +29,16 @@ public class TbAdmDocentesxnucleo implements java.io.Serializable {
 	}
 
 	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona, String vrModusuario, Date vrModfecha) {
+			TbAdmPersona tbAdmPersona, String vrModusuario, Date dtModfecha,
+			String vrOficina, String vrHorarioatencion, String vrHorarioclases) {
 		this.nbId = nbId;
 		this.tbAdmNucleo = tbAdmNucleo;
 		this.tbAdmPersona = tbAdmPersona;
 		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
+		this.dtModfecha = dtModfecha;
+		this.vrOficina = vrOficina;
+		this.vrHorarioatencion = vrHorarioatencion;
+		this.vrHorarioclases = vrHorarioclases;
 	}
 
 	public int getNbId() {
@@ -66,12 +73,36 @@ public class TbAdmDocentesxnucleo implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 	}
 
-	public Date getVrModfecha() {
-		return this.vrModfecha;
+	public Date getDtModfecha() {
+		return this.dtModfecha;
 	}
 
-	public void setVrModfecha(Date vrModfecha) {
-		this.vrModfecha = vrModfecha;
+	public void setDtModfecha(Date dtModfecha) {
+		this.dtModfecha = dtModfecha;
+	}
+
+	public String getVrOficina() {
+		return vrOficina;
+	}
+
+	public void setVrOficina(String vrOficina) {
+		this.vrOficina = vrOficina;
+	}
+
+	public String getVrHorarioatencion() {
+		return vrHorarioatencion;
+	}
+
+	public void setVrHorarioatencion(String vrHorarioatencion) {
+		this.vrHorarioatencion = vrHorarioatencion;
+	}
+
+	public String getVrHorarioclases() {
+		return vrHorarioclases;
+	}
+
+	public void setVrHorarioclases(String vrHorarioclases) {
+		this.vrHorarioclases = vrHorarioclases;
 	}
 
 }

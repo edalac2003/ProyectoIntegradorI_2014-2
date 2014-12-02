@@ -30,7 +30,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session.save(nucleo);
 			session.flush(); 
 		} catch (HibernateException e) {
-
+			throw new ExcepcionesDAO();
 		}
 	}
 
@@ -43,7 +43,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			this.getHibernateTemplate().update(nucleo);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 	}
 
@@ -57,7 +57,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			nucleo = (TbAdmNucleo) session.load(TbAdmNucleo.class, id);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return nucleo;
 	}
@@ -72,7 +72,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			Criteria criteria = session.createCriteria(TbAdmNucleo.class);
 			nucleos = criteria.list();
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 
 		return nucleos;

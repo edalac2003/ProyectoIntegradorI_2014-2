@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -33,7 +34,7 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 	        session.flush(); //address will not get saved without this
 			
 		}catch(HibernateException e){
-			
+			throw new ExcepcionesDAO(e);
 		}
 
 	}
@@ -48,19 +49,30 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 			this.getHibernateTemplate().update(bibliografia);
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 
 	}
 
 	@Override
 	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+        List<TbMicBibliografia> bibliografias = new ArrayList<TbMicBibliografia>();
+        
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
+			
+			bibliografias = criteria.list();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO(e);
+		}
+		
+		return bibliografias;
 	}
 
 	@Override
-	public List<TbMicBibliografia> listarBibliografia(char tipo) throws ExcepcionesDAO {
+	public List<TbMicBibliografia> listarBibliografiaxTipo(char tipo) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicBibliografia> bibliografias = new ArrayList<TbMicBibliografia>();
 
@@ -75,7 +87,7 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 			bibliografias = query.list();
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 
 		return bibliografias;
@@ -94,8 +106,7 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("Problemas para contar el numero de registros de la tabla Bibliografias");
 		}
-		
-		
+
 		return registro;
 	}
 	

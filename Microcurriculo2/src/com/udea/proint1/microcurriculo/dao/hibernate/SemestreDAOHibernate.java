@@ -21,8 +21,28 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 
 	@Override
 	public void guardarSemestre(TbAdmSemestre semestre) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
+		Session session = null;
 
+		try {
+			session = getSession();
+			session.save(semestre);
+			session.flush(); 
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+	}
+	
+	@Override
+	public void modificarSemestre(TbAdmSemestre semestre) throws ExcepcionesDAO{
+		Session session = null;
+
+		try {
+			session = getSession();
+			this.getHibernateTemplate().update(semestre);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
 	}
 
 	@Override
@@ -52,10 +72,6 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 		}catch (HibernateException e){
 			throw new ExcepcionesDAO(e);
 		}
-		
-		
-		
-		
 		return semestre;
 	}	
 	

@@ -12,7 +12,7 @@ public interface PrerrequisitosDAO {
 	
 	public List<TbAdmPrerrequisitos> listarPrerrequisitos() throws ExcepcionesDAO;
 	
-	public TbAdmPrerrequisitos obtenerPrerrequisito() throws ExcepcionesDAO;
+	public TbAdmPrerrequisitos obtenerPrerrequisito(int id) throws ExcepcionesDAO;
 	
 	public void guardarPrerrequisito(TbAdmPrerrequisitos prerrequisito) throws ExcepcionesDAO;
 	

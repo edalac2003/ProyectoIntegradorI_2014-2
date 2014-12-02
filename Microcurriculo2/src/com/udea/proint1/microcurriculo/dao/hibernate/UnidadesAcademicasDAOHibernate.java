@@ -28,9 +28,8 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 			session.save(unidadAcademica);
 			session.flush(); 
 		} catch (HibernateException e) {
-
+			throw new ExcepcionesDAO(e);
 		}
-		
 	}
 
 	@Override
@@ -43,7 +42,7 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 			unidad = (TbAdmUnidadAcademica) session.load(TbAdmUnidadAcademica.class, idUnidad);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
 		return unidad;
 	}
@@ -57,9 +56,8 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 			this.getHibernateTemplate().update(unidad);
 
 		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 		}
-		
 	}
 	
 	@Override
@@ -73,10 +71,9 @@ public class UnidadesAcademicasDAOHibernate extends HibernateDaoSupport implemen
 			
 			unidadesAcademicas = criteria.list();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+			throw new ExcepcionesDAO(e);
 			
 		}
-		
 		return unidadesAcademicas;
 	}
 
