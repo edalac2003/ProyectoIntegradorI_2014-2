@@ -13,6 +13,7 @@ import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements BiblioxUnidadDAO {
@@ -50,14 +51,13 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 	}
 
 	@Override
-	public TbMicBiblioxunidad obtenerBiblioxUnidad(int idUnidad,
-			int idBibliografia) throws ExcepcionesDAO {
+	public TbMicBiblioxunidad obtenerBiblioxUnidad(int id) throws ExcepcionesDAO {
 		Session session = null;
 		TbMicBiblioxunidad BiblioxUnidad = null;
 
 		try {
 			session = getSession();
-			BiblioxUnidad = (TbMicBiblioxunidad) session.load(TbMicBiblioxunidad.class, idUnidad);
+			BiblioxUnidad = (TbMicBiblioxunidad) session.load(TbMicBiblioxunidad.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
@@ -84,7 +84,7 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 	}
 
 	@Override
-	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(int idUnidad)
+	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(TbMicUnidades unidad)
 			throws ExcepcionesDAO {
 		Session session = null;
         List<TbMicBiblioxunidad> bibliosxUnidad = new ArrayList<TbMicBiblioxunidad>();
@@ -95,7 +95,7 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
                                
         	Query query = session.createQuery("from TbMicBiblioxunidad where tbMicUnidades = :unidad");
                
-        	query.setEntity("unidad", idUnidad);
+        	query.setEntity("unidad", unidad);
                
         	bibliosxUnidad = query.list();
         }catch(HibernateException e){

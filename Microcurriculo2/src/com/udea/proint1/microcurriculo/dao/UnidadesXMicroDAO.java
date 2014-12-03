@@ -16,7 +16,7 @@ public interface UnidadesXMicroDAO {
 	
 	public List<TbMicUnidadesxmicro> listarUnidadesXMicroxMicro(TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO;
 	
-	public List<TbMicUnidadesxmicro> listarTodoUnidadesXmicro() throws ExcepcionesDAO;
+	public List<TbMicUnidadesxmicro> listarUnidadesXmicro() throws ExcepcionesDAO;
 	
 	public int contarRegistros() throws ExcepcionesDAO;
 	

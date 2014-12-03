@@ -49,10 +49,9 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 	}
 
 	@Override
-	public TbMicEstados obtenerEstadoxNombre(String nombre)
+	public List<TbMicEstados> obtenerEstadoxNombre(String nombre)
 			throws ExcepcionesDAO {
 		List<TbMicEstados> listaEstados = new ArrayList<TbMicEstados>();
-		TbMicEstados estado = null;
 		Session session = null;
 		
 		try{
@@ -65,11 +64,7 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 			throw new ExcepcionesDAO(e);
 		}
 		
-		if(listaEstados != null){
-			estado = listaEstados.get(0);
-		}
-		
-		return estado;
+		return listaEstados;
 	}
 
 	@Override
@@ -88,4 +83,16 @@ public class EstadosDAOHibernate extends HibernateDaoSupport implements EstadosD
 		return estados;
 	}
 
+	@Override
+	public void actualizarEstado(TbMicEstados estado) throws ExcepcionesDAO{
+		Session session = null;
+
+		try {
+			session = getSession();
+			this.getHibernateTemplate().update(estado);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+	}
 }

@@ -8,7 +8,11 @@ public interface BibliografiaDAO {
 
 	public void guardarBibliografia(TbMicBibliografia bibliografia) throws ExcepcionesDAO;
 	
+	public TbMicBibliografia obtenerBibliografia(int id) throws ExcepcionesDAO;
+	
 	public void modificarBibliografia(TbMicBibliografia bibliografia) throws ExcepcionesDAO;
+	
+	public List<TbMicBibliografia> listarBibliografias() throws ExcepcionesDAO;
 	
 	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo) throws ExcepcionesDAO;
 	

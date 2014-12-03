@@ -13,6 +13,8 @@ public interface UnidadesDAO {
 	
 	public void modificarUnidad(TbMicUnidades unidad) throws ExcepcionesDAO;
 	
+	public List<TbMicUnidades> listarUnidades() throws ExcepcionesDAO;
+	
 	public int numeroRegistros() throws ExcepcionesDAO;
 
 }

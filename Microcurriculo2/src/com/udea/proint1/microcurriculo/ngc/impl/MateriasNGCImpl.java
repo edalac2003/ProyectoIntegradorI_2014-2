@@ -36,7 +36,7 @@ public class MateriasNGCImpl implements MateriasNGC {
 	}
 
 	@Override
-	public boolean guardarMateria(TbAdmMaterias materia) throws ExcepcionesLogica {
+	public void guardarMateria(TbAdmMaterias materia) throws ExcepcionesLogica {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
@@ -60,12 +60,10 @@ public class MateriasNGCImpl implements MateriasNGC {
 		try {
 			
 			materiasDao.guardarMateria(materia);
-			correcto = true;
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarDependencia de la clase dependenciaDao: "+ e);
+			log.error("falló al invocar el metodo guardarMateria de la clase materiasDao: "+ e);
 		}
-		return correcto;
 	}
 
 	@Override

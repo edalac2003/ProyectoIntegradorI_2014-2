@@ -4,36 +4,69 @@ import java.util.Date;
 
 public class TbAdmAuditoria {
 
-	private int nbId;
-	private TbAdmNucleo tbAdmNucleo;
-	private TbAdmPersona tbAdmPersona;
-	private String vrModusuario;
-	private String vrOficina;
-	private String vrHorarioatencion;
-	private String vrHorarioclases;
-	private Date vrModfecha;
+	private int nbIdauditoria;
+	private TbAdmUsuarios tbAdmUsuarios;
+	private TbAdmTablas tbAdmTablas;
+	private int nbObservaciones;
+	private Date dtFecha;
 
-	public TbAdmDocentesxnucleo() {
+	public TbAdmAuditoria() {
 	}
 
-	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona) {
-		this.nbId = nbId;
-		this.tbAdmNucleo = tbAdmNucleo;
-		this.tbAdmPersona = tbAdmPersona;
+	public TbAdmAuditoria(int nbIdauditoria, TbAdmUsuarios tbAdmUsuarios,
+			TbAdmTablas tbAdmTablas) {
+		this.nbIdauditoria = nbIdauditoria;
+		this.tbAdmUsuarios = tbAdmUsuarios;
+		this.tbAdmTablas = tbAdmTablas;
 	}
 
-	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona, String vrModusuario, Date vrModfecha,
-			String vrOficina, String vrHorarioatencion, String vrHorarioclases) {
-		this.nbId = nbId;
-		this.tbAdmNucleo = tbAdmNucleo;
-		this.tbAdmPersona = tbAdmPersona;
-		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
-		this.vrOficina = vrOficina;
-		this.vrHorarioatencion = vrHorarioatencion;
-		this.vrHorarioclases = vrHorarioclases;
+	public TbAdmAuditoria(int nbIdauditoria, TbAdmUsuarios tbAdmUsuarios,
+			TbAdmTablas tbAdmTablas, int nbObservaciones, Date dtFecha) {
+		this.nbIdauditoria = nbIdauditoria;
+		this.tbAdmUsuarios = tbAdmUsuarios;
+		this.tbAdmTablas = tbAdmTablas;
+		this.nbObservaciones = nbObservaciones;
+		this.dtFecha = dtFecha;
+	}
+
+	public int getNbIdauditoria() {
+		return nbIdauditoria;
+	}
+
+	public void setNbIdauditoria(int nbIdauditoria) {
+		this.nbIdauditoria = nbIdauditoria;
+	}
+
+	public TbAdmUsuarios getTbAdmUsuarios() {
+		return tbAdmUsuarios;
+	}
+
+	public void setTbAdmUsuarios(TbAdmUsuarios tbAdmUsuarios) {
+		this.tbAdmUsuarios = tbAdmUsuarios;
+	}
+
+	public TbAdmTablas getTbAdmTablas() {
+		return tbAdmTablas;
+	}
+
+	public void setTbAdmTablas(TbAdmTablas tbAdmTablas) {
+		this.tbAdmTablas = tbAdmTablas;
+	}
+
+	public int getNbObservaciones() {
+		return nbObservaciones;
+	}
+
+	public void setNbObservaciones(int nbObservaciones) {
+		this.nbObservaciones = nbObservaciones;
+	}
+
+	public Date getDtFecha() {
+		return dtFecha;
+	}
+
+	public void setDtFecha(Date dtFecha) {
+		this.dtFecha = dtFecha;
 	}
 	
 }

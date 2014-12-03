@@ -9,7 +9,10 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.SubtemasDAO;
 import com.udea.proint1.microcurriculo.dao.TemasDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
+import com.udea.proint1.microcurriculo.dto.TbMicTemas;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.SubtemasNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -86,19 +89,6 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		}
 	}
 	
-	
-	@Override
-	public void guardarSubtemas(List<TbMicSubtemas> listaSubtema) throws ExcepcionesLogica {
-		if (listaSubtema != null){
-			for(TbMicSubtemas subtema : listaSubtema)
-				guardarSubtemas(subtema);
-			
-		}else{
-			throw new ExcepcionesLogica();
-		}
-		
-	}
-
 	@Override
 	public void actualizarSubtemas(TbMicSubtemas subtema) throws ExcepcionesLogica {
 		/*
@@ -160,6 +150,29 @@ public class SubtemasNGCImpl implements SubtemasNGC {
 		return registro;
 	}
 	
-	
+	@Override
+	public List<TbMicSubtemas> listarSubtemasxTema(int idTema) throws ExcepcionesLogica{
+		List<TbMicSubtemas> listaSubtemas = null;
+		
+		TbMicTemas tema= null;
+		
+		try {
+			tema = temasDao.obtenerTema(idTema);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerTema de la clase temasDao: "+ e);
+		}
+		
+		
+		try {
+			listaSubtemas = subtemasDao.listarSubtemasxTema(tema);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarSubtemasxTema(tema) de la clase subtemasDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaSubtemas;
+	}
 
 }

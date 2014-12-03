@@ -11,4 +11,5 @@ public interface DepartamentosNGC {
 	
 	public TbAdmDepartamentos obtenerDepartamentos(int id) throws ExcepcionesLogica;
 
+	public void modificarDepartamentos(TbAdmDepartamentos departamento) throws ExcepcionesLogica;
 }

@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.ObjetivosDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -67,27 +69,59 @@ public class ObjetivosDAOHibernate extends HibernateDaoSupport implements Objeti
 	
 	@Override
 	public List<TbMicObjetivos> listarObjetivosPorMicrocurriculo(
-			String idMicrocurriculo) throws ExcepcionesDAO {
+			TbMicMicrocurriculos microcurriculo) throws ExcepcionesDAO {
+		Session session = null;
+        List<TbMicObjetivos> objetivos = new ArrayList<TbMicObjetivos>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicObjetivos where tbMicMicrocurriculos = :microcurriculo");
+               
+        	query.setEntity("microcurriculo", microcurriculo);
+               
+        	objetivos = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return objetivos;
+	}
+
+	@Override
+	public List<TbMicObjetivos> listarObjetivosPorTipo(char tipo) throws ExcepcionesDAO {
+		Session session = null;
+        List<TbMicObjetivos> objetivos = new ArrayList<TbMicObjetivos>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicObjetivos where blTipo = :tipo");
+               
+        	query.setCharacter("tipo", tipo);
+               
+        	objetivos = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return objetivos;
+	}
+	
+	@Override
+	public List<TbMicObjetivos> listarObjetivos() throws ExcepcionesDAO{
 		Session session = null;
 		List<TbMicObjetivos> objetivos = new ArrayList<TbMicObjetivos>();
-		
-		try{
+		try {
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicObjetivos.class);
 			
 			objetivos = criteria.list();
-			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 		}
+		
 		return objetivos;
-	}
-
-	@Override
-	public List<TbMicObjetivos> listarObjetivosPorTipo(String idMicrocurriculo,
-			char tipo) throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

@@ -12,7 +12,9 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -39,6 +41,21 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 
 	}
 
+	@Override
+	public TbMicBibliografia obtenerBibliografia(int id) throws ExcepcionesDAO{
+		Session session = null;
+		TbMicBibliografia bibliografia = null;
+
+		try {
+			session = getSession();
+			bibliografia = (TbMicBibliografia) session.load(TbMicBibliografia.class, id);
+
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e);
+		}
+		return bibliografia;
+	}
+	
 	@Override
 	public void modificarBibliografia(TbMicBibliografia bibliografia)
 			throws ExcepcionesDAO {
@@ -110,6 +127,20 @@ public class BibliografiasDAOHibernate extends HibernateDaoSupport implements Bi
 		return registro;
 	}
 	
-	
+	public List<TbMicBibliografia> listarBibliografias() throws ExcepcionesDAO{
+		Session session = null;
+        List<TbMicBibliografia> bibliografias = new ArrayList<TbMicBibliografia>();
+        
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
+			
+			bibliografias = criteria.list();
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO(e);
+			
+		}
+		return bibliografias;
+	}
 
 }

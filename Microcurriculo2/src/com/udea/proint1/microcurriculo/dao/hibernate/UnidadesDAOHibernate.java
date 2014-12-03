@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadesDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -71,6 +73,23 @@ public class UnidadesDAOHibernate extends HibernateDaoSupport implements Unidade
 		return registro;
 	}
 	
-	
+	@Override
+	public List<TbMicUnidades> listarUnidades() throws ExcepcionesDAO{
+		Session session = null;
+		List<TbMicUnidades> unidades = new ArrayList<TbMicUnidades>();
+		
+		try{
+			session = getSession();
+			
+			Criteria criteria = session.createCriteria(TbMicUnidades.class);
+			
+			unidades = criteria.list();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO();
+		}
+		
+		return unidades;
+	}
 
 }

@@ -89,7 +89,7 @@ public class UnidadesxMicroDAOHibernate extends HibernateDaoSupport implements U
 	}
 
 	@Override
-	public List<TbMicUnidadesxmicro> listarTodoUnidadesXmicro()
+	public List<TbMicUnidadesxmicro> listarUnidadesXmicro()
 			throws ExcepcionesDAO {
 		Session session = null;
         List<TbMicUnidadesxmicro> unidadesXMicro = new ArrayList<TbMicUnidadesxmicro>();

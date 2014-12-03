@@ -41,7 +41,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		}
 		try {
 			int id = prerrequisito.getNbId();
-			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito();
+			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito(id);
 		
 			if(prerrequisitoConsulta != null){
 				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
@@ -70,7 +70,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		}
 		try {
 			int id = prerrequisito.getNbId();
-			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito();
+			TbAdmPrerrequisitos prerrequisitoConsulta = prerrequisitosDao.obtenerPrerrequisito(id);
 		
 			if(prerrequisitoConsulta == null){
 				throw new ExcepcionesLogica("El prerrequisito a actualizar no existe");
@@ -120,7 +120,7 @@ public class PrerrequisitosNGCImpl implements PrerrequisitosNGC {
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			prerrequisito = prerrequisitosDao.obtenerPrerrequisito();
+			prerrequisito = prerrequisitosDao.obtenerPrerrequisito(id);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitosDao: "+ e);
 		}

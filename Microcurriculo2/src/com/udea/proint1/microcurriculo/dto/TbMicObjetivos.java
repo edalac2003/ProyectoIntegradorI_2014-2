@@ -20,9 +20,7 @@ public class TbMicObjetivos implements java.io.Serializable {
 
 	public TbMicObjetivos() {
 	}
-
 	
-
 	public TbMicObjetivos(int nbIdobjetivo, String vrDescripcion,
 			Character blTipo, String vrModusuario, Date dtModfecha) {
 		super();
@@ -32,8 +30,6 @@ public class TbMicObjetivos implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
-
-
 
 	public TbMicObjetivos(int nbIdobjetivo, String vrDescripcion,
 			Character blTipo, String vrModusuario, Date dtModfecha,

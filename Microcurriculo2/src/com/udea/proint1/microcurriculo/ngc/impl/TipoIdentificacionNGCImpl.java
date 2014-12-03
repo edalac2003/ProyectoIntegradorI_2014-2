@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.udea.proint1.microcurriculo.dao.TipoIdentificacionDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipoidentificacion;
 import com.udea.proint1.microcurriculo.ngc.TipoIdentificacionNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;

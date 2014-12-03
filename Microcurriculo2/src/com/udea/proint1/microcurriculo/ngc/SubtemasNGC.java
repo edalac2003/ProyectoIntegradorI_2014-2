@@ -3,6 +3,8 @@ package com.udea.proint1.microcurriculo.ngc;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
+import com.udea.proint1.microcurriculo.dto.TbMicTemas;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface SubtemasNGC {
@@ -11,12 +13,12 @@ public interface SubtemasNGC {
 	
 	public void guardarSubtemas (TbMicSubtemas subtema) throws ExcepcionesLogica;
 	
-	public void guardarSubtemas (List<TbMicSubtemas> listaSubtema) throws ExcepcionesLogica;
-	
     public void actualizarSubtemas (TbMicSubtemas subtema) throws ExcepcionesLogica;
     
     public List<TbMicSubtemas> listarSubtemas () throws ExcepcionesLogica;
     
     public int contarRegistros() throws ExcepcionesLogica;
+    
+    public List<TbMicSubtemas> listarSubtemasxTema(int idTema) throws ExcepcionesLogica;
 
 }

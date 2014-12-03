@@ -9,6 +9,8 @@ public interface BibliografiaNGC {
 
 	public void guardarBibliografia(TbMicBibliografia bibliografia) throws ExcepcionesLogica;
 	
+	public TbMicBibliografia obtenerBibliografia(int id) throws ExcepcionesLogica;
+	
 	public void modificarBibliografia(TbMicBibliografia bibliografia) throws ExcepcionesLogica;
 	
 	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo) throws ExcepcionesLogica;

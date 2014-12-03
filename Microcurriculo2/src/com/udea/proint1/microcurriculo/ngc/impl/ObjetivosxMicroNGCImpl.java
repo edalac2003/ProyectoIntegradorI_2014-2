@@ -2,19 +2,40 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
+import com.udea.proint1.microcurriculo.dao.ObjetivosDAO;
 import com.udea.proint1.microcurriculo.dao.ObjetivosxMicroDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivosxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
+import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivosxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class ObjetivosxMicroNGCImpl implements ObjetivosxMicroNGC {
 
+	private static Logger log=Logger.getLogger(ObjetivosxMicroNGC.class);
+	
 	ObjetivosxMicroDAO objetivosxMicroDao;
 	
+	MicrocurriculosDAO microcurriculosDao;
+	
+	ObjetivosDAO objetivosDao;
 		
 	public void setObjetivosxMicroDao(ObjetivosxMicroDAO objetivosxMicroDao) {
 		this.objetivosxMicroDao = objetivosxMicroDao;
+	}
+
+	public void setMicrocurriculosDao(MicrocurriculosDAO microcurriculosDao) {
+		this.microcurriculosDao = microcurriculosDao;
+	}
+
+	public void setObjetivosDao(ObjetivosDAO objetivosDao) {
+		this.objetivosDao = objetivosDao;
 	}
 
 	@Override
@@ -42,9 +63,7 @@ public class ObjetivosxMicroNGCImpl implements ObjetivosxMicroNGC {
 		}
 	}
 
-	
-	
-	@Override
+	/*@Override
 	public void guardarObjetivosxMicro(List<TbMicObjetivosxmicro> listaObjetivoxMicro) throws ExcepcionesLogica {
 		if (listaObjetivoxMicro != null){
 			for(TbMicObjetivosxmicro objetivoxMicro : listaObjetivoxMicro){
@@ -53,24 +72,68 @@ public class ObjetivosxMicroNGCImpl implements ObjetivosxMicroNGC {
 		}else{
 			throw new ExcepcionesLogica("El objeto <Lista ObjetivoxMicrocurriculo no tiene informaci髇 v醠ida.");
 		}
-	}
+	}*/
 
 	@Override
 	public void modificarObjetivoxMicro(TbMicObjetivosxmicro objetivoxMicro)throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
-
+		/*
+		 * Comprobamos que el objeto id no est茅 vacio
+		 */
+		if(objetivoxMicro == null){
+			throw new ExcepcionesLogica("El objeto objetivoxMicro est谩 vacio");
+		}
+		try {
+			int id = objetivoxMicro.getNbId();
+			TbMicObjetivosxmicro biblioxUnidadConsulta = objetivosxMicroDao.obtenerObjetivoxMicro(id);
+		
+			if(biblioxUnidadConsulta == null){
+				throw new ExcepcionesLogica("El Objetivo x micro a actualizar no existe");
+			}
+		
+		} catch (ExcepcionesDAO e) {
+			log.error("fall贸 al invocar el metodo obtenerObjetivoxMicro de la clase objetivosxMicroDao: "+ e);
+		}
+		
+		try {
+			
+			objetivosxMicroDao.modificarObjetivoxMicro(objetivoxMicro);
+		
+		} catch (ExcepcionesDAO e) {
+			log.error("fall贸 al invocar el metodo modificarObjetivoxMicro de la clase objetivosxMicroDao: "+ e);
+		}
 	}
 
 	@Override
-	public TbMicObjetivosxmicro obtenerObjetivoxMicro(String idMicrocurriculo,	int idObjetivo) throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
-		return null;
+	public TbMicObjetivosxmicro obtenerObjetivoxMicro(int id) throws ExcepcionesLogica {
+		/*
+		 * Comprobamos que el dato id no sea vacio
+		 */
+		if(id == 0){
+			throw new ExcepcionesLogica("No se ha ingresado una identificaci贸n de objetivosxMicro, est谩 vacia");
+		}
+		TbMicObjetivosxmicro objetivosxMicro = null;
+		
+		try {
+			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
+			objetivosxMicro = objetivosxMicroDao.obtenerObjetivoxMicro(id);
+		} catch (ExcepcionesDAO e) {
+			log.error("fall贸 al invocar el metodo obtenerObjetivoxMicro de la clase objetivosxMicroDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en 茅l.
+		 */
+		if(objetivosxMicro == null){
+			//si est谩 vacio tira una excepci贸n
+			throw new ExcepcionesLogica("No se encontr贸 Objetivos x Micro con el id "+ id);
+		}else{
+			//si no esta vacio retorna la ciudad
+			return objetivosxMicro;
+		}
 	}
 	
-	
-
 	@Override
-	public TbMicObjetivosxmicro obtenerObjetivoxMicro(int idObjetivo) throws ExcepcionesLogica {
+	public TbMicObjetivosxmicro obtenerObjetivosxMicroxObjetivo(int idObjetivo) throws ExcepcionesLogica {
 		TbMicObjetivosxmicro objetivoxMicro = null;
 		
 		try {
@@ -89,15 +152,47 @@ public class ObjetivosxMicroNGCImpl implements ObjetivosxMicroNGC {
 	@Override
 	public List<TbMicObjetivosxmicro> listarObjetivosxMicro()
 			throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
-		return null;
+		List<TbMicObjetivosxmicro> listaObjetivosxMicro = null;
+		try {
+			listaObjetivosxMicro = objetivosxMicroDao.listarObjetivosxMicro();
+		} catch (ExcepcionesDAO e) {
+			log.error("fall贸 al invocar el metodo listarObjetivosxMicro de la clase objetivosxMicroDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en 茅l.
+		 */
+		if(listaObjetivosxMicro == null){
+			throw new ExcepcionesLogica("No se encontraron objetivos x microcurriculos en la tabla TbMicObjetivosxmicro");
+		}else{
+			return listaObjetivosxMicro;
+		}
 	}
 
 	@Override
-	public List<TbMicObjetivosxmicro> listarObjetivosxMicro(
+	public List<TbMicObjetivosxmicro> obtenerObjetivosxMicroxMicro(
 			String idMicrocurriculo) throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
-		return null;
+		List<TbMicObjetivosxmicro> listaObjetivosxMicro = null;
+		
+		TbMicMicrocurriculos microcurriculo= null;
+		
+		try {
+			microcurriculo = microcurriculosDao.obtenerMicrocurriculo(idMicrocurriculo);
+		} catch (ExcepcionesDAO e) {
+			log.error("fall贸 al invocar el metodo obtenerMicrocurriculo de la clase microcurriculosDao: "+ e);
+		}
+		
+		
+		try {
+			listaObjetivosxMicro = objetivosxMicroDao.obtenerObjetivosxMicroxMicro(microcurriculo);
+		} catch (ExcepcionesDAO e) {
+			log.error("fall贸 al invocar el metodo obtenerObjetivosxMicroxMicro de la clase objetivosxMicroDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en 茅l.
+		 */
+		return listaObjetivosxMicro;
 	}
 
 	@Override

@@ -16,5 +16,5 @@ public interface CorrequisitosDAO {
 	
 	public List<TbAdmCorrequisitos> listarCorrequisitos() throws ExcepcionesDAO;
 	
-	public List<TbAdmCorrequisitos> listarCorrequisitosxmateria(TbAdmMaterias materia) throws ExcepcionesDAO;
+	public List<TbAdmCorrequisitos> listarCorrequisitosxMateria(TbAdmMaterias materia) throws ExcepcionesDAO;
 }

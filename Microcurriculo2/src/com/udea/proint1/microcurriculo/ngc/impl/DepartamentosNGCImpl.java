@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.DepartamentosDAO;
 import com.udea.proint1.microcurriculo.dao.PaisesDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.ngc.DepartamentosNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -77,6 +78,35 @@ public class DepartamentosNGCImpl implements DepartamentosNGC {
 		}else{
 			//si no esta vacio retorna la Departamento
 			return departamento;
+		}
+	}
+	
+	@Override
+	public void modificarDepartamentos(TbAdmDepartamentos departamento) throws ExcepcionesLogica{
+		/*
+		 * Comprobamos que el objeto id no esté vacio
+		 */
+		if(departamento == null){
+			throw new ExcepcionesLogica("El objeto departamento está vacio");
+		}
+		try {
+			int id = departamento.getNbIddepartamento();
+			TbAdmDepartamentos departamentoConsulta = departamentosDao.obtenerDepartamento(id);
+		
+			if(departamentoConsulta == null){
+				throw new ExcepcionesLogica("El departamento a actualizar no existe");
+			}
+		
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerDepartamento de la clase departamentosDao: "+ e);
+		}
+		
+		try {
+			
+			departamentosDao.modificarDepartamentos(departamento);
+		
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo modificarDepartamentos de la clase departamentosDao: "+ e);
 		}
 	}
 

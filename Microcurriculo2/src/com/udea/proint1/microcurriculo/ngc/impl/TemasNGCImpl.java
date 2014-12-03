@@ -7,7 +7,9 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.TemasDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicTemas;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
 import com.udea.proint1.microcurriculo.ngc.TemasNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -77,21 +79,6 @@ public class TemasNGCImpl implements TemasNGC {
 			log.error("falló al invocar el metodo guardarTema de la clase temasDao: "+ e);
 		}
 	}
-	
-	
-
-	@Override
-	public void guardarTemas(List<TbMicTemas> listaTema) throws ExcepcionesLogica {
-		if(listaTema != null){
-			for(TbMicTemas tema : listaTema)
-				guardarTemas(tema);
-
-		}else{
-			throw new ExcepcionesLogica();
-		}
-			
-	}
-
 
 	@Override
 	public void actualizarTema(TbMicTemas tema) throws ExcepcionesLogica {
@@ -154,6 +141,20 @@ public class TemasNGCImpl implements TemasNGC {
 		return registro;
 	}
 	
-	
+	@Override
+	public List<TbMicTemas> obtenerTemaxNombre(String nombre) throws ExcepcionesLogica{
+		List<TbMicTemas> listaTemas = null;
+		
+		try {
+			listaTemas = temasDao.obtenerTemaxNombre(nombre);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerTemaxNombre(nombre) de la clase temasDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaTemas;
+	}
 
 }

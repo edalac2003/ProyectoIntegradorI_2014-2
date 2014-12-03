@@ -84,7 +84,7 @@ public class CorrequisitosDAOHibernate extends HibernateDaoSupport implements Co
 		return correquisitos;
 	}
 
-	public List<TbAdmCorrequisitos> listarCorrequisitosxmateria(TbAdmMaterias materia) throws ExcepcionesDAO{
+	public List<TbAdmCorrequisitos> listarCorrequisitosxMateria(TbAdmMaterias materia) throws ExcepcionesDAO{
 		Session session = null;
         List<TbAdmCorrequisitos> correquisitos = new ArrayList<TbAdmCorrequisitos>();
        

@@ -2,6 +2,9 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.udea.proint1.microcurriculo.dao.AutoresDao;
 import com.udea.proint1.microcurriculo.dto.TbMicAutores;
 import com.udea.proint1.microcurriculo.ngc.AutoresNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -33,7 +36,7 @@ public class AutoresNGCImpl implements AutoresNGC {
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			autor = autoresDao.obtenerAutor(id);
+			autor = autoresDao.obtenerAutores(id);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo obtenerAutor de la clase autoresDao: "+ e);
 		}
@@ -59,7 +62,7 @@ public class AutoresNGCImpl implements AutoresNGC {
 		}
 		try {
 			int id = autor.getNbIdautor();
-			TbMicAutores autorConsulta = autoresDao.obtenerAutor(id);
+			TbMicAutores autorConsulta = autoresDao.obtenerAutores(id);
 		
 			if(autorConsulta != null){
 				throw new ExcepcionesLogica("El autor a insertar ya existe");
@@ -71,7 +74,7 @@ public class AutoresNGCImpl implements AutoresNGC {
 		
 		try {
 			
-			autoresDao.guardarAutor(autor);
+			autoresDao.guardarAutores(autor);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarAutor de la clase autoresDao: "+ e);
@@ -100,7 +103,7 @@ public class AutoresNGCImpl implements AutoresNGC {
 		
 		try {
 			
-			autoresDao.actualizarAutor(autor);
+			autoresDao.actualizarAutores(autor);;
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarAutor de la clase autoresDao: "+ e);

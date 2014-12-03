@@ -7,12 +7,11 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface BiblioxunidadNGC {
 	
-
 	public void guardarBiblioxUnidad(TbMicBiblioxunidad biblioxUnidad) throws ExcepcionesLogica;
 	
 	public void modificarBiblioxUnidad(TbMicBiblioxunidad biblioxUnidad) throws ExcepcionesLogica;
 	
-	public TbMicBiblioxunidad obtenerBiblioxUnidad(int idUnidad, int idBibliografia) throws ExcepcionesLogica;
+	public TbMicBiblioxunidad obtenerBiblioxUnidad(int id) throws ExcepcionesLogica;
 	
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad() throws ExcepcionesLogica;
 	

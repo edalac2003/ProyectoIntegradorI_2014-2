@@ -4,36 +4,15 @@ import java.util.Date;
 
 public class TbAdmObservacionesxtabla {
 
-	private int nbId;
-	private TbAdmNucleo tbAdmNucleo;
-	private TbAdmPersona tbAdmPersona;
-	private String vrModusuario;
-	private String vrOficina;
-	private String vrHorarioatencion;
-	private String vrHorarioclases;
-	private Date vrModfecha;
+	private String vrObservaciones;
+	private TbMicObservaciones tbMicObservaciones;
 
-	public TbAdmDocentesxnucleo() {
+	public TbAdmObservacionesxtabla() {
 	}
 
-	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona) {
-		this.nbId = nbId;
-		this.tbAdmNucleo = tbAdmNucleo;
-		this.tbAdmPersona = tbAdmPersona;
-	}
-
-	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona, String vrModusuario, Date vrModfecha,
-			String vrOficina, String vrHorarioatencion, String vrHorarioclases) {
-		this.nbId = nbId;
-		this.tbAdmNucleo = tbAdmNucleo;
-		this.tbAdmPersona = tbAdmPersona;
-		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
-		this.vrOficina = vrOficina;
-		this.vrHorarioatencion = vrHorarioatencion;
-		this.vrHorarioclases = vrHorarioclases;
+	public TbAdmObservacionesxtabla(String vrObservaciones, TbMicObservaciones tbMicObservaciones) {
+		this.vrObservaciones = vrObservaciones;
+		this.tbMicObservaciones = tbMicObservaciones;
 	}
 	
 }

@@ -156,7 +156,7 @@ public class CorrequisitosNGCImpl implements CorrequisitosNGC {
 		}
 		
 		try {
-			listaCorrequisitos = correquisitosDao.listarCorrequisitosxmateria(materia);
+			listaCorrequisitos = correquisitosDao.listarCorrequisitosxMateria(materia);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo listarCorrequisitosxmateria de la clase correquisitosDao: "+ e);
 		}

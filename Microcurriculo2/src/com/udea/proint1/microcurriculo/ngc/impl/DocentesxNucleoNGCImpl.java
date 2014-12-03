@@ -61,7 +61,7 @@ public class DocentesxNucleoNGCImpl implements DocentesxNucleoNGC {
 		
 		try {
 			
-			docentesxNucleoDao.guardarDocentexNucleo(docentesxNucleo);
+			docentesxNucleoDao.guardarDocentesxNucleo(docentesxNucleo);;
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarDependencia de la clase dependenciaDao: "+ e);

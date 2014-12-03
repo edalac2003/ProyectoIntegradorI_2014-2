@@ -11,7 +11,9 @@ public interface EstadosDAO {
 	
 	public TbMicEstados obtenerEstado(int idEstado) throws ExcepcionesDAO;
 	
-	public TbMicEstados obtenerEstadoxNombre(String nombre) throws ExcepcionesDAO;
+	public List<TbMicEstados> obtenerEstadoxNombre(String nombre) throws ExcepcionesDAO;
 	
 	public List<TbMicEstados> listarEstados() throws ExcepcionesDAO;
+	
+	public void actualizarEstado(TbMicEstados estado) throws ExcepcionesDAO;
 }

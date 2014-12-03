@@ -4,36 +4,31 @@ import java.util.Date;
 
 public class TbAdmTablas {
 
-	private int nbId;
-	private TbAdmNucleo tbAdmNucleo;
-	private TbAdmPersona tbAdmPersona;
-	private String vrModusuario;
-	private String vrOficina;
-	private String vrHorarioatencion;
-	private String vrHorarioclases;
-	private Date vrModfecha;
+	private int nbIdtabla;
+	private String vrNombretabla;
 
-	public TbAdmDocentesxnucleo() {
+	public TbAdmTablas() {
 	}
 
-	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona) {
-		this.nbId = nbId;
-		this.tbAdmNucleo = tbAdmNucleo;
-		this.tbAdmPersona = tbAdmPersona;
+	public TbAdmTablas(int nbIdtabla, String vrNombretabla) {
+		this.nbIdtabla = nbIdtabla;
+		this.vrNombretabla = vrNombretabla;
 	}
 
-	public TbAdmDocentesxnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona, String vrModusuario, Date vrModfecha,
-			String vrOficina, String vrHorarioatencion, String vrHorarioclases) {
-		this.nbId = nbId;
-		this.tbAdmNucleo = tbAdmNucleo;
-		this.tbAdmPersona = tbAdmPersona;
-		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
-		this.vrOficina = vrOficina;
-		this.vrHorarioatencion = vrHorarioatencion;
-		this.vrHorarioclases = vrHorarioclases;
+	public int getNbIdtabla() {
+		return nbIdtabla;
 	}
-	
+
+	public void setNbIdtabla(int nbIdtabla) {
+		this.nbIdtabla = nbIdtabla;
+	}
+
+	public String getVrNombretabla() {
+		return vrNombretabla;
+	}
+
+	public void setVrNombretabla(String vrNombretabla) {
+		this.vrNombretabla = vrNombretabla;
+	}
+	 
 }
