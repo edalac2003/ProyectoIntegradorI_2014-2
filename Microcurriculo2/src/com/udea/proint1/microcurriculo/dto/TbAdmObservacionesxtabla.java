@@ -1,18 +1,32 @@
 package com.udea.proint1.microcurriculo.dto;
 
-import java.util.Date;
-
 public class TbAdmObservacionesxtabla {
 
 	private String vrObservaciones;
-	private TbMicObservaciones tbMicObservaciones;
+	private int nbIdobservaciones;
 
 	public TbAdmObservacionesxtabla() {
 	}
 
-	public TbAdmObservacionesxtabla(String vrObservaciones, TbMicObservaciones tbMicObservaciones) {
+	public TbAdmObservacionesxtabla(String vrObservaciones, int nbIdobservaciones) {
 		this.vrObservaciones = vrObservaciones;
-		this.tbMicObservaciones = tbMicObservaciones;
+		this.nbIdobservaciones = nbIdobservaciones;
+	}
+
+	public String getVrObservaciones() {
+		return vrObservaciones;
+	}
+
+	public void setVrObservaciones(String vrObservaciones) {
+		this.vrObservaciones = vrObservaciones;
+	}
+
+	public int getNbIdobservaciones() {
+		return nbIdobservaciones;
+	}
+
+	public void setNbIdobservaciones(int nbIdobservaciones) {
+		this.nbIdobservaciones = nbIdobservaciones;
 	}
 	
 }

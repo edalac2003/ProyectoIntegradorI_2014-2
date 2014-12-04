@@ -1,7 +1,5 @@
 package com.udea.proint1.microcurriculo.dto;
 
-import java.util.Date;
-
 public class TbAdmTablas {
 
 	private int nbIdtabla;

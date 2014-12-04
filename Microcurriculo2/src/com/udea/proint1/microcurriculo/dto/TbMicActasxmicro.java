@@ -6,27 +6,24 @@ public class TbMicActasxmicro {
 
 	private int nbIdactas;
 	private TbMicMicrocurriculos tbMicMicrocurriculos;
-	private String vrModusuario;
-	private Date dtModfecha;
-	private String vrAprobador;
+	private TbAdmUsuarios tbAdmUsuarios;
 	private Date dtFechaaprobacion;
 
 	public TbMicActasxmicro() {
 	}
 
-	public TbMicActasxmicro(int nbIdactas, TbMicMicrocurriculos tbMicMicrocurriculos) {
+	public TbMicActasxmicro(int nbIdactas, TbMicMicrocurriculos tbMicMicrocurriculos,
+			TbAdmUsuarios tbAdmUsuarios) {
 		this.nbIdactas = nbIdactas;
 		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbAdmUsuarios = tbAdmUsuarios;
 	}
 
 	public TbMicActasxmicro(int nbIdactas, TbMicMicrocurriculos tbMicMicrocurriculos, 
-			String vrModusuario, Date dtModfecha,
-			String vrAprobador, Date dtFechaaprobacion) {
+			TbAdmUsuarios tbAdmUsuarios, Date dtFechaaprobacion) {
 		this.nbIdactas = nbIdactas;
 		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
-		this.vrModusuario = vrModusuario;
-		this.dtModfecha = dtModfecha;
-		this.vrAprobador = vrAprobador;
+		this.tbAdmUsuarios = tbAdmUsuarios;
 		this.dtFechaaprobacion = dtFechaaprobacion;
 	}
 
@@ -46,36 +43,20 @@ public class TbMicActasxmicro {
 		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
 	}
 
-	public String getVrModusuario() {
-		return vrModusuario;
-	}
-
-	public void setVrModusuario(String vrModusuario) {
-		this.vrModusuario = vrModusuario;
-	}
-
-	public Date getDtModfecha() {
-		return dtModfecha;
-	}
-
-	public void setDtModfecha(Date dtModfecha) {
-		this.dtModfecha = dtModfecha;
-	}
-
-	public String getVrAprobador() {
-		return vrAprobador;
-	}
-
-	public void setVrAprobador(String vrAprobador) {
-		this.vrAprobador = vrAprobador;
-	}
-
 	public Date getDtFechaaprobacion() {
 		return dtFechaaprobacion;
 	}
 
 	public void setDtFechaaprobacion(Date dtFechaaprobacion) {
 		this.dtFechaaprobacion = dtFechaaprobacion;
+	}
+
+	public TbAdmUsuarios getTbAdmUsuarios() {
+		return tbAdmUsuarios;
+	}
+
+	public void setTbAdmUsuarios(TbAdmUsuarios tbAdmUsuarios) {
+		this.tbAdmUsuarios = tbAdmUsuarios;
 	}
 	
 }

@@ -17,8 +17,8 @@
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>
-        <property name="vrModfecha" type="date">
-            <column name="VR_MODFECHA" length="7" />
+        <property name="dtModfecha" type="date">
+            <column name="DT_MODFECHA" length="7" />
         </property>
         <property name="vrOficina" type="string">
             <column name="VR_OFICINA" length="50" />

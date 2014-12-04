@@ -8,7 +8,7 @@ public class TbMicActividadesxmicro {
 	private TbMicMicrocurriculos tbMicMicrocurriculos;
 	private String vrModusuario;
 	private String vrDescripcion;
-	private Date vrModfecha;
+	private Date dtModfecha;
 
 	public TbMicActividadesxmicro() {
 	}
@@ -19,11 +19,11 @@ public class TbMicActividadesxmicro {
 	}
 
 	public TbMicActividadesxmicro(int nbIdactividad, TbMicMicrocurriculos tbMicMicrocurriculos,
-			String vrDescripcion, String vrModusuario, Date vrModfecha) {
+			String vrDescripcion, String vrModusuario, Date dtModfecha) {
 		this.nbIdactividad = nbIdactividad;
 		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
 		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
+		this.dtModfecha = dtModfecha;
 		this.vrDescripcion = vrDescripcion;
 	}
 
@@ -59,12 +59,12 @@ public class TbMicActividadesxmicro {
 		this.vrDescripcion = vrDescripcion;
 	}
 
-	public Date getVrModfecha() {
-		return vrModfecha;
+	public Date getDtModfecha() {
+		return dtModfecha;
 	}
 
-	public void setVrModfecha(Date vrModfecha) {
-		this.vrModfecha = vrModfecha;
+	public void setDtModfecha(Date dtModfecha) {
+		this.dtModfecha = dtModfecha;
 	}
 	
 }
