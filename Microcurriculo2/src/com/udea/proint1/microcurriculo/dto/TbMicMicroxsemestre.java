@@ -10,7 +10,7 @@ import java.util.Date;
 public class TbMicMicroxsemestre implements java.io.Serializable {
 
 	private int nbId;
-	private TbMicMicrocurriculos tbMicMicrocurriculos;
+	private TbMicMicrocurriculo tbMicMicrocurriculo;
 	private TbAdmSemestre tbAdmSemestre;
 	private String vrModusuario;
 	private Date dtModfecha;
@@ -19,18 +19,18 @@ public class TbMicMicroxsemestre implements java.io.Serializable {
 	}
 
 	public TbMicMicroxsemestre(int nbId,
-			TbMicMicrocurriculos tbMicMicrocurriculos,
+			TbMicMicrocurriculo tbMicMicrocurriculo,
 			TbAdmSemestre tbAdmSemestre) {
 		this.nbId = nbId;
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.tbAdmSemestre = tbAdmSemestre;
 	}
 
 	public TbMicMicroxsemestre(int nbId,
-			TbMicMicrocurriculos tbMicMicrocurriculos,
+			TbMicMicrocurriculo tbMicMicrocurriculo,
 			TbAdmSemestre tbAdmSemestre, String vrModusuario, Date dtModfecha) {
 		this.nbId = nbId;
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.tbAdmSemestre = tbAdmSemestre;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
@@ -44,13 +44,13 @@ public class TbMicMicroxsemestre implements java.io.Serializable {
 		this.nbId = nbId;
 	}
 
-	public TbMicMicrocurriculos getTbMicMicrocurriculos() {
-		return this.tbMicMicrocurriculos;
+	public TbMicMicrocurriculo getTbMicMicrocurriculo() {
+		return this.tbMicMicrocurriculo;
 	}
 
-	public void setTbMicMicrocurriculos(
-			TbMicMicrocurriculos tbMicMicrocurriculos) {
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+	public void setTbMicMicrocurriculo(
+			TbMicMicrocurriculo tbMicMicrocurriculo) {
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
 
 	public TbAdmSemestre getTbAdmSemestre() {

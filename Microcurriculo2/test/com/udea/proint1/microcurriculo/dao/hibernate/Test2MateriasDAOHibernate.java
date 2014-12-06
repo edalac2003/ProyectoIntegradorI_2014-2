@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.udea.proint1.microcurriculo.dao.MateriasDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dao.MateriaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,12 +19,12 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 public class Test2MateriasDAOHibernate {
 
 	@Autowired
-	MateriasDAO materiasDAO;
+	MateriaDAO materiasDAO;
 	
 	@Test
 	public void testBuscarMaterias() {
 		try {
-			for(TbAdmMaterias materia: materiasDAO.buscarMaterias("201001%")){
+			for(TbAdmMateria materia: materiasDAO.buscarMaterias("201001%")){
 				System.out.println("materia: "+ materia.getVrNombre());
 			}
 		} catch (ExcepcionesDAO e) {

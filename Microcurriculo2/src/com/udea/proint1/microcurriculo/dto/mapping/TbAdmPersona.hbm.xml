@@ -11,7 +11,7 @@
         <many-to-one name="tbAdmTipopersona" class="com.udea.proint1.microcurriculo.dto.TbAdmTipopersona" fetch="select">
             <column name="NB_TIPOPERSONA" precision="22" scale="0" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbAdmCiudades" class="com.udea.proint1.microcurriculo.dto.TbAdmCiudades" fetch="select">
+        <many-to-one name="tbAdmCiudad" class="com.udea.proint1.microcurriculo.dto.TbAdmCiudad" fetch="select">
             <column name="NB_CIUDAD" precision="22" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="tbAdmTipoidentificacion" class="com.udea.proint1.microcurriculo.dto.TbAdmTipoidentificacion" fetch="select">
@@ -42,13 +42,13 @@
             <key>
                 <column name="VR_PERSONA" length="15" not-null="true" />
             </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmUsuarios" />
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" />
         </set>
         <set name="tbAdmDocentesxnucleos" table="TB_ADM_DOCENTESXNUCLEO" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_DOCENTE" length="15" not-null="true" />
             </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentesxnucleo" />
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo" />
         </set>
     </class>
 </hibernate-mapping>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
+import com.udea.proint1.microcurriculo.dao.CiudadDAO;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dao.TipoPersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -19,7 +19,7 @@ public class PersonaNGCImpl implements PersonaNGC {
 	
 	PersonaDAO personaDao;
 	TipoPersonaDAO tipoPersonaDao;
-	CiudadesDAO ciudadesDao;
+	CiudadDAO ciudadDao;
 	//TipoIdentificacionDAO tipoIdentificacionDao;
 
 	public void setPersonaDao(PersonaDAO personaDao) {
@@ -30,8 +30,8 @@ public class PersonaNGCImpl implements PersonaNGC {
 		this.tipoPersonaDao = tipoPersonaDao;
 	}
 
-	public void setCiudadesDao(CiudadesDAO ciudadesDao) {
-		this.ciudadesDao = ciudadesDao;
+	public void setCiudadDao(CiudadDAO ciudadDao) {
+		this.ciudadDao = ciudadDao;
 	}
 
 	/*public void setTipoIdentificacionDao(TipoIdentificacionDAO tipoIdentificacionDao) {

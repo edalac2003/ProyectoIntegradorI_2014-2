@@ -11,7 +11,7 @@ public class TbMicAutorxbiblio implements java.io.Serializable {
 
 	private int nbId;
 	private TbMicBibliografia tbMicBibliografia;
-	private TbMicAutores tbMicAutores;
+	private TbMicAutor tbMicAutor;
 	private String vrModusuario;
 	private Date dtModfecha;
 
@@ -19,18 +19,18 @@ public class TbMicAutorxbiblio implements java.io.Serializable {
 	}
 
 	public TbMicAutorxbiblio(int nbId,
-			TbMicBibliografia tbMicBibliografia, TbMicAutores tbMicAutores) {
+			TbMicBibliografia tbMicBibliografia, TbMicAutor tbMicAutor) {
 		this.nbId = nbId;
 		this.tbMicBibliografia = tbMicBibliografia;
-		this.tbMicAutores = tbMicAutores;
+		this.tbMicAutor = tbMicAutor;
 	}
 
 	public TbMicAutorxbiblio(int nbId,
-			TbMicBibliografia tbMicBibliografia, TbMicAutores tbMicAutores,
+			TbMicBibliografia tbMicBibliografia, TbMicAutor tbMicAutor,
 			String vrModusuario, Date dtModfecha) {
 		this.nbId = nbId;
 		this.tbMicBibliografia = tbMicBibliografia;
-		this.tbMicAutores = tbMicAutores;
+		this.tbMicAutor = tbMicAutor;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
@@ -51,12 +51,12 @@ public class TbMicAutorxbiblio implements java.io.Serializable {
 		this.tbMicBibliografia = tbMicBibliografia;
 	}
 
-	public TbMicAutores getTbMicAutores() {
-		return this.tbMicAutores;
+	public TbMicAutor getTbMicAutor() {
+		return this.tbMicAutor;
 	}
 
-	public void setTbMicAutores(TbMicAutores tbMicAutores) {
-		this.tbMicAutores = tbMicAutores;
+	public void setTbMicAutor(TbMicAutor tbMicAutor) {
+		this.tbMicAutor = tbMicAutor;
 	}
 
 	public String getVrModusuario() {

@@ -27,7 +27,7 @@
             <key>
                 <column name="NB_PENSUM" precision="22" scale="0" not-null="true" />
             </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMateriasxpensum" />
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum" />
         </set>
     </class>
 </hibernate-mapping>

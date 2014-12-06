@@ -11,7 +11,7 @@
         <many-to-one name="tbMicBibliografia" class="com.udea.proint1.microcurriculo.dto.TbMicBibliografia" fetch="select">
             <column name="NB_BIBLIOGRAFIA" precision="22" scale="0" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbMicAutores" class="com.udea.proint1.microcurriculo.dto.TbMicAutores" fetch="select">
+        <many-to-one name="tbMicAutor" class="com.udea.proint1.microcurriculo.dto.TbMicAutor" fetch="select">
             <column name="NB_AUTOR" precision="22" scale="0" not-null="true" />
         </many-to-one>
         <property name="vrModusuario" type="string">

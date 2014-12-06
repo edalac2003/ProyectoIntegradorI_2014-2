@@ -13,7 +13,7 @@ public class TbAdmPersona implements java.io.Serializable {
 
 	private String vrIdpersona;
 	private TbAdmTipopersona tbAdmTipopersona;
-	private TbAdmCiudades tbAdmCiudades;
+	private TbAdmCiudad tbAdmCiudad;
 	private TbAdmTipoidentificacion tbAdmTipoidentificacion;
 	private String vrNombres;
 	private String vrApellidos;
@@ -29,26 +29,26 @@ public class TbAdmPersona implements java.io.Serializable {
 	}
 
 	public TbAdmPersona(String vrIdpersona, TbAdmTipopersona tbAdmTipopersona,
-			TbAdmCiudades tbAdmCiudades,
+			TbAdmCiudad tbAdmCiudad,
 			TbAdmTipoidentificacion tbAdmTipoidentificacion, String vrNombres,
 			String vrApellidos) {
 		this.vrIdpersona = vrIdpersona;
 		this.tbAdmTipopersona = tbAdmTipopersona;
-		this.tbAdmCiudades = tbAdmCiudades;
+		this.tbAdmCiudad = tbAdmCiudad;
 		this.tbAdmTipoidentificacion = tbAdmTipoidentificacion;
 		this.vrNombres = vrNombres;
 		this.vrApellidos = vrApellidos;
 	}
 
 	public TbAdmPersona(String vrIdpersona, TbAdmTipopersona tbAdmTipopersona,
-			TbAdmCiudades tbAdmCiudades,
+			TbAdmCiudad tbAdmCiudad,
 			TbAdmTipoidentificacion tbAdmTipoidentificacion, String vrNombres,
 			String vrApellidos, String vrEmail, String vrTelefono,
 			int blEstado, String vrModusuario, Date dtModfecha,
 			Set tbAdmUsuarioses, Set tbAdmDocentesxnucleos) {
 		this.vrIdpersona = vrIdpersona;
 		this.tbAdmTipopersona = tbAdmTipopersona;
-		this.tbAdmCiudades = tbAdmCiudades;
+		this.tbAdmCiudad = tbAdmCiudad;
 		this.tbAdmTipoidentificacion = tbAdmTipoidentificacion;
 		this.vrNombres = vrNombres;
 		this.vrApellidos = vrApellidos;
@@ -77,12 +77,12 @@ public class TbAdmPersona implements java.io.Serializable {
 		this.tbAdmTipopersona = tbAdmTipopersona;
 	}
 
-	public TbAdmCiudades getTbAdmCiudades() {
-		return this.tbAdmCiudades;
+	public TbAdmCiudad getTbAdmCiudad() {
+		return this.tbAdmCiudad;
 	}
 
-	public void setTbAdmCiudades(TbAdmCiudades tbAdmCiudades) {
-		this.tbAdmCiudades = tbAdmCiudades;
+	public void setTbAdmCiudad(TbAdmCiudad tbAdmCiudad) {
+		this.tbAdmCiudad = tbAdmCiudad;
 	}
 
 	public TbAdmTipoidentificacion getTbAdmTipoidentificacion() {

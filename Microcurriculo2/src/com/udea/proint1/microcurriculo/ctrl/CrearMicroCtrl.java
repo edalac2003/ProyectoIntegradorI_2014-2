@@ -24,17 +24,17 @@ import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbAdmPaises;
+import com.udea.proint1.microcurriculo.dto.TbAdmPais;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
-import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
+import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
-import com.udea.proint1.microcurriculo.ngc.PaisesNGC;
+import com.udea.proint1.microcurriculo.ngc.PaisNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
-import com.udea.proint1.microcurriculo.ngc.UnidadesxMicroNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
@@ -108,11 +108,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbIdNucleo;
 	Combobox cmbIdSemestre;
 	
-	MateriasNGC materiasNGC;
+	MateriaNGC materiasNGC;
 	PersonaNGC personaNGC;
 	NucleoNGC nucleoNGC;
 	SemestreNGC semestreNGC;
-	PaisesNGC paisesNGC;
+	PaisNGC paisesNGC;
 	
 	
 	
@@ -128,7 +128,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	//arg.get("objeto")
 	
 	
-	public void setMateriasNGC(MateriasNGC materiasNGC) {
+	public void setMateriasNGC(MateriaNGC materiasNGC) {
 		this.materiasNGC = materiasNGC;
 	}
 
@@ -145,7 +145,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		this.nucleoNGC = nucleoNGC;
 	}
 	
-	public void setPaisesNGC(PaisesNGC paisesNGC) {
+	public void setPaisesNGC(PaisNGC paisesNGC) {
 		this.paisesNGC = paisesNGC;
 	}
 
@@ -505,9 +505,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	public void cargarMaterias(String nucleo){
 		try {
-			List<TbAdmMaterias> listaMaterias = materiasNGC.listarMateriasxNucleo(nucleo);
+			List<TbAdmMateria> listaMaterias = materiasNGC.listarMateriasxNucleo(nucleo);
 			if (listaMaterias != null){
-				for (TbAdmMaterias materia : listaMaterias){
+				for (TbAdmMateria materia : listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
 					cmbIdMateria.appendChild(item);
 				}
@@ -639,7 +639,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void onSelect$cmbIdMateria(){
 		//Messagebox.show("Ingresó al Evento."+ cmbIdMateria.getValue().toString());
 		try {
-			TbAdmMaterias materia = materiasNGC.obtenerMateria(cmbIdMateria.getValue().toString());
+			TbAdmMateria materia = materiasNGC.obtenerMateria(cmbIdMateria.getValue().toString());
 			if (materia != null ){
 				lblNombreMateria.setValue(materia.getVrNombre());
 				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));

@@ -9,9 +9,9 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.TipoPersonaDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmCiudades;
+import com.udea.proint1.microcurriculo.dto.TbAdmCiudad;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class TipoPersonaDAOHibernate extends HibernateDaoSupport implements TipoPersonaDAO {

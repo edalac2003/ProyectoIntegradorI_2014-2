@@ -1,13 +1,11 @@
 package com.udea.proint1.microcurriculo.ngc.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.udea.proint1.microcurriculo.dao.DependenciasDAO;
-import com.udea.proint1.microcurriculo.dao.UnidadesAcademicasDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmCiudades;
+import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
+import com.udea.proint1.microcurriculo.dao.UnidadAcademicaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -17,15 +15,15 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	
 	private static Logger log=Logger.getLogger(DependenciaNGCImpl.class);
 	
-	DependenciasDAO dependenciaDao;
+	DependenciaDAO dependenciaDao;
 	
-	UnidadesAcademicasDAO unidadAcademicaDao;
+	UnidadAcademicaDAO unidadAcademicaDao;
 
-	public void setDependenciaDao(DependenciasDAO dependenciaDao) {
+	public void setDependenciaDao(DependenciaDAO dependenciaDao) {
 		this.dependenciaDao = dependenciaDao;
 	}
 
-	public void setUnidadAcademicaDao(UnidadesAcademicasDAO unidadAcademicaDao) {
+	public void setUnidadAcademicaDao(UnidadAcademicaDAO unidadAcademicaDao) {
 		this.unidadAcademicaDao = unidadAcademicaDao;
 	}
 

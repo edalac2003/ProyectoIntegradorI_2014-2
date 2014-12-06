@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.udea.proint1.microcurriculo.dao.DependenciasDAO;
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
-import com.udea.proint1.microcurriculo.dto.TbAdmDocentesxnucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;

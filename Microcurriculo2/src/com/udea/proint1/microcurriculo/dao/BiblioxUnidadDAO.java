@@ -2,10 +2,8 @@ package com.udea.proint1.microcurriculo.dao;
 
 import java.util.List;
 
-import org.zkoss.zul.Listcell;
-
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface BiblioxUnidadDAO {
@@ -18,7 +16,7 @@ public interface BiblioxUnidadDAO {
 	
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad() throws ExcepcionesDAO;
 	
-	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(TbMicUnidades unidad) throws ExcepcionesDAO;
+	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(TbMicUnidad unidad) throws ExcepcionesDAO;
 	
 	public int contarRegistros() throws ExcepcionesDAO;
 

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udea.proint1.microcurriculo.dao.MicroxSemestreDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
+import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)

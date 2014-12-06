@@ -105,47 +105,47 @@
 	</bean>
 
 	<bean id="bibliografiasDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiasDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="ciudadesDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadesDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="correquisitosDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitosDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitoDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="departamentosDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentosDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentoDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 	<bean id="dependenciasDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciasDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="materiasDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.MateriasDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="microcurriculosDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculosDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculoDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="objetivosDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivosDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="paisesDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.PaisesDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.PaisDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
@@ -160,22 +160,22 @@
 	</bean>
 	
 	<bean id="subtemasDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemasDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="temasDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.TemasDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.TemaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="unidadesAcademicasDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesAcademicasDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadAcademicaDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<bean id="unidadesDAO"
-		class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadesDAOHibernate">
+		class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadDAOHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	

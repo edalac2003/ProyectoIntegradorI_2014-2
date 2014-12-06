@@ -9,22 +9,22 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class MateriasDAOHibernateTest {
 
 	@Autowired
-	MateriasDAOHibernate materiasDAO;
+	MateriaDAOHibernate materiasDAO;
 	
 	@Test
 	public void testListarMateriasPorSemestre() {
 		 
-		 List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+		 List<TbAdmMateria> materias = new ArrayList<TbAdmMateria>();
 		 try{
 			 materias = materiasDAO.listarMateriasPorSemestre(201402);
 			 for ( Iterator iterador = materias.listIterator(); iterador.hasNext(); ) {
-                 TbAdmMaterias mat = (TbAdmMaterias) iterador.next();
+                 TbAdmMateria mat = (TbAdmMateria) iterador.next();
                  System.out.println("Nombre de materia: " + mat.getVrNombre());
            }
 		 }catch(ExcepcionesDAO e){
@@ -34,10 +34,10 @@ public class MateriasDAOHibernateTest {
 	
 	@Test
 	public void testListarMaterias() {
-		 MateriasDAOHibernate materia = new MateriasDAOHibernate();
+		 MateriaDAOHibernate materia = new MateriaDAOHibernate();
 		 
 		 try{
-			 List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+			 List<TbAdmMateria> materias = new ArrayList<TbAdmMateria>();
 			 materia.listarMaterias();
 		 }catch(ExcepcionesDAO e){
 			 

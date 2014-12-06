@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.udea.proint1.microcurriculo.dao.UnidadesAcademicasDAO;
+import com.udea.proint1.microcurriculo.dao.UnidadAcademicaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -14,9 +14,9 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 
 	private static Logger log=Logger.getLogger(UnidadAcademicaNGCImpl.class);
 	
-	UnidadesAcademicasDAO unidadAcademicaDao;
+	UnidadAcademicaDAO unidadAcademicaDao;
 
-	public void setUnidadAcademicaDao(UnidadesAcademicasDAO unidadAcademicaDao) {
+	public void setUnidadAcademicaDao(UnidadAcademicaDAO unidadAcademicaDao) {
 		this.unidadAcademicaDao = unidadAcademicaDao;
 	}
 
@@ -75,7 +75,7 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 		
 		try {
 			
-			unidadAcademicaDao.modificarUnidad(unidadAcademica);;
+			unidadAcademicaDao.modificarUnidad(unidadAcademica);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo actualizarUnidadAcademica de la clase unidadAcademicaDao: "+ e);

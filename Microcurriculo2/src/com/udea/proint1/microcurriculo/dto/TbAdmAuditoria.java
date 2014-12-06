@@ -5,27 +5,27 @@ import java.util.Date;
 public class TbAdmAuditoria {
 
 	private int nbIdauditoria;
-	private TbAdmUsuarios tbAdmUsuarios;
-	private TbAdmTablas tbAdmTablas;
-	private int nbObservaciones;
+	private TbAdmUsuario tbAdmUsuario;
+	private TbAdmTabla tbAdmTabla;
+	private String vrObservaciones;
 	private Date dtFecha;
 
 	public TbAdmAuditoria() {
 	}
 
-	public TbAdmAuditoria(int nbIdauditoria, TbAdmUsuarios tbAdmUsuarios,
-			TbAdmTablas tbAdmTablas) {
+	public TbAdmAuditoria(int nbIdauditoria, TbAdmUsuario tbAdmUsuario,
+			TbAdmTabla tbAdmTabla) {
 		this.nbIdauditoria = nbIdauditoria;
-		this.tbAdmUsuarios = tbAdmUsuarios;
-		this.tbAdmTablas = tbAdmTablas;
+		this.tbAdmUsuario = tbAdmUsuario;
+		this.tbAdmTabla = tbAdmTabla;
 	}
 
-	public TbAdmAuditoria(int nbIdauditoria, TbAdmUsuarios tbAdmUsuarios,
-			TbAdmTablas tbAdmTablas, int nbObservaciones, Date dtFecha) {
+	public TbAdmAuditoria(int nbIdauditoria, TbAdmUsuario tbAdmUsuario,
+			TbAdmTabla tbAdmTabla, String vrObservaciones, Date dtFecha) {
 		this.nbIdauditoria = nbIdauditoria;
-		this.tbAdmUsuarios = tbAdmUsuarios;
-		this.tbAdmTablas = tbAdmTablas;
-		this.nbObservaciones = nbObservaciones;
+		this.tbAdmUsuario = tbAdmUsuario;
+		this.tbAdmTabla = tbAdmTabla;
+		this.vrObservaciones = vrObservaciones;
 		this.dtFecha = dtFecha;
 	}
 
@@ -37,28 +37,28 @@ public class TbAdmAuditoria {
 		this.nbIdauditoria = nbIdauditoria;
 	}
 
-	public TbAdmUsuarios getTbAdmUsuarios() {
-		return tbAdmUsuarios;
+	public TbAdmUsuario getTbAdmUsuario() {
+		return tbAdmUsuario;
 	}
 
-	public void setTbAdmUsuarios(TbAdmUsuarios tbAdmUsuarios) {
-		this.tbAdmUsuarios = tbAdmUsuarios;
+	public void setTbAdmUsuario(TbAdmUsuario tbAdmUsuario) {
+		this.tbAdmUsuario = tbAdmUsuario;
 	}
 
-	public TbAdmTablas getTbAdmTablas() {
-		return tbAdmTablas;
+	public TbAdmTabla getTbAdmTabla() {
+		return tbAdmTabla;
 	}
 
-	public void setTbAdmTablas(TbAdmTablas tbAdmTablas) {
-		this.tbAdmTablas = tbAdmTablas;
+	public void setTbAdmTabla(TbAdmTabla tbAdmTabla) {
+		this.tbAdmTabla = tbAdmTabla;
 	}
 
-	public int getNbObservaciones() {
-		return nbObservaciones;
+	public String getVrObservaciones() {
+		return vrObservaciones;
 	}
 
-	public void setNbObservaciones(int nbObservaciones) {
-		this.nbObservaciones = nbObservaciones;
+	public void setVrObservaciones(String vrObservaciones) {
+		this.vrObservaciones = vrObservaciones;
 	}
 
 	public Date getDtFecha() {

@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.udea.proint1.microcurriculo.dao.MateriasDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dao.MateriaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -27,7 +27,7 @@ public class TestMateriasDAOHibernate {
 	static final Logger log = Logger.getLogger(TestMateriasDAOHibernate.class);
 
 	@Autowired
-	MateriasDAO materiasDAO;
+	MateriaDAO materiasDAO;
 
 	/*
 	 * @Test public void testMateriasDAOHibernate() {
@@ -36,7 +36,7 @@ public class TestMateriasDAOHibernate {
 
 	@Test
 	public void testGuardarMateria() {
-		TbAdmMaterias materias = new TbAdmMaterias();
+		TbAdmMateria materias = new TbAdmMateria();
 		materias.setVrIdmateria("20100102");
 		materias.setVrNombre("Logica y Representación II");
 		materias.setNbSemestre(2);
@@ -64,7 +64,7 @@ public class TestMateriasDAOHibernate {
 	@Test
 	public void testObtenerMateria() {
 		try {
-			TbAdmMaterias materia = materiasDAO.obtenerMateria("0000000009");
+			TbAdmMateria materia = materiasDAO.obtenerMateria("0000000009");
 			System.out.println(materia.getVrNombre());
 			assertTrue(true);
 		} catch (ExcepcionesDAO e) {
@@ -75,7 +75,7 @@ public class TestMateriasDAOHibernate {
 	@Test
 	public void testListarMaterias() {
 		try {
-			for (TbAdmMaterias materia : materiasDAO.listarMaterias()) {
+			for (TbAdmMateria materia : materiasDAO.listarMaterias()) {
 				System.out.print(materia.getVrIdmateria() + "  ");
 				System.out.println(materia.getVrNombre());
 				assertTrue(true);
@@ -87,12 +87,12 @@ public class TestMateriasDAOHibernate {
 
 	@Test
 	public void testListarMateriasPorNucleo() {
-		List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+		List<TbAdmMateria> materias = new ArrayList<TbAdmMateria>();
 		 try{
 			 materias = materiasDAO.listarMateriasPorNucleo("0000001");
-			 Iterator<TbAdmMaterias> iterador = materias.listIterator();
+			 Iterator<TbAdmMateria> iterador = materias.listIterator();
 			 while( iterador.hasNext() ) {
-				    TbAdmMaterias m = (TbAdmMaterias) iterador.next();
+				    TbAdmMateria m = (TbAdmMateria) iterador.next();
 				    System.out.println(m.getVrNombre());
 				    assertTrue(true);
 			 }
@@ -104,12 +104,12 @@ public class TestMateriasDAOHibernate {
 	@Test
 	public void testListarMateriasPorSemestre() {
 
-		List<TbAdmMaterias> materias = new ArrayList<TbAdmMaterias>();
+		List<TbAdmMateria> materias = new ArrayList<TbAdmMateria>();
 		try {
 			materias = materiasDAO.listarMateriasPorSemestre(201402);
-			Iterator<TbAdmMaterias> iterador = materias.listIterator();
+			Iterator<TbAdmMateria> iterador = materias.listIterator();
 			while (iterador.hasNext()) {
-				TbAdmMaterias m = (TbAdmMaterias) iterador.next();
+				TbAdmMateria m = (TbAdmMateria) iterador.next();
 				System.out.println(m.getVrNombre());
 				// si es necesario lo borramos con:
 				// iterador.remove();

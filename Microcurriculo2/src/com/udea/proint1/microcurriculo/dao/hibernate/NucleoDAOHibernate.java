@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO {

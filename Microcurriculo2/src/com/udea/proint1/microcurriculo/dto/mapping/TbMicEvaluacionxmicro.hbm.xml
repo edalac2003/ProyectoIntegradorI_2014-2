@@ -8,11 +8,11 @@
             <column name="NB_ID" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbMicEvaluaciones" class="com.udea.proint1.microcurriculo.dto.TbMicEvaluaciones" fetch="select">
-            <column name="TB_MIC_EVALUACIONES" />
+        <many-to-one name="tbMicEvaluacion" class="com.udea.proint1.microcurriculo.dto.TbMicEvaluacion" fetch="select">
+            <column name="TB_MIC_EVALUACION" />
         </many-to-one>
-        <many-to-one name="tbMicMicrocurriculos" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos" fetch="select">
-            <column name="TB_MIC_MICROCURRICULOS" />
+        <many-to-one name="tbMicMicrocurriculo" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" fetch="select">
+            <column name="TB_MIC_MICROCURRICULO" />
         </many-to-one>
         <property name="nbPorcentaje" type="int" access="field">
             <column name="NB_PORCENTAJE" />

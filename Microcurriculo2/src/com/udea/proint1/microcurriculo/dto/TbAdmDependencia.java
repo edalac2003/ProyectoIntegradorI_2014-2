@@ -16,7 +16,7 @@ public class TbAdmDependencia implements java.io.Serializable {
 	private String vrNombre;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbAdmNucleos = new HashSet(0);
+	private Set tbAdmNucleo = new HashSet(0);
 
 	public TbAdmDependencia() {
 	}
@@ -29,13 +29,13 @@ public class TbAdmDependencia implements java.io.Serializable {
 
 	public TbAdmDependencia(String vrIddependencia,
 			TbAdmUnidadAcademica tbAdmUnidadAcademica, String vrNombre,
-			String vrModusuario, Date dtModfecha, Set tbAdmNucleos) {
+			String vrModusuario, Date dtModfecha, Set tbAdmNucleo) {
 		this.vrIddependencia = vrIddependencia;
 		this.tbAdmUnidadAcademica = tbAdmUnidadAcademica;
 		this.vrNombre = vrNombre;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbAdmNucleos = tbAdmNucleos;
+		this.tbAdmNucleo = tbAdmNucleo;
 	}
 
 	public String getVrIddependencia() {
@@ -79,12 +79,12 @@ public class TbAdmDependencia implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-	public Set getTbAdmNucleos() {
-		return this.tbAdmNucleos;
+	public Set getTbAdmNucleo() {
+		return this.tbAdmNucleo;
 	}
 
-	public void setTbAdmNucleos(Set tbAdmNucleos) {
-		this.tbAdmNucleos = tbAdmNucleos;
+	public void setTbAdmNucleo(Set tbAdmNucleo) {
+		this.tbAdmNucleo = tbAdmNucleo;
 	}
 
 }

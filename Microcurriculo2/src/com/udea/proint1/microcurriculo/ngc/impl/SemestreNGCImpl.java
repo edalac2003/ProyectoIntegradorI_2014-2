@@ -3,10 +3,8 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.w3c.dom.ls.LSInput;
 
 import com.udea.proint1.microcurriculo.dao.SemestreDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;

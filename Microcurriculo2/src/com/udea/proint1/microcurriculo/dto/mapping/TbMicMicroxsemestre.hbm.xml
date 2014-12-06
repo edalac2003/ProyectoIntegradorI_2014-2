@@ -8,7 +8,7 @@
             <column name="NB_ID" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbMicMicrocurriculos" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos" fetch="select">
+        <many-to-one name="tbMicMicrocurriculo" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" fetch="select">
             <column name="VR_MICROCURRICULO" length="20" not-null="true" />
         </many-to-one>
         <many-to-one name="tbAdmSemestre" class="com.udea.proint1.microcurriculo.dto.TbAdmSemestre" fetch="select">

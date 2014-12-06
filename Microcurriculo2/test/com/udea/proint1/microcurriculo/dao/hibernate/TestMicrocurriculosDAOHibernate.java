@@ -11,9 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,7 +24,7 @@ public class TestMicrocurriculosDAOHibernate {
 
 	static final Logger log = Logger.getLogger(TestMicrocurriculosDAOHibernate.class);
 	@Autowired 
-	MicrocurriculosDAO microcurriculosDAO;
+	MicrocurriculoDAO microcurriculosDAO;
 	/*
 	@Test
 	public void testMicrocurriculosDAOHibernate() {
@@ -34,9 +34,9 @@ public class TestMicrocurriculosDAOHibernate {
 	@Test
 	@Rollback(true)
 	public void testGuardarMicrocurriculo() {
-		TbMicMicrocurriculos microcurriculo = new TbMicMicrocurriculos();
+		TbMicMicrocurriculo microcurriculo = new TbMicMicrocurriculo();
 		microcurriculo.setVrIdmicrocurriculo("2010010101");
-		TbAdmMaterias materias = new TbAdmMaterias();
+		TbAdmMateria materias = new TbAdmMateria();
 		materias.setVrNombre("Logica");
 		microcurriculo.setTbAdmMaterias(materias);
 		microcurriculo.setVrResumen("Este es un resumen");
@@ -55,10 +55,10 @@ public class TestMicrocurriculosDAOHibernate {
 	@Test
 	@Rollback(true)
 	public void testlistarMicrocurriculosPorMateria() throws ExcepcionesDAO{
-		TbAdmMaterias materia = new TbAdmMaterias();
+		TbAdmMateria materia = new TbAdmMateria();
 		materia.setVrIdmateria("0000000009");
 		materia.setVrNombre("Logica y Representacion I");
-		List<TbMicMicrocurriculos> microcurriculos = microcurriculosDAO.listarMicrocurriculosPorMateria(materia);
+		List<TbMicMicrocurriculo> microcurriculos = microcurriculosDAO.listarMicrocurriculosPorMateria(materia);
 	}
 	/*public void testObtenerMicrocurriculo() {
 		try{

@@ -7,37 +7,34 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl;
 import com.udea.proint1.microcurriculo.dao.GuardarMicrocurriculoDAO;
-import com.udea.proint1.microcurriculo.dao.MicrocurriculosDAO;
-import com.udea.proint1.microcurriculo.dto.TbMicAutores;
+import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
+import com.udea.proint1.microcurriculo.dto.TbMicAutor;
 import com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivosxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
-import com.udea.proint1.microcurriculo.dto.TbMicTemas;
-import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
-
-
-
 
 public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 
 	private static Logger logger = Logger.getLogger(ValidarDatosCtrl.class);
 	
-	MicrocurriculosDAO microcurriculosDao;
+	MicrocurriculoDAO microcurriculoDao;
 	GuardarMicrocurriculoDAO guardarMicrocurriculoDao;
 	
-	public void setMicrocurriculosDao(MicrocurriculosDAO microcurriculosDao) {
-		this.microcurriculosDao = microcurriculosDao;
+	public void setMicrocurriculoDao(MicrocurriculoDAO microcurriculoDao) {
+		this.microcurriculoDao = microcurriculoDao;
 	}
 	
 	public void setGuardarMicrocurriculoDao(GuardarMicrocurriculoDAO guardarMicrocurriculoDao) {
@@ -46,25 +43,25 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 
 
 	@Override
-	public void guardarMicroxlotes(List<TbMicTemas> temas,
-			List<TbMicTemasxunidad> temasxunidad, List<TbMicAutores> autores,
-			List<TbMicSubtemas> subtemas, List<TbMicUnidades> unidades,
-			List<TbMicUnidadesxmicro> unidadesxmicro,
+	public void guardarMicroxlotes(List<TbMicTema> temas,
+			List<TbMicTemaxunidad> temasxunidad, List<TbMicAutor> autores,
+			List<TbMicSubtema> subtemas, List<TbMicUnidad> unidades,
+			List<TbMicUnidadxmicro> unidadesxmicro,
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicAutorxbiblio> autorxbiblio,
-			List<TbMicObjetivos> objetivos,
-			List<TbMicObjetivosxmicro> objetivosxmicro,
+			List<TbMicObjetivo> objetivos,
+			List<TbMicObjetivoxmicro> objetivosxmicro,
 			List<TbMicBibliografia> bibliografia,
-			TbMicMicrocurriculos microcurriculo,
+			TbMicMicrocurriculo microcurriculo,
 			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre)
 			throws ExcepcionesLogica {
 		
 		String idMicro;
-		TbMicMicrocurriculos consulta = null;
+		TbMicMicrocurriculo consulta = null;
 		
 		try{			
 			idMicro = microcurriculo.getVrIdmicrocurriculo();
-			consulta = microcurriculosDao.obtenerMicrocurriculo(idMicro);
+			consulta = microcurriculoDao.obtenerMicrocurriculo(idMicro);
 			//System.out.println("El valor del Microcurriculo en Guardar x Lote : " + microConsulta);
 			
 			System.out.println("Estoy listo para llamar el metodo guardar DAO.");
@@ -83,16 +80,16 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 
 
 	@Override
-	public void guardarMicroMiniLote(TbMicMicrocurriculos microcurriculo,
+	public void guardarMicroMiniLote(TbMicMicrocurriculo microcurriculo,
 			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
-			List<TbMicObjetivos> listaObjetivos,
-			List<TbMicObjetivosxmicro> listaObjetivosxMicro)
+			List<TbMicObjetivo> listaObjetivos,
+			List<TbMicObjetivoxmicro> listaObjetivosxMicro)
 			throws ExcepcionesLogica {
 		
-		TbMicMicrocurriculos micro = null;
+		TbMicMicrocurriculo micro = null;
 		
 		try {
-			micro = microcurriculosDao.obtenerMicrocurriculo(microcurriculo.getVrIdmicrocurriculo());
+			micro = microcurriculoDao.obtenerMicrocurriculo(microcurriculo.getVrIdmicrocurriculo());
 		} catch (ExcepcionesDAO e1) {
 			
 		}

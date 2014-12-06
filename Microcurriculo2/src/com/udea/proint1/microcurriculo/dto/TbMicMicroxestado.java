@@ -14,27 +14,27 @@ public class TbMicMicroxestado implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int nbId;
-	private TbMicEstados tbMicEstados;
-	private TbMicMicrocurriculos tbMicMicrocurriculos;
+	private TbMicEstado tbMicEstado;
+	private TbMicMicrocurriculo tbMicMicrocurriculo;
 	private String vrModusuario;
 	private Date dtModfecha;
 
 	public TbMicMicroxestado() {
 	}
 
-	public TbMicMicroxestado(int nbId, TbMicEstados tbMicEstados,
-			TbMicMicrocurriculos tbMicMicrocurriculos) {
+	public TbMicMicroxestado(int nbId, TbMicEstado tbMicEstado,
+			TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.nbId = nbId;
-		this.tbMicEstados = tbMicEstados;
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbMicEstado = tbMicEstado;
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
 
-	public TbMicMicroxestado(int nbId, TbMicEstados tbMicEstados,
-			TbMicMicrocurriculos tbMicMicrocurriculos, String vrModusuario,
+	public TbMicMicroxestado(int nbId, TbMicEstado tbMicEstado,
+			TbMicMicrocurriculo tbMicMicrocurriculo, String vrModusuario,
 			Date dtModfecha) {
 		this.nbId = nbId;
-		this.tbMicEstados = tbMicEstados;
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbMicEstado = tbMicEstado;
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
@@ -47,21 +47,21 @@ public class TbMicMicroxestado implements java.io.Serializable {
 		this.nbId = nbId;
 	}
 
-	public TbMicEstados getTbMicEstados() {
-		return this.tbMicEstados;
+	public TbMicEstado getTbMicEstado() {
+		return this.tbMicEstado;
 	}
 
-	public void setTbMicEstados(TbMicEstados tbMicEstados) {
-		this.tbMicEstados = tbMicEstados;
+	public void setTbMicEstado(TbMicEstado tbMicEstado) {
+		this.tbMicEstado = tbMicEstado;
 	}
 
-	public TbMicMicrocurriculos getTbMicMicrocurriculos() {
-		return this.tbMicMicrocurriculos;
+	public TbMicMicrocurriculo getTbMicMicrocurriculo() {
+		return this.tbMicMicrocurriculo;
 	}
 
-	public void setTbMicMicrocurriculos(
-			TbMicMicrocurriculos tbMicMicrocurriculos) {
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+	public void setTbMicMicrocurriculo(
+			TbMicMicrocurriculo tbMicMicrocurriculo) {
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
 
 	public String getVrModusuario() {

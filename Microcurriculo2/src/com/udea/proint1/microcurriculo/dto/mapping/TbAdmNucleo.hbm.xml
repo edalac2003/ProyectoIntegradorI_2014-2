@@ -24,13 +24,13 @@
             <key>
                 <column name="VR_NUCLEO" length="7" not-null="true" />
             </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentesxnucleo" />
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo" />
         </set>
         <set name="tbAdmMateriases" table="TB_ADM_MATERIAS" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_NUCLEO" length="7" not-null="true" />
             </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmMaterias" />
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmMateria" />
         </set>
     </class>
 </hibernate-mapping>

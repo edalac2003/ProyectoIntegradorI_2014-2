@@ -16,9 +16,9 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
-import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
-import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
+import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class ListarMateriasCtrl extends GenericForwardComposer{
@@ -32,13 +32,13 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 	
 	Button btnBuscarMaterias;
 	
-	MateriasNGC materiasNGC;
+	MateriaNGC materiasNGC;
 	
 	//MicrocurriculosNGC microcurriculosNGC;
 
 	
 	
-	public void setMateriasNGC(MateriasNGC materiasNGC) {
+	public void setMateriasNGC(MateriaNGC materiasNGC) {
 		this.materiasNGC = materiasNGC;
 	}
 
@@ -47,11 +47,11 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 		limpiarLista(listaMaterias);
 		if (!"".equals(cmbCriterioBusqueda.getValue()) && (cmbCriterioBusqueda.getValue() != null)){
 			if ((!"".equals(cmbValorBusqueda.getValue())) && (cmbValorBusqueda.getValue() != null)){
-				List<TbAdmMaterias> listaMaterias = null;
+				List<TbAdmMateria> listaMaterias = null;
 				try {
 					listaMaterias = materiasNGC.listarMateriasxNucleo(cmbValorBusqueda.getValue().toString());
 					if (listaMaterias != null){
-						for(TbAdmMaterias materia : listaMaterias){
+						for(TbAdmMateria materia : listaMaterias){
 							llenarListaMaterias(materia);
 						}						
 					} else 
@@ -67,7 +67,7 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 			Messagebox.show("Se Requiere información en el Campo <Criterio de Busqueda>");
 	}
 	
-	public void llenarListaMaterias(TbAdmMaterias materia){
+	public void llenarListaMaterias(TbAdmMateria materia){
 		Listitem listaItem = new Listitem();
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override

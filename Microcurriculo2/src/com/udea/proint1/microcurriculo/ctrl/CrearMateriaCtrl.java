@@ -18,10 +18,10 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.ext.Selectable;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
-import com.udea.proint1.microcurriculo.ngc.impl.MateriasNGCImpl;
+import com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -49,14 +49,14 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	Textbox txtHtp;
 	Textbox txtEstado;
 	Textbox txtNucleo;
-	MateriasNGCImpl materiasNGC;
+	MateriaNGCImpl materiasNGC;
 	NucleoNGCImpl nucleosNGC;
 	SemestreNGCImpl semestresNGC;
 
 	
 
-	private TbAdmMaterias materiaSeleccionada;
-	private List<TbAdmMaterias> listaMaterias;
+	private TbAdmMateria materiaSeleccionada;
+	private List<TbAdmMateria> listaMaterias;
 	private List<TbAdmNucleo> listaNucleos;
 	private List<TbAdmSemestre> listaSemestres;
 		
@@ -97,7 +97,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	private void cargarMaterias() throws ExcepcionesLogica {
 		try {
 			this.listaMaterias = materiasNGC.listarMaterias();
-			listBoxMaterias.setModel(new ListModelList<TbAdmMaterias>(this.listaMaterias));
+			listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(this.listaMaterias));
 		} catch (Exception e) {
 			throw new ExcepcionesLogica("No se pudo cargar la lista de materias");
 		}
@@ -108,18 +108,18 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	 * Metodo que permite filtrar la lista rapida de materias
 	 */
 	public void onChange$txtFiltrarMateria() {
-		List<TbAdmMaterias> listaFiltrada = new ArrayList<TbAdmMaterias>();
+		List<TbAdmMateria> listaFiltrada = new ArrayList<TbAdmMateria>();
 		String filtro = this.txtFiltrarMateria.getValue().toLowerCase();
-		for (TbAdmMaterias materia : this.listaMaterias) {
+		for (TbAdmMateria materia : this.listaMaterias) {
 			if (materia.getVrNombre().toLowerCase().contains(filtro)){
 				listaFiltrada.add(materia);
 			}
 		}
-		this.listBoxMaterias.setModel(new ListModelList<TbAdmMaterias>(listaFiltrada));
+		this.listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(listaFiltrada));
 	}
 	
 	public void onSelect$listBoxMaterias(){
-		Set<TbAdmMaterias> selection = ((Selectable<TbAdmMaterias>)listBoxMaterias.getModel()).getSelection();
+		Set<TbAdmMateria> selection = ((Selectable<TbAdmMateria>)listBoxMaterias.getModel()).getSelection();
 		this.materiaSeleccionada = selection.iterator().next();
 		this.llenarDatos();
 	}
@@ -208,7 +208,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			throw new WrongValueException(txtMateria, Labels.getLabel("Por favor ingrese el nombre de la materia"));
 		}
 		
-		TbAdmMaterias materia = new TbAdmMaterias();
+		TbAdmMateria materia = new TbAdmMateria();
 		materia.setVrIdmateria(txtCodigo.getText());
 		materia.setVrNombre(txtMateria.getText());
 		TbAdmNucleo nucleo = new TbAdmNucleo(ltbNucleo.getSelectedItem().getValue().toString());
@@ -225,11 +225,11 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			this.limpiarCampos();
 		}
 	}
-	public MateriasNGCImpl getMateriasNGC() {
+	public MateriaNGCImpl getMateriasNGC() {
 		return materiasNGC;
 	}
 
-	public void setMateriasNGC(MateriasNGCImpl materiasNGC) {
+	public void setMateriasNGC(MateriaNGCImpl materiasNGC) {
 		this.materiasNGC = materiasNGC;
 	}
 	

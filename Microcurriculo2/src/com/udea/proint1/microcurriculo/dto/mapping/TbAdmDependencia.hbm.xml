@@ -20,7 +20,7 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmNucleos" table="TB_ADM_NUCLEO" inverse="true" lazy="true" fetch="select">
+        <set name="tbAdmNucleo" table="TB_ADM_NUCLEO" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_DEPENDENCIA" length="4" not-null="true" />
             </key>

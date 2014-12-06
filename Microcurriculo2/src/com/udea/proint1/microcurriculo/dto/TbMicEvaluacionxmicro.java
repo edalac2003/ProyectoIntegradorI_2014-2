@@ -14,8 +14,8 @@ public class TbMicEvaluacionxmicro implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int nbId;
-	private TbMicEvaluaciones tbMicEvaluaciones;
-	private TbMicMicrocurriculos tbMicMicrocurriculos;
+	private TbMicEvaluacion tbMicEvaluacion;
+	private TbMicMicrocurriculo tbMicMicrocurriculo;
 	private int nbPorcentaje;
 	private Date dtFechaestimada;
 	private String vrModusuario;
@@ -24,23 +24,23 @@ public class TbMicEvaluacionxmicro implements java.io.Serializable {
 	public TbMicEvaluacionxmicro() {
 	}
 
-	public TbMicEvaluacionxmicro(int nbId, TbMicEvaluaciones tbMicEvaluaciones,
-			TbMicMicrocurriculos tbMicMicrocurriculos,int nbPorcentaje,
+	public TbMicEvaluacionxmicro(int nbId, TbMicEvaluacion tbMicEvaluacion,
+			TbMicMicrocurriculo tbMicMicrocurriculo,int nbPorcentaje,
 			Date dtFechaestimada) {
 		this.nbId = nbId;
-		this.tbMicEvaluaciones = tbMicEvaluaciones;
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbMicEvaluacion = tbMicEvaluacion;
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.nbPorcentaje = nbPorcentaje;
 		this.dtFechaestimada = dtFechaestimada;
 	}
 
-	public TbMicEvaluacionxmicro(int nbId, TbMicEvaluaciones tbMicEvaluaciones,
-			TbMicMicrocurriculos tbMicMicrocurriculos, int nbPorcentaje,
+	public TbMicEvaluacionxmicro(int nbId, TbMicEvaluacion tbMicEvaluacion,
+			TbMicMicrocurriculo tbMicMicrocurriculo, int nbPorcentaje,
 			Date dtFechaestimada, String vrModusuario, Date dtModfecha) {
 		super();
 		this.nbId = nbId;
-		this.tbMicEvaluaciones = tbMicEvaluaciones;
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+		this.tbMicEvaluacion = tbMicEvaluacion;
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.nbPorcentaje = nbPorcentaje;
 		this.dtFechaestimada = dtFechaestimada;
 		this.vrModusuario = vrModusuario;
@@ -55,24 +55,22 @@ public class TbMicEvaluacionxmicro implements java.io.Serializable {
 		this.nbId = nbId;
 	}
 
-	public TbMicEvaluaciones getTbMicEvaluaciones() {
-		return this.tbMicEvaluaciones;
+	public TbMicEvaluacion getTbMicEvaluacion() {
+		return this.tbMicEvaluacion;
 	}
 
-	public void setTbMicEvaluaciones(TbMicEvaluaciones tbMicEvaluaciones) {
-		this.tbMicEvaluaciones = tbMicEvaluaciones;
+	public void setTbMicEvaluacion(TbMicEvaluacion tbMicEvaluacion) {
+		this.tbMicEvaluacion = tbMicEvaluacion;
 	}
 
-	public TbMicMicrocurriculos getTbMicMicrocurriculos() {
-		return this.tbMicMicrocurriculos;
+	public TbMicMicrocurriculo getTbMicMicrocurriculo() {
+		return this.tbMicMicrocurriculo;
 	}
 
-	public void setTbMicMicrocurriculos(
-			TbMicMicrocurriculos tbMicMicrocurriculos) {
-		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
+	public void setTbMicMicrocurriculo(
+			TbMicMicrocurriculo tbMicMicrocurriculo) {
+		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
-	
-	
 
 	public int getNbPorcentaje() {
 		return nbPorcentaje;

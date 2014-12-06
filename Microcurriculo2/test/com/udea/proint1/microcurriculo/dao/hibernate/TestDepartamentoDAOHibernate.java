@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.udea.proint1.microcurriculo.dao.DepartamentosDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
+import com.udea.proint1.microcurriculo.dao.DepartamentoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,12 +19,12 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 public class TestDepartamentoDAOHibernate {
 	
 	@Autowired
-	DepartamentosDAO departamentosDAO;
+	DepartamentoDAO departamentosDAO;
 
 	@Test
 	public void testObtenerDepartamento() {
 		try{
-			TbAdmDepartamentos departamento = departamentosDAO.obtenerDepartamento(18);
+			TbAdmDepartamento departamento = departamentosDAO.obtenerDepartamento(18);
 			System.out.println(departamento.getVrNombres());
 			assertTrue(true);
 		}catch(ExcepcionesDAO e){

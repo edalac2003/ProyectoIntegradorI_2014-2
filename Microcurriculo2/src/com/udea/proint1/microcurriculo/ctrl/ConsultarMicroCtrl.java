@@ -11,24 +11,23 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisitos;
-import com.udea.proint1.microcurriculo.dto.TbAdmDepartamentos;
+import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
+import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicEstados;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.ngc.CorrequisitosNGC;
+import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
-import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
-import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
-import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
-import com.udea.proint1.microcurriculo.ngc.MicroxestadoNGC;
+import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
+import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
+import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
-import com.udea.proint1.microcurriculo.ngc.PrerrequisitosNGC;
+import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -70,12 +69,12 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	UnidadAcademicaNGC unidadAcademicaNGC;
 	NucleoNGC nucleoNGC;
 	DependenciaNGC dependenciaNGC;
-	MateriasNGC materiasNGC;
-	MicrocurriculosNGC microcurriculosNGC;
-	EstadosNGC estadosNGC;
-	CorrequisitosNGC correquisitosNGC;
-	PrerrequisitosNGC prerrequisitosNGC;
-	MicroxestadoNGC microxestadoNGC;
+	MateriaNGC materiaNGC;
+	MicrocurriculoNGC microcurriculoNGC;
+	EstadoNGC estadoNGC;
+	CorrequisitoNGC correquisitoNGC;
+	PrerrequisitoNGC prerrequisitoNGC;
+	MicroxEstadoNGC microxestadoNGC;
 
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -89,27 +88,27 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		this.dependenciaNGC = dependenciaNGC;
 	}
 
-	public void setMateriasNGC(MateriasNGC materiasNGC) {
-		this.materiasNGC = materiasNGC;
+	public void setMateriaNGC(MateriaNGC materiaNGC) {
+		this.materiaNGC = materiaNGC;
 	}
 
-	public void setMicrocurriculosNGC(MicrocurriculosNGC microcurriculosNGC) {
-		this.microcurriculosNGC = microcurriculosNGC;
+	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
+		this.microcurriculoNGC = microcurriculoNGC;
 	}
 
-	public void setEstadosNGC(EstadosNGC estadosNGC) {
-		this.estadosNGC = estadosNGC;
+	public void setEstadoNGC(EstadoNGC estadoNGC) {
+		this.estadoNGC = estadoNGC;
 	}
 
-	public void setCorrequisitosNGC(CorrequisitosNGC correquisitosNGC) {
-		this.correquisitosNGC = correquisitosNGC;
+	public void setCorrequisitoNGC(CorrequisitoNGC correquisitoNGC) {
+		this.correquisitoNGC = correquisitoNGC;
 	}
 
-	public void setPrerrequisitosNGC(PrerrequisitosNGC prerrequisitosNGC) {
-		this.prerrequisitosNGC = prerrequisitosNGC;
+	public void setPrerrequisitoNGC(PrerrequisitoNGC prerrequisitoNGC) {
+		this.prerrequisitoNGC = prerrequisitoNGC;
 	}
 
-	public void setMicroxestadoNGC(MicroxestadoNGC microxestadoNGC) {
+	public void setMicroxestadoNGC(MicroxEstadoNGC microxestadoNGC) {
 		this.microxestadoNGC = microxestadoNGC;
 	}
 
@@ -178,11 +177,11 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void cargarMaterias(){
 		try {
-			List<TbAdmMaterias> listaMaterias = materiasNGC.listarMaterias();
+			List<TbAdmMateria> listaMaterias = materiaNGC.listarMaterias();
 			cmbIdMateria.getItems().clear();
 			
 			if(listaMaterias != null){
-				for(TbAdmMaterias materia: listaMaterias){
+				for(TbAdmMateria materia: listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
 					cmbIdMateria.appendChild(item);
 				}
@@ -196,11 +195,11 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void cargarMicrocurriculos(){
 		try {
-			List<TbMicMicrocurriculos> listaMicrocurriculos = microcurriculosNGC.listarMicrocurriculos();
+			List<TbMicMicrocurriculo> listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculos();
 			cmbIdMicrocurriculo.getItems().clear();
 			
 			if(listaMicrocurriculos != null){
-				for(TbMicMicrocurriculos microcurriculo: listaMicrocurriculos){
+				for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
 					Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
 					cmbIdMicrocurriculo.appendChild(item);
 				}
@@ -214,11 +213,11 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void cargarEstados(){
 		try {
-			List<TbMicEstados> listaEstados = estadosNGC.listarEstados();
+			List<TbMicEstado> listaEstados = estadoNGC.listarEstados();
 			cmbIdEstado.getItems().clear();
 			
 			if(listaEstados != null){
-				for(TbMicEstados estado: listaEstados){
+				for(TbMicEstado estado: listaEstados){
 					Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
 					cmbIdEstado.appendChild(item);
 				}
@@ -254,7 +253,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		int idNum = Integer.parseInt(id);
 		String materia = cmbIdMateria.getValue().toString();
 		try {
-			TbMicEstados estado = estadosNGC.obtenerEstados(idNum);
+			TbMicEstado estado = estadoNGC.obtenerEstados(idNum);
 			lblNbreEstado.setValue(estado.getVrDescripcion());
 			
 			if(materia.equals("")||(materia.equals(null))){
@@ -287,7 +286,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void onSelect$cmbIdMateria(){
 		String id = cmbIdMateria.getValue().toString();
 		try {
-			TbAdmMaterias materia = materiasNGC.obtenerMateria(id);
+			TbAdmMateria materia = materiaNGC.obtenerMateria(id);
 			lblNbreMateria.setValue(materia.getVrNombre());
 			recargarMicrocurriculos(id);
 		} catch (ExcepcionesLogica e) {
@@ -325,7 +324,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			
 			if(listamicrosxEstado != null){
 				for(TbMicMicroxestado microxEstado: listamicrosxEstado){
-					Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculos().getVrIdmicrocurriculo());
+					Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculo().getVrIdmicrocurriculo());
 					cmbIdMicrocurriculo.appendChild(item);
 				}
 			}else{
@@ -343,8 +342,8 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			
 			if(listamicrosxEstado != null){
 				for(TbMicMicroxestado microxEstado: listamicrosxEstado){
-					if((microxEstado.getTbMicMicrocurriculos().getTbAdmMaterias().getVrIdmateria()).equals(materia)){
-						Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculos().getVrIdmicrocurriculo());
+					if((microxEstado.getTbMicMicrocurriculo().getTbAdmMateria().getVrIdmateria()).equals(materia)){
+						Comboitem item = new Comboitem(microxEstado.getTbMicMicrocurriculo().getVrIdmicrocurriculo());
 						cmbIdMicrocurriculo.appendChild(item);
 					}
 				}
@@ -397,11 +396,11 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void recargarMaterias(String buscaMaterias){
 		try {
 			buscaMaterias = buscaMaterias + "%";
-			List<TbAdmMaterias> listaMaterias = materiasNGC.buscarMaterias(buscaMaterias);
+			List<TbAdmMateria> listaMaterias = materiaNGC.buscarMaterias(buscaMaterias);
 			cmbIdMateria.getItems().clear();
 			
 			if(listaMaterias != null){
-				for(TbAdmMaterias materia: listaMaterias){
+				for(TbAdmMateria materia: listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
 					cmbIdMateria.appendChild(item);
 				}
@@ -416,11 +415,11 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void recargarMicrocurriculos(String buscaMicrocurriculos){
 		try {
 			buscaMicrocurriculos = buscaMicrocurriculos + "%";
-			List<TbMicMicrocurriculos> listaMicrocurriculos = microcurriculosNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
+			List<TbMicMicrocurriculo> listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
 			cmbIdMicrocurriculo.getItems().clear();
 			
 			if(listaMicrocurriculos != null){
-				for(TbMicMicrocurriculos microcurriculo: listaMicrocurriculos){
+				for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
 					Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
 					cmbIdMicrocurriculo.appendChild(item);
 				}
@@ -438,44 +437,44 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	
 	public void obtenerMicro(String id){
 		try {
-			TbMicMicrocurriculos microcurriculo = microcurriculosNGC.obtenerMicrocurriculos(id);
+			TbMicMicrocurriculo microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(id);
 			lblNombreDocente.setValue("");
 			lblSemestre.setValue("");
-			lblCreditosMateria.setValue(Integer.toString(microcurriculo.getTbAdmMaterias().getNbCreditos()));
-			int ht = microcurriculo.getTbAdmMaterias().getNbHt();
-			int hp = microcurriculo.getTbAdmMaterias().getNbHp();
-			int htp = microcurriculo.getTbAdmMaterias().getNbHtp();
+			lblCreditosMateria.setValue(Integer.toString(microcurriculo.getTbAdmMateria().getNbCreditos()));
+			int ht = microcurriculo.getTbAdmMateria().getNbHt();
+			int hp = microcurriculo.getTbAdmMateria().getNbHp();
+			int htp = microcurriculo.getTbAdmMateria().getNbHtp();
 			int horasSemestral = (ht+hp+htp)*16;
 			lblHtMateria.setValue(Integer.toString(ht));
 			lblHpMateria.setValue(Integer.toString(hp));
 			lblHtpMateria.setValue(Integer.toString(htp));
 			lblHoraClaseSemestral.setValue(Integer.toString(horasSemestral));
 			
-			if((microcurriculo.getTbAdmMaterias().getBlClasificable())==1){
+			if((microcurriculo.getTbAdmMateria().getBlClasificable())==1){
 				ckbClasificable.setChecked(true);
 			}
-			if((microcurriculo.getTbAdmMaterias().getBlHabilitable()) == 1){
+			if((microcurriculo.getTbAdmMateria().getBlHabilitable()) == 1){
 				ckbHabilitable.setChecked(true);
 			}
-			if((microcurriculo.getTbAdmMaterias().getBlValidable()) == 1){
+			if((microcurriculo.getTbAdmMateria().getBlValidable()) == 1){
 				ckbValidable.setChecked(true);
 			}
 			String listaCorrequisitos = "";
 			String listaPrerrequisitos = "";
 			
-			String idMateria = microcurriculo.getTbAdmMaterias().getVrIdmateria(); 
-			List<TbAdmCorrequisitos> correquisitos = correquisitosNGC.listarCorrequisitosxMateria(idMateria);
+			String idMateria = microcurriculo.getTbAdmMateria().getVrIdmateria(); 
+			List<TbAdmCorrequisito> correquisitos = correquisitoNGC.listarCorrequisitosxMateria(idMateria);
 			
-			for(TbAdmCorrequisitos correquisito: correquisitos){
+			for(TbAdmCorrequisito correquisito: correquisitos){
 				listaCorrequisitos = listaCorrequisitos + " "+(Integer.toString(correquisito.getNbId()));
 			}
 			lblCorrequisitos.setValue(listaCorrequisitos);
 			
-			List<TbAdmPrerrequisitos> prerrequisitos;
+			List<TbAdmPrerrequisito> prerrequisitos;
 			try {
-				prerrequisitos = prerrequisitosNGC.listarPrerrequisitosxMateria(idMateria);
+				prerrequisitos = prerrequisitoNGC.listarPrerrequisitosxMateria(idMateria);
 			
-				for(TbAdmPrerrequisitos prerrequisito: prerrequisitos){
+				for(TbAdmPrerrequisito prerrequisito: prerrequisitos){
 					listaPrerrequisitos = listaPrerrequisitos + " "+(Integer.toString(prerrequisito.getNbId()));
 				}
 				lblPrerrequisitos.setValue(listaPrerrequisitos);

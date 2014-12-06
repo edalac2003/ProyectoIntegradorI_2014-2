@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -49,7 +47,7 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 		
 		try {
 			
-			bibliografiaDao.guardarBibliografia(bibliografia);;
+			bibliografiaDao.guardarBibliografia(bibliografia);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo guardarBibliografia de la clase bibliografiaDao: "+ e);
@@ -108,7 +106,7 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 		
 		try {
 			
-			bibliografiaDao.modificarBibliografia(bibliografia);;
+			bibliografiaDao.modificarBibliografia(bibliografia);
 		
 		} catch (ExcepcionesDAO e) {
 			log.error("fallÃ³ al invocar el metodo obtenerBibliografia de la clase bibliografiaDao: "+ e);

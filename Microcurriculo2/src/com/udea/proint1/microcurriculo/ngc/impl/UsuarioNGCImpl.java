@@ -4,25 +4,24 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.udea.proint1.microcurriculo.dao.UsuariosDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmUsuarios;
-import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.ngc.UsuariosNGC;
+import com.udea.proint1.microcurriculo.dao.UsuarioDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmUsuario;
+import com.udea.proint1.microcurriculo.ngc.UsuarioNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class UsuarioNGCImpl implements UsuariosNGC {
+public class UsuarioNGCImpl implements UsuarioNGC {
 
 	private static Logger log=Logger.getLogger(UsuarioNGCImpl.class);
 	
-	UsuariosDAO usuariosDao;
+	UsuarioDAO usuarioDao;
 	
-	public void setUsuariosDao(UsuariosDAO usuariosDao) {
-		this.usuariosDao = usuariosDao;
+	public void setUsuarioDao(UsuarioDAO usuarioDao) {
+		this.usuarioDao = usuarioDao;
 	}
 
 	@Override
-	public void guardarUsuarios(TbAdmUsuarios usuario) throws ExcepcionesLogica {
+	public void guardarUsuarios(TbAdmUsuario usuario) throws ExcepcionesLogica {
 		/*
 		 * Comprobamos que el objeto id no est� vacio
 		 */
@@ -31,40 +30,40 @@ public class UsuarioNGCImpl implements UsuariosNGC {
 		}
 		try {
 			int id = usuario.getNbId();
-			TbAdmUsuarios usuarioConsulta = usuariosDao.obtenerUsuarios(id);
+			TbAdmUsuario usuarioConsulta = usuarioDao.obtenerUsuarios(id);
 		
 			if(usuarioConsulta != null){
 				throw new ExcepcionesLogica("El usuario a insertar ya existe");
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerUsuarios de la clase usuariosDao: "+ e);
+			log.error("fall� al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
 		}
 		
 		try {
 			
-			usuariosDao.guardarUsuarios(usuario);
+			usuarioDao.guardarUsuarios(usuario);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarUsuarios de la clase usuariosDao: "+ e);
+			log.error("fall� al invocar el metodo guardarUsuarios de la clase usuarioDao: "+ e);
 		}
 	}
 
 	@Override
-	public TbAdmUsuarios obtenerUsuarios(int id) throws ExcepcionesLogica {
+	public TbAdmUsuario obtenerUsuarios(int id) throws ExcepcionesLogica {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
 			throw new ExcepcionesLogica("No se ha ingresado una identificación de usuario, está vacia");
 		}
-		TbAdmUsuarios usuario = null;
+		TbAdmUsuario usuario = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			usuario = usuariosDao.obtenerUsuarios(id);
+			usuario = usuarioDao.obtenerUsuarios(id);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUsuarios de la clase usuariosDao: "+ e);
+			log.error("falló al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
 		}
 		
 		/*
@@ -80,12 +79,12 @@ public class UsuarioNGCImpl implements UsuariosNGC {
 	}
 
 	@Override
-	public List<TbAdmUsuarios> listarUsuarios() throws ExcepcionesLogica {
-		List<TbAdmUsuarios> listaUsuarios = null;
+	public List<TbAdmUsuario> listarUsuarios() throws ExcepcionesLogica {
+		List<TbAdmUsuario> listaUsuarios = null;
 		try {
-			listaUsuarios = usuariosDao.listarUsuarios();
+			listaUsuarios = usuarioDao.listarUsuarios();
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarUsuarios de la clase usuariosDao: "+ e);
+			log.error("falló al invocar el metodo listarUsuarios de la clase usuarioDao: "+ e);
 		}
 		
 		/*
@@ -99,7 +98,7 @@ public class UsuarioNGCImpl implements UsuariosNGC {
 	}
 
 	@Override
-	public void actualizarUsuarios(TbAdmUsuarios usuario)
+	public void actualizarUsuarios(TbAdmUsuario usuario)
 			throws ExcepcionesLogica {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
@@ -109,22 +108,22 @@ public class UsuarioNGCImpl implements UsuariosNGC {
 		}
 		try {
 			int id = usuario.getNbId();
-			TbAdmUsuarios usuarioConsulta = usuariosDao.obtenerUsuarios(id);
+			TbAdmUsuario usuarioConsulta = usuarioDao.obtenerUsuarios(id);
 		
 			if(usuarioConsulta == null){
 				throw new ExcepcionesLogica("El Usuario a actualizar no existe");
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUsuarios de la clase usuariosDao: "+ e);
+			log.error("falló al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
 		}
 		
 		try {
 			
-			usuariosDao.actualizarUsuarios(usuario);
+			usuarioDao.actualizarUsuarios(usuario);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarUsuarios de la clase usuariosDao: "+ e);
+			log.error("falló al invocar el metodo actualizarUsuarios de la clase usuarioDao: "+ e);
 		}
 	}
 

@@ -11,7 +11,7 @@ public class TbMicBiblioxunidad implements java.io.Serializable {
 
 	private int nbId;
 	private TbMicBibliografia tbMicBibliografia;
-	private TbMicUnidades tbMicUnidades;
+	private TbMicUnidad tbMicUnidad;
 	private String vrModusuario;
 	private Date dtModfecha;
 
@@ -19,18 +19,18 @@ public class TbMicBiblioxunidad implements java.io.Serializable {
 	}
 
 	public TbMicBiblioxunidad(int nbId,
-			TbMicBibliografia tbMicBibliografia, TbMicUnidades tbMicUnidades) {
+			TbMicBibliografia tbMicBibliografia, TbMicUnidad tbMicUnidad) {
 		this.nbId = nbId;
 		this.tbMicBibliografia = tbMicBibliografia;
-		this.tbMicUnidades = tbMicUnidades;
+		this.tbMicUnidad = tbMicUnidad;
 	}
 
 	public TbMicBiblioxunidad(int nbId,
-			TbMicBibliografia tbMicBibliografia, TbMicUnidades tbMicUnidades,
+			TbMicBibliografia tbMicBibliografia, TbMicUnidad tbMicUnidad,
 			String vrModusuario, Date dtModfecha) {
 		this.nbId = nbId;
 		this.tbMicBibliografia = tbMicBibliografia;
-		this.tbMicUnidades = tbMicUnidades;
+		this.tbMicUnidad = tbMicUnidad;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
@@ -51,12 +51,12 @@ public class TbMicBiblioxunidad implements java.io.Serializable {
 		this.tbMicBibliografia = tbMicBibliografia;
 	}
 
-	public TbMicUnidades getTbMicUnidades() {
-		return this.tbMicUnidades;
+	public TbMicUnidad getTbMicUnidad() {
+		return this.tbMicUnidad;
 	}
 
-	public void setTbMicUnidades(TbMicUnidades tbMicUnidades) {
-		this.tbMicUnidades = tbMicUnidades;
+	public void setTbMicUnidad(TbMicUnidad tbMicUnidad) {
+		this.tbMicUnidad = tbMicUnidad;
 	}
 
 	public String getVrModusuario() {

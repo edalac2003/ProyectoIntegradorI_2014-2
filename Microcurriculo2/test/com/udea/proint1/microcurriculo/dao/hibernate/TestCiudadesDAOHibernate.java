@@ -12,8 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.udea.proint1.microcurriculo.dao.CiudadesDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmCiudades;
+import com.udea.proint1.microcurriculo.dao.CiudadDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmCiudad;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,12 +24,12 @@ public class TestCiudadesDAOHibernate {
 	static final Logger log = Logger.getLogger(TestCiudadesDAOHibernate.class);
 	
 	@Autowired
-	CiudadesDAO ciudadDao;
+	CiudadDAO ciudadDao;
 	
 	@Test
 	public void testObtenerCiudad() {
 		try{
-			List <TbAdmCiudades> ciudad = ciudadDao.listarCiudades();
+			List <TbAdmCiudad> ciudad = ciudadDao.listarCiudades();
 			//
 			assertTrue(true);
 		}catch(ExcepcionesDAO e){

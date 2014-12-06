@@ -5,12 +5,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
-import com.udea.proint1.microcurriculo.dao.UnidadesDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
-import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisitos;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dao.UnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -21,14 +18,14 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 	
 	BiblioxUnidadDAO biblioxUnidadDao;
 	
-	UnidadesDAO unidadesDao;
+	UnidadDAO unidadDao;
 	
 	public void setBiblioxUnidadDao(BiblioxUnidadDAO biblioxUnidadDao) {
 		this.biblioxUnidadDao = biblioxUnidadDao;
 	}
 
-	public void setUnidadesDao(UnidadesDAO unidadesDao) {
-		this.unidadesDao = unidadesDao;
+	public void setUnidadDao(UnidadDAO unidadDao) {
+		this.unidadDao = unidadDao;
 	}
 
 	public BiblioxUnidadNGCImpl() {
@@ -149,12 +146,12 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 			throws ExcepcionesLogica {
 		List<TbMicBiblioxunidad> listaBibliosxUnidad = null;
 		
-		TbMicUnidades unidad= null;
+		TbMicUnidad unidad= null;
 		
 		try {
-			unidad = unidadesDao.obtenerUnidad(idUnidad);
+			unidad = unidadDao.obtenerUnidad(idUnidad);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadesDao: "+ e);
+			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
 		}
 		
 		

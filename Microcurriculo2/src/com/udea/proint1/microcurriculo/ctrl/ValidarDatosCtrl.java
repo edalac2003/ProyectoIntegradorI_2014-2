@@ -19,43 +19,43 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmMaterias;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicEstados;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluaciones;
+import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculos;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivos;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivosxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtemas;
-import com.udea.proint1.microcurriculo.dto.TbMicTemas;
-import com.udea.proint1.microcurriculo.dto.TbMicTemasxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidades;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidadesxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
-import com.udea.proint1.microcurriculo.ngc.EstadosNGC;
-import com.udea.proint1.microcurriculo.ngc.EvaluacionesNGC;
-import com.udea.proint1.microcurriculo.ngc.EvaluacionxmicroNGC;
+import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
-import com.udea.proint1.microcurriculo.ngc.MateriasNGC;
-import com.udea.proint1.microcurriculo.ngc.MicrocurriculosNGC;
-import com.udea.proint1.microcurriculo.ngc.MicroxestadoNGC;
-import com.udea.proint1.microcurriculo.ngc.MicroxsemestreNGC;
-import com.udea.proint1.microcurriculo.ngc.ObjetivosNGC;
-import com.udea.proint1.microcurriculo.ngc.ObjetivosxMicroNGC;
+import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
+import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxSemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.ObjetivoNGC;
+import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
-import com.udea.proint1.microcurriculo.ngc.SubtemasNGC;
-import com.udea.proint1.microcurriculo.ngc.TemasNGC;
-import com.udea.proint1.microcurriculo.ngc.TemasxUnidadNGC;
-import com.udea.proint1.microcurriculo.ngc.UnidadesNGC;
-import com.udea.proint1.microcurriculo.ngc.UnidadesxMicroNGC;
+import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 /**
@@ -76,12 +76,12 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	//Por Ejemplo: listadoUnidadesxMicro se llenar cuando se estan empaquetando las Unidades, a este metodo solo se le pasa un objeto de tipo
 	//Microcurriculo.
 	
-	private static List<TbMicUnidadesxmicro> listadoUnidadesxMicro;
-	private static List<TbMicTemasxunidad> listadoTemasxUnidad;
+	private static List<TbMicUnidadxmicro> listadoUnidadesxMicro;
+	private static List<TbMicTemaxunidad> listadoTemasxUnidad;
 	private static List<TbMicEvaluacionxmicro> listadoEvaluacionesxMicro;
-	private static List<TbMicObjetivosxmicro> listadoObjetivosxMicro;
+	private static List<TbMicObjetivoxmicro> listadoObjetivosxMicro;
 	private static List<TbMicBiblioxunidad> listadoBibliografiaxUnidad;
-	private static List<TbMicEstados> listadoEstado;
+	private static List<TbMicEstado> listadoEstado;
 		
 	Button btnGuardarMicro;
 	
@@ -114,25 +114,25 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	Label lblidMicrocurriculo;
 	
 	//Objetos de Tipo NGC que se requieren para las validaciones.
-	MateriasNGC materiasNGC;
+	MateriaNGC materiasNGC;
 	SemestreNGC semestreNGC;
 	PersonaNGC personaNGC;
-	ObjetivosNGC objetivosNGC;
-	ObjetivosxMicroNGC objetivosxMicroNGC;
-	UnidadesNGC unidadesNGC;
+	ObjetivoNGC objetivosNGC;
+	ObjetivoxMicroNGC objetivosxMicroNGC;
+	UnidadNGC unidadesNGC;
 	
-	EstadosNGC estadosNGC;
-	TemasNGC temasNGC;
-	TemasxUnidadNGC temasxUnidadNGC;
-	EvaluacionesNGC evaluacionesNGC;
-	EvaluacionxmicroNGC evaluacionesxMicroNGC;
-	UnidadesxMicroNGC unidadesxMicroNGC;
-	SubtemasNGC subtemasNGC;
+	EstadoNGC estadosNGC;
+	TemaNGC temasNGC;
+	TemaxUnidadNGC temasxUnidadNGC;
+	EvaluacionNGC evaluacionesNGC;
+	EvaluacionxMicroNGC evaluacionesxMicroNGC;
+	UnidadxMicroNGC unidadesxMicroNGC;
+	SubtemaNGC subtemasNGC;
 	BibliografiaNGC bibliografiaNGC;
 	BiblioxunidadNGC biblioxUnidadNGC;
-	MicrocurriculosNGC microcurriculoNGC;
-	MicroxestadoNGC microxEstadoNGC;
-	MicroxsemestreNGC microxSemestreNGC;
+	MicrocurriculoNGC microcurriculoNGC;
+	MicroxEstadoNGC microxEstadoNGC;
+	MicroxSemestreNGC microxSemestreNGC;
 	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
 	
 	/*
@@ -140,11 +140,11 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 */
 
 	
-	public void setMateriasNGC(MateriasNGC materiasNGC) {
+	public void setMateriasNGC(MateriaNGC materiasNGC) {
 		this.materiasNGC = materiasNGC;
 	}
 
-	public void setMicrocurriculoNGC(MicrocurriculosNGC microcurriculoNGC) {
+	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
 	}
 
@@ -156,43 +156,43 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.personaNGC = personaNGC;
 	}
 	
-	public void setObjetivosNGC(ObjetivosNGC objetivosNGC) {
+	public void setObjetivosNGC(ObjetivoNGC objetivosNGC) {
 		this.objetivosNGC = objetivosNGC;
 	}
 	
-	public void setObjetivosxMicroNGC(ObjetivosxMicroNGC objetivosxMicroNGC) {
+	public void setObjetivosxMicroNGC(ObjetivoxMicroNGC objetivosxMicroNGC) {
 		this.objetivosxMicroNGC = objetivosxMicroNGC;
 	}
 	
-	public void setUnidadesNGC(UnidadesNGC unidadesNGC) {
+	public void setUnidadesNGC(UnidadNGC unidadesNGC) {
 		this.unidadesNGC = unidadesNGC;
 	}
 
-	public void setEstadosNGC(EstadosNGC estadosNGC) {
+	public void setEstadosNGC(EstadoNGC estadosNGC) {
 		this.estadosNGC = estadosNGC;
 	}
 	
-	public void setTemasNGC(TemasNGC temasNGC) {
+	public void setTemasNGC(TemaNGC temasNGC) {
 		this.temasNGC = temasNGC;
 	}
 
-	public void setTemasxUnidadNGC(TemasxUnidadNGC temasxUnidadNGC) {
+	public void setTemasxUnidadNGC(TemaxUnidadNGC temasxUnidadNGC) {
 		this.temasxUnidadNGC = temasxUnidadNGC;
 	}
 	
-	public void setEvaluacionesNGC(EvaluacionesNGC evaluacionesNGC) {
+	public void setEvaluacionesNGC(EvaluacionNGC evaluacionesNGC) {
 		this.evaluacionesNGC = evaluacionesNGC;
 	}
 	
-	public void setEvaluacionesxMicroNGC(EvaluacionxmicroNGC evaluacionesxMicroNGC) {
+	public void setEvaluacionesxMicroNGC(EvaluacionxMicroNGC evaluacionesxMicroNGC) {
 		this.evaluacionesxMicroNGC = evaluacionesxMicroNGC;
 	}	
 
-	public void setUnidadesxMicroNGC(UnidadesxMicroNGC unidadesxMicroNGC) {
+	public void setUnidadesxMicroNGC(UnidadxMicroNGC unidadesxMicroNGC) {
 		this.unidadesxMicroNGC = unidadesxMicroNGC;
 	}
 
-	public void setSubtemasNGC(SubtemasNGC subtemasNGC) {
+	public void setSubtemasNGC(SubtemaNGC subtemasNGC) {
 		this.subtemasNGC = subtemasNGC;
 	}
 
@@ -204,11 +204,11 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.biblioxUnidadNGC = biblioxUnidadNGC;
 	}
 
-	public void setMicroxEstadoNGC(MicroxestadoNGC microxEstadoNGC) {
+	public void setMicroxEstadoNGC(MicroxEstadoNGC microxEstadoNGC) {
 		this.microxEstadoNGC = microxEstadoNGC;
 	}
 
-	public void setMicroxSemestreNGC(MicroxsemestreNGC microxSemestreNGC) {
+	public void setMicroxSemestreNGC(MicroxSemestreNGC microxSemestreNGC) {
 		this.microxSemestreNGC = microxSemestreNGC;
 	}
 		
@@ -227,14 +227,14 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	@SuppressWarnings("unused")
 	public void onClick$btnGuardarMicro(Event event){		
 		//Aqui se va a empaquetar todo.
-		TbMicMicrocurriculos microcurriculo = empaquetarMicrocurriculo();
+		TbMicMicrocurriculo microcurriculo = empaquetarMicrocurriculo();
 		TbMicMicroxestado microxEstado = empaquetarMicroxEstado(microcurriculo);
 		TbMicMicroxsemestre microxSemestre = empaquetarMicroxSemestre(microcurriculo, cmbIdSemestre.getValue());
-		List<TbMicUnidades> listaUnidades = empaquetarUnidades(microcurriculo);
-		List<TbMicObjetivos> listaObjetivos = empaquetarObjetivos(microcurriculo);
-		List<TbMicEvaluaciones> listaEvaluaciones = empaquetarEvaluaciones(microcurriculo);
-		List<TbMicTemas> listaTemas = empaquetarTemas(listaUnidades);
-		List<TbMicSubtemas> listaSubtemas = empaquetarSubtemas(listaTemas);
+		List<TbMicUnidad> listaUnidades = empaquetarUnidades(microcurriculo);
+		List<TbMicObjetivo> listaObjetivos = empaquetarObjetivos(microcurriculo);
+		List<TbMicEvaluacion> listaEvaluaciones = empaquetarEvaluaciones(microcurriculo);
+		List<TbMicTema> listaTemas = empaquetarTemas(listaUnidades);
+		List<TbMicSubtema> listaSubtemas = empaquetarSubtemas(listaTemas);
 		List<TbMicBibliografia> listaBibliografia = empaquetarBibliografias(listaUnidades);
 						
 		if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
@@ -280,7 +280,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	private boolean existeMicrocurriculo(String idMicrocurriculo){
-		TbMicMicrocurriculos micro = null;
+		TbMicMicrocurriculo micro = null;
 		boolean estado = false;
 		
 //		try {
@@ -298,10 +298,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 	}
 	
-	private TbMicMicroxestado empaquetarMicroxEstado(TbMicMicrocurriculos microcurriculo){
+	private TbMicMicroxestado empaquetarMicroxEstado(TbMicMicrocurriculo microcurriculo){
 		TbMicMicroxestado microxEstado = null;
 		int registro = 0;
-		TbMicEstados estado = null;
+		TbMicEstado estado = null;
 		
 		try {
 			registro = microxEstadoNGC.contarRegistros();			
@@ -322,7 +322,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	
-	private TbMicMicroxsemestre empaquetarMicroxSemestre(TbMicMicrocurriculos microcurriculo, String idSemestre){
+	private TbMicMicroxsemestre empaquetarMicroxSemestre(TbMicMicrocurriculo microcurriculo, String idSemestre){
 		TbMicMicroxsemestre microxSemestre = null;
 		int registro = 0;
 		TbAdmSemestre semestre = null;
@@ -341,16 +341,16 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return microxSemestre;
 	}
 		
-	private List<TbMicEvaluaciones> empaquetarEvaluaciones(TbMicMicrocurriculos microcurriculo){
-		List<TbMicEvaluaciones> lista = null;
-		TbMicEvaluaciones evaluacion = null;
+	private List<TbMicEvaluacion> empaquetarEvaluaciones(TbMicMicrocurriculo microcurriculo){
+		List<TbMicEvaluacion> lista = null;
+		TbMicEvaluacion evaluacion = null;
 		TbMicEvaluacionxmicro evaluacionxMicro = null;
 		
 		int registros = 0;
 				
 		try {
 			registros = evaluacionesNGC.contarRegistros();
-			lista = new ArrayList<TbMicEvaluaciones>();
+			lista = new ArrayList<TbMicEvaluacion>();
 			listadoEvaluacionesxMicro = new ArrayList<TbMicEvaluacionxmicro>();
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron Errores al intentar obtener el numero de registros de la tabla Evaluaciones.");
@@ -364,7 +364,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
 			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
 			Date fechaEstimada = new Date(celdaFecha.getLabel());
-			evaluacion = new TbMicEvaluaciones(contador, celdaEvaluacion.getLabel(), modUsuario, modFecha);
+			evaluacion = new TbMicEvaluacion(contador, celdaEvaluacion.getLabel(), modUsuario, modFecha);
 			evaluacionxMicro = new TbMicEvaluacionxmicro(contador, evaluacion, microcurriculo, Integer.parseInt(celdaPorcentaje.getLabel()), fechaEstimada, modUsuario, modFecha);
 			lista.add(evaluacion);
 			listadoEvaluacionesxMicro.add(evaluacionxMicro);
@@ -373,17 +373,17 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	
-	private List<TbMicTemas> empaquetarTemas(List<TbMicUnidades> listadoUnidades){
-		List<TbMicTemas> lista = null;		
-		TbMicTemas tema = null;
-		TbMicTemasxunidad temaxUnidad = null;
-		TbMicUnidades unidad = null;
+	private List<TbMicTema> empaquetarTemas(List<TbMicUnidad> listadoUnidades){
+		List<TbMicTema> lista = null;		
+		TbMicTema tema = null;
+		TbMicTemaxunidad temaxUnidad = null;
+		TbMicUnidad unidad = null;
 		int registro = 0;
 		
 		try {
 			registro = temasNGC.contarRegistros();
-			lista = new ArrayList<TbMicTemas>();
-			listadoTemasxUnidad = new ArrayList<TbMicTemasxunidad>();			
+			lista = new ArrayList<TbMicTema>();
+			listadoTemasxUnidad = new ArrayList<TbMicTemaxunidad>();			
 		} catch (ExcepcionesLogica e) {
 			logger.error("Error al intentar contar los Registros de la Tabla Temas.");
 		}
@@ -396,8 +396,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			unidad = obtenerUnidad(listadoUnidades, celdaUnidad.getLabel());
 			String descripcion = celdaTema.getLabel();
 			int contador = registro + i + 1;
-			tema = new TbMicTemas(contador, descripcion, modUsuario, modFecha);
-			temaxUnidad = new TbMicTemasxunidad(contador, unidad, tema, Integer.parseInt(celdaSemanas.getLabel()), modUsuario, modFecha);
+			tema = new TbMicTema(contador, descripcion, modUsuario, modFecha);
+			temaxUnidad = new TbMicTemaxunidad(contador, unidad, tema, Integer.parseInt(celdaSemanas.getLabel()), modUsuario, modFecha);
 						
 			lista.add(tema);
 			listadoTemasxUnidad.add(temaxUnidad);
@@ -407,17 +407,17 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	
 	
-	private List<TbMicSubtemas> empaquetarSubtemas(List<TbMicTemas> listadoTemas){
-		List<TbMicSubtemas> lista = null;
-		TbMicSubtemas subtema = null;
-		TbMicTemas tema = null;
+	private List<TbMicSubtema> empaquetarSubtemas(List<TbMicTema> listadoTemas){
+		List<TbMicSubtema> lista = null;
+		TbMicSubtema subtema = null;
+		TbMicTema tema = null;
 		
 		int registro = 0;
 		int contador = 0;
 		
 		try {
 			registro = subtemasNGC.contarRegistros();
-			lista = new ArrayList<TbMicSubtemas>();
+			lista = new ArrayList<TbMicSubtema>();
 		} catch (ExcepcionesLogica e) {
 			logger.error("Error al momento de obtener el numero de Registros.");
 		}
@@ -429,13 +429,13 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			contador = registro + i + 1;
 			String nombre = celdaTemas.getLabel().toString();
 			tema = obtenerTema(listadoTemas, nombre);
-			subtema = new TbMicSubtemas(contador, tema, celdaSubtema.getLabel().toString(), modUsuario, modFecha);
+			subtema = new TbMicSubtema(contador, tema, celdaSubtema.getLabel().toString(), modUsuario, modFecha);
 			lista.add(subtema);
 		}
 		return lista;
 	}
 	
-	private List<TbMicBibliografia> empaquetarBibliografias(List<TbMicUnidades> listaUnidades){
+	private List<TbMicBibliografia> empaquetarBibliografias(List<TbMicUnidad> listaUnidades){
 		List<TbMicBibliografia> lista = null;
 		TbMicBibliografia bibliografia = null;
 		TbMicBiblioxunidad biblioxUnidad = null;
@@ -470,7 +470,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				tipoBibliografia = '0';
 			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), "", 
 					celdaISBN.getLabel().toString().toUpperCase(), tipoBibliografia, modUsuario, modFecha);
-			TbMicUnidades unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
+			TbMicUnidad unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
 			biblioxUnidad = new TbMicBiblioxunidad(contador, bibliografia, unidad, modUsuario, modFecha);
 			
 			lista.add(bibliografia);
@@ -489,7 +489,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				tipoBibliografia = '1';
 			}else 
 				tipoBibliografia = '0';
-			TbMicUnidades unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
+			TbMicUnidad unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
 			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), 
 					celdaSitio.getLabel().toString(), null, tipoBibliografia, modUsuario, modFecha);
 			biblioxUnidad = new TbMicBiblioxunidad(contador, bibliografia, unidad, modUsuario, modFecha);
@@ -505,9 +505,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * @param nombre
 	 * @return
 	 */
-	private TbMicUnidades obtenerUnidad(List<TbMicUnidades> lista, String nombre){
-		TbMicUnidades unidad = null;
-		Iterator<TbMicUnidades> iterator = lista.iterator();
+	private TbMicUnidad obtenerUnidad(List<TbMicUnidad> lista, String nombre){
+		TbMicUnidad unidad = null;
+		Iterator<TbMicUnidad> iterator = lista.iterator();
 		while (iterator.hasNext() && (unidad == null)){			
 			if(nombre.equals(iterator.next().getVrNombre()) ){				
 				unidad = iterator.next();
@@ -517,9 +517,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	
-	private TbMicTemas obtenerTema(List<TbMicTemas> lista, String nombre){
-		TbMicTemas tema = null;
-		Iterator<TbMicTemas> iterator = lista.iterator();
+	private TbMicTema obtenerTema(List<TbMicTema> lista, String nombre){
+		TbMicTema tema = null;
+		Iterator<TbMicTema> iterator = lista.iterator();
 		while (iterator.hasNext() && (tema == null)){
 			if (iterator.next().toString().trim().toUpperCase() == nombre.trim().toUpperCase()){
 				tema = iterator.next();
@@ -532,13 +532,13 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	
 	@SuppressWarnings("null")
-	private List<TbMicUnidades> empaquetarUnidades(TbMicMicrocurriculos microcurriculo){
-		List<TbMicUnidades> lista = new ArrayList<TbMicUnidades>();
+	private List<TbMicUnidad> empaquetarUnidades(TbMicMicrocurriculo microcurriculo){
+		List<TbMicUnidad> lista = new ArrayList<TbMicUnidad>();
 				
-		TbMicUnidades unidad = null;
-		TbMicUnidadesxmicro unidadxMicro = null;
+		TbMicUnidad unidad = null;
+		TbMicUnidadxmicro unidadxMicro = null;
 		
-		listadoUnidadesxMicro = new ArrayList<TbMicUnidadesxmicro>();
+		listadoUnidadesxMicro = new ArrayList<TbMicUnidadxmicro>();
 		int contador = 0;
 		int registro = 0;
 		String nombreUnidad = "";
@@ -551,8 +551,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		for(int i=0; i < listaUnidades.getItemCount(); i++){
 			contador = 	registro + i + 1;	
 			nombreUnidad = listaUnidades.getItems().get(i).getLabel();
-			unidad = new TbMicUnidades(contador, nombreUnidad, modUsuario, modFecha);
-			unidadxMicro = new TbMicUnidadesxmicro(contador, unidad, microcurriculo, modUsuario, modFecha);
+			unidad = new TbMicUnidad(contador, nombreUnidad, modUsuario, modFecha);
+			unidadxMicro = new TbMicUnidadxmicro(contador, unidad, microcurriculo, modUsuario, modFecha);
 			lista.add(unidad);
 			listadoUnidadesxMicro.add(unidadxMicro);
 		}
@@ -565,10 +565,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * @return Lista con objetos de Tipo Objetivos
 	 */
 	@SuppressWarnings("null")
-	private List<TbMicObjetivos> empaquetarObjetivos(TbMicMicrocurriculos microcurriculo){
-		List<TbMicObjetivos> listaObjetivos = null;
-		TbMicObjetivos objetivo = null;
-		TbMicObjetivosxmicro objetivosxMicro = null;
+	private List<TbMicObjetivo> empaquetarObjetivos(TbMicMicrocurriculo microcurriculo){
+		List<TbMicObjetivo> listaObjetivos = null;
+		TbMicObjetivo objetivo = null;
+		TbMicObjetivoxmicro objetivosxMicro = null;
 		
 		
 		int registro = 0;
@@ -577,22 +577,22 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		try {
 			registro = objetivosNGC.numeroRegistros()+1;
-			listaObjetivos = new ArrayList<TbMicObjetivos>();
-			listadoObjetivosxMicro = new ArrayList<TbMicObjetivosxmicro>();
+			listaObjetivos = new ArrayList<TbMicObjetivo>();
+			listadoObjetivosxMicro = new ArrayList<TbMicObjetivoxmicro>();
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
 		
 		if((txtObjetivoGeneral.getValue().trim().length() > 0) && (txtObjetivoGeneral != null)){
-			objetivo = new TbMicObjetivos(registro+1, txtObjetivoGeneral.getValue(), '1', modUsuario, modFecha);
+			objetivo = new TbMicObjetivo(registro+1, txtObjetivoGeneral.getValue(), '1', modUsuario, modFecha);
 			listaObjetivos.add(objetivo);
-			objetivosxMicro = new TbMicObjetivosxmicro(contador+1,objetivo,microcurriculo,modUsuario,modFecha);
+			objetivosxMicro = new TbMicObjetivoxmicro(contador+1,objetivo,microcurriculo,modUsuario,modFecha);
 			listadoObjetivosxMicro.add(objetivosxMicro);
 			for (int i=0; i<listaObjetivosEspecificos.getItemCount(); i++){
 				contador = registro + i + 2;
 				celdaObjetivo = listaObjetivosEspecificos.getItems().get(i).getLabel();
-				objetivo = new TbMicObjetivos(contador, celdaObjetivo, '0', modUsuario, modFecha);
-				objetivosxMicro = new TbMicObjetivosxmicro(contador,objetivo,microcurriculo,modUsuario,modFecha);
+				objetivo = new TbMicObjetivo(contador, celdaObjetivo, '0', modUsuario, modFecha);
+				objetivosxMicro = new TbMicObjetivoxmicro(contador,objetivo,microcurriculo,modUsuario,modFecha);
 				listaObjetivos.add(objetivo);
 				listadoObjetivosxMicro.add(objetivosxMicro);
 			}
@@ -610,10 +610,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 *  
 	 * @return Objeto de Tipo Microcurriculo.
 	 */
-	private TbMicMicrocurriculos empaquetarMicrocurriculo(){
-		TbMicMicrocurriculos microcurriculo = null;;
+	private TbMicMicrocurriculo empaquetarMicrocurriculo(){
+		TbMicMicrocurriculo microcurriculo = null;;
 		String codigoMicrocurriculo = "";
-		TbAdmMaterias materia = null;
+		TbAdmMateria materia = null;
 		TbAdmSemestre semestre = null;
 		TbAdmPersona responsable = null;		
 		
@@ -632,7 +632,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			if (materia != null){
 				if (semestre != null){
 					if (responsable != null){
-						microcurriculo = new TbMicMicrocurriculos(codigoMicrocurriculo, materia, txtPropositoMicro.toString(), 
+						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, txtPropositoMicro.toString(), 
 								txtJustificacionMicro.toString(), txtResumenMicro.toString(), responsable, modUsuario, modFecha);
 						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
 						cmbEstadoActual.setValue(obtenerEstado());
@@ -664,7 +664,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	private String asignarIdMicrocurriculo(String idsemestre, String idmateria){
 		String codigo = null;
 		TbAdmSemestre semestre = null;
-		TbAdmMaterias materia = null;
+		TbAdmMateria materia = null;
 		
 		try {
 			semestre = semestreNGC.obtenerSemestre(idsemestre);

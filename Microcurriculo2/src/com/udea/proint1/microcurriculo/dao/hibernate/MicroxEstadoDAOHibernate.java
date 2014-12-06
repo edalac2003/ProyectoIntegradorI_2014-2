@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MicroxEstadoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbMicEstados;
+import com.udea.proint1.microcurriculo.dto.TbMicEstado;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -78,7 +78,7 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 	}
 
 	@Override
-	public List<TbMicMicroxestado> listarMicrosxestado(TbMicEstados estado) throws ExcepcionesDAO {
+	public List<TbMicMicroxestado> listarMicrosxestado(TbMicEstado estado) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicMicroxestado> microsxEstado = new ArrayList<TbMicMicroxestado>();
         try{
