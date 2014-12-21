@@ -125,7 +125,7 @@ public class MateriaNGCImpl implements MateriaNGC {
 		try {
 			listaMaterias = materiaDao.listarMaterias();
 		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarMaterias de la clase materiaDao: "+ e);
+			log.error("Falló al invocar el metodo listarMaterias de la clase materiaDao: "+ e);
 		}
 		
 		/*

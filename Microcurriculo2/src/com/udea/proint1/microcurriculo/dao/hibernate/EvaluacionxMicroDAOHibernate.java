@@ -79,4 +79,24 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 		}
 	}
 
+	@Override
+	public int obtenerRegistro() throws ExcepcionesDAO {
+		int registro = 0;
+		Session session = null;
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbMicEvaluacionxmicro.class);
+			registro = criteria.list().size();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO("DAO : Error al intentar contar los registros de la tabla <EvaluacionesxMicro>    "+e.getMessage());
+		}
+		
+		return registro;
+	}
+	
+	
+	
+
 }

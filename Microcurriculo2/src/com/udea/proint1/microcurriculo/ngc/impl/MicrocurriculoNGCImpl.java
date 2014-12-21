@@ -25,12 +25,6 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	NucleoDAO nucleoDao;
 	PersonaDAO personaDao;
 	
-	
-	public MicrocurriculoNGCImpl() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 	public void setMicrocurriculoDao(MicrocurriculoDAO microcurriculoDao) {
 		this.microcurriculoDao = microcurriculoDao;
 	}
@@ -65,10 +59,6 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 			throw new ExcepcionesLogica("La información de IdMicrocurriculo no es válida o está vacia.");
 		}
 		
-		/*
-		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
-		 */
-		System.out.println("El valor del microcurriculo a retornar es : "+ microcurriculo);
 		return microcurriculo;
 	}
 

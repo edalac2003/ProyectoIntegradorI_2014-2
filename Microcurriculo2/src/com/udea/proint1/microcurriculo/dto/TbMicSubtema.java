@@ -10,23 +10,19 @@ import java.util.Date;
 public class TbMicSubtema implements java.io.Serializable {
 
 	private int nbIdsubtema;
-	private TbMicTema tbMicTema;
 	private String vrDescripcion;
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbMicSubtema() {
+		
+	public TbMicSubtema(int nbIdsubtema, String vrDescripcion) {
+		super();
+		this.nbIdsubtema = nbIdsubtema;
+		this.vrDescripcion = vrDescripcion;
 	}
 
-	public TbMicSubtema(int nbIdsubtema, TbMicTema tbMicTema) {
+	public TbMicSubtema(int nbIdsubtema, String vrDescripcion, String vrModusuario, Date dtModfecha) {
 		this.nbIdsubtema = nbIdsubtema;
-		this.tbMicTema = tbMicTema;
-	}
-
-	public TbMicSubtema(int nbIdsubtema, TbMicTema tbMicTema,
-			String vrDescripcion, String vrModusuario, Date dtModfecha) {
-		this.nbIdsubtema = nbIdsubtema;
-		this.tbMicTema = tbMicTema;
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
@@ -38,14 +34,6 @@ public class TbMicSubtema implements java.io.Serializable {
 
 	public void setNbIdsubtema(int nbIdsubtema) {
 		this.nbIdsubtema = nbIdsubtema;
-	}
-
-	public TbMicTema getTbMicTema() {
-		return this.tbMicTema;
-	}
-
-	public void setTbMicTema(TbMicTema tbMicTema) {
-		this.tbMicTema = tbMicTema;
 	}
 
 	public String getVrDescripcion() {

@@ -65,7 +65,7 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 		int registro = 0;
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(UnidadDAOHibernate.class);
+			Criteria criteria = session.createCriteria(TbMicUnidad.class);
 			registro = criteria.list().size();			
 		} catch(HibernateException e){
 			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro "+e);

@@ -17,9 +17,7 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 	private static Logger log=Logger.getLogger(EvaluacionNGCImpl.class);
 	
 	MicrocurriculoDAO microcurriculoDao;
-	
 	EvaluacionDAO evaluacionDao;
-	
 	EvaluacionxMicroDAO evaluacionxMicroDao;
 
 	public void setMicrocurriculoDao(MicrocurriculoDAO microcurriculoDao) {
@@ -38,6 +36,8 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 	@Override
 	public void guardarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesLogica {
 		/*
@@ -141,5 +141,21 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 			return listaEvaluacionesxMicro;
 		}
 	}
+
+	@Override
+	public int obtenerRegistros() throws ExcepcionesLogica {
+		int registro = 0;
+		
+		try {
+			registro = evaluacionxMicroDao.obtenerRegistro();
+		} catch (ExcepcionesDAO e) {
+			throw new ExcepcionesLogica("NGC : Error al intentar contar los Registros de la tabla <EvaluacionesxMicro>"+e.getMessage());
+		}
+		
+		return registro;
+	}
+	
+	
+	
 
 }

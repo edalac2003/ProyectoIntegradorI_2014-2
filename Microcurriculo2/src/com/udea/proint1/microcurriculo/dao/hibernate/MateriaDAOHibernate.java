@@ -78,14 +78,9 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 		
 		try {
 			session = getSession();
-			
-			Query query = session.createQuery("FROM TbAdmMaterias where tbAdmNucleo = :nucleo");
-			
+			Query query = session.createQuery("FROM TbAdmMateria where tbAdmNucleo = :nucleo");
 			query.setEntity("nucleo", nucleo);
-            
-            materias = query.list();
-			
-			
+            materias = query.list();			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		} 

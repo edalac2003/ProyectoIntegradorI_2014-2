@@ -16,8 +16,6 @@ public class TbMicTemaxunidad implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbMicTemaxunidad() {
-	}
 
 	public TbMicTemaxunidad(int nbId, TbMicUnidad tbMicUnidad,
 			TbMicTema tbMicTema) {

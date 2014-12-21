@@ -15,4 +15,6 @@ public interface EvaluacionxMicroNGC {
 	
 	public List<TbMicEvaluacionxmicro> actualizarEvaluacionesxmicro() throws ExcepcionesLogica;
 	
+	public int obtenerRegistros() throws ExcepcionesLogica;
+	
 }

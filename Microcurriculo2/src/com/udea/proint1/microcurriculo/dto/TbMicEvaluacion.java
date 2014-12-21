@@ -25,22 +25,11 @@ public class TbMicEvaluacion implements java.io.Serializable {
 		this.vrDescripcion = vrDescripcion;
 	}
 	
-	public TbMicEvaluacion(int nbIdevaluacion, String vrDescripcion,
-			String vrModusuario, Date dtModfecha) {
-		super();
+	public TbMicEvaluacion(int nbIdevaluacion, String vrDescripcion, String vrModusuario, Date dtModfecha) {
 		this.nbIdevaluacion = nbIdevaluacion;
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-	}
-
-	public TbMicEvaluacion(int nbIdevaluacion, String vrDescripcion,
-			String vrModusuario, Date dtModfecha, Set tbMicMicroxevaluaciones) {
-		this.nbIdevaluacion = nbIdevaluacion;
-		this.vrDescripcion = vrDescripcion;
-		this.vrModusuario = vrModusuario;
-		this.dtModfecha = dtModfecha;
-		this.tbMicMicroxevaluaciones = tbMicMicroxevaluaciones;
 	}
 
 	public int getNbIdevaluacion() {
@@ -58,7 +47,7 @@ public class TbMicEvaluacion implements java.io.Serializable {
 	public void setVrDescripcion(String vrDescripcion) {
 		this.vrDescripcion = vrDescripcion;
 	}
-
+	
 	public String getVrModusuario() {
 		return this.vrModusuario;
 	}
@@ -73,8 +62,8 @@ public class TbMicEvaluacion implements java.io.Serializable {
 
 	public void setDtModfecha(Date dtModfecha) {
 		this.dtModfecha = dtModfecha;
-	}
-
+	}	
+	
 	public Set getTbMicMicroxevaluaciones() {
 		return this.tbMicMicroxevaluaciones;
 	}

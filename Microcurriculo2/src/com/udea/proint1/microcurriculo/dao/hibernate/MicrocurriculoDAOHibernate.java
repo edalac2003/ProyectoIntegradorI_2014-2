@@ -31,12 +31,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
  * @author eacosta
  *
  */
-public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements
-		MicrocurriculoDAO {
-
-	public MicrocurriculoDAOHibernate() {
-
-	}
+public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements MicrocurriculoDAO {
 
 	@Override
 	public void guardarMicrocurriculo(TbMicMicrocurriculo microcurriculo)
@@ -53,27 +48,23 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements
 
 	}
 
+	
+
 	@Override
 	public TbMicMicrocurriculo obtenerMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO {
-//		Session session = null;
-//		TbMicMicrocurriculos microcurriculo = null;
+		Session session = null;
+		TbMicMicrocurriculo microcurriculo = null;;
+		try{
+			session = getSession();
+			microcurriculo = (TbMicMicrocurriculo)session.get(TbMicMicrocurriculo.class, idMicrocurriculo);
 		
-		System.out.println("DAO : Se va a buscar el ID : " + idMicrocurriculo);
-//		try {
-//			session = getSession();
-//			Query query = session.createQuery("from TbMicMicrocurriculo where idMicrocurriculo = :id");
-//			query.setEntity("id", idMicrocurriculo);
-//			
-//			microcurriculo = (TbMicMicrocurriculos)query.uniqueResult();
-//			
-////			microcurriculo = (TbMicMicrocurriculos)session.get(TbMicMicrocurriculos.class, idMicrocurriculo);
-//		} catch (HibernateException e) {
-//			System.out.println("PASO ALGO AL CONSULTAR EL MICROCURRICULO");
-//			throw new ExcepcionesDAO("Se produjo un Error al intentar recuperar registro de Microcurriculo. "+e);
-//		}
-//		return microcurriculo;
-		return null;
+		} catch (HibernateException e){
+			throw new ExcepcionesDAO("DAO : Error al Intentar Obtener el Registro Microcurriculo en la Base de Datos."+e);
+		}
+
+		return microcurriculo;
 	}
+
 
 	@Override
 	public void modificarMicrocurriculo(TbMicMicrocurriculo microcurriculo) throws ExcepcionesDAO {
@@ -87,18 +78,17 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements
 	}
 
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculos()
-			throws ExcepcionesDAO {
+	public List<TbMicMicrocurriculo> listarMicrocurriculos() throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
 
 		try {
 			session = getSession();
 
-			Criteria criteria = session
-					.createCriteria(TbMicMicrocurriculo.class);
-
+			Criteria criteria = session.createCriteria(TbMicMicrocurriculo.class);
 			microcurriculos = criteria.list();
+			
+			
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
@@ -108,19 +98,14 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements
 	}
 
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculosPorSemestre(
-			String idSemestre) throws ExcepcionesDAO {
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
 
 		try {
 			session = getSession();
-
-			Query query = session
-					.createQuery("from TbMicMicrocurriculos where idSemestre = :semestre");
-
+			Query query = session.createQuery("from TbMicMicrocurriculos where idSemestre = :semestre");
 			query.setString("Semestre", idSemestre);
-
 			microcurriculos = query.list();
 
 		} catch (HibernateException e) {
@@ -137,14 +122,9 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements
 		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
 
 		try {
-
 			session = getSession();
-
-			Query query = session
-					.createQuery("from TbMicMicrocurriculos where tbAdmNucleo = :buscarNucleo");
-
+			Query query = session.createQuery("from TbMicMicrocurriculos where tbAdmNucleo = :buscarNucleo");
 			query.setEntity("buscarNucleo", nucleo);
-
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);

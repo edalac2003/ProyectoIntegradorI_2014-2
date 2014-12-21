@@ -12,6 +12,7 @@ public class TbMicObjetivoxmicro implements java.io.Serializable {
 	private int nbId;
 	private TbMicObjetivo tbMicObjetivo;
 	private TbMicMicrocurriculo tbMicMicrocurriculo;
+	private Character blTipo;
 	private String vrModusuario;
 	private Date dtModfecha;
 
@@ -26,11 +27,13 @@ public class TbMicObjetivoxmicro implements java.io.Serializable {
 	}
 
 	public TbMicObjetivoxmicro(int nbId, TbMicObjetivo tbMicObjetivo,
-			TbMicMicrocurriculo tbMicMicrocurriculo, String vrModusuario,
-			Date dtModfecha) {
+			TbMicMicrocurriculo tbMicMicrocurriculo, Character blTipo,
+			String vrModusuario, Date dtModfecha) {
+		super();
 		this.nbId = nbId;
 		this.tbMicObjetivo = tbMicObjetivo;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
+		this.blTipo = blTipo;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
@@ -58,6 +61,14 @@ public class TbMicObjetivoxmicro implements java.io.Serializable {
 	public void setTbMicMicrocurriculo(
 			TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
+	}
+
+	public Character getBlTipo() {
+		return blTipo;
+	}
+
+	public void setBlTipo(Character blTipo) {
+		this.blTipo = blTipo;
 	}
 
 	public String getVrModusuario() {

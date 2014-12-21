@@ -34,6 +34,7 @@ import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PaisNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
@@ -108,12 +109,12 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbIdNucleo;
 	Combobox cmbIdSemestre;
 	
-	MateriaNGC materiasNGC;
+	MateriaNGC materiaNGC;
 	PersonaNGC personaNGC;
 	NucleoNGC nucleoNGC;
 	SemestreNGC semestreNGC;
-	PaisNGC paisesNGC;
-	
+	PaisNGC paisNGC;
+	TemaNGC temaNGC;
 	
 	
 	
@@ -127,26 +128,28 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	//Esta instruccion va en el controlador de la vista que se encargará de mostrar los resultados de la consulta
 	//arg.get("objeto")
 	
-	
-	public void setMateriasNGC(MateriaNGC materiasNGC) {
-		this.materiasNGC = materiasNGC;
+	public void setMateriaNGC(MateriaNGC materiaNGC) {
+		this.materiaNGC = materiaNGC;
 	}
 
 	public void setPersonaNGC(PersonaNGC personaNGC) {
 		this.personaNGC = personaNGC;
 	}
-	
+
+	public void setNucleoNGC(NucleoNGC nucleoNGC) {
+		this.nucleoNGC = nucleoNGC;
+	}
+
 	public void setSemestreNGC(SemestreNGC semestreNGC) {
 		this.semestreNGC = semestreNGC;
 	}
 
-	
-	public void setNucleoNGC(NucleoNGC nucleoNGC) {
-		this.nucleoNGC = nucleoNGC;
+	public void setPaisNGC(PaisNGC paisNGC) {
+		this.paisNGC = paisNGC;
 	}
 	
-	public void setPaisesNGC(PaisNGC paisesNGC) {
-		this.paisesNGC = paisesNGC;
+	public void setTemaNGC(TemaNGC temaNGC) {
+		this.temaNGC = temaNGC;
 	}
 
 	/**
@@ -176,6 +179,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}
 	}
 	
+	
+
 	/**
 	 * Este Metodo se encarga de llenar 
 	 */
@@ -488,7 +493,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	public void cargarDocentes(){
 		try {
-			List<TbAdmPersona> listaDocentes = personaNGC.listarPersonas();
+			//List<TbAdmPersona> listaDocentes = personaNGC.listarPersonas();
+			List<TbAdmPersona> listaDocentes = personaNGC.obtenerDocentes();
 			cmbIdDocente.getItems().clear();
 			if (listaDocentes != null){
 				//Messagebox.show("Se Hallaron Registros "+listaDocentes.size());
@@ -505,7 +511,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	public void cargarMaterias(String nucleo){
 		try {
-			List<TbAdmMateria> listaMaterias = materiasNGC.listarMateriasxNucleo(nucleo);
+			List<TbAdmMateria> listaMaterias = materiaNGC.listarMateriasxNucleo(nucleo);
 			if (listaMaterias != null){
 				for (TbAdmMateria materia : listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
@@ -625,6 +631,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void onSelect$cmbIdDocente(){
 		try {
 			TbAdmPersona persona = personaNGC.obtenerPersona(cmbIdDocente.getValue().toString());
+			
 			if (persona != null){
 				lblNombreDocente.setValue(persona.getVrNombres() + " "+ persona.getVrApellidos());
 			} else 
@@ -639,7 +646,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void onSelect$cmbIdMateria(){
 		//Messagebox.show("Ingresó al Evento."+ cmbIdMateria.getValue().toString());
 		try {
-			TbAdmMateria materia = materiasNGC.obtenerMateria(cmbIdMateria.getValue().toString());
+			TbAdmMateria materia = materiaNGC.obtenerMateria(cmbIdMateria.getValue().toString());
 			if (materia != null ){
 				lblNombreMateria.setValue(materia.getVrNombre());
 				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));

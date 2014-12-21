@@ -42,8 +42,7 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		
 		try{
 			session = getSession();
-			objetivo = (TbMicObjetivo)session.get(TbMicObjetivo.class, idObjetivo);
-			
+			objetivo = (TbMicObjetivo)session.get(TbMicObjetivo.class, idObjetivo);			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 		}
@@ -73,15 +72,11 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		Session session = null;
         List<TbMicObjetivo> objetivos = new ArrayList<TbMicObjetivo>();
        
-        try{
-               
+        try{               
         	session = getSession();
-                               
         	Query query = session.createQuery("from TbMicObjetivos where tbMicMicrocurriculos = :microcurriculo");
-               
-        	query.setEntity("microcurriculo", microcurriculo);
-               
-        	objetivos = query.list();
+            query.setEntity("microcurriculo", microcurriculo);
+            objetivos = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
         }
@@ -93,20 +88,17 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		Session session = null;
         List<TbMicObjetivo> objetivos = new ArrayList<TbMicObjetivo>();
        
-        try{
-               
-        	session = getSession();
-                               
+        try{               
+        	session = getSession();                               
         	Query query = session.createQuery("from TbMicObjetivos where blTipo = :tipo");
-               
-        	query.setCharacter("tipo", tipo);
-               
-        	objetivos = query.list();
+            query.setCharacter("tipo", tipo);
+            objetivos = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
         }
         return objetivos;
 	}
+	
 	
 	@Override
 	public List<TbMicObjetivo> listarObjetivos() throws ExcepcionesDAO{
@@ -114,15 +106,14 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		List<TbMicObjetivo> objetivos = new ArrayList<TbMicObjetivo>();
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicObjetivo.class);
-			
+			Criteria criteria = session.createCriteria(TbMicObjetivo.class);			
 			objetivos = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}
-		
+		}		
 		return objetivos;
 	}
+	
 
 	@Override
 	public void modificarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesDAO {
