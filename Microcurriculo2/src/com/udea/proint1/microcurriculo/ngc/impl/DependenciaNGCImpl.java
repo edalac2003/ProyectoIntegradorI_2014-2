@@ -135,17 +135,18 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		}
 	}
 
+	
+
 	@Override
-	public List<TbAdmDependencia> buscarDependencias(String buscar) throws ExcepcionesLogica{
-		
-		if(buscar.equals("")||(buscar.equals(null))){
+	public List<TbAdmDependencia> listarDependenciasPorUnidad(String unidad) throws ExcepcionesLogica {
+		if(unidad.equals("")||(unidad.equals(null))){
 			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
 		}
 		List<TbAdmDependencia> listaDependencias = null;
 		try {
-			listaDependencias = dependenciaDao.buscarDependencias(buscar);
+			listaDependencias = dependenciaDao.listarDependenciasPorUnidad(unidad);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo buscarDependencias de la clase dependenciaDao: "+ e);
+			throw new ExcepcionesLogica("NGC : Se presentaron errores al listar las Dependencias por Unidad. "+ e);
 		}
 		
 		/*
@@ -157,4 +158,6 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 			return listaDependencias;
 		}
 	}
+	
+	
 }

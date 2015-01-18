@@ -113,16 +113,14 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 	public int contarRegistros() throws ExcepcionesDAO {
 		int registro = 0;
 		Session session = null;
-		
 		try{
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicSubtema.class);
 			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO("Se presentaron errores al contar los Registros de la Tabla Subtemas. "+e);
-		}
-				
+			throw new ExcepcionesDAO("DAO : Se presentaron errores al contar los Registros de la Tabla Subtemas. "+e);
+		}				
 		return registro;
 	}
 

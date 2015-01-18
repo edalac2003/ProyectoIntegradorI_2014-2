@@ -133,14 +133,15 @@ public class NucleoNGCImpl implements NucleoNGC {
 		}
 	}
 	
+	
 	@Override
-	public List<TbAdmNucleo> buscarNucleos(String buscar) throws ExcepcionesLogica{
-		if(buscar.equals("")||(buscar.equals(null))){
+	public List<TbAdmNucleo> listarNucleosPorDependencia(String dependencia) throws ExcepcionesLogica {
+		if(dependencia.equals("")||(dependencia.equals(null))){
 			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
 		}
 		List<TbAdmNucleo> listaNucleos = null;
 		try {
-			listaNucleos = nucleoDao.buscarNucleos(buscar);
+			listaNucleos = nucleoDao.listarNucleoPorDependencia(dependencia);
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo buscarNucleos de la clase nucleoDao: "+ e);
 		}
@@ -154,5 +155,7 @@ public class NucleoNGCImpl implements NucleoNGC {
 			return listaNucleos;
 		}
 	}
+	
+	
 
 }

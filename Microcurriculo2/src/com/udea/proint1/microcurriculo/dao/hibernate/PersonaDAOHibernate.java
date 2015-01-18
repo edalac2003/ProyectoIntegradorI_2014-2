@@ -83,13 +83,9 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
         List<TbAdmPersona> personas = new ArrayList<TbAdmPersona>();
        
         try{
-               
         	session = getSession();
-                               
         	Query query = session.createQuery("from TbAdmPersona where tbAdmTipopersona = :tipoPersona");
-               
         	query.setEntity("tipoPersona", tipoPersona);
-               
         	personas = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);

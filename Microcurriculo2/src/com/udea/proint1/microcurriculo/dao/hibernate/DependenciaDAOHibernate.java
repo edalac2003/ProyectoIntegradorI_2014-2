@@ -68,8 +68,7 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 	}
 
 	@Override
-	public void actualizarDependencias(TbAdmDependencia dependencias)
-			throws ExcepcionesDAO {
+	public void actualizarDependencias(TbAdmDependencia dependencias) throws ExcepcionesDAO {
 		Session session = null;
 		
 		try{
@@ -83,23 +82,19 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 	}
 
 	@Override
-	public List<TbAdmDependencia> buscarDependencias(String buscar) throws ExcepcionesDAO{
+	public List<TbAdmDependencia> listarDependenciasPorUnidad(String unidad) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmDependencia> dependencias = new ArrayList<TbAdmDependencia>();
-        
-        try{
-               
-                session = getSession();	
-                               
-                Query query = session.createQuery("from TbAdmDependencia where vrIddependencia  like :dependencia%");
-               
-                query.setString("dependencia", buscar);
-               
-                dependencias = query.list();
-                
+        List<TbAdmDependencia> dependencias = new ArrayList<TbAdmDependencia>();        
+        try{               
+            session = getSession();	
+            Query query = session.createQuery("from TbAdmDependencia where tbAdmUnidadAcademica  like :unidad");
+            query.setString("unidad", unidad);               
+            dependencias = query.list();                
         }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
+                throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar Listar las Dependencias por Unidad. "+e);
         }
         return dependencias;
 	}
+	
+	
 }

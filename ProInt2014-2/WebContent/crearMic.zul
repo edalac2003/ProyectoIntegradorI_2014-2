@@ -3,7 +3,7 @@
 
 <zk>
 <window border="normal" apply="${crearMicroCtrl}">	
-	<borderlayout height="900px" >
+	<borderlayout height="930px" >
 		<north border="0" height="100px">
 			<include id="headerIdx" src="sections/header.zul" />
 		</north>
@@ -11,10 +11,8 @@
 		<center border="0">
 			<div align="center" >
 				<borderlayout height="740px">
-					<north border="0">
-						<div>
-							<include id="listMenu" src="sections/menuBar.zul" />
-						</div>
+					<north border="0" height="30px">
+						<div> <include id="listMenu" src="sections/menuBar.zul" /> </div>
 					</north>
 					 
 					<center border="none" autoscroll="true">
@@ -25,7 +23,8 @@
 									<tabs style="">
 										<tab label="Información General" />
 										<tab label="Información Complementaria" />
-										<tab label="Unidades Detalladas" />
+										<tab label="Unidades y Temas" />
+										<tab label="SubTemas" />
 										<tab label="Evaluaciones" />
 										<tab label="Referencias Bibliográficas" />
 									</tabs>
@@ -145,15 +144,15 @@
 												<rows >
 													<row>
 									                    <label value="Proposito del Curso" />
-									                    <textbox id="txtPropositoMicro" value="proposito" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtPropositoMicro"  value="Proposito" multiline="true" width="100%"/>									                    
 									                </row>
 													<row>
 									                    <label value="Justificación" />
-									                    <textbox id="txtJustificacionMicro" value="justificacion" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtJustificacionMicro"  value="Justificacion" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivo General" />
-									                    <textbox id="txtObjetivoGeneral" value="objetivo general" multiline="true" width="100%"/>									                    
+									                    <textbox id="txtObjetivoGeneral"  value="Objetivo General" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivos Especificos" />
@@ -161,46 +160,35 @@
 										                    <textbox id="txtObjetivoEspecifico"  multiline="true"   width="84%"/>
 										                    <button id="btnAddObjetivo" label="Adicionar" width="15%"/>
 									                    </div>
-									                    
 									                </row>
 									                <row>
-									                	<div></div>
-									                	<listbox id="listaObjetivosEspecificos">
-									                		<listitem label="Especifico 1" />
-									                		<listitem label="Especifico 2" />
-									                		<listitem label="Especifico 3" />
-									                	</listbox>
+									                	<div />
+									                	<div><listbox id="listaObjetivosEspecificos" />
+									                	</div>
+									                	
 									                </row>
 									                <row>
 									                    <label value="Contenido Resumido" />
-									                    <textbox id="txtResumenMicro" value="Resumen" multiline="true" width="100%"/>
+									                    <textbox id="txtResumenMicro"  value="Resumen" multiline="true" width="100%"/>
 									                </row>
-									                
 												</rows>
 											</grid>
 										</tabpanel>
 										
+										
 										<tabpanel id="tabInfoUnidad">
 											<grid id="gridUnidades">
-												<!--<columns>
-													<column label="Nombre de la Unidad" width="100%" height="75%" align="center" />
-												</columns>  -->
 												<rows>
 													<row>
 									                    <div>
 									                    	<label value="Nombre de la Unidad" style="font-weight:bold" width="20%"/>
 									                    	<textbox id="txtNombreUnidad" width="60%"/>		                          
-										                    <button id="btnAddUnidad" label="Adicionar" width="10%" />
+										                    <!--  <button id="btnAddUnidad" label="Adicionar" width="10%" />    -->
 									                    </div>
 									                </row>
 									                <row>
-									                	<listbox id="listaUnidades" >
-									                		<listitem label="UNIDAD 1" />
-									                		<listitem label="UNIDAD 2" />
-									                		<listitem label="UNIDAD 3" />
-									                		<listitem label="UNIDAD 4" />
-									                	</listbox>
-									                </row>		                
+									                	<listbox id="listaUnidades" />
+									                </row> 		                
 												</rows>
 											</grid>
 											
@@ -213,116 +201,99 @@
 												<grid id="infoTemas">
 													<columns>
 														<column label="Unidad" width="15%" align="center"/>
-														<column label="Tema" width="50%" align="center"/>
+														<column label="ID Tema" width="10%" align="center"/>
+														<column label="Tema" width="60%" align="center"/>
 														<column label="Tiempo (Semanas)" width="15%" align="center"/>
 													</columns>
 													<rows>
 														<row>
 															<combobox id="cmbIdUnidad" width="100%" tabindex="5" />
+															<label id="lblIdTema" value="ID" />
 										                    <textbox id="txtNombreTema" width="100%" tabindex="5" />
 										                    
 										                    <div>
 											                    <longbox id="txtNumeroSemanas" width="30%" />
-											                    <button id="btnAddTemas" label="Adicionar" width="65%"/>
+											                    <!-- <button id="btnAddTemas" label="Adicionar" width="65%"/>   -->
 										                    </div>										                    
-														</row>
-																		
-													</rows>
-													
+														</row>																		
+													</rows>													
 												</grid>
 												<grid >
-													<rows>
+													 <rows>
 														<row>
 															<listbox id="listaTemas" autopaging="true">
 																<listhead>
-																	<listheader width="18%" />
+																	<listheader width="15%" />
+																	<listheader width="10%"/>
 																	<listheader width="60" />
-																	<listheader width="18%" />
+																	<listheader width="15%" />
 																</listhead>
-																<listitem>
-																	<listcell label="UNIDAD 1"/>
-																	<listcell label="TEMA 1"/>
-																	<listcell label="3"/>
-																</listitem>
-																<listitem>
-																	<listcell label="UNIDAD 2"/>
-																	<listcell label="TEMA 1"/>
-																	<listcell label="2"/>
-																</listitem>
-																<listitem>
-																	<listcell label="UNIDAD 1"/>
-																	<listcell label="TEMA 2"/>
-																	<listcell label="3"/>
-																</listitem>
-																<listitem>
-																	<listcell label="UNIDAD 3"/>
-																	<listcell label="TEMA 1"/>
-																	<listcell label="1"/>
-																</listitem>
 															</listbox>
-										                </row>
+										                </row> 
 													</rows>
 												</grid> 
 											</div>
 											<separator />
+										</tabpanel>
 										
+										
+										<tabpanel>
 											<div>
 												<div style="color:red;" height="25px">
 													<label value="SUBTEMAS POR TEMAS" style="color:red; font-weight:bold" />
 												</div>
 												<grid>
+													<rows>
+														<row>
+															<div>
+																<label value="Unidad" style="font-weight:bold"/>
+																<combobox id="cmbListaUnidades" width="75%"/>
+															</div>		
+															<div>
+																<label value="Tema" style="font-weight:bold"/>
+																<combobox id="cmbListaTemas" width="25%"/>
+																<label id="lblNombreTema" value="NombreTema"/>
+															</div>													
+														</row>
+													</rows>
+												</grid>
+												<separator />
+												<grid>
 													<columns>
-														<column label="Unidad" align="center" width="15%" />
-														<column label="Tema" align="center" width="20%" />
-														<column label="Subtema" align="center" width="50%"/>
-														
+														<column width="20%" />
+														<column width="75%" />
 													</columns>
 													<rows>
 														<row>
-															<combobox id="cmbListaUnidades" width="100%"/>
-										                    <combobox id="cmbListaTemas" width="100%"/>
+															<div>
+																<label value="Id Subtema " style="font-weight:bold"/>
+																<label id="lblIdSubtema" value="ID" style="font-weight:bold"/>
+															</div>									                    
 										                    <div>
-											                    <textbox id="txtSubTemas" width="80%"/>
-											                    <button id="btnAddSubTema" label="Adicionar" width="18%"/>
-										                    </div>
-										                    
+										                    	<label value="Subtema" style="font-weight:bold"/>
+											                    <textbox id="txtSubTemas" width="70%" />
+											                    <button id="btnAddSubTema" label="Adicionar" />
+										                    </div>										                    
 														</row>					
 													</rows>
 												</grid>
-												<grid >
-													<rows>
-														<row>
-															<listbox id="listaSubtemas" autopaging="true">
-																<listhead height="25%">
-																	<listheader width="15%" />
-																	<listheader width="20%" />
-																	<listheader width="50%" />
-																</listhead>
-																<listitem>
-																	<listcell label="UNIDAD 1"/>
-																	<listcell label="TEMA 1"/>
-																	<listcell label="SubTema 1"/>
-																</listitem>
-																<listitem>
-																	<listcell label="UNIDAD 1"/>
-																	<listcell label="TEMA 1"/>
-																	<listcell label="SubTema 2"/>
-																</listitem>
-																<listitem>
-																	<listcell label="UNIDAD 1"/>
-																	<listcell label="TEMA 2"/>
-																	<listcell label="SubTema 1"/>
-																</listitem>
-																<listitem>
-																	<listcell label="UNIDAD 2"/>
-																	<listcell label="TEMA 1"/>
-																	<listcell label="SubTema 1"/>
-																</listitem>
-															</listbox>
-										                </row>
-													</rows>
-												</grid>
+												
 											</div>
+											<separator />
+											<grid >
+												<rows>
+													<row>
+														<listbox id="listaSubtemas" autopaging="true">
+															<listhead height="25%">
+																<listheader width="15%" />
+																<listheader width="20%" />
+																<listheader width="6%" />
+																<listheader width="50%" />
+															</listhead>
+														</listbox>
+									                </row>
+												</rows>
+											</grid>
 										</tabpanel>
 										
 										
@@ -348,39 +319,7 @@
 											<grid >
 												<rows>
 													<row>
-														<listbox id="listaEvaluaciones" autopaging="true">
-															<listhead>
-																<listheader sort="auto" width="60%" align="center"/>
-																<listheader sort="auto" width="10%" align="center"/>
-																<listheader sort="auto" width="30%" align="center"/>
-															</listhead>
-															<listitem>
-																<listcell label="EVALUACION 1" />
-																<listcell label="20" />
-																<listcell label="01/01/2010" />
-															</listitem>
-															<listitem>
-																<listcell label="EVALUACION 2" />
-																<listcell label="20" />
-																<listcell label="01/02/2010" />
-															</listitem>
-															<listitem>
-																<listcell label="EVALUACION 3" />
-																<listcell label="20" />
-																<listcell label="01/03/2010" />
-															</listitem>
-															<listitem>
-																<listcell label="EVALUACION 4" />
-																<listcell label="20" />
-																<listcell label="01/04/2010" />
-															</listitem>
-															<listitem>
-																<listcell label="EVALUACION 5" />
-																<listcell label="20" />
-																<listcell label="01/06/2010" />
-															</listitem>
-															
-														</listbox>
+														<listbox id="listaEvaluaciones" autopaging="true" />
 									                </row>
 												</rows>
 											</grid>
@@ -389,9 +328,7 @@
 										
 										<tabpanel id="infoBiblioBas">
 											<grid>
-												<!-- <columns>
-													<column label="Nombre de la Unidad" align="center" />
-												</columns>	 -->											
+																						
 												<rows>
 													<row>
 														<div align="center">
@@ -438,41 +375,7 @@
 											<grid >
 												<rows>
 													<row>
-														<listbox id="listaBibliografia">
-															<listhead>
-																<listheader label="Unidad" />
-																<listheader label="Referencia"/>
-																<listheader label="Autor"/>
-																<listheader label="ISBN"/>
-																<listheader label="Pais"/>
-																<listheader label="Tipo"/>																
-															</listhead>
-															<listitem>
-																<listcell label="UNIDAD 1" />
-																<listcell label="REFERENCIA 1" />
-																<listcell label="AUTOR 1" />
-																<listcell label="ISBN 1" />
-																<listcell label="COLOMBIA" />
-																<listcell label="BASICA" />
-															</listitem>
-															<listitem>
-																<listcell label="UNIDAD 1" />
-																<listcell label="REFERENCIA 2" />
-																<listcell label="AUTOR 2" />
-																<listcell label="ISBN 2" />
-																<listcell label="COLOMBIA" />
-																<listcell label="BASICA" />
-															</listitem>
-															<listitem>
-																<listcell label="UNIDAD 1" />
-																<listcell label="REFERENCIA 3" />
-																<listcell label="AUTOR 3" />
-																<listcell label="ISBN 3" />
-																<listcell label="COLOMBIA" />
-																<listcell label="BASICA" />
-															</listitem>
-															
-														</listbox>
+														<listbox id="listaBibliografia" />
 									                </row>
 												</rows>
 											</grid>
@@ -503,38 +406,7 @@
 											<grid >
 												<rows>
 													<row>
-														<listbox id="listaCibergrafia">
-															<listhead>
-																<listheader value="Unidad" width="15%" />
-																<listheader value="Nombre Sitio" width="30"/>
-																<listheader value="URL Sitio" width="30%"/>
-																<listheader value="Tipo" width="15%"/>
-															</listhead>
-															<listitem>
-																<listcell label="UNIDAD 1" />
-																<listcell label="Sitio Web 1" />
-																<listcell label="http://www.sitioweb1.com" />
-																<listcell label="BASICA" />
-															</listitem>
-															<listitem>
-																<listcell label="UNIDAD 1" />
-																<listcell label="Sitio Web 2" />
-																<listcell label="http://www.sitioweb1.com" />
-																<listcell label="BASICA" />
-															</listitem>
-															<listitem>
-																<listcell label="UNIDAD 2" />
-																<listcell label="Sitio Web 3" />
-																<listcell label="http://www.sitioweb1.com" />
-																<listcell label="BASICA" />
-															</listitem>
-															<listitem>
-																<listcell label="UNIDAD 3" />
-																<listcell label="Sitio Web 4" />
-																<listcell label="http://www.sitioweb1.com" />
-																<listcell label="BASICA" />
-															</listitem>
-														</listbox>
+														<listbox id="listaCibergrafia" />
 									                </row>
 												</rows>
 											</grid>
@@ -554,15 +426,8 @@
 			</div>		
 		</center>
 		
-		<south border="none">
-			<div>
-				
-				<separator />
-				<separator />
-				<div>
-					<include id="footerIdx" src="sections/footer.zul" />
-				</div>	
-			</div>						
+		<south border="0">		
+			<div> <include id="footerIdx" src="sections/footer.zul" /> </div>					
 		</south>
 	</borderlayout>
 </window>

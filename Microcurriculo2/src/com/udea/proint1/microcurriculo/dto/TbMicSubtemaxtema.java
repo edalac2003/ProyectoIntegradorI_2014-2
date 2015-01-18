@@ -5,28 +5,29 @@ import java.util.Date;
 public class TbMicSubtemaxtema {
 
 	private int nbid;
-	private TbMicTema tema;
-	private TbMicSubtema subtema;
+	private TbMicTema tbMicTema;
+	private TbMicSubtema tbMicSubtema;
 	private String vrModUsuario;
 	private Date dtModFecha;
 	
 	
-	public TbMicSubtemaxtema(int nbid, TbMicTema tema, TbMicSubtema subtema,
-			String vrModUsuario, Date dtModFecha) {
+	public TbMicSubtemaxtema(int nbid, TbMicTema tbMicTema,
+			TbMicSubtema tbMicSubtema, String vrModUsuario, Date dtModFecha) {
 		super();
 		this.nbid = nbid;
-		this.tema = tema;
-		this.subtema = subtema;
+		this.tbMicTema = tbMicTema;
+		this.tbMicSubtema = tbMicSubtema;
 		this.vrModUsuario = vrModUsuario;
 		this.dtModFecha = dtModFecha;
 	}
-	
-	
-	public TbMicSubtemaxtema(int nbid, TbMicTema tema, TbMicSubtema subtema) {
+
+
+	public TbMicSubtemaxtema(int nbid, TbMicTema tbMicTema,
+			TbMicSubtema tbMicSubtema) {
 		super();
 		this.nbid = nbid;
-		this.tema = tema;
-		this.subtema = subtema;
+		this.tbMicTema = tbMicTema;
+		this.tbMicSubtema = tbMicSubtema;
 	}
 
 
@@ -39,24 +40,24 @@ public class TbMicSubtemaxtema {
 		this.nbid = nbid;
 	}
 
-
-	public TbMicTema getTema() {
-		return tema;
+	
+	public TbMicTema getTbMicTema() {
+		return tbMicTema;
 	}
 
 
-	public void setTema(TbMicTema tema) {
-		this.tema = tema;
+	public void setTbMicTema(TbMicTema tbMicTema) {
+		this.tbMicTema = tbMicTema;
 	}
 
 
-	public TbMicSubtema getSubtema() {
-		return subtema;
+	public TbMicSubtema getTbMicSubtema() {
+		return tbMicSubtema;
 	}
 
 
-	public void setSubtema(TbMicSubtema subtema) {
-		this.subtema = subtema;
+	public void setTbMicSubtema(TbMicSubtema tbMicSubtema) {
+		this.tbMicSubtema = tbMicSubtema;
 	}
 
 

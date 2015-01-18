@@ -116,58 +116,68 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			session.save(microxSemestre);
 			session.save(microxEstado);
 			
-			for(TbMicUnidad unidad:unidades){
-				session.save(unidad);
+			if (unidades != null){
+				for(TbMicUnidad unidad:unidades)
+					session.save(unidad);
 			}
 			
-			for(TbMicTema tema:temas){
-				session.save(tema);
+			if (temas != null){
+				for(TbMicTema tema:temas)
+					session.save(tema);	
 			}
 			
-			for(TbMicObjetivo objetivo:objetivos){
-				session.save(objetivo);
+			if (objetivos != null){
+				for(TbMicObjetivo objetivo:objetivos)
+					session.save(objetivo);	
 			}
 			
-			for(TbMicEvaluacion evalua:evaluaciones){
-				session.save(evalua);
+			if (evaluaciones != null){
+				for(TbMicEvaluacion evalua:evaluaciones)
+					session.save(evalua);
 			}
 			
-			for(TbMicSubtema subtema:subtemas){
-			session.save(subtema);
-		}
-			
-			
-			for(TbMicBibliografia biblio:bibliografia){
-				session.save(biblio);
+			if (subtemas != null){
+				for(TbMicSubtema subtema:subtemas)
+					session.save(subtema);
 			}
 			
-			for(TbMicAutor autor:autores){
-				session.save(autor);
+			if (bibliografia != null){
+				for(TbMicBibliografia biblio:bibliografia)
+					session.save(biblio);	
 			}
+			
+			if(autores != null){
+				for(TbMicAutor autor:autores)
+					session.save(autor);	
+			}
+			
 
-			
-			for(TbMicUnidadxmicro unidadxmicro:unidadesxmicro){
-				session.save(unidadxmicro);
+			if (unidadesxmicro != null){
+				for(TbMicUnidadxmicro unidadxmicro:unidadesxmicro)
+					session.save(unidadxmicro);	
 			}
 			
-			for(TbMicObjetivoxmicro objetivoxmicro:objetivosxmicro){
-				session.save(objetivoxmicro);
+			if(objetivosxmicro != null){
+				for(TbMicObjetivoxmicro objetivoxmicro:objetivosxmicro)
+					session.save(objetivoxmicro);	
 			}
 			
-			for(TbMicTemaxunidad temasxUnidad:temasxunidad){
-				session.save(temasxUnidad);
-			}			
+			if (temasxunidad != null){
+				for(TbMicTemaxunidad temasxUnidad:temasxunidad)
+					session.save(temasxUnidad);	
+			}
 			
-			for(TbMicEvaluacionxmicro exM : evaluacionxMicro)
-				session.save(exM);
-			
-			
+			if (evaluacionxMicro != null){
+				for(TbMicEvaluacionxmicro exM : evaluacionxMicro)
+					session.save(exM);			
+			}
+					
 			tx.commit();
+			
 		} catch (HibernateException e){
 			tx.rollback();
 			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
 					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
-
 		}
 	}
 	
@@ -180,30 +190,30 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			List<TbMicObjetivo> listaObjetivos,
 			List<TbMicObjetivoxmicro> listaObjetivosxMicro)
 			throws ExcepcionesDAO {
-/*		Session session = null;
-		Transaction tx = null;
-		
-		try{
-			session = getSession();
-			tx = session.beginTransaction();
+			Session session = null;
+			Transaction tx = null;
 			
-			session.save(microcurriculo);
-			session.save(microxEstado);
-			session.save(microxSemestre);
-			for(TbMicObjetivos objetivo : listaObjetivos){
-				session.save(objetivo);
-			}
-			
-			for(TbMicObjetivosxmicro objetivoxMicro : listaObjetivosxMicro){
-				session.save(objetivoxMicro);
-			}
-			
-			tx.commit();			
-		}catch(HibernateException e){
-			tx.rollback();
-			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
-					"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente. "+e);
-		}	*/	
+			try{
+				session = getSession();
+				tx = session.beginTransaction();
+				
+				session.save(microcurriculo);
+				session.save(microxEstado);
+				session.save(microxSemestre);
+				for(TbMicObjetivo objetivo : listaObjetivos){
+					session.save(objetivo);
+				}
+				
+				for(TbMicObjetivoxmicro objetivoxMicro : listaObjetivosxMicro){
+					session.save(objetivoxMicro);
+				}
+				
+				tx.commit();			
+			}catch(HibernateException e){
+				tx.rollback();
+				throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+						"Cualquier cambio en la Base de Datos fue Revertido Satisfactoriamente. "+e);
+			}		
 	}
 
 	

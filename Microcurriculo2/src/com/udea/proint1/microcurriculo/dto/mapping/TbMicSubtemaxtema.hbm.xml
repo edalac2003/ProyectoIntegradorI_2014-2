@@ -4,7 +4,7 @@
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema" table="TB_MIC_SUBTEMAXTEMA">
-  <id name="nbId" type="int">
+  <id name="nbid" type="int">
    <column name="NB_ID" precision="22" scale="0"/>
    <generator class="assigned"/>
   </id>
@@ -15,10 +15,10 @@
   <many-to-one class="com.udea.proint1.microcurriculo.dto.TbMicSubtema" name="tbMicSubtema">
    <column name="NB_SUBTEMA" not-null="true" precision="22" scale="0"/>
   </many-to-one>
-  <property generated="never" lazy="false" name="vrModusuario" type="string">
+  <property generated="never" lazy="false" name="vrModUsuario" type="string">
    <column length="20" name="VR_MODUSUARIO"/>
   </property>
-  <property generated="never" lazy="false" name="dtModfecha" type="date">
+  <property generated="never" lazy="false" name="dtModFecha" type="date">
    <column length="7" name="DT_MODFECHA"/>
   </property>  
  </class>

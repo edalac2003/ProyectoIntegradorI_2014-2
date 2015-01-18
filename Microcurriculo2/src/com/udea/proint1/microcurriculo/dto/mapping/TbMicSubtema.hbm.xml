@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.TbMicSubtema" table="TB_MIC_SUBTEMAXTEMA">
+    <class name="com.udea.proint1.microcurriculo.dto.TbMicSubtema" table="TB_MIC_SUBTEMA">
         <id name="nbIdsubtema" type="int">
             <column name="NB_IDSUBTEMA" precision="22" scale="0" />
             <generator class="assigned" />

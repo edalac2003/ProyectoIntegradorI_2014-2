@@ -50,6 +50,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstado.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacion.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacionxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriaxpensum.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculo.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
@@ -58,6 +60,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivoxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtema.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemaxtema.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTema.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemaxunidad.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidad.hbm.xml</value>
@@ -65,7 +68,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActaxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActividadxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmAuditoria.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmObservacionxtabla.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTabla.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacionxmicro.hbm.xml</value>
@@ -120,10 +122,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         <bean id="nucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.NucleoDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
-        <bean id="observacionxTablaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObservacionxTablaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -243,6 +241,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="subtemaxTemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaxTemaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <bean id="temaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
@@ -294,10 +296,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         
         <bean id="nucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl">
         	<property name="nucleoDao" ref="nucleoDao" />
-        </bean>
-        
-        <bean id="observacionxTablaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObservacionxTablaNGCImpl">
-        	<property name="observacionxTablaDao" ref="observacionxTablaDao" />
         </bean>
         
         <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
@@ -428,9 +426,18 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         </bean>
    
+   		<bean id="temaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaNGCImpl">
+        	<property name="temaDao" ref="temaDao" />
+        </bean>
+        
         <bean id="subtemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaNGCImpl">
         	<property name="subtemaDao" ref="subtemaDao" />
         	<property name="temaDao" ref="temaDao" />
+        </bean>
+        
+        <bean id="subtemaxTemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaxTemaNGCImpl">
+        	<property name="subtemaxTemaDao" ref="subtemaxTemaDao" />
+        	<!-- <property name="temaDao" ref="temaDao" /> -->
         </bean>
         
         <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl">
@@ -458,6 +465,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="nucleoNGC" ref="nucleoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
         	<property name="paisNGC" ref="paisNGC" />
+        	<property name="temaNGC" ref="temaNGC" />
+        	<property name="subtemaNGC" ref="subtemaNGC" />
         </bean>
         
         <bean id="crearMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMateriaCtrl" scope="prototype">
@@ -470,21 +479,23 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="materiaNGC" ref="materiaNGC" />
         	<property name="personaNGC" ref="personaNGC" />
-        	<property name="semestreNGC" ref="semestreNGC" />
-        	<property name="objetivoNGC" ref="objetivoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />        	
         	<property name="unidadNGC" ref="unidadNGC" />
         	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
         	<property name="estadoNGC" ref="estadoNGC" />
         	<property name="temaNGC" ref="temaNGC" />
         	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaNGC" ref="subtemaNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
         	<property name="evaluacionNGC" ref="evaluacionNGC" />
         	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="objetivoNGC" ref="objetivoNGC" />
         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
-        	<property name="subtemaNGC" ref="subtemaNGC" />
         	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
         	<property name="microxSemestreNGC" ref="microxSemestreNGC" />
+        	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
         </bean>
         
         <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
@@ -504,6 +515,12 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="correquisitoNGC" ref="correquisitoNGC" />
         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
         	<property name="microxestadoNGC" ref="microxEstadoNGC" />
+        </bean>
+        
+        <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
         </bean>
             
 </beans>

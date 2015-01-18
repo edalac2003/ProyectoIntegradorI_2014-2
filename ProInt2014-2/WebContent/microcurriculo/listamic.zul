@@ -1,0 +1,79 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page contentType="text/html;charset=UTF-8"?>
+
+<zk>
+<window border="normal" apply="${listarMicroCtrl}">
+	<borderlayout height="900px">
+		<north border="0" height="100px">
+			<include id="headerIdx" src="/sections/header.zul" />
+		</north>
+		
+		<center border="0">
+			<borderlayout height="700px">
+				<north border="0" height="30px">
+					<include id="listMenu" src="/sections/menuBar.zul" />
+				</north>
+				
+				<center border="0" >
+					
+					<div align="center">
+						<grid width="960px">
+							<rows>
+								<row>
+									<div>
+										<label value="Unidad Académica" />
+										<combobox id="cmbUnidadAcademica" />
+									</div>
+									<div>
+										<label value="Dependencia" />
+										<combobox id="cmbDependencia" />
+									</div>
+									
+									<div>
+										<label value="Nucleo" />
+										<combobox id="cmbNucleo" />
+									</div>										
+								</row>
+								<row>
+									<div>
+										<label value="Semestre" />
+										<combobox id="cmbSemestre" />
+									</div>
+									<div>
+										<label value="Materia" />
+										<combobox id="cmbMateria" />
+									</div>
+									<div>
+										<label value="Responsable" />
+										<combobox id="cmbResponsable" />
+									</div>
+								</row>
+							</rows>											
+						</grid>
+						<separator />
+						
+						<div width="960px">
+							<grid id="grillaListado">
+								<columns>
+									<column label="Codigo"/>
+									<column label="Unidad" />
+									<column label="Dependencia" />
+									<column label="Nucleo"/>
+									<column label="Materia"/>
+									<column label="Semestre"/>
+									<column label="Responsable"/>
+								</columns>
+							</grid>					
+						</div> 
+						
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+		
+		<south border="0" height="80px">
+			<include id="footerIdx" src="/sections/footer.zul" />
+		</south>
+	</borderlayout>
+</window>
+</zk>

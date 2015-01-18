@@ -35,6 +35,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
@@ -54,6 +55,7 @@ import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
+import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
@@ -81,6 +83,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	private static List<TbMicEvaluacionxmicro> listadoEvaluacionesxMicro;
 	private static List<TbMicObjetivoxmicro> listadoObjetivosxMicro;
 	private static List<TbMicBiblioxunidad> listadoBibliografiaxUnidad;
+	private static List<TbMicSubtemaxtema> listadoSubtemaxTema;
 	
 		
 	Button btnGuardarMicro;
@@ -128,6 +131,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	EvaluacionxMicroNGC evaluacionxMicroNGC;
 	UnidadxMicroNGC unidadxMicroNGC;
 	SubtemaNGC subtemaNGC;
+	SubtemaxTemaNGC subtemaxTemaNGC;
 	BibliografiaNGC bibliografiaNGC;
 	BiblioxunidadNGC biblioxUnidadNGC;
 	MicrocurriculoNGC microcurriculoNGC;
@@ -191,6 +195,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.subtemaNGC = subtemaNGC;
 	}
 
+	public void setSubtemaxTemaNGC(SubtemaxTemaNGC subtemaxTemaNGC) {
+		this.subtemaxTemaNGC = subtemaxTemaNGC;
+	}
+
 	public void setBibliografiaNGC(BibliografiaNGC bibliografiaNGC) {
 		this.bibliografiaNGC = bibliografiaNGC;
 	}
@@ -238,30 +246,46 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		List<TbMicBibliografia> listaBibliografia = empaquetarBibliografias(listaUnidades);
 		List<TbMicAutor> listaAutores = new ArrayList<TbMicAutor>();
 		List<TbMicAutorxbiblio> listaAutorxBiblio = new ArrayList<TbMicAutorxbiblio>();
-						
-		for(TbMicTema tema:listaTemas){
-			System.out.print(tema.getNbIdtema()+"   ");
-			System.out.println(tema.getVrDescripcion()+"    ");
-		}
 		
-		for(TbMicSubtema subtema:listaSubtemas){
-			System.out.print(subtema.getNbIdsubtema()+"   ");
-			System.out.print(subtema.getVrDescripcion()+"   ");
-			System.out.print(subtema.getVrModusuario()+"   ");
-			System.out.println(subtema.getDtModfecha()+"    ");
-			System.out.println(subtema.getTbMicTema());
-		}
 		
-//		if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
+				
+//		for(TbMicTema tema:listaTemas){
+//			System.out.print(tema.getNbIdtema()+"   ");
+//			System.out.println(tema.getVrDescripcion()+"    ");
+//		}
+//		
+//		if(listaSubtemas.size() > 0){
+//			for(TbMicSubtema subtema:listaSubtemas){
+//				System.out.print(subtema.getNbIdsubtema()+"   ");
+//				System.out.print(subtema.getVrDescripcion()+"   ");
+//				System.out.print(subtema.getVrModusuario()+"   ");
+//				System.out.println(subtema.getDtModfecha()+"    ");
+//				
+//			}
+//		}else{
+//			System.out.println("Lista Subtemas está vacia.");
+//		}
+//		
+//		for(TbMicSubtemaxtema stxT : listadoSubtemaxTema){
+//			System.out.print(stxT.getNbid()+"    ");
+//			System.out.print(stxT.getTbMicTema().getVrDescripcion()+"   ");
+//			System.out.print(stxT.getTbMicSubtema().getVrDescripcion()+"    ");
+//			System.out.print(stxT.getVrModUsuario()+"   ");
+//			System.out.println(stxT.getDtModFecha());
+//		}
+		
+		
+		if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
+			try {
+				guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, microxSemestre, listaTemas, listaSubtemas, listadoTemasxUnidad, 
+								listaAutores, listaUnidades, listadoUnidadesxMicro, listaObjetivos, listadoObjetivosxMicro, listaBibliografia, 
+								listadoBibliografiaxUnidad, listaAutorxBiblio, listaEvaluaciones, listadoEvaluacionesxMicro);
+				Messagebox.show("El Microcurriculo se ha guardado correctamente en estado Borrador el cual puede cambiar de estado cuando lo desee.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
+			} catch (ExcepcionesLogica e) {
+				logger.error("Error al intentar guardar el objeto <Microcurriculo>");
+			}
 //			if (verificarCampos() == 1){				
-//				try {
-//					guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, microxSemestre, listaTemas, listaSubtemas, listadoTemasxUnidad, 
-//									listaAutores, listaUnidades, listadoUnidadesxMicro, listaObjetivos, listadoObjetivosxMicro, listaBibliografia, 
-//									listadoBibliografiaxUnidad, listaAutorxBiblio, listaEvaluaciones, listadoEvaluacionesxMicro);
-//					Messagebox.show("El Microcurriculo se ha guardado correctamente en estado Borrador el cual puede cambiar de estado cuando lo desee.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
-//				} catch (ExcepcionesLogica e) {
-//					logger.error("Error al intentar guardar el objeto <Microcurriculo>");
-//				}
+//				
 //
 //			} else if (verificarCampos() == 0){				
 //				try {
@@ -272,30 +296,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 //				}				
 //			} else
 //				Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
-//		} else {
-//			Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la información ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
-//		}
+		} else {
+			Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la información ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
+		}
 	}
 	
 	
 	
 
-	public int verificarCampos(){
-		int estado = -1;
-		if (comprobarInformacionGeneral()){
-			if (comprobarInformacionComplementaria()){
-				estado = 0;
-				if (comprobarUnidadesDetalladas()){
-					if (comprobarEvaluaciones()){
-						if (comprobarReferencias()){
-							estado = 1;							
-						} 
-					} 
-				}
-			} 
-		}
-		return estado;
-	}
+	
 	
 	private boolean existeMicrocurriculo(String idMicrocurriculo){
 		TbMicMicrocurriculo micro = null;
@@ -364,7 +373,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		int registrosEvaluaciones = 0;
 		int registrosEvaluacionesxMicro = 0;
-				
+		int contadorEvaluaciones = 0;
+		int contadorEvaluacionesxMicro = 0;
+		
 		try {
 			registrosEvaluaciones = evaluacionNGC.contarRegistros();
 			lista = new ArrayList<TbMicEvaluacion>();			
@@ -380,11 +391,12 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		}
 		
 		//Character tipo;
-		int contadorEvaluaciones = 0;
-		int contadorEvaluacionesxMicro = 0;
+		contadorEvaluaciones = registrosEvaluaciones;
+		contadorEvaluacionesxMicro = registrosEvaluacionesxMicro;
+		
 		for(int i=0;i<listaEvaluaciones.getItemCount();i++){
-			contadorEvaluaciones = registrosEvaluaciones + i + 1; 
-			contadorEvaluacionesxMicro =  registrosEvaluacionesxMicro + i + 1;
+			contadorEvaluaciones++; 
+			contadorEvaluacionesxMicro++;
 			Listitem listaitem = (Listitem)listaEvaluaciones.getChildren().get(i+1);
 			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
 			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
@@ -404,26 +416,41 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicTema tema = null;
 		TbMicTemaxunidad temaxUnidad = null;
 		TbMicUnidad unidad = null;
-		int registro = 0;
+		int registroTemas = 0;
+		int registroTemasxUnidad = 0;
+		int contadorTemas = 0;
+		int contadorTemasxUnidad = 0;
 		
 		try {
-			registro = temaNGC.contarRegistros();
+			registroTemas = temaNGC.contarRegistros();
 			lista = new ArrayList<TbMicTema>();
-			listadoTemasxUnidad = new ArrayList<TbMicTemaxunidad>();			
 		} catch (ExcepcionesLogica e) {
-			logger.error("Error al intentar contar los Registros de la Tabla Temas.");
+			logger.error("Error al intentar contar los Registros de la Tabla <Temas>.");
 		}
-				
+		
+		try {
+			registroTemasxUnidad = temaxUnidadNGC.contarRegistros();
+			listadoTemasxUnidad = new ArrayList<TbMicTemaxunidad>();
+		} catch (ExcepcionesLogica e) {
+			logger.error("Error al intentar contar los Registros de la Tabla <TemasxUnidad>.");
+		}
+		
+		contadorTemas = registroTemas;
+		contadorTemasxUnidad = registroTemasxUnidad;
+		
 		for (int i=0;i<listaTemas.getItemCount(); i++){
+			contadorTemas++;
+			contadorTemasxUnidad++;
 			Listitem listaitem = (Listitem)listaTemas.getChildren().get(i+1);
 			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
-			Listcell celdaTema = (Listcell)listaitem.getChildren().get(1);
-			Listcell celdaSemanas = (Listcell)listaitem.getChildren().get(2);
+			Listcell celdaIdTema = (Listcell)listaitem.getChildren().get(1);
+			Listcell celdaNombreTema = (Listcell)listaitem.getChildren().get(2);
+			Listcell celdaSemanas = (Listcell)listaitem.getChildren().get(3);
+			
 			unidad = obtenerUnidad(listadoUnidades, celdaUnidad.getLabel());
-			String descripcion = celdaTema.getLabel();
-			int contador = registro + i + 1;
-			tema = new TbMicTema(contador, descripcion, modUsuario, modFecha);
-			temaxUnidad = new TbMicTemaxunidad(contador, unidad, tema, Integer.parseInt(celdaSemanas.getLabel()), modUsuario, modFecha);
+			String descripcion = celdaNombreTema.getLabel();
+			tema = new TbMicTema(contadorTemas, descripcion, modUsuario, modFecha);
+			temaxUnidad = new TbMicTemaxunidad(contadorTemasxUnidad, unidad, tema, Integer.parseInt(celdaSemanas.getLabel()), modUsuario, modFecha);
 			lista.add(tema);
 			listadoTemasxUnidad.add(temaxUnidad);
 		}
@@ -434,34 +461,47 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	private List<TbMicSubtema> empaquetarSubtemas(List<TbMicTema> listadoTemas){
 		List<TbMicSubtema> lista = null;
-		TbMicSubtema subtema = null;
 		TbMicTema tema = null;
+		TbMicSubtema subtema = null;
+		TbMicSubtemaxtema subtemaxTema = null;		
 		
-		int registro = 0;
-		int contador = 0;
+		int registroSubtema = 0;
+		int registroSubtemaxTema = 0;
+		int contadorSubtema = 0;
+		int contadorSubtemaxTema = 0;
 		
 		try {
-			registro = subtemaNGC.contarRegistros();
+			registroSubtema = subtemaNGC.contarRegistros();
 			lista = new ArrayList<TbMicSubtema>();
-		} catch (ExcepcionesLogica e) {
-			logger.error("Error al momento de obtener el numero de Registros.  "+e.getMessage());
-		}
+		} catch (ExcepcionesLogica e){
+			logger.error("NGC : Se presentaron problemas para obtener el numero de Registros de la tabla <Subtema>.   ");
+		}			
 		
+		try{
+			registroSubtemaxTema = subtemaxTemaNGC.contarRegistros();
+			listadoSubtemaxTema = new ArrayList<TbMicSubtemaxtema>();
+		}catch(ExcepcionesLogica e){
+			logger.error("NGC : Se presentaron problemas para obtener el numero de Registros de la tabla <SubtemaxTema>.   ");
+		}
+			
+		contadorSubtemaxTema = registroSubtemaxTema;
+		contadorSubtema = registroSubtema;
 		for(int i=0; i<listaSubtemas.getItemCount(); i++){
 			Listitem listaitem = (Listitem)listaSubtemas.getChildren().get(i+1);
 			Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);
 			Listcell celdaSubtema = (Listcell)listaitem.getChildren().get(2);
-			contador = registro + i + 1;
+			contadorSubtema++;
 			String nombre = celdaTemas.getLabel().toString();
-			tema = obtenerTema(listadoTemas, nombre);
-			System.out.println("Elemntos en la Lista de Temas : "+listadoTemas.size());
-			if (tema != null){
-				subtema = new TbMicSubtema(contador, tema, celdaSubtema.getLabel().toString(), modUsuario, modFecha);
-				lista.add(subtema);
-			} else {
-				System.out.println("El tema está Vacio.");
-			}
 			
+			tema = obtenerTema(listadoTemas, nombre);
+						
+			if (tema != null){
+				subtema = new TbMicSubtema(contadorSubtema, celdaSubtema.getLabel().toString(), modUsuario, modFecha);
+				lista.add(subtema);
+				contadorSubtemaxTema++;
+				subtemaxTema = new TbMicSubtemaxtema(contadorSubtemaxTema, tema, subtema, modUsuario, modFecha);
+				listadoSubtemaxTema.add(subtemaxTema);
+			} 
 		}
 		return lista;
 	}
@@ -472,24 +512,32 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		List<TbMicBibliografia> lista = null;
 		TbMicBibliografia bibliografia = null;
 		TbMicBiblioxunidad biblioxUnidad = null;
-		int registro = 0;
-		int registro2 = 0;
-		int contador = 0;
+		int registroBibliografia = 0;
+		int registroBiblioxUnidad = 0;
+		int contadorBiblio = 0;
+		int contadorBilbioxUnidad = 0;
 		char tipoBibliografia;
 		
 		try {
-			registro = bibliografiaNGC.contarRegistros();
-			registro2 = biblioxUnidadNGC.contarRegistros();
+			registroBibliografia = bibliografiaNGC.contarRegistros();
 			lista = new ArrayList<TbMicBibliografia>();
-			listadoBibliografiaxUnidad = new ArrayList<TbMicBiblioxunidad>();
-			
 		} catch (ExcepcionesLogica e) {			
-			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Bibliobrafia x Unidad.");
+			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Bibliobrafia.");
 		}
 		
 		
+		try {
+			registroBiblioxUnidad = biblioxUnidadNGC.contarRegistros();
+			listadoBibliografiaxUnidad = new ArrayList<TbMicBiblioxunidad>();			
+		}catch(ExcepcionesLogica e){
+			logger.error("Error al intentar recuperar el numero de Registros de la Tabla <BiblioxUnidad>.");
+		}
+		
+		contadorBiblio = registroBibliografia;
+		contadorBilbioxUnidad = registroBiblioxUnidad;
 		for(int i=0; i<listaBibliografia.getItemCount(); i++){
-			contador = registro + i + 1;
+			contadorBiblio++;
+			contadorBilbioxUnidad++;
 			Listitem listaitem = (Listitem)listaBibliografia.getChildren().get(i+1);
 			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
 			Listcell celdaReferencia = (Listcell)listaitem.getChildren().get(1);
@@ -501,18 +549,18 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				tipoBibliografia = '1';
 			}else 
 				tipoBibliografia = '0';
-			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), "", 
+			bibliografia = new TbMicBibliografia(contadorBiblio, celdaReferencia.getLabel().toString(), "", 
 					celdaISBN.getLabel().toString().toUpperCase(), tipoBibliografia, modUsuario, modFecha);
 			TbMicUnidad unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
-			biblioxUnidad = new TbMicBiblioxunidad(contador, bibliografia, unidad, modUsuario, modFecha);
+			biblioxUnidad = new TbMicBiblioxunidad(contadorBilbioxUnidad, bibliografia, unidad, modUsuario, modFecha);
 			
 			lista.add(bibliografia);
 			listadoBibliografiaxUnidad.add(biblioxUnidad);
 		}
-		registro = contador;
 		
 		for(int i=0; i<listaCibergrafia.getItemCount();i++){
-			contador = registro + i + 1;
+			contadorBiblio++;
+			contadorBilbioxUnidad++;
 			Listitem listaItem = (Listitem)listaCibergrafia.getChildren().get(i+1);
 			Listcell celdaUnidad = (Listcell)listaItem.getChildren().get(0);
 			Listcell celdaReferencia = (Listcell)listaItem.getChildren().get(1);
@@ -523,9 +571,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			}else 
 				tipoBibliografia = '0';
 			TbMicUnidad unidad = obtenerUnidad(listaUnidades, celdaUnidad.getLabel().toString().toUpperCase());
-			bibliografia = new TbMicBibliografia(contador, celdaReferencia.getLabel().toString(), 
+			bibliografia = new TbMicBibliografia(contadorBiblio, celdaReferencia.getLabel().toString(), 
 					celdaSitio.getLabel().toString(), null, tipoBibliografia, modUsuario, modFecha);
-			biblioxUnidad = new TbMicBiblioxunidad(contador, bibliografia, unidad, modUsuario, modFecha);
+			biblioxUnidad = new TbMicBiblioxunidad(contadorBilbioxUnidad, bibliografia, unidad, modUsuario, modFecha);
 			lista.add(bibliografia);
 			listadoBibliografiaxUnidad.add(biblioxUnidad);			
 		}	
@@ -542,9 +590,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicUnidad unidad = null;
 		Iterator<TbMicUnidad> iterator = lista.iterator();
 		while (iterator.hasNext() && (unidad == null)){			
-			if(nombre.equals(iterator.next().getVrNombre()) ){				
+			if(nombre.equals(iterator.next().getVrNombre()) )				
 				unidad = iterator.next();
-			}
 		}		
 		return unidad;
 	}
@@ -552,19 +599,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	private TbMicTema obtenerTema(List<TbMicTema> lista, String nombre){
 		TbMicTema tema = null;
-		Iterator<TbMicTema> iterator = lista.iterator();
+		Iterator<TbMicTema> iterator = lista.iterator();	
 		while (iterator.hasNext() && (tema == null)){
-			if (iterator.next().toString().trim().toUpperCase() == nombre.trim().toUpperCase()){
-				tema = iterator.next();
-			}
-			
-		}
-		
+			if(nombre.equalsIgnoreCase(iterator.next().getVrDescripcion().toString()))
+				tema = iterator.next();		
+		}		
 		return tema;
 	}
 	
 	
-	@SuppressWarnings("null")
 	private List<TbMicUnidad> empaquetarUnidades(TbMicMicrocurriculo microcurriculo){
 		List<TbMicUnidad> lista = new ArrayList<TbMicUnidad>();
 				
@@ -744,6 +787,27 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return codigo;
 	}
 	
+	/**
+	 * Este método se encarga de validar la información ingresada y clasifica el estado en el que se guardará el Microcurriculo.
+	 * @return
+	 */
+	public int verificarCampos(){
+		int estado = -1;
+		if (comprobarInformacionGeneral()){
+			if (comprobarInformacionComplementaria()){
+				estado = 0;
+				if (comprobarUnidadesDetalladas()){
+					if (comprobarEvaluaciones()){
+						if (comprobarReferencias()){
+							estado = 1;							
+						} 
+					} 
+				}
+			} 
+		}
+		return estado;
+	}
+	
 	
 	/**
 	 * Este metodo verifica que los campos de la Pestaña Información General no esten vacios.
@@ -825,18 +889,21 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			if ((listaTemas.getItemCount() > 0) && (listaTemas != null)){
 				if ((listaSubtemas.getItemCount() > 0) && (listaSubtemas != null)){
 					estado = true;
-				} else {
-					Messagebox.show("Falta Informacion en la lista <Subtemas por Temas>");
-					cmbListaUnidades.setFocus(true);
-				}
-			} else {
-				Messagebox.show("Falta Informacion en la lista <Temas por Unidades>");
-				cmbIdUnidad.setFocus(true);
-			}
-		} else {
-			Messagebox.show("Falta Informacion en la lista <Unidades>");
-			txtNombreUnidad.setFocus(true);
-		}
+				} 
+//				else {
+//					Messagebox.show("Falta Informacion en la lista <Subtemas por Temas>");
+//					cmbListaUnidades.setFocus(true);
+//				}
+			} 
+//			else {
+//				Messagebox.show("Falta Informacion en la lista <Temas por Unidades>");
+//				cmbIdUnidad.setFocus(true);
+//			}
+		} 
+//		else {
+//			Messagebox.show("Falta Informacion en la lista <Unidades>");
+//			txtNombreUnidad.setFocus(true);
+//		}
 		
 		return estado;
 	}
@@ -850,10 +917,11 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		Boolean estado = false;
 		if ((listaEvaluaciones.getItemCount() > 0) && (listaEvaluaciones != null)){
 			estado = true;
-		} else {
-			Messagebox.show("Falta Informacion en la lista <Evaluaciones>");
-			txtActividadMicro.setFocus(true);
-		}
+		} 
+//		else {
+//			Messagebox.show("Falta Informacion en la lista <Evaluaciones>");
+//			txtActividadMicro.setFocus(true);
+//		}
 		
 		return estado;
 	}
@@ -868,14 +936,16 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		if ((listaBibliografia.getItemCount() > 0) && (listaBibliografia != null)){
 			if ((listaCibergrafia.getItemCount() > 0) && (listaCibergrafia != null)){
 				estado = true;
-			} else {
-				Messagebox.show("Falta Informacion en la lista <Referencias Cibergráficas>");
-				txtNombreSitioCiber.setFocus(true);
-			}
-		} else {
-			Messagebox.show("Falta Informacion en la lista <Referncias Bibliográficas>");
-			cmbReferenciaBiblio.setFocus(true);
-		}
+			} 
+//			else {
+//				Messagebox.show("Falta Informacion en la lista <Referencias Cibergráficas>");
+//				txtNombreSitioCiber.setFocus(true);
+//			}
+		} 
+//		else {
+//			Messagebox.show("Falta Informacion en la lista <Referncias Bibliográficas>");
+//			cmbReferenciaBiblio.setFocus(true);
+//		}
 		
 		return estado;
 	}

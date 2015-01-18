@@ -78,25 +78,23 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 		return nucleos;
 	}
 	
+	
 	@Override
-	public List<TbAdmNucleo> buscarNucleos(String buscar) throws ExcepcionesDAO{
+	public List<TbAdmNucleo> listarNucleoPorDependencia(String nucleo) throws ExcepcionesDAO {
 		Session session = null;
         List<TbAdmNucleo> nucleos = new ArrayList<TbAdmNucleo>();
         
         try{
-               
-                session = getSession();	
-                               
-                Query query = session.createQuery("from TbAdmNucleo where vrIdnucleo  like :nucleo%");
-               
-                query.setString("nucleo", buscar);
-               
-                nucleos = query.list();
-                
+            session = getSession();
+            Query query = session.createQuery("from TbAdmNucleo where vrIdnucleo  like :nucleo");
+            query.setString("nucleo", nucleo);
+            nucleos = query.list();
         }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
+            throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar listar los Nucleos por Dependencia.  "+e);
         }
         return nucleos;
 	}
+	
+	
 
 }
