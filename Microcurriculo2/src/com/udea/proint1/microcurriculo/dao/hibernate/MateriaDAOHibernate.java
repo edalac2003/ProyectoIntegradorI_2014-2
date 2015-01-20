@@ -128,19 +128,14 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 		Session session = null;
         List<TbAdmMateria> materias = new ArrayList<TbAdmMateria>();
         
-        try{
-               
+        try{               
                 session = getSession();	
                 //buscar = buscar.substring(0, buscar.length() - 2);
                                
                 Query query = session.createQuery("from TbAdmMaterias where vrIdmateria  like :materia");
-//                Query query = session.createQuery("from TbAdmMaterias mat where mat.vrNucleo = :materia");
-                
-               
-                query.setString("materia", buscar);
-               
-                materias = query.list();
-                
+//                Query query = session.createQuery("from TbAdmMaterias mat where mat.vrNucleo = :materia");                               
+                query.setString("materia", buscar);               
+                materias = query.list();                
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
         }

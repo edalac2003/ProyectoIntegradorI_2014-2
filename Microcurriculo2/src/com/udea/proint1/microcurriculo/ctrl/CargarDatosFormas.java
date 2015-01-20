@@ -84,6 +84,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				cmbUnidadAcademica.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
 					Comboitem item = new Comboitem(unidad.getVrIdunidad());
+					item.setDescription(unidad.getVrNombre());
 					cmbUnidadAcademica.appendChild(item);
 				}
 			}
@@ -100,6 +101,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmDependencia dependencia : listaDependencias){
 					Comboitem item = new Comboitem(dependencia.getVrIddependencia());
+					item.setDescription(dependencia.getVrNombre());
 					cmbDependencia.appendChild(item);
 				}
 			}
@@ -116,6 +118,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				cmbNucleo.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmNucleo nucleo : listaNucleos){
 					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
+					item.setDescription(nucleo.getVrNombre());
 					cmbNucleo.appendChild(item);
 				}
 			}
@@ -131,6 +134,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			if(listaMaterias != null){
 				for(TbAdmMateria materia : listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
+					item.setDescription(materia.getVrNombre());
 					cmbMateria.appendChild(item);
 				}
 			}
