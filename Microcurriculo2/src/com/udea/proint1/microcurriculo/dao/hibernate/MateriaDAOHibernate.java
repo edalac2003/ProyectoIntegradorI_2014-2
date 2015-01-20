@@ -83,8 +83,7 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
             materias = query.list();			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
-		} 
-		
+		} 		
 		return materias;
 	}
 

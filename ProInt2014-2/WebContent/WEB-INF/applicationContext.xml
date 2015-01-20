@@ -517,10 +517,17 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="microxestadoNGC" ref="microxEstadoNGC" />
         </bean>
         
-        <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
+        <!--<bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
+        	
+        </bean>  -->
+        
+        <bean id="cargarDatosFormas" class="com.udea.proint1.microcurriculo.ctrl.CargarDatosFormas" scope="prototype">
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
         </bean>
             
 </beans>

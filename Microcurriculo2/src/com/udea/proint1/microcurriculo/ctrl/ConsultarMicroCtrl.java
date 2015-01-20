@@ -358,7 +358,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void recargarDepartamentos(String buscaDepartamentos){
 		try {
 			buscaDepartamentos = buscaDepartamentos + "%";
-			List<TbAdmDependencia> listaDependencias = dependenciaNGC.buscarDependencias(buscaDepartamentos);
+			List<TbAdmDependencia> listaDependencias = dependenciaNGC.obtenerDependencia(buscaDepartamentos);
 			cmbIdDepartamento.getItems().clear();
 			
 			if(listaDependencias != null){

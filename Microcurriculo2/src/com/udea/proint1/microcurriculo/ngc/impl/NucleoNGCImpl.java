@@ -136,7 +136,7 @@ public class NucleoNGCImpl implements NucleoNGC {
 	
 	@Override
 	public List<TbAdmNucleo> listarNucleosPorDependencia(String dependencia) throws ExcepcionesLogica {
-		if(dependencia.equals("")||(dependencia.equals(null))){
+		if(dependencia.equals("") || (dependencia.length() < 1)){
 			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
 		}
 		List<TbAdmNucleo> listaNucleos = null;

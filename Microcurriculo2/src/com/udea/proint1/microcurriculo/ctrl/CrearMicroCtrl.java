@@ -109,10 +109,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbPaisBiblio;
 	Combobox cmbTipoBibliografia;
 	Combobox cmbTipoCibergrafia;
-	Combobox cmbIdMateria;
-	Combobox cmbIdDocente;
-	Combobox cmbIdNucleo;
-	Combobox cmbIdSemestre;
+	Combobox cmbMateria;
+	Combobox cmbDocente;
+	Combobox cmbNucleo;
+	Combobox cmbSemestre;
 	
 	MateriaNGC materiaNGC;
 	PersonaNGC personaNGC;
@@ -528,23 +528,23 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	
 	
-	public void cargarDocentes(){
-		try {
-			//List<TbAdmPersona> listaDocentes = personaNGC.listarPersonas();
-			List<TbAdmPersona> listaDocentes = personaNGC.obtenerDocentes();
-			cmbIdDocente.getItems().clear();
-			if (listaDocentes != null){
-				//Messagebox.show("Se Hallaron Registros "+listaDocentes.size());
-				for(TbAdmPersona docente : listaDocentes){
-					Comboitem item = new Comboitem(docente.getVrIdpersona());
-					cmbIdDocente.appendChild(item);
-				}
-			} else
-				Messagebox.show("No Se Hallaron Registros de Docentes");
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
-		}
-	}
+//	public void cargarDocentes(){
+//		try {
+//			//List<TbAdmPersona> listaDocentes = personaNGC.listarPersonas();
+//			List<TbAdmPersona> listaDocentes = personaNGC.obtenerDocentes();
+//			cmbDocente.getItems().clear();
+//			if (listaDocentes != null){
+//				//Messagebox.show("Se Hallaron Registros "+listaDocentes.size());
+//				for(TbAdmPersona docente : listaDocentes){
+//					Comboitem item = new Comboitem(docente.getVrIdpersona());
+//					cmbDocente.appendChild(item);
+//				}
+//			} else
+//				Messagebox.show("No Se Hallaron Registros de Docentes");
+//		} catch (ExcepcionesLogica e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public void cargarMaterias(String nucleo){
 		try {
@@ -552,7 +552,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if (listaMaterias != null){
 				for (TbAdmMateria materia : listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
-					cmbIdMateria.appendChild(item);
+					cmbMateria.appendChild(item);
 				}
 			} else {
 				System.out.println("El objeto está Vacio");
@@ -563,51 +563,51 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	
-	public void cargarNucleos(){
-		try {
-			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
-			cmbIdNucleo.getItems().clear();
-			if (listaNucleos != null){
-				for(TbAdmNucleo nucleo : listaNucleos){
-					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
-					cmbIdNucleo.appendChild(item);
-				}
-			} else
-				Messagebox.show("No se Encontraron Registros en la Tabla Nucleos Académicos");
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);			
-		}
-	}
+//	public void cargarNucleos(){
+//		try {
+//			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
+//			cmbNucleo.getItems().clear();
+//			if (listaNucleos != null){
+//				for(TbAdmNucleo nucleo : listaNucleos){
+//					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
+//					cmbNucleo.appendChild(item);
+//				}
+//			} else
+//				Messagebox.show("No se Encontraron Registros en la Tabla Nucleos Académicos");
+//		} catch (ExcepcionesLogica e) {
+//			logger.error(e);			
+//		}
+//	}
 	
-	private void cargarSemestres(){
-		try {
-			List<TbAdmSemestre> listaSemestre = semestreNGC.listarSemestres();
-			if (listaSemestre != null){
-				for (TbAdmSemestre semestre : listaSemestre){
-					Comboitem item = new Comboitem(semestre.getVrIdsemestre());
-					cmbIdSemestre.appendChild(item);
-				}
-			} else
-				Messagebox.show("No se Encontraron Registros de Semestres");
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
-		}
-	}
+//	private void cargarSemestres(){
+//		try {
+//			List<TbAdmSemestre> listaSemestre = semestreNGC.listarSemestres();
+//			if (listaSemestre != null){
+//				for (TbAdmSemestre semestre : listaSemestre){
+//					Comboitem item = new Comboitem(semestre.getVrIdsemestre());
+//					cmbSemestre.appendChild(item);
+//				}
+//			} else
+//				Messagebox.show("No se Encontraron Registros de Semestres");
+//		} catch (ExcepcionesLogica e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 	
-	public void onSelect$cmbIdNucleo(){
+	public void onSelect$cmbNucleo(){
 		TbAdmNucleo nucleo;
 		try {
-			nucleo = nucleoNGC.obtenerNucleo(cmbIdNucleo.getValue().toString());
+			nucleo = nucleoNGC.obtenerNucleo(cmbNucleo.getValue().toString());
 			lblNombreNucleo.setValue(nucleo.getVrNombre());
 		} catch (WrongValueException e) {
 			e.printStackTrace();
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
-		cmbIdMateria.getItems().clear();
-		cargarMaterias(cmbIdNucleo.getValue().toString());
+		cmbMateria.getItems().clear();
+		cargarMaterias(cmbNucleo.getValue().toString());
 	}
 		
 	private void llenarCombosUnidades(String unidad){
@@ -684,9 +684,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	
-	public void onSelect$cmbIdDocente(){
+	public void onSelect$cmbDocente(){
 		try {
-			TbAdmPersona persona = personaNGC.obtenerPersona(cmbIdDocente.getValue().toString());
+			TbAdmPersona persona = personaNGC.obtenerPersona(cmbDocente.getValue().toString());
 			
 			if (persona != null){
 				lblNombreDocente.setValue(persona.getVrNombres() + " "+ persona.getVrApellidos());
@@ -699,10 +699,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}
 	}
 	
-	public void onSelect$cmbIdMateria(){
+	public void onSelect$cmbMateria(){
 		//Messagebox.show("Ingresó al Evento."+ cmbIdMateria.getValue().toString());
 		try {
-			TbAdmMateria materia = materiaNGC.obtenerMateria(cmbIdMateria.getValue().toString());
+			TbAdmMateria materia = materiaNGC.obtenerMateria(cmbMateria.getValue().toString());
 			if (materia != null ){
 				lblNombreMateria.setValue(materia.getVrNombre());
 				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
@@ -740,13 +740,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
-		cargarNucleos();
-		cargarDocentes();
-		cargarSemestres();
+//		cargarNucleos();
+//		cargarDocentes();
+//		cargarSemestres();
 		asignaIdSubtema();
 		asignaIdTema();
-		
-		logger.info("Esta es la Ventana de Crear Microcurriculo");
 
 	}
 

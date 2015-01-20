@@ -2,8 +2,8 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 
 <zk>
-<window border="normal" apply="${crearMicroCtrl}">	
-	<borderlayout height="930px" >
+<window id="formaCrearMicro" border="normal">	
+	<borderlayout height="930px" apply="${cargarDatosFormas}">
 		<north border="0" height="100px">
 			<include id="headerIdx" src="sections/header.zul" />
 		</north>
@@ -45,14 +45,13 @@
 													<row>
 														<label value="Semestre" />
 									                    <div>
-									                        <combobox id="cmbIdSemestre" width="15%"/>
-									                        
+									                        <combobox id="cmbSemestre" width="15%"/>									                        
 									                    </div>
 							                		</row>
 							                		<row>
 						                				<label value="Nucleo" width="30%"/>
 								                        <div>
-								                        	<combobox id="cmbIdNucleo" />
+								                        	<combobox id="cmbNucleo" />
 								                        	<label id="lblNombreNucleo" />
 								                        </div>
 								                        
@@ -60,14 +59,14 @@
 							                		<row>
 														<label value="Docente Responsable" />
 									                    <div>
-									                        <combobox id="cmbIdDocente" width="25%" droppable="2"/>
+									                        <combobox id="cmbDocente" width="25%" droppable="2"/>
 									                        <label id="lblNombreDocente" />
 									                    </div>
 							                		</row>
 													<row>
 														<label value="Id Materia" />
 									                    <div>
-									                        <combobox id="cmbIdMateria" width="25%" />
+									                        <combobox id="cmbMateria" width="25%" />
 									                        <label id="lblNombreMateria" />
 									                    </div>
 							                		</row>

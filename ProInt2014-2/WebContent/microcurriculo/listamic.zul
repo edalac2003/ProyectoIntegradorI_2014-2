@@ -2,8 +2,8 @@
 <?page contentType="text/html;charset=UTF-8"?>
 
 <zk>
-<window border="normal" apply="${listarMicroCtrl}">
-	<borderlayout height="900px">
+<window id="formaListarMicro" border="normal">
+	<borderlayout height="900px" apply="${cargarDatosFormas}">
 		<north border="0" height="100px">
 			<include id="headerIdx" src="/sections/header.zul" />
 		</north>
@@ -17,35 +17,44 @@
 				<center border="0" >
 					
 					<div align="center">
-						<grid width="960px">
+						<grid width="960px" >
 							<rows>
 								<row>
 									<div>
-										<label value="Unidad Académica" />
-										<combobox id="cmbUnidadAcademica" />
+										<label value="U. Académica" />
+										<combobox id="cmbUnidadAcademica" width="60%" />
+										<label id="lblUnidadAcademica" />
 									</div>
 									<div>
 										<label value="Dependencia" />
-										<combobox id="cmbDependencia" />
+										<combobox id="cmbDependencia" width="60%"/>
+										<label id="lblDependencia" />
 									</div>
 									
 									<div>
 										<label value="Nucleo" />
 										<combobox id="cmbNucleo" />
-									</div>										
-								</row>
-								<row>
-									<div>
-										<label value="Semestre" />
-										<combobox id="cmbSemestre" />
-									</div>
+										<label id="lblNucleo" />
+									</div>		
 									<div>
 										<label value="Materia" />
 										<combobox id="cmbMateria" />
-									</div>
+										<label id="lblMateria" />
+									</div>								
+								</row>
+								<row>									
+									<div>
+										<label value="Semestre" />
+										<combobox id="cmbSemestre" />
+										<label id="lblSemestre" />
+									</div>									
 									<div>
 										<label value="Responsable" />
-										<combobox id="cmbResponsable" />
+										<combobox id="cmbDocente" width="60%"/>
+										<label id="lblResponsable" />
+									</div>
+									<div align="center">
+										<button id="btnBuscar" label="Iniciar Busqueda" />
 									</div>
 								</row>
 							</rows>											
