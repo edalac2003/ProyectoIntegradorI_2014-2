@@ -16,5 +16,7 @@ public interface NucleoNGC {
 	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesLogica;
 	
 	public List<TbAdmNucleo> listarNucleosPorDependencia(String dependencia) throws ExcepcionesLogica;
+	
+	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesLogica;
 
 }

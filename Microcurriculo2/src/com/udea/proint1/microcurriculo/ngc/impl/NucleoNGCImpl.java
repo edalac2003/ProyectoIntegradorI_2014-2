@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -156,6 +157,26 @@ public class NucleoNGCImpl implements NucleoNGC {
 		}
 	}
 	
-	
+	@Override
+	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesLogica{
+		if(buscar.equals("")||(buscar.equals(null))){
+			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+		}
+		List<TbAdmNucleo> listaNucleos = null;
+		try {
+			listaNucleos = nucleoDao.buscarNucleos(buscar);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo buscarNucleos de la clase nucleoDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaNucleos == null){
+			throw new ExcepcionesLogica("No se encontraron nucleos en la tabla TbAdmNucleo");
+		}else{
+			return listaNucleos;
+		}
+	}
 
 }

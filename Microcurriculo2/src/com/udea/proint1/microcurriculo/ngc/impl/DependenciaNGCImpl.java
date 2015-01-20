@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
 import com.udea.proint1.microcurriculo.dao.UnidadAcademicaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -147,6 +148,28 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 			listaDependencias = dependenciaDao.listarDependenciasPorUnidad(unidad);
 		} catch (ExcepcionesDAO e) {
 			throw new ExcepcionesLogica("NGC : Se presentaron errores al listar las Dependencias por Unidad. "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		if(listaDependencias == null){
+			throw new ExcepcionesLogica("No se encontraron dependencias en la tabla TbAdmDependencia");
+		}else{
+			return listaDependencias;
+		}
+	}
+	
+	@Override
+	public List<TbAdmDependencia> buscarDepdencias(String buscar) throws ExcepcionesLogica{
+		if(buscar.equals("")||(buscar.equals(null))){
+			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+		}
+		List<TbAdmDependencia> listaDependencias = null;
+		try {
+			listaDependencias = dependenciaDao.buscarDependencias(buscar);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo buscarDependencias de la clase dependenciaDao: "+ e);
 		}
 		
 		/*

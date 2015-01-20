@@ -17,4 +17,6 @@ public interface DependenciaDAO {
 	
 	public void actualizarDependencias(TbAdmDependencia dependencias) throws ExcepcionesDAO;
 	
+	public List<TbAdmDependencia> buscarDependencias(String buscar) throws ExcepcionesDAO;
+	
 }

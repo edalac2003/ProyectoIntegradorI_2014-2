@@ -146,6 +146,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaDepartamentos != null){
 				for(TbAdmDependencia departamento: listaDepartamentos){
 					Comboitem item = new Comboitem(departamento.getVrIddependencia());
+					item.setDescription(departamento.getVrNombre());
 					cmbIdDepartamento.appendChild(item);
 				}
 			}else{
@@ -165,6 +166,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaNucleos != null){
 				for(TbAdmNucleo nucleo: listaNucleos){
 					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
+					item.setDescription(nucleo.getVrNombre());
 					cmbIdNucleo.appendChild(item);
 				}
 			}else{
@@ -183,6 +185,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaMaterias != null){
 				for(TbAdmMateria materia: listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
+					item.setDescription(materia.getVrNombre());
 					cmbIdMateria.appendChild(item);
 				}
 			}else{
@@ -219,6 +222,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaEstados != null){
 				for(TbMicEstado estado: listaEstados){
 					Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
+					item.setDescription(estado.getVrDescripcion());
 					cmbIdEstado.appendChild(item);
 				}
 			}else{
@@ -358,12 +362,13 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void recargarDepartamentos(String buscaDepartamentos){
 		try {
 			buscaDepartamentos = buscaDepartamentos + "%";
-			List<TbAdmDependencia> listaDependencias = dependenciaNGC.obtenerDependencia(buscaDepartamentos);
+			List<TbAdmDependencia> listaDependencias = dependenciaNGC.buscarDepdencias(buscaDepartamentos);
 			cmbIdDepartamento.getItems().clear();
 			
 			if(listaDependencias != null){
 				for(TbAdmDependencia dependencia: listaDependencias){
 					Comboitem item = new Comboitem(dependencia.getVrIddependencia());
+					item.setDescription(dependencia.getVrNombre());
 					cmbIdDepartamento.appendChild(item);
 				}
 			}else{
@@ -383,6 +388,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaNucleos != null){
 				for(TbAdmNucleo nucleo: listaNucleos){
 					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
+					item.setDescription(nucleo.getVrNombre());
 					cmbIdNucleo.appendChild(item);
 				}
 			}else{
@@ -402,6 +408,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			if(listaMaterias != null){
 				for(TbAdmMateria materia: listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
+					item.setDescription(materia.getVrNombre());
 					cmbIdMateria.appendChild(item);
 				}
 			}else{

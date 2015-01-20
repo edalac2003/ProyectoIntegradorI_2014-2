@@ -16,5 +16,6 @@ public interface NucleoDAO {
 	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesDAO;
 	
 	public List<TbAdmNucleo> listarNucleoPorDependencia(String dependencia) throws ExcepcionesDAO;
-
+	
+	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesDAO;
 }

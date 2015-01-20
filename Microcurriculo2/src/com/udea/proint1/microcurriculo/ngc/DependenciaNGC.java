@@ -16,4 +16,6 @@ public interface DependenciaNGC {
 	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesLogica;
 
 	public List<TbAdmDependencia> listarDependenciasPorUnidad(String unidad) throws ExcepcionesLogica;
+	
+	public List<TbAdmDependencia> buscarDepdencias(String buscar) throws ExcepcionesLogica;
 }
