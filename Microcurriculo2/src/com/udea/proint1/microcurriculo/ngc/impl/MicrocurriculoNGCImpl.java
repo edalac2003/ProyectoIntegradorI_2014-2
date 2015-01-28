@@ -196,18 +196,19 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			materia = materiaDao.obtenerMateria(idMateria);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+			log.error("fall� al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
 		}
 		
-		if(materia == null){
+		if(materia != null){
+			try {
+				listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(idMateria);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica("Se presentaron problemas "+e);
+			}			
+		} else {
 			throw new ExcepcionesLogica("NO existe materia a consultar"); 
 		}
 		
-		try {
-			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(materia);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicrocurriculosPorMateria de la clase microcurriculoDao: "+ e);
-		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.

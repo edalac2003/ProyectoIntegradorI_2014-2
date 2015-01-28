@@ -27,10 +27,7 @@ public class MateriaNGCImpl implements MateriaNGC {
 		this.nucleoDao = nucleoDao;
 	}
 
-	public MateriaNGCImpl() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public void guardarMateria(TbAdmMateria materia) throws ExcepcionesLogica {
 		/*
@@ -95,24 +92,25 @@ public class MateriaNGCImpl implements MateriaNGC {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
-		if("".equals(id) || (id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado un ID de Materia Valido.");
-		}
 		TbAdmMateria materias = null;
 		
-		try {
-			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			materias = materiaDao.obtenerMateria(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMaterias de la clase materiaDao: "+ e);
+		if("".equals(id) || (id.equals(null))){
+			throw new ExcepcionesLogica("No se ha ingresado un ID de Materia Valido.");
+		} else {
+			try {
+				//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
+				materias = materiaDao.obtenerMateria(id);
+			} catch (ExcepcionesDAO e) {
+				log.error("falló al invocar el metodo obtenerMaterias de la clase materiaDao: "+ e);
+			}
 		}
-		
+				
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(materias == null){
 			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró dependencia con el id "+ id);
+			throw new ExcepcionesLogica("No se encontr� Materia con el id "+ id);
 		}else{
 			//si no esta vacio retorna la ciudad
 			return materias;

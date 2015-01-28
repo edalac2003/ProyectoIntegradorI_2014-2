@@ -84,12 +84,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 
 		try {
 			session = getSession();
-
 			Criteria criteria = session.createCriteria(TbMicMicrocurriculo.class);
 			microcurriculos = criteria.list();
-			
-			
-
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		}
@@ -137,22 +133,33 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			TbAdmMateria materia) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
-
+		
 		try {
-
 			session = getSession();
-
-			Query query = session
-					.createQuery("from TbMicMicrocurriculos where tbAdmMaterias = :buscarMateria");
-
+			Query query = session.createQuery("from TbMicMicrocurriculos where tbAdmMaterias = :buscarMateria");
 			query.setEntity("buscarMateria", materia);
-
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		}
 		return microcurriculos;
-
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String materia) throws ExcepcionesDAO {
+		Session session = null;
+		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
+		
+		try {
+			session = getSession();
+			Query query = session.createQuery("from TbMicMicrocurriculos where tbAdmMaterias = :buscarMateria");
+			query.setEntity("buscarMateria", materia);
+			microcurriculos = query.list();
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO("Se presentaron problemas al intentar Listar los Microcurriculos por Materia.  ");
+		}
+		return microcurriculos;
 	}
 
 	@Override

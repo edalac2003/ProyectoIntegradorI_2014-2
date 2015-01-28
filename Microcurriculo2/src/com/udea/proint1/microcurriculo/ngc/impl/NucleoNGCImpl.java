@@ -159,9 +159,9 @@ public class NucleoNGCImpl implements NucleoNGC {
 	
 	@Override
 	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesLogica{
-		if(buscar.equals("")||(buscar.equals(null))){
-			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
-		}
+//		if(buscar.equals("")||(buscar.equals(null))){
+//			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+//		}
 		List<TbAdmNucleo> listaNucleos = null;
 		try {
 			listaNucleos = nucleoDao.buscarNucleos(buscar);

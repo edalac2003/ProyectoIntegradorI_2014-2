@@ -32,6 +32,8 @@ public interface MicrocurriculoDAO {
 	
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(TbAdmMateria materia) throws ExcepcionesDAO;
 	
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String materia) throws ExcepcionesDAO;
+	
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(TbAdmPersona responsable) throws ExcepcionesDAO;
 	
 }

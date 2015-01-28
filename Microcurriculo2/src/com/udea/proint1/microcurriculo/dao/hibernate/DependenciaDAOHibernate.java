@@ -48,24 +48,7 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 		return dependencia;
 	}
 
-	@Override
-	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesDAO {
-		Session session = null;
-		List<TbAdmDependencia> dependencia = new ArrayList<TbAdmDependencia>();
-		
-		try{
-			session = getSession();
-			
-			Criteria criteria = session.createCriteria(TbAdmDependencia.class);
-			
-			dependencia = criteria.list();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
-		}
-		
-		return dependencia;
-	}
+	
 
 	@Override
 	public void actualizarDependencias(TbAdmDependencia dependencias) throws ExcepcionesDAO {
@@ -81,6 +64,24 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 		
 	}
 
+	
+	@Override
+	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesDAO {
+		Session session = null;
+		List<TbAdmDependencia> dependencia = new ArrayList<TbAdmDependencia>();
+		
+		try{
+			session = getSession();
+			Criteria criteria = session.createCriteria(TbAdmDependencia.class);
+			dependencia = criteria.list();
+			
+		}catch(HibernateException e){
+			throw new ExcepcionesDAO(e);
+		}
+		
+		return dependencia;
+	}
+	
 	@Override
 	public List<TbAdmDependencia> listarDependenciasPorUnidad(String unidad) throws ExcepcionesDAO {
 		Session session = null;
@@ -91,24 +92,23 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
             query.setString("unidad", unidad);               
             dependencias = query.list();                
         }catch(HibernateException e){
-                throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar Listar las Dependencias por Unidad. "+e);
+            throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar Listar las Dependencias por Unidad. "+e);
         }
         return dependencias;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmDependencia> buscarDependencias(String buscar) throws ExcepcionesDAO{
 		Session session = null;
         List<TbAdmDependencia> dependencias = new ArrayList<TbAdmDependencia>();
-        
         try{               
-                session = getSession();
-                               
-                Query query = session.createQuery("from TbAdmDependencia where vrIddependencia  like :dependencia");                            
-                query.setString("dependencia", buscar);               
-                dependencias = query.list();                
+            session = getSession();           
+        	Query query = session.createQuery("from TbAdmDependencia where vrIddependencia  like :dependencia");
+        	query.setString("dependencia", buscar);               
+            dependencias = query.list();
         }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
+            throw new ExcepcionesDAO(e);
         }
         return dependencias;
 	}

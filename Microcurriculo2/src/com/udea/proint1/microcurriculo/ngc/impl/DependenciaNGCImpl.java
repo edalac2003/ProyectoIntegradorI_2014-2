@@ -17,7 +17,6 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	private static Logger log=Logger.getLogger(DependenciaNGCImpl.class);
 	
 	DependenciaDAO dependenciaDao;
-	
 	UnidadAcademicaDAO unidadAcademicaDao;
 
 	public void setDependenciaDao(DependenciaDAO dependenciaDao) {
@@ -161,10 +160,10 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 	}
 	
 	@Override
-	public List<TbAdmDependencia> buscarDepdencias(String buscar) throws ExcepcionesLogica{
-		if(buscar.equals("")||(buscar.equals(null))){
-			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
-		}
+	public List<TbAdmDependencia> buscarDepedencias(String buscar) throws ExcepcionesLogica{
+//		if(buscar.equals("")||(buscar.equals(null))){
+//			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+//		}
 		List<TbAdmDependencia> listaDependencias = null;
 		try {
 			listaDependencias = dependenciaDao.buscarDependencias(buscar);

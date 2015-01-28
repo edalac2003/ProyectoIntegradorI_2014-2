@@ -62,7 +62,7 @@
 						<separator />
 						
 						<div width="960px">
-							<grid id="grillaListado">
+							<!-- <grid id="grillaListado">
 								<columns>
 									<column label="Codigo"/>
 									<column label="Unidad" />
@@ -72,7 +72,8 @@
 									<column label="Semestre"/>
 									<column label="Responsable"/>
 								</columns>
-							</grid>					
+							</grid>	 -->
+							<listbox id="listaMicrocurriculo" />				
 						</div> 
 						
 					</div>
