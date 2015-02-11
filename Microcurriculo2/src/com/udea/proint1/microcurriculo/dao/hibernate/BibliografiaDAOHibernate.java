@@ -12,7 +12,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;

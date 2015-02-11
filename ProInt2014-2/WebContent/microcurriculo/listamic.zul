@@ -2,6 +2,9 @@
 <?page contentType="text/html;charset=UTF-8"?>
 
 <zk>
+    
+    
+  
 <window id="formaListarMicro" border="normal">
 	<borderlayout height="900px" apply="${cargarDatosFormas}">
 		<north border="0" height="100px">
@@ -14,7 +17,7 @@
 					<include id="listMenu" src="/sections/menuBar.zul" />
 				</north>
 				
-				<center border="0" >
+				<center border="0">
 					
 					<div align="center">
 						<grid width="960px" >
@@ -62,18 +65,17 @@
 						<separator />
 						
 						<div width="960px">
-							<!-- <grid id="grillaListado">
-								<columns>
-									<column label="Codigo"/>
-									<column label="Unidad" />
-									<column label="Dependencia" />
-									<column label="Nucleo"/>
-									<column label="Materia"/>
-									<column label="Semestre"/>
-									<column label="Responsable"/>
-								</columns>
-							</grid>	 -->
-							<listbox id="listaMicrocurriculo" />				
+							<listbox id="listaMicrocurriculo">
+								<listhead>
+									<listheader label="Codigo" align="center" style="font-size:8px" width="12%"/>
+									<listheader label="Unidad" align="center"/>
+									<listheader label="Dependencia" align="center"/>
+									<listheader label="Nucleo" align="center"/>
+									<listheader label="Materia" align="center"/>
+									<listheader label="Semestre" align="center"/>
+									<listheader label="Responsable" align="center"/>
+								</listhead>
+							</listbox>				
 						</div> 
 						
 					</div>

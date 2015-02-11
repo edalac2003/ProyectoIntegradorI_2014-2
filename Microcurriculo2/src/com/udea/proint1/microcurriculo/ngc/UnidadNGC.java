@@ -15,5 +15,5 @@ public interface UnidadNGC {
     
     public List<TbMicUnidad> listarUnidades() throws ExcepcionesLogica;
     
-    public int numeroRegistros() throws ExcepcionesLogica;
+    public int contarRegistros() throws ExcepcionesLogica;
 }

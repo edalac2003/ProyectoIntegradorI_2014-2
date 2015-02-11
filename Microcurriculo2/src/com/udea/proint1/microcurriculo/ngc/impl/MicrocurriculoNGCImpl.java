@@ -201,7 +201,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		
 		if(materia != null){
 			try {
-				listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(idMateria);
+				listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(materia);
 			} catch (ExcepcionesDAO e) {
 				throw new ExcepcionesLogica("Se presentaron problemas "+e);
 			}			
@@ -209,7 +209,12 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 			throw new ExcepcionesLogica("NO existe materia a consultar"); 
 		}
 		
-		
+//		try {
+//			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(idMateria);
+//		} catch (ExcepcionesDAO e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */

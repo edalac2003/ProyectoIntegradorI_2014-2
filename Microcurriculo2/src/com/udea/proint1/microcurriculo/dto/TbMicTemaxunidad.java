@@ -16,6 +16,9 @@ public class TbMicTemaxunidad implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	public TbMicTemaxunidad() {
+		super();
+	}
 
 	public TbMicTemaxunidad(int nbId, TbMicUnidad tbMicUnidad,
 			TbMicTema tbMicTema) {

@@ -1,5 +1,8 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,11 +28,14 @@ import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPais;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PaisNGC;
@@ -37,6 +43,7 @@ import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
@@ -54,7 +61,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Button btnAddCibergrafia;
 	//Button btnGuardarMicro;
 	
-	
+	Label lblNombreUnidadAcademica;
+	Label lblNombreDependencia;
 	Label lblNombreMateria;
 	Label lblAreaMateria;
 	Label lblCreditosMateria;
@@ -77,8 +85,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Checkbox ckbHabilitable;
 	Checkbox ckbClasificable;
 	
-	
-	
 	Listbox listaUnidades;
 	Listbox listaTemas;
 	Listbox listaObjetivosEspecificos;
@@ -86,6 +92,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Listbox listaEvaluaciones;
 	Listbox listaBibliografia;
 	Listbox listaCibergrafia;
+	Listbox listaTemaPorUnidad;
 	
 	Textbox txtNombreUnidad;
 	Textbox txtNombreTema;
@@ -94,6 +101,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Textbox txtSubTemas;
 	Textbox txtActividadMicro;
 	Longbox txtPorcentajeActividad;
+	Textbox txtReferenciaBiblio;
+	Textbox txtAutorBiblio;
 	Textbox txtISBNBiblio;
 	Textbox txtNombreSitioCiber;
 	Textbox txtURLSitioCiber;
@@ -104,15 +113,17 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbListaUnidades;
 	Combobox cmbListaTemas;
 	Combobox cmbListaUnidadBiblio;
-	Combobox cmbReferenciaBiblio;
-	Combobox cmbAutorBiblio;
-	Combobox cmbPaisBiblio;
 	Combobox cmbTipoBibliografia;
 	Combobox cmbTipoCibergrafia;
 	Combobox cmbMateria;
 	Combobox cmbDocente;
 	Combobox cmbNucleo;
 	Combobox cmbSemestre;
+	Combobox cmbUnidadAcademica;
+	Combobox cmbDependencia;
+	
+	Date fechaEstimada = null;
+	DateFormat formatoFecha = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	
 	MateriaNGC materiaNGC;
 	PersonaNGC personaNGC;
@@ -121,6 +132,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	PaisNGC paisNGC;
 	TemaNGC temaNGC;
 	SubtemaNGC subtemaNGC;
+	DependenciaNGC dependenciaNGC;
+	UnidadAcademicaNGC unidadAcademicaNGC;
 	
 	
 	
@@ -162,6 +175,14 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		this.subtemaNGC = subtemaNGC;
 	}
 
+	public void setDependenciaNGC(DependenciaNGC dependenciaNGC) {
+		this.dependenciaNGC = dependenciaNGC;
+	}
+
+	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
+		this.unidadAcademicaNGC = unidadAcademicaNGC;
+	}
+
 	/**
 	 * Este evento ocurre cuando se hace click en sobre el boton <AddCibergrafia>.
 	 * 
@@ -170,6 +191,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	 * @param event
 	 */
 	public void onClick$btnAddCibergrafia(Event event){
+		verificarCamposCibergrafia();
+	}
+	
+	private void verificarCamposCibergrafia(){
 		if (!"".equals(cmbListaUnidadBiblio.getValue())){
 			if (txtNombreSitioCiber.getValue() != null && (txtNombreSitioCiber.getValue().trim().length() > 0)){
 				if (!"".equals(txtURLSitioCiber.getValue())){
@@ -189,12 +214,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}
 	}
 	
-	
 
 	/**
 	 * Este Metodo se encarga de llenar 
 	 */
-	public void llenarListaCibergrafia(){
+	private void llenarListaCibergrafia(){
 		final Listitem listaItem = new Listitem();				
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
@@ -202,31 +226,66 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				eliminaListItem(listaItem);
 			}
 		});
-		Listcell celda1 = new Listcell(cmbListaUnidadBiblio.getValue());
-		Listcell celda2 = new Listcell(txtNombreSitioCiber.getValue());
-		Listcell celda3 = new Listcell(txtURLSitioCiber.getValue());
-		Listcell celda4 = new Listcell(cmbTipoCibergrafia.getValue());
-		listaItem.appendChild(celda1);
-		listaItem.appendChild(celda2);
-		listaItem.appendChild(celda3);
-		listaItem.appendChild(celda4);
+		Listcell celdaUnidad = new Listcell(cmbListaUnidadBiblio.getValue());
+		Listcell celdaSitio = new Listcell(txtNombreSitioCiber.getValue());
+		Listcell celdaURL = new Listcell(txtURLSitioCiber.getValue());
+		Listcell celdaTipo = new Listcell(cmbTipoCibergrafia.getValue());
+		listaItem.appendChild(celdaUnidad);
+		listaItem.appendChild(celdaSitio);
+		listaItem.appendChild(celdaURL);
+		listaItem.appendChild(celdaTipo);
 		listaCibergrafia.appendChild(listaItem);
 		txtNombreSitioCiber.setValue("");
 		txtURLSitioCiber.setValue("");
+		txtNombreSitioCiber.focus();
 	}
 	
+	
+	public void onOK$cmbListaUnidadBiblio(){
+		txtReferenciaBiblio.focus();
+	}
+	
+	public void onOK$txtReferenciaBiblio(){
+		txtAutorBiblio.focus();
+	}
+	
+	public void onOK$txtAutorBiblio(){
+		txtISBNBiblio.focus();
+	}
+	
+	public void onOK$txtISBNBiblio(){
+		cmbTipoBibliografia.focus();
+	}
+	
+	public void onOK$cmbTipoBibliografia(){
+		verificarCamposBibliografia();
+	}
+		
 	public void onClick$btnAddBibliografia(Event event){
+		verificarCamposBibliografia();
+	}
+	
+	public void onOK$txtNombreSitioCiber(){
+		txtURLSitioCiber.focus();
+	}
+	
+	public void onOK$txtURLSitioCiber(){
+		cmbTipoCibergrafia.focus();
+	}
+	
+	public void onOK$cmbTipoCibergrafia(){
+		verificarCamposCibergrafia();
+	}
+	
+	private void verificarCamposBibliografia(){
 		if (!"".equals(cmbListaUnidadBiblio.getValue())){
-			if (cmbReferenciaBiblio.getValue() != null && (cmbReferenciaBiblio.getValue().trim().length() > 0)){
-				if (cmbAutorBiblio.getValue() != null && (cmbAutorBiblio.getValue().trim().length() > 0)){
+			if (txtReferenciaBiblio.getValue() != null && (txtReferenciaBiblio.getValue().trim().length() > 0)){
+				if (txtAutorBiblio.getValue() != null && (txtAutorBiblio.getValue().trim().length() > 0)){
 					if (txtISBNBiblio.getValue() != null && (txtISBNBiblio.getValue().trim().length() > 0)){
-						if (cmbPaisBiblio.getValue() != null && (cmbPaisBiblio.getValue().trim().length() > 0)){
-							if (cmbTipoBibliografia.getValue() != null && (cmbTipoBibliografia.getValue().trim().length() > 0)){
-								llenarListaBibliografia();
-							} else
-								Messagebox.show("Se Requiere información en el Campo <Tipo Bibliografia>");
-						} else 
-							Messagebox.show("Se Requiere información en el Campo <Pais>");						
+						if (cmbTipoBibliografia.getValue() != null && (cmbTipoBibliografia.getValue().trim().length() > 0)){
+							llenarListaBibliografia();
+						} else
+							Messagebox.show("Se Requiere información en el Campo <Tipo Bibliografia>");					
 					} else
 						Messagebox.show("Se Requiere información en el Campo <ISBN>");
 				} else
@@ -237,33 +296,44 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
 	}
 	
-	public void llenarListaBibliografia(){
+	private void llenarListaBibliografia(){
 		final Listitem listaItem = new Listitem();
 		
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
-			public void onEvent(Event arg0) throws Exception {		
-				
+			public void onEvent(Event arg0) throws Exception {						
 				eliminaListItem(listaItem);
 			}
 		});
 		
-		Listcell celda1 = new Listcell(cmbListaUnidadBiblio.getValue());
-		Listcell celda2 = new Listcell(cmbReferenciaBiblio.getValue());
-		Listcell celda3 = new Listcell(cmbAutorBiblio.getValue());
-		Listcell celda4 = new Listcell(txtISBNBiblio.getValue());
-		Listcell celda5 = new Listcell(cmbPaisBiblio.getValue());
-		Listcell celda6 = new Listcell(cmbTipoBibliografia.getValue());
-		listaItem.appendChild(celda1);
-		listaItem.appendChild(celda2);
-		listaItem.appendChild(celda3);
-		listaItem.appendChild(celda4);
-		listaItem.appendChild(celda5);
-		listaItem.appendChild(celda6);
-		listaBibliografia.appendChild(listaItem);
+		Listcell celdaUnidad = new Listcell(cmbListaUnidadBiblio.getValue());
+		Listcell celdaReferencia = new Listcell(txtReferenciaBiblio.getValue());
+		Listcell celdaAutor = new Listcell(txtAutorBiblio.getValue().toUpperCase());
+		Listcell celdaISBN = new Listcell(txtISBNBiblio.getValue().toUpperCase());
+		Listcell celdaTipo = new Listcell(cmbTipoBibliografia.getValue().toUpperCase());
+		listaItem.appendChild(celdaUnidad);
+		listaItem.appendChild(celdaReferencia);
+		listaItem.appendChild(celdaAutor);
+		listaItem.appendChild(celdaISBN);
+		listaItem.appendChild(celdaTipo);
+		listaBibliografia.appendChild(listaItem);		
+		
+		limpiarCamposBibliografia();
+		txtReferenciaBiblio.focus();
+	}
+	
+	private void limpiarCamposBibliografia(){
+		txtReferenciaBiblio.setValue("");
+		txtAutorBiblio.setValue("");
+		txtISBNBiblio.setValue("");
+		cmbTipoBibliografia.setValue("");
 	}
 	
 	public void onClick$btnAddEvaluacion(Event event){
+		verificarCamposEvaluacion();
+	}
+	
+	private void verificarCamposEvaluacion(){
 		if (txtActividadMicro.getValue() != null && (txtActividadMicro.getValue().trim().length() > 0)){
 			if (txtPorcentajeActividad.getValue() != null && (txtPorcentajeActividad.getValue() > 0)){
 				if (dtFechaEvaluacion.getValue() != null) {
@@ -281,17 +351,18 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {		
-				
 				eliminaListItem(listaItem);
 			}
 		});
 		
-		Listcell celda1 = new Listcell(txtActividadMicro.getValue());
-		Listcell celda2 = new Listcell(txtPorcentajeActividad.getValue().toString());
-		Listcell celda3 = new Listcell(dtFechaEvaluacion.getValue().toString());
-		listaItem.appendChild(celda1);
-		listaItem.appendChild(celda2);
-		listaItem.appendChild(celda3);
+		Listcell celdaActividad = new Listcell(txtActividadMicro.getValue());
+		Listcell celdaPorcentaje = new Listcell(txtPorcentajeActividad.getValue().toString());
+		String tmpFecha = formatoFecha.format(dtFechaEvaluacion.getValue());
+		Listcell celdaFecha = new Listcell(tmpFecha);
+		
+		listaItem.appendChild(celdaActividad);
+		listaItem.appendChild(celdaPorcentaje);
+		listaItem.appendChild(celdaFecha);
 		listaEvaluaciones.appendChild(listaItem);
 		txtActividadMicro.setValue("");
 		txtPorcentajeActividad.setValue(null);	
@@ -303,7 +374,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){	
 			final Listitem listaItem = new Listitem();
 			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-
 				@Override
 				public void onEvent(Event arg0) throws Exception {
 					eliminaListItem(listaItem);
@@ -328,14 +398,24 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		Executions.createComponentsDirectly("/dsd/listarMicro.zul", "zul", null, arg);
 	}*/
 	
-	public void eliminaListItem(Listitem item){		
-		if(item.getParent() == listaUnidades){
+	private void eliminaListItem(Listitem item){		
+		if(item.getParent().getId().toString().equals("listaUnidades")){
 			item.detach();
 			recargarCombosUnidades(listaUnidades);
+		} else if (item.getParent().getId().toString().equals("listaTemas")){
+			item.detach();
+			recargarCombosTemas(listaTemas);
+		} else if(item.getParent().getId().toString().equals("listaSubtemas")){
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaEvaluaciones")){
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaBibliografia")){
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaCibergrafia")){
+			item.detach();
 		}
-		item.detach();
 	}
-	
+		
 	
 	public void onClick$btnAddUnidad(Event event){
 		llenarListaUnidades(txtNombreUnidad.getValue());
@@ -346,7 +426,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 
 	private void llenarListaUnidades(String nombreUnidad){
-		if(nombreUnidad != null && (nombreUnidad.trim().length() > 0)){			
+		if(!nombreUnidad.equals("") && (nombreUnidad.trim().length() > 0)){			
 			final Listitem listaItem = new Listitem();
 			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 				@Override
@@ -354,37 +434,20 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 					eliminaListItem(listaItem);					
 				}
 			});
+			Listcell celda1 = new Listcell("");
+			listaItem.appendChild(celda1);
 			
-			Listcell celda = new Listcell(nombreUnidad.toUpperCase());
-			listaItem.appendChild(celda);
+			Listcell celda2 = new Listcell(nombreUnidad.toUpperCase());
+			listaItem.appendChild(celda2);
 			llenarCombosUnidades(nombreUnidad.toUpperCase());
 			listaUnidades.appendChild(listaItem);
 			txtNombreUnidad.setValue("");
 			txtNombreUnidad.setFocus(true);
 		} else
-			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
-	}
-	
-	private void asignaIdSubtema(){
-		try {
-			int registroBD = subtemaNGC.contarRegistros() + 1;
-			int registroLista = listaSubtemas.getItems().size();
-			int total = registroBD + registroLista;
-			lblIdSubtema.setValue(Integer.toString(total));
-		} catch (ExcepcionesLogica e) {
-			logger.error("Error al Intentar Obtener el Numero de Registros de la Tabla <Subtemas>.  " + e);
-		}
-	}
-	
-	private void asignaIdTema(){
-		try {
-			int registroBD = temaNGC.contarRegistros() + 1;
-			int registroLista = listaTemas.getItems().size();
-			int total = registroBD + registroLista;
-			lblIdTema.setValue(Integer.toString(total));			
-		} catch (ExcepcionesLogica e) {
-			logger.error("Error al Intentar Obtener el Numero de Registros de la Tabla <Tema>.  " + e);
-		}		
+			if (listaUnidades.getItems().size() > 0)
+				cmbIdUnidad.focus();
+			else
+				Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
 	}
 	
 	
@@ -392,27 +455,35 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		txtNombreTema.setFocus(true);
 	}
 	
+//	public void onSelect$cmbIdUnidad(){
+//		cargarComboUnidadSubtema(cmbListaTemas.getValue());
+//		txtNombreTema.focus();
+//	}
+	
 	public void onOK$txtNombreTema(){
-		txtNumeroSemanas.setFocus(true);
+		txtNumeroSemanas.focus();
 	}
 	
 	public void onOK$txtNumeroSemanas(){
 		validarCamposTemas(cmbIdUnidad.getValue(), txtNombreUnidad.getValue(), Integer.parseInt(txtNumeroSemanas.getValue().toString()));
 		cmbIdUnidad.setFocus(true);
 	}
-	
-	public void onOK$cmbListaUnidades(){
-		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
-		cmbListaTemas.setFocus(true);
-	}
-	
-	public void onOK$cmbListaTemas(){
-		txtSubTemas.setFocus(true);
-	}
-	
+		
 	public void onOK$txtSubTemas(){
 		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
 		cmbListaUnidades.setFocus(true);
+	}
+	
+	public void onOK$txtActividadMicro(){
+		txtPorcentajeActividad.focus();
+	}
+	
+	public void onOK$txtPorcentajeActividad(){
+		dtFechaEvaluacion.focus();
+	}
+	
+	public void onOK$dtFechaEvaluacion(){
+		verificarCamposEvaluacion();
 	}
 	
 	
@@ -463,22 +534,21 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			}
 		});
 		
-		Listcell celda1 = new Listcell(cmbIdUnidad.getValue());
-		Listcell celda2 = new Listcell(lblIdTema.getValue());
-		Listcell celda3 = new Listcell(txtNombreTema.getValue().toUpperCase());		
-		Listcell celda4 = new Listcell(txtNumeroSemanas.getValue().toString());
+		Listcell celdaUnidad = new Listcell(cmbIdUnidad.getValue());
+		Listcell celdaTema = new Listcell(txtNombreTema.getValue().toUpperCase());		
+		Listcell celdaTiempo = new Listcell(txtNumeroSemanas.getValue().toString());
 		
-		listaItem.appendChild(celda1);
-		listaItem.appendChild(celda2);
-		listaItem.appendChild(celda3);
-		listaItem.appendChild(celda4);
+		listaItem.appendChild(celdaUnidad);
+		listaItem.appendChild(celdaTema);
+		listaItem.appendChild(celdaTiempo);
 		
 		listaTemas.appendChild(listaItem);
 		cmbIdUnidad.setValue("");
-		asignaIdTema();
 		txtNombreTema.setValue("");
 		txtNumeroSemanas.setValue(null);
 	}
+	
+	
 	
 	public void onClick$btnAddSubTema(Event event){
 		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
@@ -489,6 +559,9 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if (cmbListaTemas.getValue() != null && (cmbListaTemas.getValue().trim().length() > 0)){
 				if (txtSubTemas.getValue() != null && (txtSubTemas.getValue().trim().length() > 0)){
 					llenarListaSubTemas();
+					cmbListaTemas.getItems().clear();
+					cmbListaTemas.setValue("");;
+					cmbListaUnidades.focus();
 //					cmbListaUnidades.setSelectedIndex(-1);
 //					cmbListaTemas.setSelectedIndex(-1);
 				} else
@@ -510,19 +583,19 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			}
 		});			
 		
-		Listcell celda1 = new Listcell(cmbListaUnidades.getValue());
-		Listcell celda2 = new Listcell(cmbListaTemas.getValue());
-		Listcell celda3 = new Listcell(lblIdSubtema.getValue());
-		Listcell celda4 = new Listcell(txtSubTemas.getValue());
-		listaItem.appendChild(celda1);
-		listaItem.appendChild(celda2);
-		listaItem.appendChild(celda3);
-		listaItem.appendChild(celda4);
+		Listcell celdaUnidad = new Listcell(cmbListaUnidades.getValue());
+		Listcell celdaTema = new Listcell(cmbListaTemas.getValue());
+		//Listcell celda3 = new Listcell(lblIdSubtema.getValue());
+		Listcell celdaSubtema = new Listcell(txtSubTemas.getValue());
+		listaItem.appendChild(celdaUnidad);
+		listaItem.appendChild(celdaTema);
+		//listaItem.appendChild(celda3);
+		listaItem.appendChild(celdaSubtema);
 		
 		listaSubtemas.appendChild(listaItem);
 //		cmbListaUnidades.setValue("");
 //		cmbListaTemas.setValue("");
-		asignaIdSubtema();
+//		asignaIdSubtema();
 		txtSubTemas.setValue("");
 	}
 	
@@ -552,6 +625,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if (listaMaterias != null){
 				for (TbAdmMateria materia : listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
+					item.setDescription(materia.getVrNombre());
 					cmbMateria.appendChild(item);
 				}
 			} else {
@@ -561,39 +635,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			e.printStackTrace();
 		}
 	}
-	
-	
-//	public void cargarNucleos(){
-//		try {
-//			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
-//			cmbNucleo.getItems().clear();
-//			if (listaNucleos != null){
-//				for(TbAdmNucleo nucleo : listaNucleos){
-//					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
-//					cmbNucleo.appendChild(item);
-//				}
-//			} else
-//				Messagebox.show("No se Encontraron Registros en la Tabla Nucleos Académicos");
-//		} catch (ExcepcionesLogica e) {
-//			logger.error(e);			
-//		}
-//	}
-	
-//	private void cargarSemestres(){
-//		try {
-//			List<TbAdmSemestre> listaSemestre = semestreNGC.listarSemestres();
-//			if (listaSemestre != null){
-//				for (TbAdmSemestre semestre : listaSemestre){
-//					Comboitem item = new Comboitem(semestre.getVrIdsemestre());
-//					cmbSemestre.appendChild(item);
-//				}
-//			} else
-//				Messagebox.show("No se Encontraron Registros de Semestres");
-//		} catch (ExcepcionesLogica e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
 	
 	
 	public void onSelect$cmbNucleo(){
@@ -624,83 +665,178 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		cmbListaUnidades.getItems().clear();
 		cmbListaUnidadBiblio.getItems().clear();
 		cmbListaTemas.getItems().clear();
-		String celda;
+
+		if (lista.getItems().size() > 0){
+			for (int i=1; i <= lista.getItemCount(); i++ ){
+				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
+				Listcell celda = (Listcell)listaItem.getChildren().get(0);
+
+				Comboitem item = new Comboitem(celda.getLabel());
+				cmbIdUnidad.appendChild(item);
+				Comboitem item2 = new Comboitem(celda.getLabel());
+				cmbListaUnidades.appendChild(item2); 
+				Comboitem item3 = new Comboitem(celda.getLabel());
+				cmbListaUnidadBiblio.appendChild(item3);
+			}	
+		}
+			
+	}
+	
+	private void recargarCombosTemas(Listbox lista){
+		cmbListaTemas.getItems().clear();
 		
-		for (int i=0; i < lista.getItemCount(); i++ ){
-			Listitem listaItem = (Listitem)lista.getChildren().get(0); 
-			celda = listaItem.getLabel();
-			Comboitem item = new Comboitem(celda);
-			cmbIdUnidad.appendChild(item);
-			Comboitem item2 = new Comboitem(celda);
-			cmbListaUnidades.appendChild(item2); 
-			Comboitem item3 = new Comboitem(celda);
-			cmbListaUnidadBiblio.appendChild(item3);
-		}		
+		if(lista.getItems().size() > 0){
+			for(int i=1; i<= lista.getItemCount(); i++){
+				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
+				Listcell celda = (Listcell)listaItem.getChildren().get(0);
+				Comboitem item = new Comboitem(celda.getLabel());
+				cmbListaTemas.appendChild(item);
+			}
+		}
+	}
+	
+	private void cargarComboUnidadSubtema(String tema){
+		cmbListaTemas.getItems().clear();
+		
+		for(int i=1; i<= listaTemas.getItemCount(); i++){
+			Listitem listaItem = (Listitem)listaTemas.getChildren().get(i);
+			Listcell celda = (Listcell)listaItem.getChildren().get(1);
+			if(celda.getLabel().equals(tema)){
+				Comboitem item = new Comboitem(celda.getLabel());
+				cmbListaTemas.appendChild(item);				
+			}			
+		}
 	}
 		
+	
 	/**
 	 *
 	 */
 	public void onSelect$cmbListaUnidades(){
-		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
+//		System.out.println("posicion : "+ listaTemas.getSelectedItem().getIndex());
+//		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue().toString());
+//		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
+//		cmbListaTemas.focus();
 	}
 		
+	public void onOK$cmbListaUnidades(){
+		
+		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
+		cmbListaTemas.setValue("");
+		cmbListaTemas.focus();
+//		llenarTemasPorUnidad(listaTemas, cmbListaUnidades.getValue());
+//		cmbListaTemas.setFocus(true);
+	}
+	
 	/**
 	 * Este metodo de encarga de Cargar, en el ComboBox de Temas de la pestaña Subtemas, los datos hallados de acuerdo a la unidad Seleccionada.
 	 * 
 	 * @param lista.  Recibe el ListBox de donde se Extraeran los registros.
 	 * @param unidad. Es el valor que se utilizará para comparar.
 	 */
-	private void llenarTemasPorUnidad(Listbox lista, String unidad){
-		cmbListaTemas.getItems().clear();
-		cmbListaTemas.setValue("");
-		lblNombreTema.setValue("");
+	private void cargarTemasEnSubtemas(Listbox lista, String unidad){
 		
-		for(int i=1; i <= listaTemas.getItemCount(); i++){
-			Listitem listaitem = (Listitem)lista.getChildren().get(i);
-			Listcell celdaUnidades = (Listcell)listaitem.getChildren().get(0);			
-			
-			if (celdaUnidades.getLabel().equals(unidad)){
-				Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);
-				Comboitem item = new Comboitem(celdaTemas.getLabel());				
-				cmbListaTemas.appendChild(item);								
-			}			
-		}	
+		cmbListaTemas.getItems().clear();
+		if (lista.getItemCount() > 0){
+			for(int i=1;i<=lista.getItemCount(); i++){
+				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
+				Listcell celdaTema = (Listcell)listaItem.getChildren().get(1);
+				Listcell celdaUnidad = (Listcell)listaItem.getChildren().get(0);
+				Comboitem itemTema = new Comboitem(celdaTema.getLabel());
+				
+				if (celdaUnidad.getLabel().equals(unidad))
+					cmbListaTemas.appendChild(itemTema);
+			}
+		}
+		
 	}
+
 	
 	public void onSelect$cmbListaTemas(){
-		mostrarTemaporUnidad(listaTemas, cmbListaTemas.getValue());
+//		txtSubTemas.setFocus(true);
 	}
 	
-	private void mostrarTemaporUnidad(Listbox lista, String idTema){
-		for(int i=1; i <= listaTemas.getItemCount(); i++){
-			Listitem listaitem = (Listitem)lista.getChildren().get(i);
-			Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);		
-			if (celdaTemas.getLabel().equals(idTema)){
-				Listcell celdaNombreTemas = (Listcell)listaitem.getChildren().get(2);
-				lblNombreTema.setValue(celdaNombreTemas.getLabel().toString());				
-			}			
-		}	
+	public void onOK$cmbListaTemas(){
+		txtSubTemas.setFocus(true);
 	}
 	
 	
 	public void onSelect$cmbDocente(){
-		try {
-			TbAdmPersona persona = personaNGC.obtenerPersona(cmbDocente.getValue().toString());
-			
-			if (persona != null){
-				lblNombreDocente.setValue(persona.getVrNombres() + " "+ persona.getVrApellidos());
-			} else 
-				Messagebox.show("No se Encontró el Regitro para el docente.");
-		} catch (WrongValueException e) {
-			e.printStackTrace();
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
-		}
+		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
 	}
 	
+	public void onOK$cmbDocente(){
+		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
+		if (!(lblNombreDocente.getValue().equals("") && (lblNombreDocente.getValue().trim().length() > 0)))
+			cmbSemestre.focus();				
+	}
+	
+	private String mostrarNombreDocente(String idDocente){
+		String nombre = "";
+		TbAdmPersona persona = null;
+	
+		try {
+			persona = personaNGC.obtenerPersona(idDocente);
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		if (persona != null){
+			nombre = persona.getVrApellidos()+" "+persona.getVrNombres();
+		}	
+		return nombre;
+	}
+	
+	private String mostrarUnidadAcademica(String idUnidad){
+		String nombre = "";
+		TbAdmUnidadAcademica unidadAcademica = null;
+		
+		try{
+			unidadAcademica = unidadAcademicaNGC.obtenerUnidadAcademica(idUnidad);
+		}catch(ExcepcionesLogica e){
+			logger.error(e);
+		}
+		
+		if (unidadAcademica != null)
+			nombre = unidadAcademica.getVrNombre();
+		return nombre;
+	}
+	
+	private String mostrarDependencia(String idDependencia){
+		String nombre = "";
+		TbAdmDependencia dependencia = null;
+		
+		try {
+			dependencia = dependenciaNGC.obtenerDependencia(idDependencia);
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		if (dependencia != null)
+			nombre = dependencia.getVrNombre();
+		
+		return nombre;
+	}
+	
+	public void onOK$cmbUnidadAcademica(){
+		cmbDependencia.focus();
+	}
+	
+	public void onSelect$cmbUnidadAcademica(){
+		lblNombreUnidadAcademica.setValue(mostrarUnidadAcademica(cmbUnidadAcademica.getValue()));
+	}
+	
+	public void onOK$cmbDependencia(){
+		cmbNucleo.focus();
+	}
+	
+	public void onSelect$cmbDependencia(){
+		lblNombreDependencia.setValue(mostrarDependencia(cmbDependencia.getValue()));
+	}
+	
+	
+	
 	public void onSelect$cmbMateria(){
-		//Messagebox.show("Ingresó al Evento."+ cmbIdMateria.getValue().toString());
 		try {
 			TbAdmMateria materia = materiaNGC.obtenerMateria(cmbMateria.getValue().toString());
 			if (materia != null ){
@@ -734,18 +870,12 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		
 	}
 	
+	
 		
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
-		
 		super.doAfterCompose(comp);
-//		cargarNucleos();
-//		cargarDocentes();
-//		cargarSemestres();
-		asignaIdSubtema();
-		asignaIdTema();
-
 	}
 
 }

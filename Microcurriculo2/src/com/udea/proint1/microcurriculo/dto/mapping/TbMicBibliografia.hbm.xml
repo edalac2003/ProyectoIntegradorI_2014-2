@@ -17,6 +17,9 @@
         <property name="vrIsbn" type="string">
             <column name="VR_ISBN" length="50" />
         </property>
+        <property name="vrAutor" type="string">
+            <column name="VR_AUTOR" />
+        </property>
         <property name="blTipo" type="java.lang.Character">
             <column name="BL_TIPO" length="1" />
         </property>
@@ -31,12 +34,6 @@
                 <column name="NB_BIBLIOGRAFIA" precision="22" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad" />
-        </set>
-        <set name="tbMicAutorxbiblios" table="TB_MIC_AUTORXBIBLIO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_BIBLIOGRAFIA" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio" />
         </set>
     </class>
 </hibernate-mapping>

@@ -60,7 +60,7 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 	}
 
 	@Override
-	public int numeroRegistros() throws ExcepcionesDAO {
+	public int contarRegistros() throws ExcepcionesDAO {
 		Session session = null;
 		int registro = 0;
 		try {
@@ -72,7 +72,7 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 		}		
 		return registro;
 	}
-	
+
 	@Override
 	public List<TbMicUnidad> listarUnidades() throws ExcepcionesDAO{
 		Session session = null;

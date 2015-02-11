@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
@@ -16,12 +13,12 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPais;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
@@ -30,6 +27,7 @@ import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
+import com.udea.proint1.microcurriculo.ngc.PaisNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
@@ -45,6 +43,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	Combobox cmbSemestre;
 	Combobox cmbMateria;
 	Combobox cmbDocente;
+	Combobox cmbPaisBiblio;
 	
 	Window formaCrearMicro;
 	Window formaListarMicro;
@@ -67,6 +66,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	SemestreNGC semestreNGC;
 	PersonaNGC personaNGC;
 	MicrocurriculoNGC microcurriculoNGC;
+	PaisNGC paisNGC;
 	
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -95,8 +95,11 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
 	}
-
 	
+	public void setPaisNGC(PaisNGC paisNGC) {
+		this.paisNGC = paisNGC;
+	}
+
 	private void cargarUnidades(){
 		try {
 			List<TbAdmUnidadAcademica> listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
@@ -163,8 +166,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				logger.error(e.getMessage());
 			}
 		}
-		
-		
+				
 		cmbMateria.getItems().clear();
 		if(listaMaterias != null){
 			for(TbAdmMateria materia : listaMaterias){
@@ -174,11 +176,6 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			}
 		}
 		
-//		try {
-//			
-//		} catch (ExcepcionesLogica e) {
-//			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Materia>.  "+e);
-//		}
 	}
 	
 	private void cargarSemestres(){
@@ -215,6 +212,22 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		}
 	}
 	
+//	private void cargarPais(){
+//		List<TbAdmPais> listaPais = null;
+//		
+//		try {
+//			listaPais = paisNGC.listarPaises();
+//		} catch (ExcepcionesLogica e) {
+//			logger.error("Error al intentar Obtener el listado de los registros de la tabla <TbAdmPais>.");
+//		}
+//		
+//		if (listaPais != null){
+//			for(TbAdmPais pais : listaPais){
+//				Comboitem item = new Comboitem(pais.getVrNombre());
+//				cmbPaisBiblio.appendChild(item);
+//			}
+//		}
+//	}
 	
 	private void inicializarFormaListado(){
 		String cadenaInicial = "[Seleccione]";
@@ -280,27 +293,34 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	private void cargarMicrocurriculos(String id){
 		try {
 			List<TbMicMicrocurriculo> listaMicro = microcurriculoNGC.listarMicrocurriculosPorMateria(id);
-			final Listitem listaItem = new Listitem();
-			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-
-				@Override
-				public void onEvent(Event arg0) throws Exception {						
-//					eliminaListItem(listaItem);
-				}
-			});			
+//			Listitem listaItem = new Listitem();
+//			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+//
+//				@Override
+//				public void onEvent(Event arg0) throws Exception {						
+////					eliminaListItem(listaItem);
+//				}
+//			});			
 			if (listaMicro != null){
+				System.out.println("La lista tiene "+ listaMicro.size()+ "  elementos");
+				
 				for(TbMicMicrocurriculo micro : listaMicro){
-					Listcell celdaCodigo = new Listcell(micro.getVrIdmicrocurriculo());
+					Listitem listaItem = new Listitem();
+					Listcell celdaCodigo = new Listcell(micro.getVrIdmicrocurriculo().toString());
 					Listcell celdaUnidad = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
 					Listcell celdaDependencia = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
 					Listcell celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrNombre());
 					Listcell celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
-					
+					Listcell celdaSemestre = new Listcell();
+					Listcell celdaResponsable = new Listcell(micro.getTbAdmPersona().getVrNombres()+" "+micro.getTbAdmPersona().getVrApellidos());
+						
 					listaItem.appendChild(celdaCodigo);
 					listaItem.appendChild(celdaUnidad);
 					listaItem.appendChild(celdaDependencia);
 					listaItem.appendChild(celdaNucleo);
 					listaItem.appendChild(celdaMateria);
+					listaItem.appendChild(celdaSemestre);
+					listaItem.appendChild(celdaResponsable);
 					
 					listaMicrocurriculo.appendChild(listaItem);
 				}
@@ -313,6 +333,8 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	private void inicializarFormaCrear(){
 		String cadenaInicial = "[Seleccione]";
+		cmbUnidadAcademica.setValue(cadenaInicial);
+		cmbDependencia.setValue(cadenaInicial);
 		cmbNucleo.setValue(cadenaInicial);
 		cmbSemestre.setValue(cadenaInicial);
 		cmbDocente.setValue(cadenaInicial);
@@ -327,17 +349,9 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		cargarDependenciaPorUnidadAcademica(cmbUnidadAcademica.getValue());
 	}
 	
-	public void onFocus$cmbUnidadAcademica(){
-//		System.out.println("EL CONTROL CMBUNIDADACADEMICA RECIBIÓ EN FOCO");
-	}
-	
 	public void onSelect$cmbDependencia(){
 		cargarNucleosPorDependencia(cmbDependencia.getValue());
 	}
-	
-//	public void onFocus$cmbDependencia(){
-//		cargarDependencias();
-//	}
 	
 	public void onSelect$cmbNucleo(){
 		cargarMateriasPorNucleo(cmbNucleo.getValue());
@@ -352,16 +366,14 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
 		if (comp.getParent().getId().equals("formaCrearMicro")){
-			inicializarFormaCrear();			
+			inicializarFormaCrear();
+			
 		} else if (comp.getParent().getId().equals("formaListarMicro")){
 			inicializarFormaListado();
-			cargarUnidades();
-			cargarDependencias();
-//			cargarNucleos();
 			cargarMaterias(cmbNucleo.getValue());
-//			cargarSemestres();
-//			cargarDocentes();
 		}
+		cargarUnidades();
+		cargarDependencias();
 		cargarSemestres();
 		cargarNucleos();
 		cargarDocentes();

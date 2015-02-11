@@ -184,7 +184,7 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 			throw new ExcepcionesLogica("Se produjeron Errores al Obtener el numero de Registros de la Tabla Unidades x Microcurriculo.");
 		}
 				
-		return 0;
+		return registro;
 	}
 	
 	

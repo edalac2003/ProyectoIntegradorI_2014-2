@@ -12,7 +12,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class MateriaxPensumNGCImpl implements MateriaxPensumNGC {
 
-	private static Logger log=Logger.getLogger(AutorNGCImpl.class);
+	private static Logger log=Logger.getLogger(MateriaxPensumNGCImpl.class);
 
 	MateriaxPensumDAO materiaxPensumDao;
 	

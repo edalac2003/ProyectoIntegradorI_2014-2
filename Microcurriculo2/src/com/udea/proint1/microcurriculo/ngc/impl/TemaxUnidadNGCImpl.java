@@ -158,7 +158,8 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 		try {
 			registro = temaxUnidadDao.contarRegistros();
 		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("NGC : No se pudo obtener un valor válido para el numero de Registros.");
+			//throw new ExcepcionesLogica("Se presentaron problemas al intentar obtener el numero de registros de la tabla <TB_MIC_TEMASXUNIDAD>.");
+			throw new ExcepcionesLogica(e);
 		}
 		
 		return registro;

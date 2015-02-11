@@ -45,8 +45,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuario.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutor.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicAutorxbiblio.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstado.hbm.xml</value>
@@ -168,15 +166,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         <bean id="actividadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActividadxMicroDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
-        
-        <bean id="autorDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AutorDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
-        <bean id="autorxBiblioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AutorxBiblioDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
+                
         <bean id="bibliografiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
@@ -345,14 +335,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="actividadxMicroDao" ref="actividadxMicroDao" />
         </bean>
         
-        <bean id="autorNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AutorNGCImpl">
-        	<property name="autorDao" ref="autorDao" />
-        </bean>
-        
-        <bean id="autorxBiblioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AutorxBiblioNGCImpl">
-        	<property name="autorxBiblioDao" ref="autorxBiblioDao" />
-        </bean>
-        
         <bean id="bibliografiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BibliografiaNGCImpl">
         	<property name="bibliografiaDao" ref="bibliografiaDao" />
         </bean>
@@ -467,6 +449,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="paisNGC" ref="paisNGC" />
         	<property name="temaNGC" ref="temaNGC" />
         	<property name="subtemaNGC" ref="subtemaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         </bean>
         
         <bean id="crearMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMateriaCtrl" scope="prototype">
@@ -528,6 +512,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="materiaNGC" ref="materiaNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
         	<property name="personaNGC" ref="personaNGC" />
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="paisNGC" ref="paisNGC" />
         </bean>
             
 </beans>

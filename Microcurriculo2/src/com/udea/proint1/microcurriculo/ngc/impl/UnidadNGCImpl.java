@@ -127,11 +127,12 @@ private static Logger log = Logger.getLogger(UnidadNGCImpl.class);
 		}
 	}
 
+	
 	@Override
-	public int numeroRegistros() throws ExcepcionesLogica {
+	public int contarRegistros() throws ExcepcionesLogica {
 		int registro = 0;
 		try {
-			registro = unidadDao.numeroRegistros();
+			registro = unidadDao.contarRegistros();
 		} catch (ExcepcionesDAO e) {
 			throw new ExcepcionesLogica("Se produjo un Error al Contar los Registros de la Tabla Unidades.");
 		}

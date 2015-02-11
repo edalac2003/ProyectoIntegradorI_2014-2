@@ -15,44 +15,31 @@ public class TbMicBibliografia implements java.io.Serializable {
 	private String vrNombre;
 	private String vrSitioweb;
 	private String vrIsbn;
+	private String vrAutor;
 	private Character blTipo;
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbMicBiblioxunidads = new HashSet(0);
-	private Set tbMicAutorxbiblios = new HashSet(0);
 
 	public TbMicBibliografia() {
 	}
 
-	
 	public TbMicBibliografia(int nbIdbibliografia, String vrNombre,
-			String vrSitioweb, String vrIsbn, Character blTipo,
+			String vrSitioweb, String vrIsbn, String vrAutor, Character blTipo,
 			String vrModusuario, Date dtModfecha) {
 		super();
 		this.nbIdbibliografia = nbIdbibliografia;
 		this.vrNombre = vrNombre;
 		this.vrSitioweb = vrSitioweb;
 		this.vrIsbn = vrIsbn;
+		this.vrAutor = vrAutor;
 		this.blTipo = blTipo;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
 
 
-	public TbMicBibliografia(int nbIdbibliografia, String vrNombre,
-			String vrSitioweb, String vrIsbn, Character blTipo,
-			String vrModusuario, Date dtModfecha, Set tbMicBiblioxunidads,
-			Set tbMicAutorxbiblios) {
-		this.nbIdbibliografia = nbIdbibliografia;
-		this.vrNombre = vrNombre;
-		this.vrSitioweb = vrSitioweb;
-		this.vrIsbn = vrIsbn;
-		this.blTipo = blTipo;
-		this.vrModusuario = vrModusuario;
-		this.dtModfecha = dtModfecha;
-		this.tbMicBiblioxunidads = tbMicBiblioxunidads;
-		this.tbMicAutorxbiblios = tbMicAutorxbiblios;
-	}
+
 
 	public int getNbIdbibliografia() {
 		return this.nbIdbibliografia;
@@ -86,6 +73,15 @@ public class TbMicBibliografia implements java.io.Serializable {
 		this.vrIsbn = vrIsbn;
 	}
 
+	public String getVrAutor() {
+		return vrAutor;
+	}
+
+	public void setVrAutor(String vrAutor) {
+		this.vrAutor = vrAutor;
+	}
+
+
 	public Character getBlTipo() {
 		return this.blTipo;
 	}
@@ -117,13 +113,4 @@ public class TbMicBibliografia implements java.io.Serializable {
 	public void setTbMicBiblioxunidads(Set tbMicBiblioxunidads) {
 		this.tbMicBiblioxunidads = tbMicBiblioxunidads;
 	}
-
-	public Set getTbMicAutorxbiblios() {
-		return this.tbMicAutorxbiblios;
-	}
-
-	public void setTbMicAutorxbiblios(Set tbMicAutorxbiblios) {
-		this.tbMicAutorxbiblios = tbMicAutorxbiblios;
-	}
-
 }

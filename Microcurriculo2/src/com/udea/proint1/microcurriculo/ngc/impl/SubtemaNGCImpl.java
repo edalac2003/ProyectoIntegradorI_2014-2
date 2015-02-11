@@ -139,7 +139,8 @@ public class SubtemaNGCImpl implements SubtemaNGC {
 		try {
 			registro = subtemaDao.contarRegistros();
 		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("Se presentaron errores al intentar obtener el numero de Registros de la tabla Subtemas.");
+//			throw new ExcepcionesLogica("Se presentaron errores al intentar obtener el numero de Registros de la tabla Subtemas.");
+			throw new ExcepcionesLogica(e);
 		}
 		
 		return registro;

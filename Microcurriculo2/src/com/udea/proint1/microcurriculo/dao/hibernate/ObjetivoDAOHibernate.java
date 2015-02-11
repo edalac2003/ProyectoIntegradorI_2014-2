@@ -57,12 +57,10 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		try{
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicObjetivo.class);
-			registro = criteria.list().size();
-			
+			registro = criteria.list().size();			
 		} catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}
-		
+		}		
 		return registro;
 	}
 	

@@ -11,6 +11,10 @@ public class TbMicSubtemaxtema {
 	private Date dtModFecha;
 	
 	
+	public TbMicSubtemaxtema() {
+	}
+
+
 	public TbMicSubtemaxtema(int nbid, TbMicTema tbMicTema,
 			TbMicSubtema tbMicSubtema, String vrModUsuario, Date dtModFecha) {
 		super();

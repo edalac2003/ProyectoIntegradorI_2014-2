@@ -113,7 +113,7 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			Criteria criteria = session.createCriteria(TbMicTemaxunidad.class);
 			registro = criteria.list().size();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : Error al intentar recuperar el Numero de Registros de la Tabla Temas por Unidad. "+e);
+			throw new ExcepcionesDAO("DAO : Se presentaron problemas al intentar recuperar el Numero de Registros de la Tabla <TB_MIC_TEMAXUNIDAD>. "+e);
 		}
 		
 		return registro;
