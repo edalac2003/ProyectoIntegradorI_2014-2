@@ -92,7 +92,7 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
                
                 session = getSession();	
                                
-                Query query = session.createQuery("from TbAdmCorrequisitos where tbAdmMateriasByVrMateria = :materia");
+                Query query = session.createQuery("from TbAdmCorrequisito where tbAdmMateriasByVrMateria = :materia");
                
                 query.setEntity("materia", materia);
                

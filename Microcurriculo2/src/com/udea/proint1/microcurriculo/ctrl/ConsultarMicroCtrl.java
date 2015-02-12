@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
@@ -26,6 +25,7 @@ import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxSemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
@@ -61,10 +61,13 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	Label lblPrerrequisitos;
 	Label lblCorrequisitos;
 	Label lblProgramasVinculados;
-	
-	Checkbox ckbValidable;
-	Checkbox ckbHabilitable;
-	Checkbox ckbClasificable;
+	Label lblValidable;
+	Label lblHabilitable;
+	Label lblClasificable;
+	Label lblPropositoMicro;
+	Label lblJustificacionMicro;
+	Label lblObjetivoGeneral;
+	Label lblResumenMicro;
 	
 	UnidadAcademicaNGC unidadAcademicaNGC;
 	NucleoNGC nucleoNGC;
@@ -75,6 +78,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	CorrequisitoNGC correquisitoNGC;
 	PrerrequisitoNGC prerrequisitoNGC;
 	MicroxEstadoNGC microxestadoNGC;
+	MicroxSemestreNGC microxsemestreNGC;
 
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -445,7 +449,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void obtenerMicro(String id){
 		try {
 			TbMicMicrocurriculo microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(id);
-			lblNombreDocente.setValue("");
+			lblNombreDocente.setValue(microcurriculo.getTbAdmPersona().getVrIdpersona()+" - "+microcurriculo.getTbAdmPersona().getVrNombres()+" "+microcurriculo.getTbAdmPersona().getVrApellidos());
 			lblSemestre.setValue("");
 			lblCreditosMateria.setValue(Integer.toString(microcurriculo.getTbAdmMateria().getNbCreditos()));
 			int ht = microcurriculo.getTbAdmMateria().getNbHt();
@@ -458,13 +462,19 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			lblHoraClaseSemestral.setValue(Integer.toString(horasSemestral));
 			
 			if((microcurriculo.getTbAdmMateria().getBlClasificable())==1){
-				ckbClasificable.setChecked(true);
+				lblClasificable.setValue("Si");
+			}else if((microcurriculo.getTbAdmMateria().getBlClasificable())==0){
+				lblClasificable.setValue("No");
 			}
 			if((microcurriculo.getTbAdmMateria().getBlHabilitable()) == 1){
-				ckbHabilitable.setChecked(true);
+				lblHabilitable.setValue("Si");
+			}else if((microcurriculo.getTbAdmMateria().getBlHabilitable()) == 0){
+				lblClasificable.setValue("No");
 			}
 			if((microcurriculo.getTbAdmMateria().getBlValidable()) == 1){
-				ckbValidable.setChecked(true);
+				lblValidable.setValue("Si");
+			}else if((microcurriculo.getTbAdmMateria().getBlValidable()) == 0){
+				lblValidable.setValue("No");
 			}
 			String listaCorrequisitos = "";
 			String listaPrerrequisitos = "";
@@ -472,8 +482,14 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			String idMateria = microcurriculo.getTbAdmMateria().getVrIdmateria(); 
 			List<TbAdmCorrequisito> correquisitos = correquisitoNGC.listarCorrequisitosxMateria(idMateria);
 			
+			boolean bandera = true;
 			for(TbAdmCorrequisito correquisito: correquisitos){
-				listaCorrequisitos = listaCorrequisitos + " "+(Integer.toString(correquisito.getNbId()));
+				if(bandera){
+					listaCorrequisitos = correquisito.getTbAdmMateriasByVrCorrequisito().getVrIdmateria()+" - "+correquisito.getTbAdmMateriasByVrCorrequisito().getVrNombre();
+					bandera = false;
+				}else{
+					listaCorrequisitos = listaCorrequisitos + "\n"+(correquisito.getTbAdmMateriasByVrCorrequisito().getVrIdmateria()+" - "+correquisito.getTbAdmMateriasByVrCorrequisito().getVrNombre());
+				}
 			}
 			lblCorrequisitos.setValue(listaCorrequisitos);
 			
@@ -481,14 +497,22 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			try {
 				prerrequisitos = prerrequisitoNGC.listarPrerrequisitosxMateria(idMateria);
 			
+				boolean bandera2 = true;
 				for(TbAdmPrerrequisito prerrequisito: prerrequisitos){
-					listaPrerrequisitos = listaPrerrequisitos + " "+(Integer.toString(prerrequisito.getNbId()));
+					if(bandera2){
+						listaPrerrequisitos = prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrIdmateria()+" - "+prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre();
+						bandera2 = false;
+					}else{
+						listaPrerrequisitos = listaCorrequisitos + "\n"+(prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrIdmateria()+" - "+prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre());
+					}
 				}
 				lblPrerrequisitos.setValue(listaPrerrequisitos);
 			} catch (ExcepcionesDAO e) {
 				e.printStackTrace();
 			}
-			
+			lblPropositoMicro.setValue(microcurriculo.getVrProposito());
+			lblJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
+			lblResumenMicro.setValue(microcurriculo.getVrResumen());
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}

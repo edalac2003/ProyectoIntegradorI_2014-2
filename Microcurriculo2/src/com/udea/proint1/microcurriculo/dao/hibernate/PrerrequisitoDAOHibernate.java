@@ -31,7 +31,7 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
                
                 session = getSession();	
                                
-                Query query = session.createQuery("from TbAdmPrerrequisitos where tbAdmMateriasByVrMateria = :materia");
+                Query query = session.createQuery("from TbAdmPrerrequisito where tbAdmMateriasByVrMateria = :materia");
                
                 query.setEntity("materia", materia);
                

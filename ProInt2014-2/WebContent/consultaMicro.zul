@@ -125,24 +125,24 @@
 							                		</row>
 							                		<row>
 									                    <label value="Validable" width="150px" />
-									                    <checkbox id="ckbValidable" />
+									                    <label id="lblValidable" />
 							                		</row>
 							                		
 							                		<row>
 									                    <label value="Habilitable" />
-									                    <checkbox id="ckbHabilitable" />
+									                    <label id="lblHabilitable" />
 							                		</row>
 							                		<row>
 									                    <label value="Clasificable" width="150px" />
-									                    <checkbox id="ckbClasificable" />
+									                    <label id="lblClasificable" />
 							                		</row>
 							                		<row>
 									                    <label value="Prerequisitos" width="150px" />
-									                    <label id="lblPrerrequisitos" />
+									                    <label id="lblPrerrequisitos" multiline="true"/>
 							                		</row>
 							                		<row>
 									                    <label value="Correquisitos" width="150px" />
-									                    <label id="lblCorrequisitos" />
+									                    <label id="lblCorrequisitos" multiline="true"/>
 							                		</row>
 							                		<row>
 									                    <label value="Programas Vinculados" width="150px" />
@@ -162,32 +162,30 @@
 												<rows >
 													<row>
 									                    <label value="Proposito del Curso" />
-									                    <textbox id="txtPropositoMicro" multiline="true" width="100%"/>									                    
+									                    <label id="lblPropositoMicro" width="100%"/>									                    
 									                </row>
 													<row>
 									                    <label value="Justificación" />
-									                    <textbox id="txtJustificacionMicro" multiline="true" width="100%"/>									                    
+									                    <label id="lblJustificacionMicro" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivo General" />
-									                    <textbox id="txtObjetivoGeneral" multiline="true" width="100%"/>									                    
+									                    <label id="lblObjetivoGeneral" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
 									                    <label value="Objetivos Especificos" />
-									                    <div>
+									                    <listbox id="listaObjetivosEspecificos">
+									                	</listbox>
+									                    <!--<div>
 										                    <textbox id="txtObjetivoEspecifico"  multiline="true"   width="84%"/>
 										                    <button id="btnAddObjetivo" label="Adicionar" width="15%"/>
-									                    </div>
+									                    </div>-->
 									                    
 									                </row>
-									                <row>
-									                	<div></div>
-									                	<listbox id="listaObjetivosEspecificos">
-									                	</listbox>
-									                </row>
+									                
 									                <row>
 									                    <label value="Contenido Resumido" />
-									                    <textbox id="txtResumenMicro" multiline="true" width="100%"/>
+									                    <label id="lblResumenMicro" multiline="true" width="100%"/>
 									                </row>
 									                
 												</rows>

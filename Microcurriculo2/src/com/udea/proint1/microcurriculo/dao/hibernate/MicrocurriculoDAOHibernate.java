@@ -100,8 +100,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 
 		try {
 			session = getSession();
-			Query query = session.createQuery("from TbMicMicrocurriculos where idSemestre = :semestre");
-			query.setString("Semestre", idSemestre);
+			Query query = session.createQuery("from TbMicMicrocurriculo where idSemestre = :semestre");
+			query.setString("semestre", idSemestre);
 			microcurriculos = query.list();
 
 		} catch (HibernateException e) {
@@ -119,7 +119,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 
 		try {
 			session = getSession();
-			Query query = session.createQuery("from TbMicMicrocurriculos where tbAdmNucleo = :buscarNucleo");
+			Query query = session.createQuery("from TbMicMicrocurriculo where tbAdmNucleo = :buscarNucleo");
 			query.setEntity("buscarNucleo", nucleo);
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
@@ -136,8 +136,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		
 		try {
 			session = getSession();
-			Query query = session.createQuery("from TbMicMicrocurriculo mic where mic.tbAdmMateria like :materia");
-			query.setEntity("materia", materia);
+			Query query = session.createQuery("from TbMicMicrocurriculo where tbAdmMateria = :buscarMateria");
+			query.setEntity("buscarMateria", materia);
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
@@ -178,7 +178,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			session = getSession();
 
 			Query query = session
-					.createQuery("from TbMicMicrocurriculos where tbAdmPersona= :buscarResponsable");
+					.createQuery("from TbMicMicrocurriculo where tbAdmPersona= :buscarResponsable");
 
 			query.setEntity("buscarResponsable", responsable);
 

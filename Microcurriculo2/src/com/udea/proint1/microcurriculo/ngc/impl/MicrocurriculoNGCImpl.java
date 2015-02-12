@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.ngc.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -189,6 +190,40 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
+		List<TbMicMicrocurriculo> listaTodosMicrocurriculos = new ArrayList<TbMicMicrocurriculo>();
+		List<TbMicMicrocurriculo> listaMicrocurriculo = null;
+		System.out.println("materia a consultar "+idMateria);
+		
+		List<TbAdmMateria> materias= null;
+		
+		try {
+			materias = materiaDao.buscarMaterias(idMateria);
+		} catch (ExcepcionesDAO e) {
+			log.error("fall� al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+		}
+		
+		if(materias != null){
+			for(TbAdmMateria materia:materias){
+				try {
+					listaMicrocurriculo = microcurriculoDao.listarMicrocurriculosPorMateria(materia);
+					listaTodosMicrocurriculos.addAll(listaMicrocurriculo);
+				} catch (ExcepcionesDAO e) {
+					throw new ExcepcionesLogica("Se presentaron problemas "+e);
+				}
+			}
+		} else {
+			throw new ExcepcionesLogica("NO existe materia a consultar"); 
+		}
+		
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaTodosMicrocurriculos;
+	}
+	
+	/*@Override
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 		
 		TbAdmMateria materia= null;
@@ -215,11 +250,11 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		/*
+		
 		 * Confirmamos si el objeto retornado tiene elementos en él.
-		 */
+		 
 		return listaMicrocurriculos;
-	}
+	}*/
 	
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesLogica{
