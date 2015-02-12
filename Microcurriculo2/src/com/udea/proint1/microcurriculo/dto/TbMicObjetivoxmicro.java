@@ -21,6 +21,7 @@ public class TbMicObjetivoxmicro implements java.io.Serializable {
 
 	public TbMicObjetivoxmicro(int nbId, TbMicObjetivo tbMicObjetivo,
 			TbMicMicrocurriculo tbMicMicrocurriculo) {
+		super();
 		this.nbId = nbId;
 		this.tbMicObjetivo = tbMicObjetivo;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
