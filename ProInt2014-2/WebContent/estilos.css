@@ -1,0 +1,47 @@
+@CHARSET "ISO-8859-1";
+
+.titulo{
+	color: red;
+	font-weight: bold;
+}
+
+.requerido{
+	color: red;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.requerido2{
+	color: red;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.narrow tr.z-row td.z-row-inner { 
+	padding:0 5px 
+}
+
+.estiloceldas{
+	font-size: 9px;
+	padding:0 5px;
+}
+
+.titulos{
+	color: Red;
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+	font-size: medium;
+	margin: 5mm;
+	padding: 2mm;
+	text-align: center
+}
+
+.resaltado{
+	color: Red;
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+}
+
+.resaltadonormal{
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;

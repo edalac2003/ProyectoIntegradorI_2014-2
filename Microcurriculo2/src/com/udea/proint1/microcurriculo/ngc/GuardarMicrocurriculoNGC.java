@@ -8,7 +8,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
@@ -24,7 +23,6 @@ public interface GuardarMicrocurriculoNGC {
 	
 	public void guardarMicroxlotes(TbMicMicrocurriculo microcurriculo,
 			TbMicMicroxestado microxEstado, 
-			TbMicMicroxsemestre microxSemestre,
 			List<TbMicTema> temas,
 			List<TbMicSubtema> subtemas,
 			List<TbMicSubtemaxtema> subtemaxTema,

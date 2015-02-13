@@ -17,7 +17,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
@@ -36,8 +35,8 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 
 	@Override
 	public void guardarMicroxlotes(TbMicMicrocurriculo microcurriculo,
-			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
-			List<TbMicTema> temas, List<TbMicSubtema> subtemas, List<TbMicSubtemaxtema> subtemaxTema,
+			TbMicMicroxestado microxEstado, List<TbMicTema> temas, 
+			List<TbMicSubtema> subtemas, List<TbMicSubtemaxtema> subtemaxTema,
 			List<TbMicTemaxunidad> temasxunidad,List<TbMicUnidad> unidades, 
 			List<TbMicUnidadxmicro> unidadesxmicro,
 			List<TbMicObjetivo> objetivos,
@@ -50,13 +49,12 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		
 		Session session = null;
 		Transaction tx = null;
-		
+
 		try {
 			session = getSession();
 			tx = session.beginTransaction();
 			
 			session.saveOrUpdate(microcurriculo);
-			session.saveOrUpdate(microxSemestre);
 			session.saveOrUpdate(microxEstado);
 			
 			if (unidades != null){

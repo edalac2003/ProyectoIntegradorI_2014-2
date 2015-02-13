@@ -4,17 +4,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Calendar;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -33,7 +29,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
@@ -51,7 +46,6 @@ import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
-import com.udea.proint1.microcurriculo.ngc.MicroxSemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
@@ -147,7 +141,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	BiblioxunidadNGC biblioxUnidadNGC;
 	MicrocurriculoNGC microcurriculoNGC;
 	MicroxEstadoNGC microxEstadoNGC;
-	MicroxSemestreNGC microxSemestreNGC;
 	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
 	
 	/*
@@ -226,10 +219,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.microxEstadoNGC = microxEstadoNGC;
 	}
 
-	public void setMicroxSemestreNGC(MicroxSemestreNGC microxSemestreNGC) {
-		this.microxSemestreNGC = microxSemestreNGC;
-	}
-
 	public void setGuardarMicrocurriculoNGC(GuardarMicrocurriculoNGC guardarMicrocurriculoNGC) {
 		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
 	}
@@ -251,7 +240,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicMicrocurriculo microcurriculo = empaquetarMicrocurriculo();
 		if (microcurriculo != null){
 			TbMicMicroxestado microxEstado = empaquetarMicroxEstado(microcurriculo);
-			TbMicMicroxsemestre microxSemestre = empaquetarMicroxSemestre(microcurriculo, cmbSemestre.getValue());
 			empaquetarObjetivos(microcurriculo);
 			if (listaUnidades.getItems().size() > 0)
 				empaquetarUnidades(microcurriculo);
@@ -270,33 +258,30 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 			if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
 				try {
-					guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, microxSemestre, listadoTemas, listadoSubtemas, listadoSubtemaxTema, listadoTemasxUnidad, 
+					guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, listadoTemas, listadoSubtemas, listadoSubtemaxTema, listadoTemasxUnidad, 
 											listadoUnidades, listadoUnidadesxMicro, listadoObjetivos, listadoObjetivosxMicro, listadoBibliografia, listadoBibliografiaxUnidad, 
 											listadoEvaluaciones, listadoEvaluacionesxMicro);
-					Messagebox.show("El Microcurriculo se ha guardado correctamente en estado Borrador el cual puede cambiar de estado cuando lo desee.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
+					
 				} catch (ExcepcionesLogica e) {
-					logger.error("Error al intentar guardar el objeto <Microcurriculo>");
+					logger.error("Error al intentar guardar el objeto <Microcurriculo>.");
 				}
-//				if (verificarCampos() == 1){				
-//					
-	//
-//				} else if (verificarCampos() == 0){				
-//					try {
-//						guardarMicrocurriculoNGC.guardarMicroMiniLote(microcurriculo, microxEstado, microxSemestre, listaObjetivos, listadoObjetivosxMicro);
-//						Messagebox.show("El registro de Microcurriculos se guardará con la información mínima necesaria. \n El estado de este será <BORRADOR> y no podrá ser cambiado hasta que complete toda la información.","Información",Messagebox.OK, Messagebox.EXCLAMATION);
-//					} catch (ExcepcionesLogica e) {
-//						logger.error("Error al intentar guardar el objeto <Microcurriculo>");
-//					}				
-//				} else
-//					Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
+				if (verificarCampos() == 1){
+					cmbEstadoActual.setDisabled(false);
+					Messagebox.show("El Microcurriculo se ha guardado correctamente. Puede Cambiar el estado del Microcurriculo cuando lo desee.");
+				} else if (verificarCampos() == 0){
+					Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
+							"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
+				} else{
+					Messagebox.show("Errores al guardar.  Revise la información.");
+				}
+					
+				
 			} else {
 				Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la información ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
 			}
 		} else{
 			Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 		}
-			
-
 	}
 	
 	
@@ -340,26 +325,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		return microxEstado;
 	}
 	
-	
-	private TbMicMicroxsemestre empaquetarMicroxSemestre(TbMicMicrocurriculo microcurriculo, String idSemestre){
-		TbMicMicroxsemestre microxSemestre = null;
-		int registro = 0;
-		TbAdmSemestre semestre = null;
-		
-		try {
-			registro = microxSemestreNGC.ContarMicrosxsemestre();
-			semestre = semestreNGC.obtenerSemestre(idSemestre);
-		} catch (ExcepcionesLogica e) {
-			logger.error("");
-		}
-		
-		if (semestre != null){
-			microxSemestre = new TbMicMicroxsemestre(registro+1, microcurriculo, semestre, modUsuario, modFecha);
-		}
-		
-		return microxSemestre;
-	}
-		
+			
 	private void empaquetarEvaluaciones(TbMicMicrocurriculo microcurriculo){
 		TbMicEvaluacion evaluacion = null;
 		TbMicEvaluacionxmicro evaluacionxMicro = null;
@@ -370,13 +336,13 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		try {
 			registrosEvaluacionesBD = evaluacionNGC.contarRegistros();
 		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron Errores al intentar obtener el numero de registros de la tabla <Evaluaciones>.");
+			logger.error("Se presentaron Errores al intentar obtener el numero de registros de la tabla <TbMicEvaluaciones>.");
 		}
 		
 		try{
 			registrosEvaluacionesxMicroBD = evaluacionxMicroNGC.obtenerRegistros();
 		} catch(ExcepcionesLogica e){
-			logger.error("Se presentaron Errores al intentar obtener el numero de registros de la tabla <EvaluacionesxMicro>.");
+			logger.error("Se presentaron Errores al intentar obtener el numero de registros de la tabla <TbMicEvaluacionesxMicro>.");
 		}
 				
 		int contadorEvaluaciones = registrosEvaluacionesBD;
@@ -392,9 +358,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
 			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
 			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
-			String tmpFecha = celdaFecha.getLabel().toString();
-			System.out.println("La fecha leida es : "+tmpFecha);
-			
+			String tmpFecha = celdaFecha.getLabel().toString();			
 			try {
 				fechaEstimada = df.parse(tmpFecha);
 			} catch (ParseException e) {
@@ -740,15 +704,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		} catch (ExcepcionesLogica e) {
 			logger.error(e);
 		}
-		
+
 		codigoMicrocurriculo = asignarIdMicrocurriculo(cmbSemestre.getValue().toString(), cmbMateria.getValue().toString());
 		
 		if ((codigoMicrocurriculo.length() > 0) && (!codigoMicrocurriculo.equals(""))){
 			if (materia != null){
 				if (semestre != null){
 					if (responsable != null){
-						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, txtPropositoMicro.getText(), 
-								txtJustificacionMicro.getText(), txtResumenMicro.getText(), responsable, modUsuario, modFecha);
+						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, semestre, txtPropositoMicro.getValue().toString(), 
+								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, modUsuario, modFecha);
 						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
 						cmbEstadoActual.setValue(obtenerEstado());
 					}
@@ -808,22 +772,22 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * Este método se encarga de validar la información ingresada y clasifica el estado en el que se guardará el Microcurriculo.
 	 * @return
 	 */
-//	public int verificarCampos(){
-//		int estado = -1;
-//		if (comprobarInformacionGeneral()){
-//			if (comprobarInformacionComplementaria()){
-//				estado = 0;
-//				if (comprobarUnidadesDetalladas()){
-//					if (comprobarEvaluaciones()){
-//						if (comprobarReferencias()){
-//							estado = 1;							
-//						} 
-//					} 
-//				}
-//			} 
-//		}
-//		return estado;
-//	}
+	public int verificarCampos(){
+		int estado = -1;
+		if (comprobarInformacionGeneral()){
+			if (comprobarInformacionComplementaria()){
+				estado = 0;
+				if (comprobarUnidadesDetalladas()){
+					if (comprobarEvaluaciones()){
+						if (comprobarReferencias()){
+							estado = 1;							
+						} 
+					} 
+				}
+			} 
+		}
+		return estado;
+	}
 	
 	
 	/**
@@ -831,32 +795,42 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
-//	private boolean comprobarInformacionGeneral(){
-//		Boolean estado = false;
-//		if (cmbIdSemestre.getValue() != null && (cmbIdSemestre.getValue().trim().length() > 0)){
-//			if (cmbIdNucleo.getValue() != null && (cmbIdNucleo.getValue().trim().length() > 0)){
-//				if ((cmbIdDocente.getValue() != null) && (cmbIdDocente.getValue().trim().length() > 0)){
-//					if((cmbIdMateria.getValue() != null) && (cmbIdMateria.getValue().trim().length() > 0)){
+	private boolean comprobarInformacionGeneral(){
+		Boolean estado = false;
+		if((cmbSemestre.getValue().trim().length() > 0) && !("".equals(cmbSemestre.getValue().toString()))){
+			if ((cmbNucleo.getValue().trim().length() > 0) && !("".equals(cmbNucleo.getValue().toString()))){
+				if ((cmbDocente.getValue().trim().length() > 0) && !("".equals(cmbDocente.getValue().toString()))){
+					if ((cmbMateria.getValue().trim().length() > 0) && !("".equals(cmbMateria.getValue().toString()))){
+						estado = true;
+					} 				
+				}
+			}
+		}
+		
+//		if((cmbSemestre.getValue().trim().length() > 0) && !("".equals(cmbSemestre.getValue().toString()))){
+//			if ((cmbNucleo.getValue().trim().length() > 0) && !("".equals(cmbNucleo.getValue().toString()))){
+//				if ((cmbDocente.getValue().trim().length() > 0) && !("".equals(cmbDocente.getValue().toString()))){
+//					if ((cmbMateria.getValue().trim().length() > 0) && !("".equals(cmbMateria.getValue().toString()))){
 //						estado = true;
-//					} else {
+//					} else{
 //						Messagebox.show("Falta Informacion en el Campo <Id Materia>");
-//						cmbIdMateria.setFocus(true);
+//						cmbMateria.setFocus(true);
 //					}					
-//				} else {
+//				} else{
 //					Messagebox.show("Falta Informacion en el Campo <Id Responsable>");
-//					cmbIdDocente.setFocus(true);
+//					cmbDocente.setFocus(true);
 //				}
-//			} else {
+//			}else {
 //				Messagebox.show("Falta Informacion en el Campo <Id Nucleo>");
-//				cmbIdNucleo.setFocus(true);
+//				cmbNucleo.setFocus(true);
 //			}
-//		} else {
+//		}else {
 //			Messagebox.show("Falta Informacion en el Campo <Id Semestre>");
-//			cmbIdSemestre.setFocus(true);
+//			cmbSemestre.setFocus(true);
 //		}
-//		
-//		return estado;
-//	}
+		
+		return estado;
+	}
 	
 	
 	/**
@@ -864,13 +838,27 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
-//	private boolean comprobarInformacionComplementaria(){
-//		boolean estado = false;
-//		if ((txtPropositoMicro.getValue() != null) && (txtPropositoMicro.getValue().trim().length() > 0)){
-//			if ((txtJustificacionMicro.getValue() != null) && (txtJustificacionMicro.getValue().trim().length() > 0)){
-//				if ((txtObjetivoGeneral.getValue() != null) && (txtObjetivoGeneral.getValue().trim().length() > 0)){
-//					if (listaObjetivosEspecificos.getItemCount() > 0){
-//						if ((txtResumenMicro.getValue() != null) && (txtResumenMicro.getValue().trim().length() > 0)){
+	private boolean comprobarInformacionComplementaria(){
+		boolean estado = false;
+		if (!("".equals(txtPropositoMicro.getValue().toString())) && (txtPropositoMicro.getValue().trim().length() > 0)){
+			if (!("".equals(txtJustificacionMicro.getValue().toString())) && (txtJustificacionMicro.getValue().trim().length() > 0)){
+				if (!("".equals(txtObjetivoGeneral.getValue().toString())) && (txtObjetivoGeneral.getValue().trim().length() > 0)){
+					if (listaObjetivosEspecificos.getItems().size() > 0){
+						if (!("".equals(txtResumenMicro.getValue().toString())) && (txtResumenMicro.getValue().trim().length() > 0)){
+							estado = true;
+						} else {
+							Messagebox.show("Falta Informacion en el Campo <Contenido Resumido>");
+						}
+					} 
+				} 
+			} 
+		} 
+		
+//		if (!("".equals(txtPropositoMicro.getValue().toString())) && (txtPropositoMicro.getValue().trim().length() > 0)){
+//			if (!("".equals(txtJustificacionMicro.getValue().toString())) && (txtJustificacionMicro.getValue().trim().length() > 0)){
+//				if (!("".equals(txtObjetivoGeneral.getValue().toString())) && (txtObjetivoGeneral.getValue().trim().length() > 0)){
+//					if (listaObjetivosEspecificos.getItems().size() > 0){
+//						if (!("".equals(txtResumenMicro.getValue().toString())) && (txtResumenMicro.getValue().trim().length() > 0)){
 //							estado = true;
 //						} else {
 //							Messagebox.show("Falta Informacion en el Campo <Contenido Resumido>");
@@ -891,17 +879,26 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 //			Messagebox.show("Falta Informacion en el Campo <Proposito Microcurriculo>");
 //			txtPropositoMicro.setFocus(true);
 //		}
-//				
-//		return estado;
-//	}
+				
+		return estado;
+	}
 	
 	/**
 	 * Este metodo verifica que los Componentes de la Pestaña Unidades Detalladas no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
-//	private boolean comprobarUnidadesDetalladas(){
-//		Boolean estado = false;
+	private boolean comprobarUnidadesDetalladas(){
+		Boolean estado = false;
+		if ((listaUnidades.getItems().size() > 0) && (listaUnidades != null)){
+			if ((listaTemas.getItems().size() > 0) && (listaTemas != null)){
+				if ((listaSubtemas.getItems().size() > 0) && (listaSubtemas != null)){
+					estado = true;
+				} 
+			}
+		} 
+		
+		
 //		if ((listaUnidades.getItemCount() > 0) && (listaUnidades != null)){
 //			if ((listaTemas.getItemCount() > 0) && (listaTemas != null)){
 //				if ((listaSubtemas.getItemCount() > 0) && (listaSubtemas != null)){
@@ -921,51 +918,38 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 //			Messagebox.show("Falta Informacion en la lista <Unidades>");
 //			txtNombreUnidad.setFocus(true);
 //		}
-//		
-//		return estado;
-//	}
+		return estado;
+	}
 	
 	/**
 	 * Este metodo verifica que los componentes de la Pestaña Evaluaciones no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
-//	private boolean comprobarEvaluaciones(){
-//		Boolean estado = false;
-//		if ((listaEvaluaciones.getItemCount() > 0) && (listaEvaluaciones != null)){
-//			estado = true;
-//		} 
-//		else {
-//			Messagebox.show("Falta Informacion en la lista <Evaluaciones>");
-//			txtActividadMicro.setFocus(true);
-//		}
-//		
-//		return estado;
-//	}
+	private boolean comprobarEvaluaciones(){
+		Boolean estado = false;
+		if ((listaEvaluaciones.getItems().size() > 0) && (listaEvaluaciones != null))
+			estado = true;
+
+				
+		return estado;
+	}
 	
 	/**
 	 * Este metodo verifica que los componentes de la Pestaña Bibliográficas no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
-//	private boolean comprobarReferencias(){
-//		Boolean estado = false;
-//		if ((listaBibliografia.getItemCount() > 0) && (listaBibliografia != null)){
-//			if ((listaCibergrafia.getItemCount() > 0) && (listaCibergrafia != null)){
-//				estado = true;
-//			} 
-//			else {
-//				Messagebox.show("Falta Informacion en la lista <Referencias Cibergráficas>");
-//				txtNombreSitioCiber.setFocus(true);
-//			}
-//		} 
-//		else {
-//			Messagebox.show("Falta Informacion en la lista <Referncias Bibliográficas>");
-//			cmbReferenciaBiblio.setFocus(true);
-//		}
-//		
-//		return estado;
-//	}
+	private boolean comprobarReferencias(){
+		Boolean estado = false;
+		if ((listaBibliografia.getItems().size() > 0) && (listaBibliografia != null)){
+			if ((listaCibergrafia.getItems().size() > 0) && (listaCibergrafia != null)){
+				estado = true;
+			}
+		} 
+		
+		return estado;
+	}
 
 	
 	@SuppressWarnings("unchecked")

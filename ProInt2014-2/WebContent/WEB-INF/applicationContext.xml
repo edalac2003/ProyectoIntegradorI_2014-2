@@ -53,7 +53,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriaxpensum.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculo.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxsemestre.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivo.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivoxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
@@ -198,11 +197,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         <bean id="microxEstadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxEstadoDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
-        
-        <bean id="microxSemestreDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxSemestreDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
+                
         <bean id="objetivoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
@@ -374,12 +369,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadoDao" ref="estadoDao" />
         </bean>
         
-        <bean id="microxSemestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxSemestreNGCImpl">
-        	<property name="microxSemestreDao" ref="microxSemestreDao" />
-        	<property name="microcurriculoDao" ref="microcurriculoDao" />
-        	<property name="semestreDao" ref="semestreDao" />
-        </bean>
-        
         <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl">
         	<property name="objetivoDao" ref="objetivoDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
@@ -478,7 +467,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
-        	<property name="microxSemestreNGC" ref="microxSemestreNGC" />
         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
         </bean>
         
@@ -498,7 +486,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadoNGC" ref="estadoNGC" />
         	<property name="correquisitoNGC" ref="correquisitoNGC" />
         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
-        	<property name="microxestadoNGC" ref="microxEstadoNGC" />
         </bean>
         
         <!--<bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
@@ -514,6 +501,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="personaNGC" ref="personaNGC" />
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="paisNGC" ref="paisNGC" />
+        </bean>
+        
+        <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         </bean>
             
 </beans>

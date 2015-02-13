@@ -14,7 +14,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.dto.TbMicMicroxsemestre;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
@@ -45,8 +44,7 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 
 	@Override
 	public void guardarMicroxlotes(TbMicMicrocurriculo microcurriculo,
-			TbMicMicroxestado microxEstado, 
-			TbMicMicroxsemestre microxSemestre,
+			TbMicMicroxestado microxEstado,
 			List<TbMicTema> temas, 
 			List<TbMicSubtema> subtemas,
 			List<TbMicSubtemaxtema> subtemaxTema,
@@ -69,9 +67,9 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			consulta = microcurriculoDao.obtenerMicrocurriculo(idMicro);
 			if (consulta == null){
 				try {
-					guardarMicrocurriculoDao.guardarMicroxlotes(microcurriculo, microxEstado, microxSemestre, 
-							temas, subtemas, subtemaxTema, temasxunidad, unidades, unidadesxmicro, objetivos, 
-							objetivosxmicro, bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro);
+					guardarMicrocurriculoDao.guardarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, 
+							subtemaxTema, temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, 
+							bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro);
 				} catch (ExcepcionesDAO e) {
 					throw new ExcepcionesLogica("Error al intentar Guardar el registro de Microcurriculo."+e.getMessage());
 				}
@@ -82,43 +80,5 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			logger.error("Error al intentar Obtener la informacion del registro de Microcurriculo.");
 		}
 				
-	}
-
-	
-	
-	
-
-	
-//	@Override
-//	public void guardarMicroMiniLote(TbMicMicrocurriculo microcurriculo,
-//			TbMicMicroxestado microxEstado, TbMicMicroxsemestre microxSemestre,
-//			List<TbMicObjetivo> listaObjetivos,
-//			List<TbMicObjetivoxmicro> listaObjetivosxMicro)
-//			throws ExcepcionesLogica {
-//		
-//		TbMicMicrocurriculo micro = null;
-//		
-//		try {
-//			micro = microcurriculoDao.obtenerMicrocurriculo(microcurriculo.getVrIdmicrocurriculo());
-//		} catch (ExcepcionesDAO e1) {
-//			
-//		}
-//		
-//		if (micro == null){
-//			//Se debe guardar un nuevo microcurriculo.
-//			try{
-//				guardarMicrocurriculoDao.guardarMicroMiniLote(microcurriculo, microxEstado, microxSemestre, listaObjetivos, listaObjetivosxMicro);	
-//			}catch(ExcepcionesDAO e){
-//				System.out.println("");
-//			}
-//			
-//		} else {
-//			//Se debe actualizar el microcurriculo existente.
-//			
-//		
-//		}
-//		
-//	}
-
-	
+	}	
 }

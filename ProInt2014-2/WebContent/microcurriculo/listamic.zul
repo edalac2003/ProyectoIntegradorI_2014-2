@@ -2,17 +2,15 @@
 <?page contentType="text/html;charset=UTF-8"?>
 
 <zk>
-    
-    
-  
+<style src="estilos.css" />
 <window id="formaListarMicro" border="normal">
-	<borderlayout height="900px" apply="${cargarDatosFormas}">
+	<borderlayout height="1000px" apply="${cargarDatosFormas}">
 		<north border="0" height="100px">
 			<include id="headerIdx" src="/sections/header.zul" />
 		</north>
 		
 		<center border="0">
-			<borderlayout height="700px">
+			<borderlayout height="1000px">
 				<north border="0" height="30px">
 					<include id="listMenu" src="/sections/menuBar.zul" />
 				</north>
@@ -56,7 +54,7 @@
 										<combobox id="cmbDocente" width="60%"/>
 										<label id="lblResponsable" />
 									</div>
-									<div align="center">
+									<div align="center" apply="${listarMicroCtrl}">
 										<button id="btnBuscar" label="Iniciar Busqueda" />
 									</div>
 								</row>
@@ -65,9 +63,9 @@
 						<separator />
 						
 						<div width="960px">
-							<listbox id="listaMicrocurriculo">
+							<listbox id="listaMicrocurriculo" context="editPopup" autopaging="true" sclass="estiloceldas">
 								<listhead>
-									<listheader label="Codigo" align="center" style="font-size:8px" width="12%"/>
+									<listheader label="Codigo"  align="center" width="12%"/>
 									<listheader label="Unidad" align="center"/>
 									<listheader label="Dependencia" align="center"/>
 									<listheader label="Nucleo" align="center"/>
@@ -87,5 +85,35 @@
 			<include id="footerIdx" src="/sections/footer.zul" />
 		</south>
 	</borderlayout>
+	
+	<!-- <menupopup id="editPopup">
+        <menuitem image="/widgets/menu/context_menu/img/Bubble-16x16.png" label="Message" />
+        <menuseparator />
+        <menuitem image="/widgets/menu/context_menu/img/UserProfileMale-16x16.png" label="Profile" />
+        <menuitem image="/widgets/menu/context_menu/img/Envelope-16x16.png" label="Mail to" />
+        <menuseparator />
+        <menu label="Group" image="/widgets/menu/context_menu/img/CasualUsers-16x16.png">
+            <menupopup>
+                <menu label="Add to...">
+                    <menupopup>
+                        <menuitem label="Member" autocheck="true" checkmark="true" checked="true" />
+                        <menuitem label="Managers" autocheck="true" checkmark="true" />
+                        <menuitem label="Guest" autocheck="true" checkmark="true" />
+                        <menuitem label="Customers" autocheck="true" checkmark="true" />
+                    </menupopup>
+                </menu>
+                <menu label="Move to...">
+                    <menupopup>
+                        <menuitem label="Member" autocheck="true" checkmark="true" />
+                        <menuitem label="Managers" autocheck="true" checkmark="true" />
+                        <menuitem label="Guest" autocheck="true" checkmark="true" />
+                        <menuitem label="Customers" autocheck="true" checkmark="true" />
+                    </menupopup>
+                </menu>
+            </menupopup>
+        </menu>
+        <menuitem label="Block" image="/widgets/menu/context_menu/img/CasualUserMaleProhibition-16x16.png" />
+        <menuitem label="Remove contant" image="/widgets/menu/context_menu/img/DeleteCross-16x16.png" />
+    </menupopup>  -->
 </window>
 </zk>

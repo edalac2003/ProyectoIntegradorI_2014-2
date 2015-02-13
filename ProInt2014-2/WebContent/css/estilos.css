@@ -16,3 +16,18 @@
 	font-size: 14pt;
 	font-weight: bold;
 }
+
+.narrow tr.z-row td.z-row-inner { 
+	color: Green;
+	padding: 5px;
+	font-style: normal;
+	font-size: 10px;
+	font-family: Arial, Tahoma;
+	font-weight: normal 
+}
+
+.estiloceldas tr.z-row td.z-row-inner{
+	font-size: 10px;
+	font-color: red;
+	padding:0 5px;
+}

@@ -1,9 +1,13 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.awt.MenuItem;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
@@ -12,6 +16,8 @@ import org.zkoss.zul.Grid;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Menuitem;
+import org.zkoss.zul.Menupopup;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -290,47 +296,6 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		}
 	}
 	
-	private void cargarMicrocurriculos(String id){
-		try {
-			List<TbMicMicrocurriculo> listaMicro = microcurriculoNGC.listarMicrocurriculosPorMateria(id);
-//			Listitem listaItem = new Listitem();
-//			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-//
-//				@Override
-//				public void onEvent(Event arg0) throws Exception {						
-////					eliminaListItem(listaItem);
-//				}
-//			});			
-			if (listaMicro != null){
-				System.out.println("La lista tiene "+ listaMicro.size()+ "  elementos");
-				
-				for(TbMicMicrocurriculo micro : listaMicro){
-					Listitem listaItem = new Listitem();
-					Listcell celdaCodigo = new Listcell(micro.getVrIdmicrocurriculo().toString());
-					Listcell celdaUnidad = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
-					Listcell celdaDependencia = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
-					Listcell celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrNombre());
-					Listcell celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
-					Listcell celdaSemestre = new Listcell();
-					Listcell celdaResponsable = new Listcell(micro.getTbAdmPersona().getVrNombres()+" "+micro.getTbAdmPersona().getVrApellidos());
-						
-					listaItem.appendChild(celdaCodigo);
-					listaItem.appendChild(celdaUnidad);
-					listaItem.appendChild(celdaDependencia);
-					listaItem.appendChild(celdaNucleo);
-					listaItem.appendChild(celdaMateria);
-					listaItem.appendChild(celdaSemestre);
-					listaItem.appendChild(celdaResponsable);
-					
-					listaMicrocurriculo.appendChild(listaItem);
-				}
-			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Microcurriculo>.  "+e);
-		}
-		
-	}
-	
 	private void inicializarFormaCrear(){
 		String cadenaInicial = "[Seleccione]";
 		cmbUnidadAcademica.setValue(cadenaInicial);
@@ -357,9 +322,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		cargarMateriasPorNucleo(cmbNucleo.getValue());
 	}
 	
-	public void onClick$btnBuscar(){
-		cargarMicrocurriculos(cmbMateria.getValue());
-	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@Override

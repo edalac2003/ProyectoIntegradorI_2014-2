@@ -17,7 +17,7 @@ public class TbAdmSemestre implements java.io.Serializable {
 	private Date dtFechafin;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbMicMicroxsemestres = new HashSet(0);
+	private Set tbMicMicrocurriculos = new HashSet(0);
 
 	public TbAdmSemestre() {
 	}
@@ -28,14 +28,14 @@ public class TbAdmSemestre implements java.io.Serializable {
 
 	public TbAdmSemestre(String vrIdsemestre, String vrNombre,
 			Date dtFechainicio, Date dtFechafin, String vrModusuario,
-			Date dtModfecha, Set tbMicMicroxsemestres) {
+			Date dtModfecha, Set tbMicMicrocurriculos) {
 		this.vrIdsemestre = vrIdsemestre;
 		this.vrNombre = vrNombre;
 		this.dtFechainicio = dtFechainicio;
 		this.dtFechafin = dtFechafin;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbMicMicroxsemestres = tbMicMicroxsemestres;
+		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
 	}
 
 	public String getVrIdsemestre() {
@@ -86,12 +86,11 @@ public class TbAdmSemestre implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-	public Set getTbMicMicroxsemestres() {
-		return this.tbMicMicroxsemestres;
+	public Set getTbMicMicrocurriculos() {
+		return tbMicMicrocurriculos;
 	}
 
-	public void setTbMicMicroxsemestres(Set tbMicMicroxsemestres) {
-		this.tbMicMicroxsemestres = tbMicMicroxsemestres;
+	public void setTbMicMicrocurriculos(Set tbMicMicrocurriculos) {
+		this.tbMicMicrocurriculos = tbMicMicrocurriculos;
 	}
-
 }
