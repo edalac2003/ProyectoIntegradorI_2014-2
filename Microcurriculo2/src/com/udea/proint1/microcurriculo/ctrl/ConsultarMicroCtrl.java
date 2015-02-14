@@ -1,5 +1,9 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,6 +12,9 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
@@ -16,22 +23,41 @@ import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
+import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
-import com.udea.proint1.microcurriculo.ngc.MicroxSemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
+import com.udea.proint1.microcurriculo.ngc.ObjetivoNGC;
+import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
+import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
+/**
+ * @author Elmer
+ *
+ */
 public class ConsultarMicroCtrl extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
@@ -69,6 +95,14 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	Label lblObjetivoGeneral;
 	Label lblResumenMicro;
 	
+	Listbox listaObjetivosEspecificos;
+	Listbox listaUnidades;
+	Listbox listaTemas;
+	Listbox listaSubtemas;
+	Listbox listaEvaluaciones;
+	Listbox listaBibliografia;
+	Listbox listaCibergrafia;
+	
 	UnidadAcademicaNGC unidadAcademicaNGC;
 	NucleoNGC nucleoNGC;
 	DependenciaNGC dependenciaNGC;
@@ -78,7 +112,13 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	CorrequisitoNGC correquisitoNGC;
 	PrerrequisitoNGC prerrequisitoNGC;
 	MicroxEstadoNGC microxestadoNGC;
-	MicroxSemestreNGC microxsemestreNGC;
+	ObjetivoxMicroNGC objetivoxMicroNGC;
+	UnidadxMicroNGC unidadxMicroNGC;
+	TemaxUnidadNGC temaxUnidadNGC;
+	SubtemaxTemaNGC subtemaxTemaNGC;
+	EvaluacionxMicroNGC evaluacionxMicroNGC;
+	UnidadNGC unidadNGC;
+	BiblioxunidadNGC biblioxUnidadNGC;
 
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -114,6 +154,34 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 
 	public void setMicroxestadoNGC(MicroxEstadoNGC microxestadoNGC) {
 		this.microxestadoNGC = microxestadoNGC;
+	}
+
+	public void setObjetivoxMicroNGC(ObjetivoxMicroNGC objetivoxMicroNGC) {
+		this.objetivoxMicroNGC = objetivoxMicroNGC;
+	}
+
+	public void setUnidadxMicroNGC(UnidadxMicroNGC unidadxMicroNGC) {
+		this.unidadxMicroNGC = unidadxMicroNGC;
+	}
+
+	public void setTemaxUnidadNGC(TemaxUnidadNGC temaxUnidadNGC) {
+		this.temaxUnidadNGC = temaxUnidadNGC;
+	}
+
+	public void setSubtemaxTemaNGC(SubtemaxTemaNGC subtemaxTemaNGC) {
+		this.subtemaxTemaNGC = subtemaxTemaNGC;
+	}
+
+	public void setEvaluacionxMicroNGC(EvaluacionxMicroNGC evaluacionxMicroNGC) {
+		this.evaluacionxMicroNGC = evaluacionxMicroNGC;
+	}
+
+	public void setUnidadNGC(UnidadNGC unidadNGC) {
+		this.unidadNGC = unidadNGC;
+	}
+
+	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
+		this.biblioxUnidadNGC = biblioxUnidadNGC;
 	}
 
 	/**
@@ -450,7 +518,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		try {
 			TbMicMicrocurriculo microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(id);
 			lblNombreDocente.setValue(microcurriculo.getTbAdmPersona().getVrIdpersona()+" - "+microcurriculo.getTbAdmPersona().getVrNombres()+" "+microcurriculo.getTbAdmPersona().getVrApellidos());
-			lblSemestre.setValue("");
+			lblSemestre.setValue(microcurriculo.getTbAdmSemestre().getVrNombre());
 			lblCreditosMateria.setValue(Integer.toString(microcurriculo.getTbAdmMateria().getNbCreditos()));
 			int ht = microcurriculo.getTbAdmMateria().getNbHt();
 			int hp = microcurriculo.getTbAdmMateria().getNbHp();
@@ -513,6 +581,155 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			lblPropositoMicro.setValue(microcurriculo.getVrProposito());
 			lblJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
 			lblResumenMicro.setValue(microcurriculo.getVrResumen());
+			
+			List<TbMicObjetivoxmicro> objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(id);
+			
+			for(TbMicObjetivoxmicro objetivo:objetivosxMicro){
+				if((objetivo.getTbMicObjetivo().getBlTipo()) == '1'){
+					lblObjetivoGeneral.setValue(objetivo.getTbMicObjetivo().getVrDescripcion());
+				}else{
+					Listitem listaItem = new Listitem();
+					Listcell celda = new Listcell(objetivo.getTbMicObjetivo().getVrDescripcion());
+					listaItem.appendChild(celda);			
+					listaObjetivosEspecificos.appendChild(listaItem);
+				}
+			}
+			
+			List<TbMicUnidadxmicro> unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(id);
+			
+			List<Integer> unidades = new ArrayList<Integer>();
+			
+			for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
+				
+				//guardo en un array list las unidades del microcurriculo
+				unidades.add(unidadxMicro.getTbMicUnidad().getNbIdunidad());
+				
+				Listitem listaItem = new Listitem();
+				Listcell celda = new Listcell(unidadxMicro.getTbMicUnidad().getVrNombre());
+				listaItem.appendChild(celda);			
+				listaUnidades.appendChild(listaItem);
+			}
+			
+			List<String> temas = new ArrayList<String>();
+			
+			for(int unidad : unidades){
+				List<TbMicTemaxunidad> temasxUnidad = temaxUnidadNGC.ListarTemasxUnidadxUnidad(unidad);
+				
+				for(TbMicTemaxunidad temaxUnidad : temasxUnidad){
+					//guardo en un Arraylist todos los temas pertenecientes al microcurriculo y agrego las unidades
+					//concatenadas como string separadas por "-"
+					
+					String idTema = Integer.toString(temaxUnidad.getTbMicTema().getNbIdtema());
+					String idUnidad = Integer.toString(temaxUnidad.getTbMicUnidad().getNbIdunidad());
+					temas.add(idTema+"-"+idUnidad);
+					
+					Listitem listaItem = new Listitem();
+					Listcell celda = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
+					listaItem.appendChild(celda);
+					Listcell celda2 = new Listcell(temaxUnidad.getTbMicTema().getVrDescripcion());
+					listaItem.appendChild(celda2);
+					Listcell celda3 = new Listcell(Integer.toString(temaxUnidad.getNbSemanasRequeridas()));
+					listaItem.appendChild(celda3);			
+					listaTemas.appendChild(listaItem);
+				}
+			}
+			
+			for(String tema : temas){
+				//estraigo el id de tema y de unidad y los vuelvo a poner como enteros
+				String []campos = tema.split("-");
+				int idTemaInt = Integer.parseInt(campos[0]);
+				int idUnidadInt = Integer.parseInt(campos[1]);
+				
+				List<TbMicSubtemaxtema> subtemasxtema = subtemaxTemaNGC.listarSubtemaxTema_Tema(idTemaInt);
+				TbMicUnidad unidad = unidadNGC.obtenerUnidades(idUnidadInt);
+				
+				for(TbMicSubtemaxtema subtemaxTema : subtemasxtema){
+					Listitem listaItem = new Listitem();
+					
+					Listcell celda = new Listcell(unidad.getVrNombre());
+					listaItem.appendChild(celda);
+					Listcell celda2 = new Listcell(subtemaxTema.getTbMicTema().getVrDescripcion());
+					listaItem.appendChild(celda2);
+					Listcell celda3 = new Listcell(subtemaxTema.getTbMicSubtema().getVrDescripcion());
+					listaItem.appendChild(celda3);			
+					listaSubtemas.appendChild(listaItem);
+				}
+			}
+			
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro = evaluacionxMicroNGC.ListarEvaluacionxMicroxMicro(id);
+			
+			for(TbMicEvaluacionxmicro evaluacionxMicro : evaluacionesxMicro){
+				Listitem listaItem = new Listitem();
+				Listcell celda = new Listcell(evaluacionxMicro.getTbMicEvaluacion().getVrDescripcion());
+				listaItem.appendChild(celda);
+				Listcell celda2 = new Listcell(Integer.toString(evaluacionxMicro.getNbPorcentaje())+"%");
+				listaItem.appendChild(celda2);
+				
+				//formato para fecha
+				DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+				
+				Listcell celda3 = new Listcell(fecha.format(evaluacionxMicro.getDtFechaestimada()));
+				listaItem.appendChild(celda3);			
+				listaEvaluaciones.appendChild(listaItem);
+			}
+			
+			for(int unidad : unidades){
+				List<TbMicBiblioxunidad> bibliosxUnidad = biblioxUnidadNGC.listadoBiblioxUnidad(unidad);
+				
+				for(TbMicBiblioxunidad biblio : bibliosxUnidad){
+					if((biblio.getTbMicBibliografia().getVrSitioweb() == null)||(biblio.getTbMicBibliografia().getVrSitioweb() == "")){
+						Listitem listaItem = new Listitem();
+						
+						Listcell celda = new Listcell(biblio.getTbMicUnidad().getVrNombre());
+						listaItem.appendChild(celda);
+						Listcell celda2 = new Listcell(Integer.toString(biblio.getTbMicBibliografia().getNbIdbibliografia()));
+						listaItem.appendChild(celda2);
+						Listcell celda3 = new Listcell(biblio.getTbMicBibliografia().getVrAutor());
+						listaItem.appendChild(celda3);
+						Listcell celda4 = new Listcell(biblio.getTbMicBibliografia().getVrIsbn());
+						listaItem.appendChild(celda4);
+						Listcell celda5 = new Listcell("");
+						listaItem.appendChild(celda5);
+						
+						String tipo;
+						if(biblio.getTbMicBibliografia().getBlTipo()=='1'){
+							tipo = "básica";
+						}else{
+							tipo = "complementaria";
+						}
+						Listcell celda6 = new Listcell(tipo);
+						listaItem.appendChild(celda6);
+						listaBibliografia.appendChild(listaItem);
+					}
+				}
+			}
+			
+			for(int unidad : unidades){
+				List<TbMicBiblioxunidad> bibliosxUnidad = biblioxUnidadNGC.listadoBiblioxUnidad(unidad);
+				
+				for(TbMicBiblioxunidad biblio : bibliosxUnidad){
+					if((biblio.getTbMicBibliografia().getVrAutor() == null)||(biblio.getTbMicBibliografia().getVrAutor() == "")){
+						Listitem listaItem = new Listitem();
+						
+						Listcell celda1 = new Listcell(biblio.getTbMicUnidad().getVrNombre());
+						listaItem.appendChild(celda1);
+						Listcell celda = new Listcell(biblio.getTbMicBibliografia().getVrNombre());
+						listaItem.appendChild(celda);
+						Listcell celda2 = new Listcell(biblio.getTbMicBibliografia().getVrSitioweb());
+						listaItem.appendChild(celda2);
+						String tipo;
+						if(biblio.getTbMicBibliografia().getBlTipo()=='1'){
+							tipo = "básica";
+						}else{
+							tipo = "complementaria";
+						}
+						Listcell celda3 = new Listcell(tipo);
+						listaItem.appendChild(celda3);
+						listaCibergrafia.appendChild(listaItem);
+					}
+				}
+			}
+			
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}

@@ -77,7 +77,7 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
                
         	session = getSession();
                                
-        	Query query = session.createQuery("from TbMicUnidadesxmicro where tbMicMicrocurriculos = :microcurriculo");
+        	Query query = session.createQuery("from TbMicUnidadxmicro where tbMicMicrocurriculo = :microcurriculo");
                
         	query.setEntity("microcurriculo", microcurriculo);
                

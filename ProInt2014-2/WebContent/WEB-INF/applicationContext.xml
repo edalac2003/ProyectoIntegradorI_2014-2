@@ -408,7 +408,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         
         <bean id="subtemaxTemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaxTemaNGCImpl">
         	<property name="subtemaxTemaDao" ref="subtemaxTemaDao" />
-        	<!-- <property name="temaDao" ref="temaDao" /> -->
+        	<property name="temaDao" ref="temaDao" />
         </bean>
         
         <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl">
@@ -446,6 +446,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="materiaNGC" ref="materiaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
         </bean>
         
         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
@@ -486,6 +488,14 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadoNGC" ref="estadoNGC" />
         	<property name="correquisitoNGC" ref="correquisitoNGC" />
         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="microxestadoNGC" ref="microxEstadoNGC" />
+        	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
+        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
+        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
+        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="unidadNGC" ref="unidadNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         </bean>
         
         <!--<bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
