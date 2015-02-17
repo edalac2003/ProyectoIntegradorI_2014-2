@@ -67,7 +67,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmAuditoria.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTabla.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacionxmicro.hbm.xml</value>
 			</list>
 		</property>
             
@@ -207,10 +206,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         <bean id="observacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObservacionDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
-        <bean id="observacionxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObservacionxMicroDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -384,11 +379,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="observacionDao" ref="observacionDao" />
         </bean>
         
-        <bean id="observacionxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObservacionxMicroNGCImpl">
-        	<property name="observacionxMicroDao" ref="observacionxMicroDao" />
-        </bean>
-        
-        <bean id="pensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PensumNGCImpl">
+       <bean id="pensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PensumNGCImpl">
         	<property name="pensumDao" ref="pensumDao" />
         </bean>
         

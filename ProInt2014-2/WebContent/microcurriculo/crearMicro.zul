@@ -1,0 +1,27 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+<window title="" border="normal">
+	<borderlayout height="980px">
+		<north size="130px" border="0">
+			<borderlayout>
+				<north border="0">
+					<include id="headerIdx" src="/sections/header.zul" />
+				</north>
+				<south border="0">
+					<include id="listMenu" src="/sections/menuBar.zul"/>
+				</south>
+			</borderlayout>
+		</north>
+		<center>
+			<div>
+				<grid></grid>
+			</div>
+		</center>
+		<south size="130px">
+			<include id="footerIdx" src="/sections/footer.zul" />
+		</south>
+	</borderlayout>
+</window>
+</zk>

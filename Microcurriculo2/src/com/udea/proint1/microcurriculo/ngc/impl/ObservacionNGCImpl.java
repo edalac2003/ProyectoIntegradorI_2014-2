@@ -113,7 +113,7 @@ public class ObservacionNGCImpl implements ObservacionNGC {
 		try {
 			listaObservacion = observacionDao.listarObservacion();
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarObservacion de la clase observacionDao: "+ e);
+			log.error("fallo al invocar el metodo listarObservacion de la clase observacionDao: "+ e);
 		}
 		
 		/*
@@ -125,5 +125,20 @@ public class ObservacionNGCImpl implements ObservacionNGC {
 			return listaObservacion;
 		}
 	}
+
+	@Override
+	public int contarRegistros() throws ExcepcionesLogica {
+		int registro = 0;
+		
+		try {
+			registro = observacionDao.contarRegistros();
+		} catch (ExcepcionesDAO e) {
+			throw new ExcepcionesLogica(e);
+		}
+		
+		return registro;
+	}
+	
+	
 
 }

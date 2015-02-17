@@ -301,7 +301,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	public void onOK$txtNumeroSemanas(){
-		validarCamposTemas(cmbIdUnidad.getValue(), txtNombreUnidad.getValue(), Integer.parseInt(txtNumeroSemanas.getValue().toString()));
+		validarCamposTemas(cmbIdUnidad.getValue(), txtNombreTema.getValue(), Integer.parseInt(txtNumeroSemanas.getValue().toString()));
 		cmbIdUnidad.setFocus(true);
 	}
 		
@@ -558,7 +558,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				Listcell celdaUnidad = (Listcell)itemBiblio.getChildren().get(0);
 				if (clave.equals(celdaUnidad.getLabel().trim().toUpperCase())){
 					itemBiblio.detach();
-					i=1;
+					i--;
 				}				
 			}
 		}
@@ -569,7 +569,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				Listcell celdaUnidad = (Listcell)itemCiber.getChildren().get(0);
 				if(clave.equals(celdaUnidad.getLabel().trim().toUpperCase())){
 					itemCiber.detach();
-					i=1;
+					i--;
 				}
 			}
 		}
@@ -580,7 +580,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				Listcell celdaUnidad = (Listcell)itemSubtema.getChildren().get(0);
 				if(clave.equals(celdaUnidad.getLabel().trim().toUpperCase())){
 					itemSubtema.detach();
-					i=1;
+					i--;
 				}
 			}
 		}
@@ -590,20 +590,22 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				Listcell celdaTema = (Listcell)itemTema.getChildren().get(0);
 				if (clave.equals(celdaTema.getLabel().trim().toUpperCase())){
 					itemTema.detach();
-					i=1;
+					i--;
 				}
 			}
 		}
 	}
 	
 	private void eliminaCascadaTema(Listitem item, String clave){
+		Listcell celda = (Listcell)item.getChildren().get(1);
+		clave = celda.getLabel();
 		if (listaSubtemas.getItems().size() > 0){
 			for(int i=1; i<=listaSubtemas.getItems().size(); i++){
 				Listitem itemSubtema = (Listitem)listaSubtemas.getChildren().get(i);
 				Listcell celdaTema = (Listcell)itemSubtema.getChildren().get(1);
 				if(clave.equals(celdaTema.getLabel().trim().toUpperCase())){
 					itemSubtema.detach();
-					i=1;
+					i--;
 				}
 			}
 		}
@@ -622,15 +624,18 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 					eliminaListItem(listaItem, tmpUnidad);					
 				}
 			});
+			if (!existeUnidad(tmpUnidad)){
+				Listcell celdaVacia = new Listcell("");
+				listaItem.appendChild(celdaVacia);
+				Listcell celdaUnidad = new Listcell(nombreUnidad.toUpperCase());
+				listaItem.appendChild(celdaUnidad);
+				llenarCombosUnidades(nombreUnidad.toUpperCase());
+				listaUnidades.appendChild(listaItem);
+				txtNombreUnidad.setValue("");
+				txtNombreUnidad.setFocus(true);
+			}else
+				Messagebox.show("Existe un unidad con el mismo nombre.");
 			
-			Listcell celdaVacia = new Listcell("");
-			listaItem.appendChild(celdaVacia);
-			Listcell celdaUnidad = new Listcell(nombreUnidad.toUpperCase());
-			listaItem.appendChild(celdaUnidad);
-			llenarCombosUnidades(nombreUnidad.toUpperCase());
-			listaUnidades.appendChild(listaItem);
-			txtNombreUnidad.setValue("");
-			txtNombreUnidad.setFocus(true);
 		} else
 			if (listaUnidades.getItems().size() > 0)
 				cmbIdUnidad.focus();
@@ -651,12 +656,25 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	 * @param event
 	 */
 	public void onClick$btnAddTemas(Event event){		
+		validarCamposTemas(cmbIdUnidad.getValue().toString(), txtNombreTema.getValue().toString(), 
+				Integer.parseInt(txtNumeroSemanas.getValue().toString()));
+					
+	}
+	
+	
+	/*
+	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
+	 * lista previa validación de contenido existente.
+	 * 
+	 */
+	private void validarCamposTemas(String idUnidad, String nombreTema, int numeroSemanas){
 		if(cmbIdUnidad.getValue().trim().length() > 0)
-			if (txtNombreTema.getValue().trim().length() > 0)
-				if(txtNumeroSemanas.longValue() > 0)
-					validarCamposTemas(cmbIdUnidad.getValue().toString(), txtNombreUnidad.getValue().toString(), 
-							Integer.parseInt(txtNumeroSemanas.getValue().toString()));
-				else{
+			if (txtNombreTema.getValue().trim().length() > 0 && (!"".equals(txtNombreTema.getValue())))
+				if(txtNumeroSemanas.longValue() > 0){
+					llenarListaTemas(nombreTema);
+					cmbListaUnidades.setSelectedIndex(-1);
+					cmbListaUnidades.setValue("");
+				}else{
 					Messagebox.show("Se requiere información en el campo <Tiempo (Semanas)>");
 					txtNumeroSemanas.focus();
 				}
@@ -668,25 +686,13 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			Messagebox.show("Se requiere información en el campo <Nombre Unidad>");
 			cmbIdUnidad.focus();
 		}
-					
-	}
-	
-	
-	/*
-	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
-	 * lista previa validación de contenido existente.
-	 * 
-	 */
-	private void validarCamposTemas(String idUnidad, String nombreTema, int numeroSemanas){
-		llenarListaTemas(nombreTema);
-		cmbListaUnidades.setSelectedIndex(-1);
-		cmbListaUnidades.setValue("");	
+			
 		
 	}
 		
 	public void llenarListaTemas(String tema){
 		final Listitem listaItem = new Listitem();
-		final String tmpTema = tema;
+		final String tmpTema = tema.toUpperCase().trim();
 		
 		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
@@ -695,20 +701,51 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			}
 		});
 		
-		Listcell celdaUnidad = new Listcell(cmbIdUnidad.getValue());
-		Listcell celdaTema = new Listcell(txtNombreTema.getValue().toUpperCase());		
-		Listcell celdaTiempo = new Listcell(txtNumeroSemanas.getValue().toString());		
-		listaItem.appendChild(celdaUnidad);
-		listaItem.appendChild(celdaTema);
-		listaItem.appendChild(celdaTiempo);
+		if (!existeTema(tmpTema)){
+			Listcell celdaUnidad = new Listcell(cmbIdUnidad.getValue());
+			Listcell celdaTema = new Listcell(txtNombreTema.getValue().toUpperCase());		
+			Listcell celdaTiempo = new Listcell(txtNumeroSemanas.getValue().toString());		
+			listaItem.appendChild(celdaUnidad);
+			listaItem.appendChild(celdaTema);
+			listaItem.appendChild(celdaTiempo);
+			
+			listaTemas.appendChild(listaItem);
+			cmbIdUnidad.setValue("");
+			txtNombreTema.setValue("");
+			txtNumeroSemanas.setValue(null);
+		} else{
+			Messagebox.show("El Tema a Ingresar ya Existe.");
+		}
 		
-		listaTemas.appendChild(listaItem);
-		cmbIdUnidad.setValue("");
-		txtNombreTema.setValue("");
-		txtNumeroSemanas.setValue(null);
 	}
 	
+	private boolean existeTema(String tema){
+		boolean estado = false;
+		for(int i=1; i<=listaTemas.getItems().size(); i++){
+			Listitem item = (Listitem)listaTemas.getChildren().get(i);
+			Listcell celdaTema = (Listcell)item.getChildren().get(1);
+			if (tema.equals(celdaTema.getLabel().trim().toUpperCase())){
+				estado = true;
+				break;
+			}
+		}
+		return estado;
+	}
 	
+	private boolean existeUnidad(String unidad){
+		boolean estado = false;
+		for (int i=1;i<=listaUnidades.getItems().size(); i++){
+			Listitem item = (Listitem)listaUnidades.getChildren().get(i);
+			Listcell celdaUnidad = (Listcell)item.getChildren().get(1);
+			if (unidad.toUpperCase().equals(celdaUnidad.getLabel())){
+				estado = true;
+				break;
+			}
+				
+				
+		}
+		return estado;
+	}
 	
 	public void onClick$btnAddSubTema(Event event){
 		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
@@ -827,19 +864,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			}
 		}
 	}
-	
-//	private void cargarComboUnidadSubtema(String tema){
-//		cmbListaTemas.getItems().clear();
-//		
-//		for(int i=1; i<= listaTemas.getItemCount(); i++){
-//			Listitem listaItem = (Listitem)listaTemas.getChildren().get(i);
-//			Listcell celda = (Listcell)listaItem.getChildren().get(1);
-//			if(celda.getLabel().equals(tema)){
-//				Comboitem item = new Comboitem(celda.getLabel());
-//				cmbListaTemas.appendChild(item);				
-//			}			
-//		}
-//	}
+
 	
 	
 	/**
@@ -861,8 +886,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				if (unidad.equals(celdaUnidad.getLabel()))
 					cmbListaTemas.appendChild(itemTema);
 			}
-//			cmbListaTemas.setValue("");
-//			cmbListaTemas.focus();
 		}		
 	}
 	

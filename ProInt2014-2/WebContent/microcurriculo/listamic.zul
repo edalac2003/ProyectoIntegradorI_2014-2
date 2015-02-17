@@ -14,9 +14,10 @@
 				<north border="0" height="30px">
 					<include id="listMenu" src="/sections/menuBar.zul" />
 				</north>
-				
-				<center border="0">
+				<east>
 					
+				</east>
+				<center border="0">					
 					<div align="center">
 						<grid width="960px" >
 							<rows>
