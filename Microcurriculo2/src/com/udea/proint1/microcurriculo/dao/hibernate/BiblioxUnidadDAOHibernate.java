@@ -93,7 +93,7 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
                
         	session = getSession();
                                
-        	Query query = session.createQuery("from TbMicBiblioxunidad where tbMicUnidades = :unidad");
+        	Query query = session.createQuery("from TbMicBiblioxunidad where tbMicUnidad = :unidad");
                
         	query.setEntity("unidad", unidad);
                

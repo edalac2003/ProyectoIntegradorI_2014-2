@@ -1,14 +1,17 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.SubtemaxTemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements SubtemaxTemaDAO {
@@ -59,10 +62,24 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
 	}
 
 	@Override
-	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(int idTema)
+	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(TbMicTema tema)
 			throws ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+        List<TbMicSubtemaxtema> subtemaxTema = new ArrayList<TbMicSubtemaxtema>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicSubtemaxtema where tbMicTema = :tema");
+               
+        	query.setEntity("tema", tema);
+               
+        	subtemaxTema = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return subtemaxTema;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.dao;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface SubtemaxTemaDAO {
@@ -17,7 +18,7 @@ public interface SubtemaxTemaDAO {
 	
 	public List<TbMicSubtemaxtema> listarSubtemaxTema() throws ExcepcionesDAO;
 	
-	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(int idTema) throws ExcepcionesDAO;
+	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(TbMicTema tema) throws ExcepcionesDAO;
 	
 	public int contarRegistros() throws ExcepcionesDAO;
 

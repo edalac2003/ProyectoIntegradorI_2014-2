@@ -75,7 +75,7 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
                
         	session = getSession();
                                
-        	Query query = session.createQuery("from TbMicTemasxunidad where tbMicUnidades = :unidad");
+        	Query query = session.createQuery("from TbMicTemaxunidad where tbMicUnidad = :unidad");
                
         	query.setEntity("unidad", unidad);
                

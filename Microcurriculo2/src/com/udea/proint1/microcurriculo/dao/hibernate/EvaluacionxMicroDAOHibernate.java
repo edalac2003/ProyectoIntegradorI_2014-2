@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.EvaluacionxMicroDAO;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements EvaluacionxMicroDAO {
@@ -96,7 +97,26 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 		return registro;
 	}
 	
-	
+	@Override
+	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(TbMicMicrocurriculo microcurriculo)
+			throws ExcepcionesDAO {
+		Session session = null;
+        List<TbMicEvaluacionxmicro> evaluacionesxMicro = new ArrayList<TbMicEvaluacionxmicro>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbMicEvaluacionxmicro where tbMicMicrocurriculo = :microcurriculo");
+               
+        	query.setEntity("microcurriculo", microcurriculo);
+               
+        	evaluacionesxMicro = query.list();
+        }catch(HibernateException e){
+                throw new ExcepcionesDAO(e);
+        }
+        return evaluacionesxMicro;
+	}
 	
 
 }

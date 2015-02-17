@@ -2,26 +2,31 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
-import javax.mail.Message;
-
+import org.apache.log4j.Logger;
 import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dao.SubtemaxTemaDAO;
+import com.udea.proint1.microcurriculo.dao.TemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
-
+	
+	private static Logger log=Logger.getLogger(SubtemaxTemaNGCImpl.class);
 
 	SubtemaxTemaDAO subtemaxTemaDao;
-	
+	TemaDAO temaDao;
 	
 	public void setSubtemaxTemaDao(SubtemaxTemaDAO subtemaxTemaDao) {
 		this.subtemaxTemaDao = subtemaxTemaDao;
 	}
 
+	public void setTemaDao(TemaDAO temaDao) {
+		this.temaDao = temaDao;
+	}
 
 	@Override
 	public void guardar(TbMicSubtemaxtema subtemaxTema)	throws ExcepcionesLogica {
@@ -70,8 +75,27 @@ public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
 	@Override
 	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(int idTema)
 			throws ExcepcionesLogica {
-		// TODO Auto-generated method stub
-		return null;
+		List<TbMicSubtemaxtema> listaSubtemasxtema = null;
+		
+		TbMicTema tema= null;
+		
+		try {
+			tema = temaDao.obtenerTema(idTema);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerTema de la clase temaDao: "+ e);
+		}
+		
+		
+		try {
+			listaSubtemasxtema = subtemaxTemaDao.listarSubtemaxTema_Tema(tema);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo listarSubtemaxTema_Tema de la clase subtemaxTemaDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaSubtemasxtema;
 	}
 
 	@Override

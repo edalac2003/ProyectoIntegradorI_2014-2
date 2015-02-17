@@ -3,14 +3,14 @@
 
 <zk>
 <window border="normal" apply="${consultarMicroCtrl}">	
-	<borderlayout height="900px" >
+	<borderlayout height="1100px" >
 		<north border="0" height="100px">
 			<include id="headerIdx" src="sections/header.zul" />
 		</north>
 		
 		<center border="0">
 			<div align="center" >
-				<borderlayout height="750px">
+				<borderlayout height="850px" >
 					<north border="0">
 						<div>
 							<include id="listMenu" src="sections/menuBar.zul" ></include>
@@ -24,7 +24,7 @@
 							
 							<separator />
 							<div>
-								<tabbox width="72%">
+								<tabbox width="72%" >
 									<tabs style="">
 										<tab label="Información General" />
 										<tab label="Información Complementaria" />
@@ -193,7 +193,10 @@
 										</tabpanel>
 										
 										<tabpanel id="tabInfoUnidad">
-											<grid id="gridUnidades">
+											<!--<grid id="gridUnidades">-->
+												<div style="" height="25px">
+													<label value="Unidades" />
+												</div>
 												<!--<columns>
 													<column label="Nombre de la Unidad" width="100%" align="center" />
 												</columns>
@@ -204,11 +207,15 @@
 										                    <button id="btnAddUnidad" label="Adicionar" width="10%" />
 									                    </div>
 									                </row>
-									                <row>
-									                	<listbox id="listaUnidades" ></listbox>
-									                </row>		                
+									                <row>-->
+									                	<listbox id="listaUnidades" >
+									                		<listhead>
+																<listheader width="100%" align="center"/>
+															</listhead>
+									                	</listbox>
+									                <!--</row>		                
 												</rows>-->
-											</grid>
+											<!-- </grid>-->
 											
 										
 											<separator />
@@ -241,9 +248,9 @@
 														<row>
 															<listbox id="listaTemas">
 																<listhead>
-																	<listheader width="18%" />
-																	<listheader width="60" />
-																	<listheader width="18%" />
+																	<listheader width="18%" align="center"/>
+																	<listheader width="60" align="center"/>
+																	<listheader width="18%" align="center"/>
 																</listhead>
 																
 															</listbox>
@@ -281,9 +288,9 @@
 														<row>
 															<listbox id="listaSubtemas">
 																<listhead>
-																	<listheader width="15%" />
-																	<listheader width="20%" />
-																	<listheader width="50%" />
+																	<listheader width="15%" align="center"/>
+																	<listheader width="20%" align="center"/>
+																	<listheader width="50%" align="center"/>
 																</listhead>
 															</listbox>
 										                </row>
@@ -398,8 +405,9 @@
 											</div>
 											<grid id="infoRefBiblioComp">
 												<columns>
-													<column label="Nombre del Sitio" align="center" width="40%"/>
-													<column label="Sitio Web" align="center" width="40%"/>
+													<column label="Unidad" align="center" width="20%"/>
+													<column label="Nombre del Sitio" align="center" width="30%"/>
+													<column label="Sitio Web" align="center" width="30%"/>
 													<column label="Tipo" align="center" width="20%" />
 												</columns>
 												<!-- <rows>
@@ -423,10 +431,10 @@
 													<row>
 														<listbox id="listaCibergrafia">
 															<listhead>
-																<listheader value="Unidad" width="15%" />
+																<listheader value="Unidad" width="20%" />
 																<listheader value="Nombre Sitio" width="30"/>
 																<listheader value="URL Sitio" width="30%"/>
-																<listheader value="Tipo" width="15%"/>
+																<listheader value="Tipo" width="20%"/>
 															</listhead>
 															
 														</listbox>

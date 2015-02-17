@@ -8,6 +8,7 @@ import com.udea.proint1.microcurriculo.dao.EvaluacionDAO;
 import com.udea.proint1.microcurriculo.dao.EvaluacionxMicroDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -155,7 +156,30 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 		return registro;
 	}
 	
-	
+	@Override
+	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(String idMicrocurriculo) throws ExcepcionesLogica {
+		List<TbMicEvaluacionxmicro> listaEvaluacionesxMicro = null;
+		
+		TbMicMicrocurriculo microcurriculo= null;
+		
+		try {
+			microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
+		}
+		
+		
+		try {
+			listaEvaluacionesxMicro = evaluacionxMicroDao.ListarEvaluacionxMicroxMicro(microcurriculo);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo ListarEvaluacionxMicroxMicro de la clase evaluacionxMicroDao: "+ e);
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 */
+		return listaEvaluacionesxMicro;
+	}
 	
 
 }

@@ -76,7 +76,7 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
                
         	session = getSession();
                                
-        	Query query = session.createQuery("from TbMicObjetivosxmicro where tbMicObjetivos = :objetivo");
+        	Query query = session.createQuery("from TbMicObjetivoxmicro where tbMicObjetivo = :objetivo");
                
         	query.setEntity("objetivo", objetivo);
                
@@ -97,7 +97,7 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
                
         	session = getSession();
                                
-        	Query query = session.createQuery("from TbMicObjetivosxmicro where tbMicMicrocurriculos = :microcurriculo");
+        	Query query = session.createQuery("from TbMicObjetivoxmicro where tbMicMicrocurriculo = :microcurriculo");
                
         	query.setEntity("microcurriculo", microcurriculo);
                

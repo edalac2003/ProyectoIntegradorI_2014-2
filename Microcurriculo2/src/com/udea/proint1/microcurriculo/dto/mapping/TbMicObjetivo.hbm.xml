@@ -11,6 +11,9 @@
         <property name="vrDescripcion" type="string">
             <column name="VR_DESCRIPCION" />
         </property>
+        <property name="blTipo" type="java.lang.Character">
+            <column name="BL_TIPO" length="1" />
+        </property>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>

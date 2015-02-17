@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.dao;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface EvaluacionxMicroDAO {
@@ -16,5 +17,7 @@ public interface EvaluacionxMicroDAO {
 	public void actualizarEvaluacionesxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesDAO;
 	
 	public int obtenerRegistro() throws ExcepcionesDAO;
+	
+	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(TbMicMicrocurriculo microcurriculo)throws ExcepcionesDAO;
 
 }
