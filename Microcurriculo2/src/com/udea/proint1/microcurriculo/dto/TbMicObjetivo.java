@@ -13,7 +13,6 @@ public class TbMicObjetivo implements java.io.Serializable {
 
 	private int nbIdobjetivo;
 	private String vrDescripcion;
-	private char blTipo;
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbMicObjetivosxmicros = new HashSet(0);
@@ -21,21 +20,19 @@ public class TbMicObjetivo implements java.io.Serializable {
 	public TbMicObjetivo() {
 	}
 	
-	public TbMicObjetivo(int nbIdobjetivo, String vrDescripcion, char blTipo, String vrModusuario, Date dtModfecha) {
+	
+	public TbMicObjetivo(int nbIdobjetivo, String vrDescripcion, String vrModusuario, Date dtModfecha) {
 		super();
 		this.nbIdobjetivo = nbIdobjetivo;
 		this.vrDescripcion = vrDescripcion;
-		this.blTipo = blTipo;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
 
-	public TbMicObjetivo(int nbIdobjetivo, String vrDescripcion, char blTipo,
-			String vrModusuario, Date dtModfecha,
+	public TbMicObjetivo(int nbIdobjetivo, String vrDescripcion, String vrModusuario, Date dtModfecha,
 			Set tbMicObjetivosxmicros) {
 		this.nbIdobjetivo = nbIdobjetivo;
 		this.vrDescripcion = vrDescripcion;
-		this.blTipo = blTipo;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 		this.tbMicObjetivosxmicros = tbMicObjetivosxmicros;
@@ -79,14 +76,6 @@ public class TbMicObjetivo implements java.io.Serializable {
 
 	public void setTbMicObjetivosxmicros(Set tbMicObjetivosxmicros) {
 		this.tbMicObjetivosxmicros = tbMicObjetivosxmicros;
-	}
-
-	public char getBlTipo() {
-		return blTipo;
-	}
-
-	public void setBlTipo(char blTipo) {
-		this.blTipo = blTipo;
 	}
 
 }

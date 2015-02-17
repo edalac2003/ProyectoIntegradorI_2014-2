@@ -1,6 +1,6 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<div align="center" zclass="imgBanner">
-		<image  src="/img/bar_inf.jpg" />
+		<image  src="/_img/bar_inf.jpg" />
 	</div>
 </zk>

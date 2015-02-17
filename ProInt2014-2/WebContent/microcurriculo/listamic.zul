@@ -6,13 +6,13 @@
 <window id="formaListarMicro" border="normal">
 	<borderlayout height="1000px" apply="${cargarDatosFormas}">
 		<north border="0" height="100px">
-			<include id="headerIdx" src="/sections/header.zul" />
+			<include id="headerIdx" src="/_sections/header.zul" />
 		</north>
 		
 		<center border="0">
 			<borderlayout height="1000px">
 				<north border="0" height="30px">
-					<include id="listMenu" src="/sections/menuBar.zul" />
+					<include id="listMenu" src="/_sections/menuBar.zul" />
 				</north>
 				<east>
 					
@@ -83,7 +83,7 @@
 		</center>
 		
 		<south border="0" height="80px">
-			<include id="footerIdx" src="/sections/footer.zul" />
+			<include id="footerIdx" src="/_sections/footer.zul" />
 		</south>
 	</borderlayout>
 	

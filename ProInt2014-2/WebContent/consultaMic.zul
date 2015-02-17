@@ -13,7 +13,7 @@
 				<north border="0">
 					<div align="center">
 						<div>
-							<include id="listMenu" src="sections/menuBar.zul" />
+							<include id="listMenu" src="/_sections/menuBar.zul" />
 						</div>
 						<div width="73%">						
 							<listbox style="">
@@ -41,7 +41,7 @@
 		</center>
 		
 		<south border="0">
-			<include id="footerIdx" src="sections/footer.zul" />
+			<include id="footerIdx" src="/_sections/footer.zul" />
 		</south>	
 	</borderlayout>
 </window>
