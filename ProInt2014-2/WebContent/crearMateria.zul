@@ -5,7 +5,7 @@
 		<borderlayout height="1150px">
 
 			<north border="0" height="100px">
-				<include id="headerIdx" src="sections/header.zul" />
+				<include id="headerIdx" src="/_sections/header.zul" />
 			</north>
 
 			<center border="0">
@@ -14,7 +14,7 @@
 						<north border="0">
 							<div>
 								<include id="listMenu"
-									src="sections/menuBar.zul">
+									src="/_sections/menuBar.zul">
 								</include>
 							</div>
 						</north>
@@ -31,14 +31,14 @@
 												<div
 													style="float:left;">
 													<image
-														src="/img/materias.png" />
+														src="/_img/materias.png" />
 													<label
 														value="Buscar Materia" />
 												</div>
 												<div
 													style="float:right;">
 													<image
-														id="imgAddNew" src="/img/add-icon.png" />
+														id="imgAddNew" src="/_img/add-icon.png" />
 												</div>
 											</caption>
 
@@ -52,15 +52,12 @@
 												emptyMessage="Sin registros" height="86%"
 												style="margin-top:10px" rows="9">
 												<listhead>
-													<listheader
-														label="Materias" />
+													<listheader label="Materias" />
 												</listhead>
-												<template
-													name="model">
+												
+												<template name="model">
 													<listitem>
-														<listcell
-															label="${each.vrNombre}">
-														</listcell>
+														<listcell label="${each.vrNombre}"></listcell>
 													</listitem>
 												</template>
 											</listbox>
@@ -72,7 +69,9 @@
 									<hbox spacing="15px">
 										<groupbox mold="3d"
 											width="900px" height="100%">
-											<caption image="/img/crearMateria.png" label="Crear Materia" />
+											<caption image="/_img/crearMateria.png" >
+												<label id="lblEncabezadoMateria" value="Crear Materia" ></label>
+											</caption>
 
 											<grid>
 												<columns>
@@ -129,7 +128,7 @@
 													
 													<row>
 														<label value="Nivel o Semestre"></label>
-														<longbox id="txtSemestre" width="25%"/>
+														<longbox id="txtSemestre" width="25%" constraint="no empty"/>
 <!-- 														<div width="50%"> 	<listbox -->
 <!-- 																id="ltbSemestre" tabindex="6" width="100%" rows="1" -->
 <!-- 																mold="select" height="20px" /> -->
@@ -192,10 +191,13 @@
 
 											<div align="center">
 												<button id="btnGuardar"
-													label="Guardar Materia" tabindex="15">
+													label="Guardar materia" tabindex="15">
+												</button>
+												<button id="btnVolver" visible="false"
+													label="Crear nueva materia" tabindex="15">
 												</button>
 												<button
-													id="btnActualizar" label="Actualizar Materia"
+													id="btnActualizar" label="Actualizar materia"
 													visible="false" tabindex="15">
 												</button>
 											</div>
@@ -209,7 +211,7 @@
 			</center>
 
 			<south border="none">
-				<include id="footerIdx" src="sections/footer.zul" />
+				<include id="footerIdx" src="/_sections/footer.zul" />
 			</south>
 		</borderlayout>
 	</window>
