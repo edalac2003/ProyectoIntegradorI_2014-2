@@ -323,7 +323,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	public void onSelect$cmbListaTemas(){
-//		txtSubTemas.setFocus(true);
+		txtSubTemas.setFocus(true);
 	}
 	
 	public void onOK$cmbListaTemas(){
@@ -352,6 +352,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void onOK$cmbListaUnidades(){		
 		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
 		cmbListaTemas.focus();
+	}
+	
+	public void onSelect$cmbListaUnidades(){
+		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
 	}
 
 	public void onOK$cmbUnidadAcademica(){
@@ -547,6 +551,8 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		} else if(item.getParent().getId().toString().equals("listaBibliografia")){
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaCibergrafia")){
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaObjetivosEspecificos")){
 			item.detach();
 		}
 	}

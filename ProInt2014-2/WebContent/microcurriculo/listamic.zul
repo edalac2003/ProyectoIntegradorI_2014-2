@@ -1,5 +1,6 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos2.css" ?>
 
 <zk>
 <style src="estilos.css" />
@@ -9,14 +10,20 @@
 			<include id="headerIdx" src="/_sections/header.zul" />
 		</north>
 		
+		<east width="180px" border="0">
+			<label />
+		</east>
+		<west width="180px" border="0">
+			<label />
+		</west>
+		
 		<center border="0">
 			<borderlayout height="1000px">
-				<north border="0" height="30px">
-					<include id="listMenu" src="/_sections/menuBar.zul" />
+				<north border="0" height="50px">
+					<include id="listMenu" src="/_sections/toolbar_micro2.zul"/>
 				</north>
-				<east>
-					
-				</east>
+				
+				
 				<center border="0">					
 					<div align="center">
 						<grid width="960px" >
@@ -64,7 +71,7 @@
 						<separator />
 						
 						<div width="960px">
-							<listbox id="listaMicrocurriculo" context="editPopup" autopaging="true" sclass="estiloceldas">
+							<listbox id="listaMicrocurriculo" autopaging="true" sclass="estiloceldas">
 								<listhead>
 									<listheader label="Codigo"  align="center" width="12%"/>
 									<listheader label="Unidad" align="center"/>

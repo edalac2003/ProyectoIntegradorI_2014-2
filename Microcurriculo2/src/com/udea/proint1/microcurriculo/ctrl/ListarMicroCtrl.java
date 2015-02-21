@@ -1,21 +1,14 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
-import java.awt.MenuItem;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.hibernate.cfg.SetSimpleValueTypeSecondPass;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Menuitem;
-import org.zkoss.zul.Menupopup;
 
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
@@ -47,12 +40,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 				listaMicrocurriculo.getItems().clear();
 				for(TbMicMicrocurriculo micro : listaMicro){
 					final Listitem listaItem = new Listitem();
-					listaItem.addEventListener(Events.ON_RIGHT_CLICK, new EventListener<Event>() {
-						@Override
-						public void onEvent(Event arg0) throws Exception{
-							menuEmergente(listaItem);
-						}
-					});
+					
 					
 					Listcell celdaCodigo = new Listcell(micro.getVrIdmicrocurriculo().toString());
 					Listcell celdaUnidad = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());

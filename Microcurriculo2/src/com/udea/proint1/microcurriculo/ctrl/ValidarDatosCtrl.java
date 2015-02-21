@@ -18,6 +18,7 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -92,6 +93,12 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 		
 	Button btnGuardarMicro;
+	
+	Toolbarbutton tool_home;
+	Toolbarbutton tool_new;
+	Toolbarbutton tool_save;
+	Toolbarbutton tool_print;
+	Toolbarbutton tool_close;
 	
 	Combobox cmbSemestre;
 	Combobox cmbNucleo;
@@ -236,6 +243,10 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	@SuppressWarnings("unused")
 	public void onClick$btnGuardarMicro(Event event){		
+		
+	}
+	
+	public void onClick$tool_save(){
 		//Aqui se va a empaquetar todo.
 		TbMicMicrocurriculo microcurriculo = empaquetarMicrocurriculo();
 		if (microcurriculo != null){
@@ -252,8 +263,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			if(listaBibliografia.getItems().size() > 0)
 				empaquetarBibliografias(listadoUnidades);
 			
-//			listadoAutores = new ArrayList<TbMicAutor>();
-//			listadoAutorxBiblio = new ArrayList<TbMicAutorxbiblio>();
+//					listadoAutores = new ArrayList<TbMicAutor>();
+//					listadoAutorxBiblio = new ArrayList<TbMicAutorxbiblio>();
 
 		
 			if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
@@ -283,7 +294,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 		}
 	}
-	
 	
 	private boolean existeMicrocurriculo(String idMicrocurriculo){
 		TbMicMicrocurriculo micro = null;
