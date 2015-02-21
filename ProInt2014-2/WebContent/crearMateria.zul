@@ -23,10 +23,10 @@
 							<div align="center">
 								<separator />
 								<separator />
-								<hlayout width="100%" height="300px;">
+								<hlayout width="100%" height="650px;">
 									<hbox spacing="15px">
 										<groupbox mold="3d"
-											width="900px" height="300px;">
+											width="255px" height="100%">
 											<caption>
 												<div
 													style="float:left;">
@@ -48,27 +48,24 @@
 													id="txtFiltrarMateria" tabindex="1" />
 											</hbox>
 
-											<listbox id="listBoxMaterias"
-												emptyMessage="Sin registros" height="86%"
+											<listbox id="listBoxMaterias" emptyMessage="Sin registros" height="86%"
 												style="margin-top:10px" rows="9">
 												<listhead>
-													<listheader label="Materias" />
+													<listheader label="Materias"/>
 												</listhead>
 												
 												<template name="model">
 													<listitem>
-														<listcell label="${each.vrNombre}"></listcell>
+														<listcell label="${each.vrNombre}" style="font-size:11px"></listcell>
 													</listitem>
 												</template>
 											</listbox>
 										</groupbox>
 									</hbox>
-								</hlayout>
 								
-								<hlayout width="100%" height="600px;">
 									<hbox spacing="15px">
 										<groupbox mold="3d"
-											width="900px" height="100%">
+											width="700px" height="100%">
 											<caption image="/_img/crearMateria.png" >
 												<label id="lblEncabezadoMateria" value="Crear Materia" ></label>
 											</caption>
