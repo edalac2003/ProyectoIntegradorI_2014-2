@@ -584,12 +584,12 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			
 			List<TbMicObjetivoxmicro> objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(id);
 			
-			for(TbMicObjetivoxmicro objetivo:objetivosxMicro){
-				if((objetivo.getTbMicObjetivo().getBlTipo()) == '1'){
-					lblObjetivoGeneral.setValue(objetivo.getTbMicObjetivo().getVrDescripcion());
+			for(TbMicObjetivoxmicro oxM : objetivosxMicro){
+				if("1".equals(oxM.getBlTipo().toString())){
+					lblObjetivoGeneral.setValue(oxM.getTbMicObjetivo().getVrDescripcion());
 				}else{
 					Listitem listaItem = new Listitem();
-					Listcell celda = new Listcell(objetivo.getTbMicObjetivo().getVrDescripcion());
+					Listcell celda = new Listcell(oxM.getTbMicObjetivo().getVrDescripcion());
 					listaItem.appendChild(celda);			
 					listaObjetivosEspecificos.appendChild(listaItem);
 				}

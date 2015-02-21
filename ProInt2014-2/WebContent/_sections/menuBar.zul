@@ -5,11 +5,11 @@
 		<menubar width="73%">
 			<menu label="Microcurriculos">
 				<menupopup>
-					<menuitem label="Crear" href="crearMic.zul"/>
+					<menuitem label="Crear" href="microcurriculo/crearMic.zul"/>
 					<menu label="Busqueda">
 						<menupopup>
 							<menuitem label="Por ID" href="consultas/consultaMicID.zul"/>
-							<menuitem label="Listar Microcurriculos" href="listarMicro.zul"/>
+							<menuitem label="Listar Microcurriculos" href="/microcurriculo/listaMic.zul"/>
 						</menupopup>
 					</menu>
 				</menupopup>
