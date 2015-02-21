@@ -28,6 +28,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl;
@@ -42,6 +43,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	
 	Button btnGuardar;
 	Button btnActualizar;
+	Button btnVolver;
 	
 	Textbox txtFiltrarMateria;
 	Longbox txtCodigo;
@@ -65,6 +67,9 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	Label lblNucleo;
 	Label lblDepartamento;
 	Label lblCodigo;
+	Label lblEncabezadoMateria;
+	
+	Listbox listBoxMaterias;
 	
 	MateriaNGCImpl materiaNGC;
 	NucleoNGCImpl nucleoNGC;
@@ -294,7 +299,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		
 	}*/
 	
-	/*private void cargarMaterias() throws ExcepcionesLogica {
+	private void cargarMaterias() throws ExcepcionesLogica {
 		try {
 			this.listaMaterias = materiaNGC.listarMaterias();
 			listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(this.listaMaterias));
@@ -302,12 +307,12 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			throw new ExcepcionesLogica("No se pudo cargar la lista de materias");
 		}
 		
-	}*/
+	}
 	
 	/**
 	 * Metodo que permite filtrar la lista rapida de materias
 	 */
-	/*public void onChange$txtFiltrarMateria() {
+	public void onChange$txtFiltrarMateria() {
 		List<TbAdmMateria> listaFiltrada = new ArrayList<TbAdmMateria>();
 		String filtro = this.txtFiltrarMateria.getValue().toLowerCase();
 		for (TbAdmMateria materia : this.listaMaterias) {
@@ -316,41 +321,46 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			}
 		}
 		this.listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(listaFiltrada));
-	}*/
+	}
 	
-	/*public void onSelect$listBoxMaterias(){
+	public void onSelect$listBoxMaterias(){
 		Set<TbAdmMateria> selection = ((Selectable<TbAdmMateria>)listBoxMaterias.getModel()).getSelection();
-		this.materiaSeleccionada = selection.iterator().next();
-		this.llenarDatos();
-	}*/
+		TbAdmMateria materia = selection.iterator().next();
+		llenarDatos(materia);
+	}
 	
 	/*public void onClick$imgAddNew()  {
 		this.limpiarCampos();
 	}*/
 	
-	/*private void limpiarCampos() {
-		this.ltbNucleo.setVisible(true);
-		this.txtNucleo.setVisible(false);
-		this.ltbSemestre.setVisible(true);
-		this.txtSemestre.setVisible(false);
-		ltbNucleo.clearSelection();
-		limpiarCampoConstraint(txtCodigo);
-		limpiarCampoConstraint(txtMateria);
-		limpiarCampoConstraint(txtNucleo);
-		limpiarCampoConstraint(txtSemestre);
-		limpiarCampoConstraint(txtCreditos);
-		txtHabilitable.setText(null);
-		txtValidable.setText(null);
-		txtClasificable.setText(null);
-		txtHt.setText(null);
-		txtHp.setText(null);
+	private void limpiarCampos() {
+		
+		cmbUnidadAcademica.setValue("[Seleccione]");
+		lblUnidadAcademica.setValue("");
+		cmbDepartamento.setValue("[Seleccione]");
+		lblDepartamento.setValue("");
+		cmbNucleo.setValue("[Seleccione]");
+		lblNucleo.setValue("");
+		txtCodigo.setConstraint("");
+		txtCodigo.setValue(null);
+		txtNombreMateria.setConstraint("");
+		txtNombreMateria.setValue(null);
+		txtSemestre.setConstraint("");
+		txtSemestre.setValue(null);
+		txtCreditos.setConstraint("");
+		txtCreditos.setValue(null);
+		ckbHabilitable.setChecked(false);
+		ckbValidable.setChecked(false);
+		ckbClasificable.setChecked(false);
+		txtHp.setConstraint("");
+		txtHp.setValue(null);
+		txtHt.setConstraint("");
+		txtHt.setValue(null);
+		txtHtp.setConstraint("");
 		txtHtp.setText(null);
-		txtEstado.setText(null);
+		cmbEstado.setValue("[Seleccione]");
 		
-		this.btnActualizar.setVisible(false);
-		this.btnGuardar.setVisible(true);
-		
-	}*/
+	}
 	
 	/**
 	 * Metodo para limpiar campo TextBox con Constraint
@@ -365,9 +375,42 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		}
 	}
 
-	/*private void llenarDatos() {
-		TbAdmNucleo nucleo = materiaSeleccionada.getTbAdmNucleo();
-		this.txtNucleo.setVisible(true);
+	private void llenarDatos(TbAdmMateria materia) {
+		
+		cmbUnidadAcademica.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad());
+		lblUnidadAcademica.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
+		cmbDepartamento.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrIddependencia());
+		lblDepartamento.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
+		cmbNucleo.setValue(materia.getTbAdmNucleo().getVrIdnucleo());
+		lblNucleo.setValue(materia.getTbAdmNucleo().getVrNombre());
+		txtCodigo.setValue(new Long(Long.parseLong(materia.getVrIdmateria())));
+		txtNombreMateria.setValue(materia.getVrNombre());
+		txtSemestre.setValue((long)materia.getNbSemestre());
+		txtCreditos.setValue((long)materia.getNbCreditos());
+		if(materia.getBlHabilitable()==1){
+			ckbHabilitable.setChecked(true);
+		}else{
+			ckbHabilitable.setChecked(false);
+		}
+		if(materia.getBlValidable()==1){
+			ckbValidable.setChecked(true);
+		}else{
+			ckbValidable.setChecked(false);
+		}
+		if(materia.getBlClasificable()==1){
+			ckbClasificable.setChecked(true);
+		}else{
+			ckbClasificable.setChecked(false);
+		}
+		txtHp.setValue((long)materia.getNbHp());
+		txtHt.setValue((long)materia.getNbHt());
+		txtHtp.setValue((long)materia.getNbHtp());
+		if(materia.getBlEstado()==1){
+			cmbEstado.setValue("Activo");
+		}else{
+			cmbEstado.setValue("Inactivo");
+		}
+		/*this.txtNucleo.setVisible(true);
 		this.ltbNucleo.setVisible(false);
 		this.txtSemestre.setVisible(true);
 		this.ltbSemestre.setVisible(false);
@@ -382,13 +425,136 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		this.txtHt.setText(materiaSeleccionada.getNbHt()+"");
 		this.txtHp.setText(materiaSeleccionada.getNbHp()+"");
 		this.txtHtp.setText(materiaSeleccionada.getNbHtp()+"");
-		this.txtEstado.setText(materiaSeleccionada.getBlEstado()==1?"Activa":"Inactiva");
+		this.txtEstado.setText(materiaSeleccionada.getBlEstado()==1?"Activa":"Inactiva");*/
 		
-		this.btnActualizar.setVisible(true);
-		this.btnGuardar.setVisible(false);
+		btnVolver.setVisible(true);
+		btnActualizar.setVisible(true);
+		btnGuardar.setVisible(false);
+		lblEncabezadoMateria.setValue("Modificar Materia");
 		
-	}*/
+	}
+	
+	public void onClick$btnVolver(){
+		btnVolver.setVisible(false);
+		btnActualizar.setVisible(false);
+		btnGuardar.setVisible(true);
+		lblEncabezadoMateria.setValue("Crear Materia");
+		limpiarCampos();
+	}
+	
+	public void onClick$btnActualizar() throws ExcepcionesLogica{
+		TbAdmMateria materiaActualizar = verificarDatos();
+		actualizarMateria(materiaActualizar);
+	}
+	
+	public void onClick$btnGuardar() throws ExcepcionesLogica{
+		TbAdmMateria materiaGuardar = verificarDatos();
+		guardarMateria(materiaGuardar);
+	}
+	
+	public TbAdmMateria verificarDatos(){
+		TbAdmMateria materiaNueva = new TbAdmMateria();
+		if((!"[Seleccione]".equals(cmbNucleo.getValue().toString())) && (cmbNucleo.getValue() != null) && (cmbNucleo.getValue().trim().length() > 0)){
+			try{
+				TbAdmNucleo nucleo = nucleoNGC.obtenerNucleo(cmbNucleo.getValue().toString());
+				if(nucleo == null){
+					Messagebox.show("El nucleo a asociar con la meteria no existe");
+					return null;
+				}else{
+					materiaNueva.setTbAdmNucleo(nucleo);
+					if(txtCodigo.getValue() != null){
+						materiaNueva.setVrIdmateria(txtCodigo.getValue().toString());
+						if(!"".equals(txtNombreMateria.getValue())){
+							materiaNueva.setVrNombre(txtNombreMateria.getValue().toString().toUpperCase());
+							if(!"".equals(txtSemestre.getValue())){
+								materiaNueva.setNbSemestre(Integer.parseInt(txtSemestre.getValue().toString()));
+								if(!"".equals(txtCreditos.getValue())){
+									
+									materiaNueva.setNbCreditos(Integer.parseInt(txtCreditos.getValue().toString()));
+									
+									if(ckbHabilitable.isChecked()){
+										materiaNueva.setBlHabilitable('1');
+									}else{
+										materiaNueva.setBlHabilitable('0');
+									}
+									
+									if(ckbValidable.isChecked()){
+										materiaNueva.setBlValidable('1');
+									}else{
+										materiaNueva.setBlValidable('0');
+									}
+									
+									if(ckbClasificable.isChecked()){
+										materiaNueva.setBlClasificable('1');
+									}else{
+										materiaNueva.setBlClasificable('0');
+									}
+									
+									materiaNueva.setNbHp(Integer.parseInt(txtHp.getValue().toString()));
+									
+									materiaNueva.setNbHt(Integer.parseInt(txtHt.getValue().toString()));
+									
+									materiaNueva.setNbHtp(Integer.parseInt(txtHtp.getValue().toString()));
+									
+									if(cmbEstado.getValue().equals("Activo")){
+										materiaNueva.setBlEstado('1');
+										return materiaNueva;
+									}else if(cmbEstado.getValue().equals("Inactivo")){
+										materiaNueva.setBlEstado('0');
+										return materiaNueva;
+									}else{
+										Messagebox.show("Se requiere información del campo <Estado>");
+										return null;
+									}
+									
+								}else{
+									Messagebox.show("Se requiere información del campo <Creditos>");
+									return null;
+								}
+							}else{
+								Messagebox.show("Se requiere información del campo <Nivel o Semestre>");
+								return null;
+							}
+						}else{
+							Messagebox.show("Se requiere información del campo <Nombre Materia>");
+							return null;
+						}
+					}else{
+						Messagebox.show("Se requiere información del campo <Código Materia>");
+						return null;
+					}
+				}
+			}catch(ExcepcionesLogica e){
+				Messagebox.show("error al intentar obtener Núcleo");
+				return null;
+			}
+		}else{
+			Messagebox.show("Se requiere información del campo <Núcleo>");
+			return null;
+		}
+	}
 
+	public void guardarMateria(TbAdmMateria materiaGuardar) throws ExcepcionesLogica{
+		try{
+			materiaNGC.guardarMateria(materiaGuardar);
+			Messagebox.show("Se guardó exitosamente la materia");
+			cargarMaterias();
+			limpiarCampos();
+		}catch(ExcepcionesLogica e){
+			Messagebox.show("No se guardó la materia");
+		}
+	}
+	
+	public void actualizarMateria(TbAdmMateria materiaActualizar)throws ExcepcionesLogica{
+		try{
+			materiaNGC.actualizarMateria(materiaActualizar);
+			Messagebox.show("Se actualizó materia exitosamente");
+			cargarMaterias();
+		}catch(ExcepcionesLogica e){
+			Messagebox.show("No se pudo actualizar la Materia");
+		}
+	}
+	
 	/*public void onClick$btnGuardar() throws ExcepcionesLogica{
 		if (!Validaciones.isTextoVacio(txtCodigo.getText())) {
 			if (!Validaciones.validarSoloNumeros(txtCodigo.getText())){
@@ -432,6 +598,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		cargarDepartamentos();
 		cargarNucleos();
 		cargarEstado();
+		cargarMaterias();
 	}
 }
 
