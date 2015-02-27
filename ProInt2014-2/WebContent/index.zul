@@ -33,7 +33,8 @@
 									<button label="Docentes" image="//_img/icons/128x128/docentes.png" />
 								</column>
 								<column align="center">
-									<button label="Materias" image="//_img/icons/128x128/materias.png" />
+									<button label="Materias" image="//_img/icons/128x128/materias.png" 
+									href="/materia/inicio_mat.zul"/>
 								</column>
 							</columns>						
 						</grid>

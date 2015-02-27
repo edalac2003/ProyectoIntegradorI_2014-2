@@ -439,6 +439,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="semestreNGC" ref="semestreNGC" />
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
         </bean>
         
         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
@@ -464,10 +466,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         </bean>
         
         <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
-        	<!-- <property name="semestreNGC" ref="semestresNGC" />  -->
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
         	<property name="materiaNGC" ref="materiaNGC" />
-        	<property name="personaNGC" ref="personaNGC" />
-        	<!-- <property name="semestreNGC" ref="semestreNGC" />  -->
         </bean>
         
         <bean id="consultarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ConsultarMicroCtrl" scope="prototype">
@@ -502,6 +504,13 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="personaNGC" ref="personaNGC" />
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="paisNGC" ref="paisNGC" />
+        </bean>
+        
+        <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
         </bean>
         
         <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">

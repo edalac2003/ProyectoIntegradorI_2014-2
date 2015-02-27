@@ -1,14 +1,20 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import javassist.expr.NewArray;
 
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -18,22 +24,29 @@ import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.ext.Selectable;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
+import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
+import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 import com.udea.proint1.microcurriculo.util.exception.Validaciones;
 
@@ -41,15 +54,13 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(CrearMateriaCtrl.class);
 	
-	Button btnGuardar;
-	Button btnActualizar;
-	Button btnVolver;
+	Toolbarbutton tool_update;
+	Toolbarbutton tool_new;
+	Toolbarbutton tool_save;
 	
 	Textbox txtFiltrarMateria;
 	Longbox txtCodigo;
 	Textbox txtNombreMateria;
-	Longbox txtSemestre;
-	Longbox txtCreditos;
 	Longbox txtHt;
 	Longbox txtHp;
 	Longbox txtHtp;
@@ -58,10 +69,13 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	Checkbox ckbValidable;
 	Checkbox ckbClasificable;
 	
+	Combobox cmbSemestre;
+	Combobox cmbCreditos;
 	Combobox cmbUnidadAcademica;
-	Combobox cmbDepartamento;
+	Combobox cmbDependencia;
 	Combobox cmbNucleo;
-	Combobox cmbEstado;
+	Combobox cmbPrerrequisito;
+	Combobox cmbCorrequisito;
 	
 	Label lblUnidadAcademica;
 	Label lblNucleo;
@@ -70,12 +84,16 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	Label lblEncabezadoMateria;
 	
 	Listbox listBoxMaterias;
+	Listbox listPrerrequisito;
+	Listbox listCorrequisito;
 	
 	MateriaNGCImpl materiaNGC;
 	NucleoNGCImpl nucleoNGC;
 	SemestreNGCImpl semestreNGC;
 	UnidadAcademicaNGC unidadAcademicaNGC;
 	DependenciaNGC dependenciaNGC;
+	PrerrequisitoNGC prerrequisitoNGC;
+	CorrequisitoNGC correquisitoNGC;
 
 	public void setMateriaNGC(MateriaNGCImpl materiaNGC) {
 		this.materiaNGC = materiaNGC;
@@ -97,10 +115,26 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		this.dependenciaNGC = dependenciaNGC;
 	}
 
-	private TbAdmMateria materiaSeleccionada;
+	public void setPrerrequisitoNGC(PrerrequisitoNGC prerrequisitoNGC) {
+		this.prerrequisitoNGC = prerrequisitoNGC;
+	}
+
+	public void setCorrequisitoNGC(CorrequisitoNGC correquisitoNGC) {
+		this.correquisitoNGC = correquisitoNGC;
+	}
+
+	private List<TbAdmMateria> listaPrerrequisitos = new ArrayList<TbAdmMateria>();
+	private List<TbAdmMateria> listaCorrequisitos = new ArrayList<TbAdmMateria>();
 	private List<TbAdmMateria> listaMaterias;
-	private List<TbAdmNucleo> listaNucleos;
-	private List<TbAdmSemestre> listaSemestres;
+	
+	private void cargarMaterias() throws ExcepcionesLogica {
+		try {
+			this.listaMaterias = materiaNGC.listarMaterias();
+			listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(this.listaMaterias));
+		} catch (Exception e) {
+			throw new ExcepcionesLogica("No se pudo cargar la lista de materias");
+		}
+	}
 	
 	public void cargarUnidadesAcademicas(){
 		try {
@@ -125,14 +159,14 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	public void cargarDepartamentos(){
 		try {
 			List<TbAdmDependencia> listaDepartamentos = dependenciaNGC.listarDependencias();
-			cmbDepartamento.getItems().clear();
+			cmbDependencia.getItems().clear();
 			
 			if(listaDepartamentos != null){
 				for(TbAdmDependencia departamento: listaDepartamentos){
 					Comboitem item = new Comboitem(departamento.getVrIddependencia());
 					item.setDescription(departamento.getVrNombre());
-					cmbDepartamento.appendChild(item);
-					cmbDepartamento.setValue("[Seleccione]");
+					cmbDependencia.appendChild(item);
+					cmbDependencia.setValue("[Seleccione]");
 				}
 			}else{
 				Messagebox.show("No se hallaron departamentos");
@@ -152,23 +186,59 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				for(TbAdmNucleo nucleo: listaNucleos){
 					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
 					item.setDescription(nucleo.getVrNombre());
-					cmbNucleo.appendChild(item);
-					cmbNucleo.setValue("[Seleccione]");
+					cmbNucleo.appendChild(item);	
 				}
+				cmbNucleo.setValue("[Seleccione]");
 			}else{
 				Messagebox.show("No se hallaron nucleos");
 			}
+			
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void cargarEstado(){
-		Comboitem item = new Comboitem("Activo");
-		cmbEstado.appendChild(item);
-		Comboitem item2 = new Comboitem("Inactivo");
-		cmbEstado.appendChild(item2);
-		cmbEstado.setValue("[Seleccione]");
+	public void cargarCoPrerrequisitos(){
+		try{
+			List<TbAdmMateria> listaMaterias = materiaNGC.listarMaterias();
+			cmbPrerrequisito.getItems().clear();
+			cmbCorrequisito.getItems().clear();
+			
+			if(listaMaterias != null){
+				for(TbAdmMateria materia: listaMaterias){
+					Comboitem item = new Comboitem(materia.getVrIdmateria());
+					item.setDescription(materia.getVrNombre());
+					cmbPrerrequisito.appendChild(item);
+					
+					Comboitem item2 = new Comboitem(materia.getVrIdmateria());
+					item2.setDescription(materia.getVrNombre());
+					cmbCorrequisito.appendChild(item2);
+				}
+				cmbPrerrequisito.setValue("[Seleccione]");
+				cmbCorrequisito.setValue("[Seleccione]");
+			}else{
+				
+			}
+			
+		}catch(ExcepcionesLogica e){
+			
+		}
+	}
+	
+	public void cargarSemestres(){
+		for(int i=0;i<=10;i++){
+			Comboitem item = new Comboitem(Integer.toString(i));
+			cmbSemestre.appendChild(item);
+		}
+		cmbSemestre.setValue("[Seleccione]");
+	}
+	
+	public void cargarCreditos(){
+		for(int i=0;i<=8;i++){
+			Comboitem item = new Comboitem(Integer.toString(i));
+			cmbCreditos.appendChild(item);
+		}
+		cmbCreditos.setValue("[Seleccione]");
 	}
 	
 	public void onSelect$cmbUnidadAcademica(){
@@ -185,8 +255,8 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		}
 	}
 	
-	public void onSelect$cmbDepartamento(){
-		String id = cmbDepartamento.getValue().toString();
+	public void onSelect$cmbDependencia(){
+		String id = cmbDependencia.getValue().toString();
 		try {
 			TbAdmDependencia departamento = dependenciaNGC.obtenerDependencia(id);
 			lblDepartamento.setValue(departamento.getVrNombre());
@@ -210,6 +280,129 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	public void onSelect$cmbPrerrequisito(){
+		TbAdmMateria materiaAgregar;
+		String idMateria = cmbPrerrequisito.getValue().toString();
+		boolean materiaNoExiste = true;
+		for(TbAdmMateria materia:listaPrerrequisitos){
+			if(materia.getVrIdmateria().equals(idMateria)){
+				Messagebox.show("Materia ya fue agregada como prerrequisito");
+				materiaNoExiste = false;
+			}
+		}
+		if(materiaNoExiste){
+			try{
+				materiaAgregar = materiaNGC.obtenerMateria(idMateria);
+				if(materiaAgregar != null){
+					listaPrerrequisitos.add(materiaAgregar);
+					agregarPrerrequisito(materiaAgregar);
+				}else{
+					Messagebox.show("Materia a agregar como prerrequisito no existe");
+				}
+			}catch(ExcepcionesLogica e){
+				
+			}
+		}
+		cmbPrerrequisito.setValue("[Seleccione]");
+	}
+	
+	public void agregarPrerrequisito(TbAdmMateria materiaAgregar){
+		
+		final Listitem listaItem = new Listitem();
+		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				eliminaListItem(listaItem);
+			}
+		});
+		
+		Listcell celda = new Listcell(materiaAgregar.getVrIdmateria());
+		listaItem.appendChild(celda);
+		Listcell celda2 = new Listcell(materiaAgregar.getVrNombre());
+		listaItem.appendChild(celda2);			
+		listPrerrequisito.appendChild(listaItem);
+	}
+	
+	public void onSelect$cmbCorrequisito(){
+		TbAdmMateria materiaAgregar;
+		String idMateria = cmbCorrequisito.getValue().toString();
+		boolean materiaNoExiste = true;
+		for(TbAdmMateria materia:listaCorrequisitos){
+			if(materia.getVrIdmateria().equals(idMateria)){
+				Messagebox.show("Materia ya fue agregada como correquisito");
+				materiaNoExiste = false;
+			}
+		}
+		if(materiaNoExiste){
+			try{
+				materiaAgregar = materiaNGC.obtenerMateria(idMateria);
+				if(materiaAgregar != null){
+					listaCorrequisitos.add(materiaAgregar);
+					agregarCorrequisito(materiaAgregar);
+				}else{
+					Messagebox.show("Materia a agregar como correquisito no existe");
+				}
+			}catch(ExcepcionesLogica e){
+				
+			}
+		}
+		cmbCorrequisito.setValue("[Seleccione]");
+	}
+	
+	public void agregarCorrequisito(TbAdmMateria materiaAgregar){
+		
+		final Listitem listaItem = new Listitem();
+		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				eliminaListItem(listaItem);
+			}
+		});
+		
+		Listcell celda = new Listcell(materiaAgregar.getVrIdmateria());
+		listaItem.appendChild(celda);
+		Listcell celda2 = new Listcell(materiaAgregar.getVrNombre());
+		listaItem.appendChild(celda2);			
+		listCorrequisito.appendChild(listaItem);
+	}
+	
+	public void eliminaListItem(Listitem item){
+		if(item.getParent().getId().toString().equals("listPrerrequisito")){
+			
+			int contador = 0;
+			int objeto = -1;
+			for(TbAdmMateria prerrequisito: listaPrerrequisitos){
+				Listcell celdaPre = (Listcell)item.getChildren().get(0);
+				String cadenaPre = celdaPre.getLabel();
+				if(prerrequisito.getVrIdmateria().equals(cadenaPre)){
+					objeto = contador;
+				}
+				contador++;
+			}
+			if(objeto != -1){
+				listaPrerrequisitos.remove(objeto);
+				item.detach();
+			}
+			
+		}else if(item.getParent().getId().toString().equals("listCorrequisito")){
+			int contador = 0;
+			int objeto = -1;
+			for(TbAdmMateria correquisito: listaCorrequisitos){
+				Listcell celdaPre = (Listcell)item.getChildren().get(0);
+				String cadenaPre = celdaPre.getLabel();
+				if(correquisito.getVrIdmateria().equals(cadenaPre)){
+					objeto = contador;
+				}
+				contador++;
+			}
+			if(objeto != -1){
+				listaCorrequisitos.remove(objeto);
+				item.detach();
+			}
+			
+		}
+	}
+	
 	public void recargarIdMateria(String id){
 		txtCodigo.setValue(new Long(Long.parseLong(id)));
 		verificarCodigo();
@@ -219,13 +412,14 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		try {
 			buscaDepartamentos = buscaDepartamentos + "%";
 			List<TbAdmDependencia> listaDependencias = dependenciaNGC.buscarDepedencias(buscaDepartamentos);
-			cmbDepartamento.getItems().clear();
+			cmbDependencia.getItems().clear();
+			cmbDependencia.setValue("[Seleccione]");
 			
 			if(listaDependencias != null){
 				for(TbAdmDependencia dependencia: listaDependencias){
 					Comboitem item = new Comboitem(dependencia.getVrIddependencia());
 					item.setDescription(dependencia.getVrNombre());
-					cmbDepartamento.appendChild(item);
+					cmbDependencia.appendChild(item);
 				}
 			}else{
 				Messagebox.show("No se hallaron departamentos");
@@ -240,6 +434,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			buscaNucleos = buscaNucleos+"%";
 			List<TbAdmNucleo> listaNucleos = nucleoNGC.buscarNucleos(buscaNucleos);
 			cmbNucleo.getItems().clear();
+			cmbNucleo.setValue("[Seleccione]");
 			
 			if(listaNucleos != null){
 				for(TbAdmNucleo nucleo: listaNucleos){
@@ -261,10 +456,8 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	
 	public void verificarCodigo(){
 		String codigo = Long.toString(txtCodigo.getValue());
-		if(codigo.length()<8){
+		if(codigo.length()<=6){
 			lblCodigo.setValue("¡Complete codigo!");
-		}else if(codigo.length()>8){
-			lblCodigo.setValue("¡Codigo excede el tamaño!");
 		}else{
 			lblCodigo.setValue("");
 		}
@@ -299,16 +492,6 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		
 	}*/
 	
-	private void cargarMaterias() throws ExcepcionesLogica {
-		try {
-			this.listaMaterias = materiaNGC.listarMaterias();
-			listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(this.listaMaterias));
-		} catch (Exception e) {
-			throw new ExcepcionesLogica("No se pudo cargar la lista de materias");
-		}
-		
-	}
-	
 	/**
 	 * Metodo que permite filtrar la lista rapida de materias
 	 */
@@ -337,18 +520,17 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		
 		cmbUnidadAcademica.setValue("[Seleccione]");
 		lblUnidadAcademica.setValue("");
-		cmbDepartamento.setValue("[Seleccione]");
+		cmbDependencia.setValue("[Seleccione]");
 		lblDepartamento.setValue("");
 		cmbNucleo.setValue("[Seleccione]");
 		lblNucleo.setValue("");
 		txtCodigo.setConstraint("");
 		txtCodigo.setValue(null);
+		lblCodigo.setValue("");
 		txtNombreMateria.setConstraint("");
 		txtNombreMateria.setValue(null);
-		txtSemestre.setConstraint("");
-		txtSemestre.setValue(null);
-		txtCreditos.setConstraint("");
-		txtCreditos.setValue(null);
+		cmbSemestre.setValue("[Seleccione]");
+		cmbCreditos.setValue("[Seleccione]");
 		ckbHabilitable.setChecked(false);
 		ckbValidable.setChecked(false);
 		ckbClasificable.setChecked(false);
@@ -358,7 +540,12 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		txtHt.setValue(null);
 		txtHtp.setConstraint("");
 		txtHtp.setText(null);
-		cmbEstado.setValue("[Seleccione]");
+		cmbCorrequisito.setValue("[Seleccione]");
+		listCorrequisito.getItems().clear();
+		listaCorrequisitos.clear();
+		cmbPrerrequisito.setValue("[Seleccione]");
+		listPrerrequisito.getItems().clear();
+		listaPrerrequisitos.clear();
 		
 	}
 	
@@ -377,16 +564,18 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 
 	private void llenarDatos(TbAdmMateria materia) {
 		
+		limpiarCampos();
+		
 		cmbUnidadAcademica.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad());
 		lblUnidadAcademica.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
-		cmbDepartamento.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrIddependencia());
+		cmbDependencia.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrIddependencia());
 		lblDepartamento.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
 		cmbNucleo.setValue(materia.getTbAdmNucleo().getVrIdnucleo());
 		lblNucleo.setValue(materia.getTbAdmNucleo().getVrNombre());
 		txtCodigo.setValue(new Long(Long.parseLong(materia.getVrIdmateria())));
 		txtNombreMateria.setValue(materia.getVrNombre());
-		txtSemestre.setValue((long)materia.getNbSemestre());
-		txtCreditos.setValue((long)materia.getNbCreditos());
+		cmbSemestre.setValue(Integer.toString(materia.getNbSemestre()));
+		cmbCreditos.setValue(Integer.toString(materia.getNbCreditos()));
 		if(materia.getBlHabilitable()==1){
 			ckbHabilitable.setChecked(true);
 		}else{
@@ -405,11 +594,42 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		txtHp.setValue((long)materia.getNbHp());
 		txtHt.setValue((long)materia.getNbHt());
 		txtHtp.setValue((long)materia.getNbHtp());
-		if(materia.getBlEstado()==1){
-			cmbEstado.setValue("Activo");
-		}else{
-			cmbEstado.setValue("Inactivo");
+		
+		try {
+			List<TbAdmPrerrequisito> prerrequisitos = prerrequisitoNGC.listarPrerrequisitosxMateria(materia.getVrIdmateria());
+			
+			for(TbAdmPrerrequisito prerrequisito: prerrequisitos){
+				Listitem listaItem = new Listitem();
+				
+				Listcell celda = new Listcell(prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrIdmateria());
+				listaItem.appendChild(celda);
+				Listcell celda2 = new Listcell(prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre());
+				listaItem.appendChild(celda2);			
+				listPrerrequisito.appendChild(listaItem);
+			}
+			
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		try {
+			List<TbAdmCorrequisito> correquisitos = correquisitoNGC.listarCorrequisitosxMateria(materia.getVrIdmateria());
+			
+			for(TbAdmCorrequisito correquisito: correquisitos){
+				Listitem listaItem = new Listitem();
+				
+				Listcell celda = new Listcell(correquisito.getTbAdmMateriasByVrCorrequisito().getVrIdmateria());
+				listaItem.appendChild(celda);
+				Listcell celda2 = new Listcell(correquisito.getTbAdmMateriasByVrCorrequisito().getVrNombre());
+				listaItem.appendChild(celda2);			
+				listCorrequisito.appendChild(listaItem);
+			}
+			
+		} catch (ExcepcionesLogica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		/*this.txtNucleo.setVisible(true);
 		this.ltbNucleo.setVisible(false);
 		this.txtSemestre.setVisible(true);
@@ -427,27 +647,25 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		this.txtHtp.setText(materiaSeleccionada.getNbHtp()+"");
 		this.txtEstado.setText(materiaSeleccionada.getBlEstado()==1?"Activa":"Inactiva");*/
 		
-		btnVolver.setVisible(true);
-		btnActualizar.setVisible(true);
-		btnGuardar.setVisible(false);
+		tool_update.setVisible(true);
+		tool_save.setVisible(false);
 		lblEncabezadoMateria.setValue("Modificar Materia");
 		
 	}
 	
-	public void onClick$btnVolver(){
-		btnVolver.setVisible(false);
-		btnActualizar.setVisible(false);
-		btnGuardar.setVisible(true);
+	public void onClick$tool_new(){
+		tool_update.setVisible(false);
+		tool_save.setVisible(true);
 		lblEncabezadoMateria.setValue("Crear Materia");
 		limpiarCampos();
 	}
 	
-	public void onClick$btnActualizar() throws ExcepcionesLogica{
+	public void onClick$tool_update() throws ExcepcionesLogica{
 		TbAdmMateria materiaActualizar = verificarDatos();
 		actualizarMateria(materiaActualizar);
 	}
 	
-	public void onClick$btnGuardar() throws ExcepcionesLogica{
+	public void onClick$tool_save() throws ExcepcionesLogica{
 		TbAdmMateria materiaGuardar = verificarDatos();
 		guardarMateria(materiaGuardar);
 	}
@@ -466,11 +684,11 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 						materiaNueva.setVrIdmateria(txtCodigo.getValue().toString());
 						if(!"".equals(txtNombreMateria.getValue())){
 							materiaNueva.setVrNombre(txtNombreMateria.getValue().toString().toUpperCase());
-							if(!"".equals(txtSemestre.getValue())){
-								materiaNueva.setNbSemestre(Integer.parseInt(txtSemestre.getValue().toString()));
-								if(!"".equals(txtCreditos.getValue())){
+							if(!"[Seleccione]".equals(cmbSemestre.getValue().toString()) && (!"".equals(cmbSemestre.getValue().toString()))){
+								materiaNueva.setNbSemestre(Integer.parseInt(cmbSemestre.getValue().toString()));
+								if(!"[Seleccione]".equals(cmbCreditos.getValue().toString()) && !"".equals(cmbCreditos.getValue())){
 									
-									materiaNueva.setNbCreditos(Integer.parseInt(txtCreditos.getValue().toString()));
+									materiaNueva.setNbCreditos(Integer.parseInt(cmbCreditos.getValue().toString()));
 									
 									if(ckbHabilitable.isChecked()){
 										materiaNueva.setBlHabilitable('1');
@@ -496,17 +714,9 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 									
 									materiaNueva.setNbHtp(Integer.parseInt(txtHtp.getValue().toString()));
 									
-									if(cmbEstado.getValue().equals("Activo")){
-										materiaNueva.setBlEstado('1');
-										return materiaNueva;
-									}else if(cmbEstado.getValue().equals("Inactivo")){
-										materiaNueva.setBlEstado('0');
-										return materiaNueva;
-									}else{
-										Messagebox.show("Se requiere información del campo <Estado>");
-										return null;
-									}
+									materiaNueva.setBlEstado('1');
 									
+									return materiaNueva;
 								}else{
 									Messagebox.show("Se requiere información del campo <Creditos>");
 									return null;
@@ -538,11 +748,34 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		try{
 			materiaNGC.guardarMateria(materiaGuardar);
 			Messagebox.show("Se guardó exitosamente la materia");
-			cargarMaterias();
-			limpiarCampos();
 		}catch(ExcepcionesLogica e){
 			Messagebox.show("No se guardó la materia");
 		}
+		
+		try{
+			for(TbAdmMateria correquisito: listaCorrequisitos){
+				TbAdmCorrequisito nuevoCorrequisito = new TbAdmCorrequisito();
+				nuevoCorrequisito.setDtModfecha(new Date());
+				nuevoCorrequisito.setVrModusuario("USER");
+				nuevoCorrequisito.setTbAdmMateriasByVrCorrequisito(correquisito);
+				nuevoCorrequisito.setTbAdmMateriasByVrMateria(materiaGuardar);
+				nuevoCorrequisito.setNbId(0);
+				correquisitoNGC.guardarCorrequisito(nuevoCorrequisito);
+			}
+			for(TbAdmMateria prerrequisito: listaPrerrequisitos){
+				TbAdmPrerrequisito nuevoPrerrequisito = new TbAdmPrerrequisito();
+				nuevoPrerrequisito.setDtModfecha(new Date());
+				nuevoPrerrequisito.setVrModusuario("USER");
+				nuevoPrerrequisito.setTbAdmMateriasByVrPrerrequisito(prerrequisito);
+				nuevoPrerrequisito.setTbAdmMateriasByVrMateria(materiaGuardar);
+				nuevoPrerrequisito.setNbId(0);
+				prerrequisitoNGC.guardarPrerrequisito(nuevoPrerrequisito);
+			}
+		}catch(ExcepcionesLogica e){
+			Messagebox.show("No se guardó la materia");
+		}
+		cargarMaterias();
+		limpiarCampos();
 	}
 	
 	public void actualizarMateria(TbAdmMateria materiaActualizar)throws ExcepcionesLogica{
@@ -597,8 +830,10 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		cargarUnidadesAcademicas();
 		cargarDepartamentos();
 		cargarNucleos();
-		cargarEstado();
 		cargarMaterias();
+		cargarCoPrerrequisitos();
+		cargarSemestres();
+		cargarCreditos();
 	}
 }
 

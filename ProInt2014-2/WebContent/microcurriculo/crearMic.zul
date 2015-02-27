@@ -5,7 +5,7 @@
 
 <zk>	
 	<window id="formaCrearMicro" border="normal" apply="${crearMicroCtrl}">	
-		<borderlayout height="1050px" apply="${cargarDatosFormas}">
+		<borderlayout height="950px" apply="${cargarDatosFormas}">
 			
 			<north height="100px" border="0">
 				<include id="headerIdx" src="/_sections/header.zul" />
@@ -14,7 +14,7 @@
 			
 			<center border="0">
 				<div align="center">
-					<borderlayout height="820px">
+					<borderlayout height="870px">
 						<north border="0">
 							<include id="listMenu" src="/_sections/toolbar-micro.zul"/>
 						</north>

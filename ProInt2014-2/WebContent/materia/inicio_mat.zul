@@ -1,0 +1,72 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Pantalla Inicial Materias" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos2.css" ?>
+
+<zk>
+	<window id="" border="0">
+		<borderlayout height="670px">
+		
+			<north height="100px" border="0">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</north>
+			
+			<east width="180px" border="0">
+				<label />
+			</east>
+			
+			<west width="180px" border="0">
+				<label />
+			</west>
+			
+			<center border="0">
+			
+				<div>
+					<div height="40px"/>
+					<div align="center" height="50px">
+						<label value="SESSION MATERIAS" sclass="titulo"/>
+					</div>
+					
+					<hlayout height="180px">
+						<vlayout>
+							<button image="/_img/icons/128x128/new.png" href="/materia/crearMateria.zul" />
+							<label value="Crear Materia"/>
+						</vlayout>
+						
+						<vlayout>
+							<button image="/_img/icons/128x128/edit.png" href="" />
+							<label value="Editar Materia"/>
+						</vlayout>
+						
+						<vlayout>
+							<button image="/_img/icons/128x128/borrar.png" href="" />
+							<label value="Borrar Materia"/>
+						</vlayout>
+					</hlayout>
+					
+					<hlayout height="180px">
+						<vlayout>
+							<button image="/_img/icons/128x128/search.png" href="" />
+							<label value="Buscar Materia"/>
+						</vlayout>
+						
+						<vlayout>
+							<button image="/_img/icons/128x128/list.png" href="/materia/listarMaterias.zul" />
+							<label value="Listar Materias"/>
+						</vlayout>
+						
+						<vlayout>
+							<button image="/_img/icons/128x128/shutdown.png" href="/index.zul" />
+							<label value="Regresar"/>
+						</vlayout>
+					</hlayout>
+				</div>
+				
+			</center>
+			
+			<south border="0">
+				<include id="footerIdx" src="/_sections/footer.zul" />
+			</south>
+		
+		</borderlayout>	
+	</window>
+</zk>
