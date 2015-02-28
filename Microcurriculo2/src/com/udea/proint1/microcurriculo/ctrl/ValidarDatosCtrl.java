@@ -274,18 +274,18 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 											listadoEvaluaciones, listadoEvaluacionesxMicro);
 					
 				} catch (ExcepcionesLogica e) {
-					logger.error("Error al intentar guardar el objeto <Microcurriculo>.");
+					logger.error("Error al intentar guardar el objeto <Microcurriculo>. "+e);
 				}
-				if (verificarCampos() == 1){
-					cmbEstadoActual.setDisabled(false);
-					Messagebox.show("El Microcurriculo se ha guardado correctamente. Puede Cambiar el estado del Microcurriculo cuando lo desee.");
-				} else if (verificarCampos() == 0){
-					Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
-							"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
-				} else{
-					Messagebox.show("Errores al guardar.  Revise la información.");
-				}
-					
+//				if (verificarCampos() == 1){
+//					cmbEstadoActual.setDisabled(false);
+//					Messagebox.show("El Microcurriculo se ha guardado correctamente. Puede Cambiar el estado del Microcurriculo cuando lo desee.");
+//				} else if (verificarCampos() == 0){
+//					Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
+//							"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
+//				} else{
+//					Messagebox.show("Errores al guardar.  Revise la información.");
+//				}
+//					
 				
 			} else {
 				Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la información ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);

@@ -14,8 +14,10 @@ import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
@@ -37,11 +39,16 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	Listbox listaMicrocurriculo;
 	
 	MicrocurriculoNGC microcurriculoNGC;
+	MicroxEstadoNGC microxEstadoNGC;
 	MateriaNGC materiaNGC;
 	
 	
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
+	}
+
+	public void setMicroxEstadoNGC(MicroxEstadoNGC microxEstadoNGC) {
+		this.microxEstadoNGC = microxEstadoNGC;
 	}
 
 	public void setMateriaNGC(MateriaNGC materiaNGC) {
@@ -126,7 +133,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 		}
 		filtrarMicrocurriculosPorSemestre();
 		filtrarMicrocurriculosPorResponsable();
-		//filtrarMicrocurriculosPorEstado();
+		filtrarMicrocurriculosPorEstado();
 		listarMicrocurriculos();
 		//cargarMicrocurriculos(cmbMateria.getValue());
 	}
@@ -145,7 +152,6 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	public void filtrarMicrocurriculosPorSemestre(){
 		microcurriculosFiltradoSemestre.clear();
 		if("[Seleccione]".equals(cmbSemestre.getValue().toString()) || ("".equals(cmbSemestre.getValue().toString()))){
-			Messagebox.show("entró aqui");
 			microcurriculosFiltradoSemestre = microcurriculosEncontrados;
 		}else{
 			if(microcurriculosEncontrados != null){
@@ -162,7 +168,6 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	public void filtrarMicrocurriculosPorResponsable(){
 		microcurriculosFiltradoResponsable.clear();
 		if("[Seleccione]".equals(cmbDocente.getValue().toString()) || ("".equals(cmbDocente.getValue().toString()))){
-			Messagebox.show("entró otra vez");
 			microcurriculosFiltradoResponsable = microcurriculosFiltradoSemestre;
 		}else{
 			if(microcurriculosFiltradoSemestre != null){
@@ -177,20 +182,33 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	public void filtrarMicrocurriculosPorEstado(){
-		if(microcurriculosFiltradoResponsable != null){
-			microcurriculosFiltradoEstado.clear();
-			String estado = cmbEstado.getValue().toString();
-			for(TbMicMicrocurriculo microcurriculo: microcurriculosFiltradoResponsable){
-				if(microcurriculo.equals(estado)){
-					microcurriculosFiltradoEstado.add(microcurriculo);
+		List<TbMicMicroxestado> consultaMicrosxEstado = null;
+		microcurriculosFiltradoEstado.clear();
+		if("[Seleccione]".equals(cmbEstado.getValue().toString()) || ("".equals(cmbEstado.getValue().toString()))){
+			microcurriculosFiltradoEstado = microcurriculosFiltradoResponsable;
+		}else{
+			int estado = Integer.parseInt(cmbEstado.getValue().toString());
+			try {
+				consultaMicrosxEstado = microxEstadoNGC.listarMicrosxestado(estado);
+			} catch (ExcepcionesLogica e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(microcurriculosFiltradoResponsable != null){
+				for(TbMicMicrocurriculo microcurriculo: microcurriculosFiltradoResponsable){
+					for(TbMicMicroxestado microxEstado: consultaMicrosxEstado){
+						if(microcurriculo.getVrIdmicrocurriculo().equals(microxEstado.getTbMicMicrocurriculo().getVrIdmicrocurriculo())){
+							microcurriculosFiltradoEstado.add(microcurriculo);
+						}
+					}
 				}
 			}
 		}
 	}
 	
 	public void listarMicrocurriculos(){
-		if(microcurriculosFiltradoResponsable != null){
-			for(TbMicMicrocurriculo micro: microcurriculosFiltradoResponsable){
+		if(microcurriculosFiltradoEstado != null){
+			for(TbMicMicrocurriculo micro: microcurriculosFiltradoEstado){
 				final Listitem listaItem = new Listitem();
 				
 				

@@ -249,6 +249,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 					cmbDependencia.appendChild(item);
 				}
 			}
+			cmbDependencia.setValue("[Seleccione]");
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
 		}	
@@ -266,6 +267,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 					cmbNucleo.appendChild(item);
 				}
 			}
+			cmbNucleo.setValue("[Seleccione]");
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
 		}		
@@ -282,6 +284,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 					cmbMateria.appendChild(item);
 				}
 			}
+			cmbMateria.setValue("[Seleccione]");
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Materia>.  "+e);
 		}
