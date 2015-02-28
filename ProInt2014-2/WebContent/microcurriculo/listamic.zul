@@ -62,6 +62,10 @@
 										<combobox id="cmbDocente" width="60%"/>
 										<label id="lblResponsable" />
 									</div>
+									<div>
+										<label value="Estado" />
+										<combobox id="cmbEstado" width="60%"/>
+									</div>
 									<div align="center" apply="${listarMicroCtrl}">
 										<button id="btnBuscar" label="Iniciar Busqueda" />
 									</div>
