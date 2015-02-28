@@ -857,7 +857,9 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		}
 		
 		if (ltbSemestre.getSelectedItem() == null){
-			throw new WrongValueException(ltbSemestre, Labels.getLabel("Por favor seleccione un semestre"));
+			throw new WrongValueException(ltbSemestre, Labels.getLabel("Por favor seleccione un sem
+			
+			estre"));
 		}
 		
 		if (Validaciones.isTextoVacio(txtMateria.getText())) {

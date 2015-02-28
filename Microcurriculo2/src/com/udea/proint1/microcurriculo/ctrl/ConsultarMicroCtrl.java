@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.ctrl;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -750,7 +749,6 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 		cargarMaterias();
 		cargarMicrocurriculos();
 		cargarEstados();
-		System.out.println("Esta es la Ventana de Crear Microcurriculo");
 
 	}
 	

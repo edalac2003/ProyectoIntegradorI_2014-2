@@ -465,12 +465,18 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if (txtPorcentajeActividad.getValue() != null && (txtPorcentajeActividad.getValue() > 0)){
 				if (dtFechaEvaluacion.getValue() != null) {
 					llenarListaActividades();
-				} else 
+				} else{
 					Messagebox.show("La Información del Campo <fecha> no es válida");
-			} else
+					dtFechaEvaluacion.setFocus(true);
+				}					
+			} else{
 				Messagebox.show("Se Requiere información en el Campo <Porcentaje>");
-		} else
+				txtPorcentajeActividad.setFocus(true);
+			}	
+		} else {
 			Messagebox.show("Se Requiere información en el Campo <Actividad>");
+			txtActividadMicro.setFocus(true);
+		}			
 	}
 	
 	public void llenarListaActividades() {
@@ -487,7 +493,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		String tmpFecha = formatoFecha.format(dtFechaEvaluacion.getValue());
 		Listcell celdaFecha = new Listcell(tmpFecha);
 		
-		porcentajeEvaluacion = porcentajeEvaluacion + Integer.parseInt(txtPorcentajeActividad.getValue().toString());
+		porcentajeEvaluacion = calcularPorcentaje();
 		if (porcentajeEvaluacion > 100){
 			Messagebox.show("No es posible agregar el registro a la lista. El porcentaje de las Evaluaciones supera el 100%. " +
 					"\n Por favor verifique los valores.");			
@@ -503,7 +509,16 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}
 	}
 	
-	
+	private int calcularPorcentaje(){
+		int porcentaje = Integer.parseInt(txtPorcentajeActividad.getValue().toString());
+		for (int i=1; i <= listaEvaluaciones.getItems().size();i++){
+			Listitem item = (Listitem) listaEvaluaciones.getChildren().get(i);
+			Listcell celdaPorcentaje = (Listcell)item.getChildren().get(1);
+			porcentaje = porcentaje + Integer.parseInt(celdaPorcentaje.getLabel());
+		}
+		
+		return porcentaje;
+	}
 	
 	public void onClick$btnAddObjetivo(Event event){
 		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){	
@@ -982,6 +997,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		cmbDocente.focus();
+		System.out.println();
 	}
 
 }
