@@ -443,6 +443,16 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="correquisitoNGC" ref="correquisitoNGC" />
         </bean>
         
+        <bean id="modificarMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.ModificarMateriaCtrl" scope="prototype">
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        </bean>
+        
         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="materiaNGC" ref="materiaNGC" />

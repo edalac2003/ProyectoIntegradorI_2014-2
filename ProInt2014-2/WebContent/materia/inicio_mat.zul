@@ -33,7 +33,7 @@
 						</vlayout>
 						
 						<vlayout>
-							<button image="/_img/icons/128x128/edit.png" href="" />
+							<button image="/_img/icons/128x128/edit.png" href="/materia/modificarMateria.zul" />
 							<label value="Editar Materia"/>
 						</vlayout>
 						

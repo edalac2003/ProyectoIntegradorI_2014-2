@@ -27,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Longbox;
+import org.zkoss.zul.Row;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.ext.Selectable;
@@ -79,13 +80,27 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	
 	Label lblUnidadAcademica;
 	Label lblNucleo;
-	Label lblDepartamento;
+	Label lblDependencia;
 	Label lblCodigo;
+	Label lblNombreMateria;
+	Label lblSemestre;
+	Label lblCreditos;
+	Label lblHabilitable;
+	Label lblClasificable;
+	Label lblValidable;
+	Label lblHp;
+	Label lblHt;
+	Label lblHtp;
 	Label lblEncabezadoMateria;
 	
 	Listbox listBoxMaterias;
 	Listbox listPrerrequisito;
+	Listbox listPrerrequisito2;
 	Listbox listCorrequisito;
+	Listbox listCorrequisito2;
+	
+	Row rowPrerrequisitos;
+	Row rowCorrequisitos;
 	
 	MateriaNGCImpl materiaNGC;
 	NucleoNGCImpl nucleoNGC;
@@ -259,7 +274,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		String id = cmbDependencia.getValue().toString();
 		try {
 			TbAdmDependencia departamento = dependenciaNGC.obtenerDependencia(id);
-			lblDepartamento.setValue(departamento.getVrNombre());
+			lblDependencia.setValue(departamento.getVrNombre());
 			recargarNucleos(id);
 			recargarIdMateria(id);
 		} catch (ExcepcionesLogica e) {
@@ -518,32 +533,61 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 	
 	private void limpiarCampos() {
 		
+		cmbUnidadAcademica.setVisible(true);
 		cmbUnidadAcademica.setValue("[Seleccione]");
 		lblUnidadAcademica.setValue("");
+		cmbDependencia.setVisible(true);
 		cmbDependencia.setValue("[Seleccione]");
-		lblDepartamento.setValue("");
+		lblDependencia.setValue("");
+		cmbNucleo.setVisible(true);
 		cmbNucleo.setValue("[Seleccione]");
 		lblNucleo.setValue("");
+		txtCodigo.setVisible(true);
 		txtCodigo.setConstraint("");
+		txtCodigo.setVisible(true);
 		txtCodigo.setValue(null);
 		lblCodigo.setValue("");
+		txtNombreMateria.setVisible(true);
 		txtNombreMateria.setConstraint("");
 		txtNombreMateria.setValue(null);
+		lblNombreMateria.setValue("");
+		cmbSemestre.setVisible(true);
 		cmbSemestre.setValue("[Seleccione]");
+		lblSemestre.setValue("");
+		cmbCreditos.setVisible(true);
 		cmbCreditos.setValue("[Seleccione]");
+		lblCreditos.setValue("");
+		ckbHabilitable.setVisible(true);
 		ckbHabilitable.setChecked(false);
+		lblHabilitable.setValue("");
+		ckbValidable.setVisible(true);
 		ckbValidable.setChecked(false);
+		lblValidable.setValue("");
+		ckbClasificable.setVisible(true);
 		ckbClasificable.setChecked(false);
+		lblClasificable.setValue("");
+		txtHp.setVisible(true);
 		txtHp.setConstraint("");
 		txtHp.setValue(null);
+		lblHp.setValue("");
+		txtHt.setVisible(true);
 		txtHt.setConstraint("");
 		txtHt.setValue(null);
+		lblHt.setValue("");
+		txtHtp.setVisible(true);
 		txtHtp.setConstraint("");
 		txtHtp.setText(null);
+		lblHtp.setValue("");
+		cmbCorrequisito.setVisible(true);
 		cmbCorrequisito.setValue("[Seleccione]");
+		listCorrequisito2.setVisible(false);
+		rowCorrequisitos.setVisible(true);
 		listCorrequisito.getItems().clear();
 		listaCorrequisitos.clear();
+		cmbPrerrequisito.setVisible(true);
 		cmbPrerrequisito.setValue("[Seleccione]");
+		listPrerrequisito2.setVisible(false);
+		rowPrerrequisitos.setVisible(true);
 		listPrerrequisito.getItems().clear();
 		listaPrerrequisitos.clear();
 		
@@ -566,34 +610,54 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		
 		limpiarCampos();
 		
-		cmbUnidadAcademica.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad());
-		lblUnidadAcademica.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
-		cmbDependencia.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrIddependencia());
-		lblDepartamento.setValue(materia.getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
-		cmbNucleo.setValue(materia.getTbAdmNucleo().getVrIdnucleo());
-		lblNucleo.setValue(materia.getTbAdmNucleo().getVrNombre());
-		txtCodigo.setValue(new Long(Long.parseLong(materia.getVrIdmateria())));
-		txtNombreMateria.setValue(materia.getVrNombre());
-		cmbSemestre.setValue(Integer.toString(materia.getNbSemestre()));
-		cmbCreditos.setValue(Integer.toString(materia.getNbCreditos()));
+		cmbUnidadAcademica.setVisible(false);
+		lblUnidadAcademica.setValue("["+materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad()+"] "+materia.getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
+		cmbDependencia.setVisible(false);
+		lblDependencia.setValue("["+materia.getTbAdmNucleo().getTbAdmDependencia().getVrIddependencia()+"] "+materia.getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
+		cmbNucleo.setVisible(false);
+		lblNucleo.setValue("["+materia.getTbAdmNucleo().getVrIdnucleo()+"] "+materia.getTbAdmNucleo().getVrNombre());
+		txtCodigo.setVisible(false);
+		lblCodigo.setValue(materia.getVrIdmateria());
+		txtNombreMateria.setVisible(false);
+		lblNombreMateria.setValue(materia.getVrNombre());
+		cmbSemestre.setVisible(false);
+		lblSemestre.setValue(Integer.toString(materia.getNbSemestre()));
+		cmbCreditos.setVisible(false);
+		lblCreditos.setValue(Integer.toString(materia.getNbCreditos()));
+		ckbHabilitable.setVisible(false);
 		if(materia.getBlHabilitable()==1){
-			ckbHabilitable.setChecked(true);
+			lblHabilitable.setValue("Si");
 		}else{
-			ckbHabilitable.setChecked(false);
+			lblHabilitable.setValue("No");
 		}
+		ckbValidable.setVisible(false);
 		if(materia.getBlValidable()==1){
-			ckbValidable.setChecked(true);
+			lblValidable.setValue("Si");
 		}else{
-			ckbValidable.setChecked(false);
+			lblValidable.setValue("No");
 		}
+		ckbClasificable.setVisible(false);
 		if(materia.getBlClasificable()==1){
-			ckbClasificable.setChecked(true);
+			lblClasificable.setValue("Si");
 		}else{
-			ckbClasificable.setChecked(false);
+			lblClasificable.setValue("No");
 		}
-		txtHp.setValue((long)materia.getNbHp());
-		txtHt.setValue((long)materia.getNbHt());
-		txtHtp.setValue((long)materia.getNbHtp());
+		txtHp.setVisible(false);
+		lblHp.setValue(Integer.toString(materia.getNbHp()));
+		txtHt.setVisible(false);
+		lblHt.setValue(Integer.toString(materia.getNbHt()));
+		txtHtp.setVisible(false);
+		lblHtp.setValue(Integer.toString(materia.getNbHtp()));
+		
+		cmbPrerrequisito.setVisible(false);
+		cmbCorrequisito.setVisible(false);
+		listCorrequisito2.setVisible(true);
+		listPrerrequisito2.setVisible(true);
+		rowCorrequisitos.setVisible(false);
+		rowPrerrequisitos.setVisible(false);
+		
+		listPrerrequisito2.getItems().clear();
+		listCorrequisito2.getItems().clear();
 		
 		try {
 			List<TbAdmPrerrequisito> prerrequisitos = prerrequisitoNGC.listarPrerrequisitosxMateria(materia.getVrIdmateria());
@@ -605,7 +669,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				listaItem.appendChild(celda);
 				Listcell celda2 = new Listcell(prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre());
 				listaItem.appendChild(celda2);			
-				listPrerrequisito.appendChild(listaItem);
+				listPrerrequisito2.appendChild(listaItem);
 			}
 			
 		} catch (ExcepcionesDAO e) {
@@ -622,7 +686,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				listaItem.appendChild(celda);
 				Listcell celda2 = new Listcell(correquisito.getTbAdmMateriasByVrCorrequisito().getVrNombre());
 				listaItem.appendChild(celda2);			
-				listCorrequisito.appendChild(listaItem);
+				listCorrequisito2.appendChild(listaItem);
 			}
 			
 		} catch (ExcepcionesLogica e) {
@@ -647,22 +711,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		this.txtHtp.setText(materiaSeleccionada.getNbHtp()+"");
 		this.txtEstado.setText(materiaSeleccionada.getBlEstado()==1?"Activa":"Inactiva");*/
 		
-		tool_update.setVisible(true);
 		tool_save.setVisible(false);
-		lblEncabezadoMateria.setValue("Modificar Materia");
+		lblEncabezadoMateria.setValue("Materia Consultada");
 		
 	}
 	
 	public void onClick$tool_new(){
-		tool_update.setVisible(false);
 		tool_save.setVisible(true);
 		lblEncabezadoMateria.setValue("Crear Materia");
 		limpiarCampos();
-	}
-	
-	public void onClick$tool_update() throws ExcepcionesLogica{
-		TbAdmMateria materiaActualizar = verificarDatos();
-		actualizarMateria(materiaActualizar);
 	}
 	
 	public void onClick$tool_save() throws ExcepcionesLogica{

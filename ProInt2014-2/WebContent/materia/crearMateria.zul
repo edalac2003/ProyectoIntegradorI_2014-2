@@ -20,7 +20,7 @@
 								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" />
 								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" />
-								<toolbarbutton id="tool_update" label="Actualizar" image="/_img/icons/32x32/refresh.png" visible="false"/>
+								<toolbarbutton id="tool_update" label="Modificar Materia" image="/_img/icons/32x32/refresh.png" href="/materia/modificarMateria.zul"/>
 								<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/materia/inicio_mat.zul"/>
 							</toolbar>
 						</north>
@@ -80,7 +80,7 @@
 														<label value="Departamento"></label>
 														<div>
 															<combobox id="cmbDependencia" width="25%"/>
-															<label id="lblDepartamento"></label>
+															<label id="lblDependencia"></label>
 														</div>
 													</row>
 													
@@ -108,65 +108,90 @@
 													
 													<row>
 														<label value="Nombre Materia"></label>
-														<textbox id="txtNombreMateria" tabindex="5" width="50%" constraint="no empty" />
+														<div>
+															<textbox id="txtNombreMateria" tabindex="5" width="50%" constraint="no empty" />
+															<label id="lblNombreMateria"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Nivel o Semestre"></label>
-														<combobox id="cmbSemestre" width="25%"/>
-<!-- 														<div width="50%"> 	<listbox -->
-<!-- 																id="ltbSemestre" tabindex="6" width="100%" rows="1" -->
-<!-- 																mold="select" height="20px" /> -->
-<!-- 																<textbox id="txtSemestre" tabindex="6" width="100%" -->
-<!-- 																constraint="no empty" visible="false"></textbox> -->
-<!-- 														</div> -->
+														<div>
+															<combobox id="cmbSemestre" width="25%"/>
+															<label id="lblSemestre"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Créditos"></label>
-														<combobox id="cmbCreditos" tabindex="7" width="25%" />
+														<div>
+															<combobox id="cmbCreditos" tabindex="7" width="25%" />
+															<label id="lblCreditos"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Habilitable"></label>
-														<checkbox id="ckbHabilitable"/>
-													<!--<textbox id="txtHabilitable" tabindex="8" width="50%" />-->
+														<div>
+															<checkbox id="ckbHabilitable"/>
+															<label id="lblHabilitable"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Validable"></label>
-														<checkbox id="ckbValidable"/>
-<!-- 														<textbox id="txtValidable" tabindex="9" width="50%" /> -->
+														<div>
+															<checkbox id="ckbValidable"/>
+															<label id="lblValidable"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Clasificable"></label>
-														<checkbox id="ckbClasificable"/>
-<!-- 														<textbox id="txtClasificable" tabindex="10" width="50%" /> -->
+														<div>
+															<checkbox id="ckbClasificable"/>
+															<label id="lblClasificable"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Horas Teóricas"></label>
-														<longbox id="txtHt" tabindex="11" width="25%" />
+														<div>
+															<longbox id="txtHt" tabindex="11" width="25%" />
+															<label id="lblHt"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Horas Prácticas"></label>
-														<longbox id="txtHp" tabindex="12" width="25%" />
+														<div>
+															<longbox id="txtHp" tabindex="12" width="25%" />
+															<label id="lblHp"></label>
+														</div>
 													</row>
 
 													<row>
 														<label value="Horas Teórico Prácticas"></label>
-														<longbox id="txtHtp" tabindex="13" width="25%" />
+														<div>
+															<longbox id="txtHtp" tabindex="13" width="25%" />
+															<label id="lblHtp"></label>
+														</div>
 													</row>
 													
 													<row>
 														<label value="Prerrequisitos"></label>
-<!-- 														<textbox id="txtEstado" tabindex="14" width="25%" /> -->
-														<combobox id="cmbPrerrequisito" width="37%"/>
+														<div>
+															<combobox id="cmbPrerrequisito" width="37%"/>
+															<listbox id="listPrerrequisito2" visible="false">
+																<listhead>
+																	<listheader width="20%"></listheader>
+																	<listheader></listheader>
+																</listhead>
+															</listbox>
+														</div>
 													</row>
 													
-													<row>
+													<row id="rowPrerrequisitos">
 														<label></label>
 														<listbox id="listPrerrequisito">
 															<listhead>
@@ -178,10 +203,18 @@
 													
 													<row>
 														<label value="Correquisitos"></label>
-														<combobox id="cmbCorrequisito" width="37%"/>
+														<div>
+															<combobox id="cmbCorrequisito" width="37%"/>
+															<listbox id="listCorrequisito2" visible="false">
+																<listhead>
+																	<listheader width="20%"></listheader>
+																	<listheader></listheader>
+																</listhead>
+															</listbox>
+														</div>
 													</row>
 													
-													<row>
+													<row id="rowCorrequisitos">
 														<label></label>
 														<listbox id="listCorrequisito">
 															<listhead>
@@ -195,14 +228,6 @@
 											</grid>
 											<separator height="10px;" />
 
-<!-- 											<div align="center"> -->
-<!-- 												<button id="btnGuardar" label="Guardar materia" tabindex="15"> -->
-<!-- 												</button> -->
-<!-- 												<button id="btnVolver" visible="false" label="Crear nueva materia" tabindex="15"> -->
-<!-- 												</button> -->
-<!-- 												<button id="btnActualizar" label="Actualizar materia" visible="false" tabindex="15"> -->
-<!-- 												</button> -->
-<!-- 											</div> -->
 										</groupbox>
 									</hbox>
 								</hlayout>
