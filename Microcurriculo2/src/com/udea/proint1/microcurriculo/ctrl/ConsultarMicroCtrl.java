@@ -15,6 +15,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
@@ -60,6 +61,12 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 public class ConsultarMicroCtrl extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
+	
+	Toolbarbutton tool_home;
+	Toolbarbutton tool_new;
+	Toolbarbutton tool_save;
+	Toolbarbutton tool_print;
+	Toolbarbutton tool_close;
 	
 	Combobox cmbIdUnidadAcademica;
 	Combobox cmbIdDepartamento;
@@ -187,6 +194,58 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	 * Metodos inciales al cargar la pagina y que llenan los combobox
 	 */
 	
+	public void onClick$tool_new(){
+		limpiarInfoBasica();
+		limpiarInfoComplementaria();
+		limpiarInfoUnidades();
+		
+	}
+	
+	private void limpiarInfoBasica(){
+		cmbIdUnidadAcademica.getItems().clear();
+		lblNbreUnidadAcademica.setValue("");
+		cmbIdDepartamento.getItems().clear();
+		lblNbreDepartamento.setValue("");
+		cmbIdNucleo.getItems().clear();
+		lblNbreNucleo.setValue("");
+		cmbIdMateria.getItems().clear();
+		lblNbreMateria.setValue("");
+		cmbIdEstado.getItems().clear();
+		lblNbreEstado.setValue("");
+		cmbIdMicrocurriculo.getItems().clear();
+		lblNombreDocente.setValue("");
+		lblSemestre.setValue("");
+		lblCreditosMateria.setValue("");
+		lblHtMateria.setValue("");
+		lblHpMateria.setValue("");
+		lblHtpMateria.setValue("");
+		lblHoraClaseSemestral.setValue("");
+		lblCampoFormacion.setValue("");
+		lblValidable.setValue("");
+		lblHabilitable.setValue("");
+		lblClasificable.setValue("");
+		lblPrerrequisitos.setValue("");
+		lblCorrequisitos.setValue("");
+		lblProgramasVinculados.setValue("");
+	}
+	
+	private void limpiarInfoComplementaria(){
+		lblPropositoMicro.setValue("");
+		lblJustificacionMicro.setValue("");
+		lblObjetivoGeneral.setValue("");
+		listaObjetivosEspecificos.getItems().clear();
+		lblResumenMicro.setValue("");
+	}
+	
+	private void limpiarInfoUnidades(){
+		listaUnidades.getItems().clear();
+		listaTemas.getItems().clear();
+		listaSubtemas.getItems().clear();
+		listaEvaluaciones.getItems().clear();
+		listaBibliografia.getItems().clear();
+		listaCibergrafia.getItems().clear();
+	}
+
 	public void cargarUnidadesAcademicas(){
 		try {
 			List<TbAdmUnidadAcademica> listaUnidadesAca = unidadAcademicaNGC.listarUnidadAcademicas();

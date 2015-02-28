@@ -4,7 +4,7 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 <zk>
 <window  id="formaConsultarMicro" border="normal" apply="${consultarMicroCtrl}">	
-	<borderlayout height="950px" >
+	<borderlayout height="950px" apply="${validarMicroCtrl}" >
 		<north border="0" height="100px">
 			<include id="headerIdx" src="/_sections/header.zul" />
 		</north>
@@ -228,22 +228,15 @@
 												<listhead>
 													<listheader width="25%">
 														<label value="Unidad" sclass="resaltadonormal"/>
-														<div>																
-															<combobox id="cmbListaUnidades" width="75%"/>
-														</div>
+														
 													</listheader>
 													<listheader width="25%">
 														<label value="Tema" sclass="resaltadonormal"/>
-														<div>																
-															<combobox id="cmbListaTemas" width="75%"/>																
-														</div>	
+														
 													</listheader>
 													<listheader width="50%">
 														<label value="Subtema" sclass="resaltadonormal"/>
-														<div>										                    	
-										                    <textbox id="txtSubTemas" width="70%" />
-										                    <button id="btnAddSubTema" label="Adicionar" />
-									                    </div>	
+															
 													</listheader>
 												</listhead>
 											</listbox>
@@ -296,12 +289,20 @@
 							</div>
 						</div>			
 					</center>	
+					<south border="0" height="130px">
+							<div>
+								<div height="20px" />
+								<div>
+									<include id="footerIdx" src="/_sections/footer.zul" />
+								</div> 							
+							</div>
+						</south>
 				</borderlayout>
 			</div>		
 		</center>
 		
 		<south border="none">
-			<include id="footerIdx" src="/_sections/footer.zul" />
+			
 		</south>
 	</borderlayout>
 </window>
