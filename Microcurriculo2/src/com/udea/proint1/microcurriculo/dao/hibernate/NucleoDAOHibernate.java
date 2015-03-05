@@ -65,7 +65,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 	@Override
 	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesDAO {
 		Session session = null;
-		List<TbAdmNucleo> nucleos = new ArrayList<TbAdmNucleo>();
+		List<TbAdmNucleo> nucleos = null;
 
 		try {
 			session = getSession();

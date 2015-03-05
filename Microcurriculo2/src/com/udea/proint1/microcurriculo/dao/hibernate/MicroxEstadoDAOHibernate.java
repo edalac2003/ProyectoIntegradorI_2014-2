@@ -80,15 +80,11 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 	public List<TbMicMicroxestado> listarMicrosxestado(TbMicEstado estado) throws ExcepcionesDAO {
 		Session session = null;
 		List<TbMicMicroxestado> microsxEstado = new ArrayList<TbMicMicroxestado>();
-        try{
-               
+        try{               
         	session = getSession();
-            
-        	Query query = session.createQuery("from TbMicMicroxestado where tbMicEstados = :estado");
-               
-        	query.setEntity("estado", estado);
-               
-        	microsxEstado = query.list();
+            Query query = session.createQuery("from TbMicMicroxestado where tbMicEstados = :estado");
+            query.setEntity("estado", estado);
+            microsxEstado = query.list();
             
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);

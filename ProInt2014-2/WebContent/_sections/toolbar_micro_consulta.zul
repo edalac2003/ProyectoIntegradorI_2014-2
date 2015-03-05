@@ -2,9 +2,9 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-	<toolbar id="tb" sclass="vista" height="45px" width="960px" apply="${validarDatosCtrl}">
+	<toolbar id="tb" sclass="vista" height="45px" width="960px" apply="${consultarMicroCtrl}">
 		<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
-		<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="" />
+		<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" />
 		<toolbarbutton id="tool_refresh" label="Actualizar" image="/_img/icons/32x32/reload-icon.png" href="" />
 		<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" href="" />
 		<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/home.png" href="/microcurriculo/inicio_mic.zul" />

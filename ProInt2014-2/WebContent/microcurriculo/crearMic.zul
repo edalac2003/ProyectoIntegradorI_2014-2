@@ -56,12 +56,7 @@
 								                        <label id="lblNombreDocente" />
 								                    </div>
 						                		</row>
-												<row>
-													<label value="Semestre" />
-								                    <div>
-								                        <combobox id="cmbSemestre" width="15%"/>									                        
-								                    </div>
-						                		</row>
+												
 						                		<row>
 					                				<label value="Unidad Académica" width="30%"/>
 							                        <div>
@@ -92,7 +87,12 @@
 								                        <label id="lblNombreMateria" />
 								                    </div>
 						                		</row>
-						                		
+						                		<row>
+													<label value="Semestre" />
+								                    <div>
+								                        <combobox id="cmbSemestre" width="15%"/>									                        
+								                    </div>
+						                		</row>
 						                		<row>
 								                    <label value="Créditos" />
 								                    <div>

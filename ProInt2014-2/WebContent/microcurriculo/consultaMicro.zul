@@ -3,17 +3,17 @@
 
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 <zk>
-<window  id="formaConsultarMicro" border="normal" apply="${consultarMicroCtrl}">	
-	<borderlayout height="950px" apply="${validarMicroCtrl}" >
+<window id="formaConsultarMicro" border="normal" >	
+	<borderlayout height="950px" >
 		<north border="0" height="100px">
 			<include id="headerIdx" src="/_sections/header.zul" />
 		</north>
 		
-		<center border="0">
+		<center border="0" apply="${consultarMicroCtrl}">
 			<div align="center" >
 				<borderlayout height="870px" >
 					<north border="0">
-						<include id="listMenu" src="/_sections/toolbar-micro.zul"/>
+						<include id="listMenu" src="/_sections/toolbar_micro_consulta.zul"/>
 					</north>
 					<west width="180px" border="0">
 						<label></label>
@@ -22,14 +22,14 @@
 						<label></label>
 					</east>
 				
-					<center autoscroll="true" border="0">
-						<div align="center">
+					<center autoscroll="true" border="0" >
+						<div id="consultarMicro" align="center">
 							
 							<separator /> 
 							<separator />
-							<div>
+							<div apply="${cargarDatosFormas}">
 								<tabbox >
-									<tabs style="">
+									<tabs style="" >
 										<tab label="Información General" id="infoGeneral"/>
 										<tab label="Información Complementaria" id="infoComplemento"/>
 										<tab label="Unidades y Temas" id="infoUnidades"/>
@@ -48,56 +48,56 @@
 													<row>
 						                				<label value="Unidad Academica" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdUnidadAcademica" width="25%"/>
-								                        	<label id="lblNbreUnidadAcademica"/>
+								                        	<combobox id="cmbUnidadAcademica" width="25%"/>
+								                        	<label id="lblNombreUnidadAcademica"/>
 								                        </div>
 							                		</row>
 							                		<row>
-						                				<label value="Departamento" width="30%"/>
+						                				<label value="Dependencia" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdDepartamento" width="25%"/>
-								                        	<label id="lblNbreDepartamento"/>
+								                        	<combobox id="cmbDependencia" width="25%"/>
+								                        	<label id="lblNombreDependencia"/>
 								                        </div>
 							                		</row>
-							                		<row>
+								                		<row>
 						                				<label value="Nucleo" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdNucleo" width="25%"/>
-								                        	<label id="lblNbreNucleo"/>
+								                        	<combobox id="cmbNucleo" width="25%"/>
+								                        	<label id="lblNombreNucleo"/>
 								                        </div>
 							                		</row>
 													<row>
 														<label value="Materia" />
 									                    <div>
-									                        <combobox id="cmbIdMateria" width="25%" />
-									                        <label id="lblNbreMateria" />   
+									                        <combobox id="cmbMateria" width="25%" />
+									                        <label id="lblNombreMateria" />   
 									                    </div>
+							                		</row>
+							                		<row>
+														<label value="Semestre" />
+									                    <div>
+									                        <combobox id="cmbSemestre" width="25%"/>									                        
+									                    </div>
+							                		</row>
+							                		<row>
+						                				<label value="Microcurriculo" width="30%"/>
+								                        <combobox id="cmbMicrocurriculo" width="25%"/>
 							                		</row>
 							                		<row>
 						                				<label value="Estado" width="30%"/>
 						                				<div>
-								                        	<combobox id="cmbIdEstado" width="25%"/>
-								                        	<label id="lblNbreEstado"/>
+								                        	<combobox id="cmbEstado" width="25%"/>
+								                        	<label id="lblNombreEstado"/>
 								                        </div>
-							                		</row>
-							                		<row>
-						                				<label value="Microcurriculo" width="30%"/>
-								                        <combobox id="cmbIdMicrocurriculo" width="25%"/>
 							                		</row>
 							                		<row>
 														<label value="Docente Responsable" />
 									                    <div>
-									                        <label id="lblNombreDocente" />
+									                        <combobox id="cmbDocente" width="25%"/>
 									                    </div>
 							                		</row>
 							                		
-							                		<row>
-														<label value="Semestre" />
-									                    <div>
-									                        <label id="lblSemestre"/>
-									                        
-									                    </div>
-							                		</row>
+							                		
 							                		<row>
 									                    <label value="Créditos" />
 									                    <div>
@@ -130,16 +130,16 @@
 							                		</row>
 							                		<row>
 									                    <label value="Validable" width="150px" />
-									                    <label id="lblValidable" />
+									                    <checkbox id="ckbValidable" />									                    
 							                		</row>
 							                		
 							                		<row>
 									                    <label value="Habilitable" />
-									                    <label id="lblHabilitable" />
+									                    <checkbox id="ckbHabilitable" />
 							                		</row>
 							                		<row>
 									                    <label value="Clasificable" width="150px" />
-									                    <label id="lblClasificable" />
+									                    <checkbox id="ckbClasificable" />
 							                		</row>
 							                		<row>
 									                    <label value="Prerequisitos" width="150px" />

@@ -6,9 +6,11 @@ import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
@@ -19,7 +21,10 @@ import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
+import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
@@ -38,11 +43,29 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	Combobox cmbNucleo;
 	Combobox cmbSemestre;
 	Combobox cmbMateria;
+	Combobox cmbMicrocurriculo;
 	Combobox cmbDocente;
+	Combobox cmbEstado;
 	Combobox cmbPaisBiblio;
 	
-	Window formaCrearMicro;
-	Window formaListarMicro;
+	Label lblNombreUnidadAcademica;
+	Label lblNombreDependencia;
+	Label lblNombreMateria;
+	Label lblNombreDocente;
+	Label lblNombreNucleo;
+	Label lblNombreEstado;
+	Label lblCreditosMateria;
+	Label lblHtMateria;
+	Label lblHpMateria;
+	Label lblHtpMateria;
+	Label lblHoraClaseSemestral;
+	
+	Checkbox ckbValidable;
+	Checkbox ckbHabilitable;
+	Checkbox ckbClasificable;
+	
+//	Window formaCrearMicro;
+//	Window formaListarMicro;
 	
 	Button btnBuscar;
 	
@@ -64,6 +87,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	PersonaNGC personaNGC;
 	MicrocurriculoNGC microcurriculoNGC;
 	PaisNGC paisNGC;
+	EstadoNGC estadoNGC;
 	
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -95,6 +119,10 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	public void setPaisNGC(PaisNGC paisNGC) {
 		this.paisNGC = paisNGC;
+	}
+			
+	public void setEstadoNGC(EstadoNGC estadoNGC) {
+		this.estadoNGC = estadoNGC;
 	}
 
 	private void cargarUnidades(){
@@ -131,9 +159,10 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	private void cargarNucleos(){
+		cmbNucleo.getItems().clear();
 		try {
 			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
-			cmbNucleo.getItems().clear();
+			listaNucleos = nucleoNGC.listarNucleos();
 			if (listaNucleos != null){
 				cmbNucleo.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmNucleo nucleo : listaNucleos){
@@ -192,7 +221,26 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		}
 	}
 	
-	public void cargarDocentes(){
+	private void cargarEstados(){
+		List<TbMicEstado> listaEstados = null;
+		cmbEstado.getItems().clear();
+		
+		try {
+			 listaEstados = estadoNGC.listarEstados();
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
+		if(listaEstados != null){
+			for(TbMicEstado estado: listaEstados){
+				Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
+				item.setDescription(estado.getVrDescripcion());
+				cmbEstado.appendChild(item);
+			}
+		}		
+	}
+	
+	private void cargarDocentes(){
 		try {
 			List<TbAdmPersona> listaDocentes = personaNGC.obtenerDocentes();
 			cmbDocente.getItems().clear();
@@ -207,6 +255,41 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		} catch (ExcepcionesLogica e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void cargarMicrocurriculos(){
+		cmbMicrocurriculo.getItems().clear();
+		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
+		try {
+			listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculos();
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
+		if(listaMicrocurriculos != null){
+			for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
+				Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
+				cmbMicrocurriculo.appendChild(item);
+			}
+		}		
+	}
+	
+	private void cargarMicroxMateriaxSemestre(String codigoMicro){
+		
+		TbMicMicrocurriculo microcurriculo = null;
+		cmbMicrocurriculo.getItems().clear();
+		
+		try {
+			microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(codigoMicro);
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
+		if (microcurriculo != null){
+			Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
+			cmbMicrocurriculo.appendChild(item);
+		}
+		
 	}
 	
 //	private void cargarPais(){
@@ -301,19 +384,179 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Definiendo los Eventos de los Objetos Combobox de la Forma
+	 * Definiendo los Eventos de los Objetos de la Forma
 	 */
 	
+	public void onOK$cmbUnidadAcademica(){
+		cmbDependencia.setDisabled(false);
+		cmbDependencia.focus();
+	}
+	
+	public void onOK$cmbDependencia(){
+		cmbNucleo.setDisabled(false);
+		cmbNucleo.focus();
+	}
+	
+	public void onOK$cmbNucleo(){
+		cmbMateria.setDisabled(false);
+		cmbMateria.focus();
+	}
+		
+	public void onOK$cmbMateria(){
+		mostrarInfoMateria(cmbMateria.getValue().toString());
+	}
+	
+	public void onOK$cmbSemestre(){
+		cmbMicrocurriculo.setDisabled(false);
+		String codigo = cmbMateria.getValue().toString()+"-"+cmbSemestre.getValue().toString();
+		cargarMicroxMateriaxSemestre(codigo);
+	}
+	
+	
 	public void onSelect$cmbUnidadAcademica(){
+		cmbDependencia.setDisabled(false);
+		lblNombreUnidadAcademica.setValue(mostrarUnidadAcademica(cmbUnidadAcademica.getValue()));
 		cargarDependenciaPorUnidadAcademica(cmbUnidadAcademica.getValue());
 	}
 	
 	public void onSelect$cmbDependencia(){
+		cmbNucleo.setDisabled(false);
+		lblNombreDependencia.setValue(mostrarDependencia(cmbDependencia.getValue()));
 		cargarNucleosPorDependencia(cmbDependencia.getValue());
 	}
 	
 	public void onSelect$cmbNucleo(){
+		cmbMateria.setDisabled(false);
+		mostrarNucleo(cmbNucleo.getValue().toString());
 		cargarMateriasPorNucleo(cmbNucleo.getValue());
+	}
+	
+	public void onSelect$cmbMateria(){
+		cmbSemestre.setDisabled(false);
+		mostrarInfoMateria(cmbMateria.getValue().toString());
+	}
+	
+	public void onSelect$cmbSemestre(){
+		cmbMicrocurriculo.setDisabled(false);
+		String codigo = cmbMateria.getValue().toString()+"-"+cmbSemestre.getValue().toString();
+		cargarMicroxMateriaxSemestre(codigo);	}
+	
+	
+//	public void onSelect$cmbEstado(){
+//		lblNombreEstado.setValue(mostrarEstado(Integer.parseInt(cmbEstado.getValue().toString()))); 
+//	}
+	
+	
+	
+	
+	
+	//***********************************************************************************************
+	private String mostrarUnidadAcademica(String idUnidad){
+		String nombre = "";
+		TbAdmUnidadAcademica unidadAcademica = null;
+		
+		try{
+			unidadAcademica = unidadAcademicaNGC.obtenerUnidadAcademica(idUnidad);
+		}catch(ExcepcionesLogica e){
+			logger.error(e);
+		}
+		
+		if (unidadAcademica != null)
+			nombre = unidadAcademica.getVrNombre();
+		return nombre;
+	}
+	
+	private String mostrarDependencia(String idDependencia){
+		String nombre = "";
+		TbAdmDependencia dependencia = null;
+		
+		try {
+			dependencia = dependenciaNGC.obtenerDependencia(idDependencia);
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		if (dependencia != null)
+			nombre = dependencia.getVrNombre();
+		
+		return nombre;
+	}
+	
+	private void mostrarNucleo(String idNucleo){
+		TbAdmNucleo nucleo;
+		try {
+			nucleo = nucleoNGC.obtenerNucleo(idNucleo);
+			lblNombreNucleo.setValue(nucleo.getVrNombre());
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		cmbMateria.getItems().clear();
+		cargarMaterias(idNucleo);
+	}
+	
+	private void mostrarInfoMateria(String idMateria){
+		try {
+			TbAdmMateria materia = materiaNGC.obtenerMateria(idMateria);
+			if (materia != null ){
+				lblNombreMateria.setValue(materia.getVrNombre());
+				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
+				lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
+				lblHpMateria.setValue(Integer.toString(materia.getNbHp()));
+				lblHtpMateria.setValue(Integer.toString(materia.getNbHtp()));
+				Integer horaClaseSemestral = (materia.getNbHt()+materia.getNbHp()+materia.getNbHtp())*16;
+				lblHoraClaseSemestral.setValue(Integer.toString(horaClaseSemestral));
+				if (materia.getBlValidable() == 1)
+					ckbValidable.setChecked(true);
+				else
+					ckbValidable.setChecked(false);
+				
+				if (materia.getBlHabilitable() == 1)
+					ckbHabilitable.setChecked(true);
+				else
+					ckbHabilitable.setChecked(false);
+				
+				if (materia.getBlClasificable() == 1)
+					ckbClasificable.setChecked(true);
+				else
+					ckbClasificable.setChecked(false);	
+			} else 
+				Messagebox.show("El Registro esta vacio.");
+			
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private String mostrarEstado(int idEstado){
+		String nombreEstado = "";
+		try {
+			TbMicEstado estado = estadoNGC.obtenerEstados(idEstado);
+			nombreEstado = estado.getVrDescripcion();
+			
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+		
+		return nombreEstado;
+	}
+	
+	
+	//*************************************************************************************************
+	
+	
+	
+	private void inhabilitarControles(){
+//		cmbUnidadAcademica.setDisabled(true);;
+		cmbDependencia.setDisabled(true);
+		cmbNucleo.setDisabled(true);
+		cmbMateria.setDisabled(true);
+		cmbSemestre.setDisabled(true);
+		cmbMicrocurriculo.setDisabled(true);
+		cmbEstado.setDisabled(true);
+		cmbDocente.setDisabled(true);
+		ckbValidable.setDisabled(true);
+		ckbHabilitable.setDisabled(true);
+		ckbClasificable.setDisabled(true);
 	}
 	
 	
@@ -322,6 +565,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
+//		System.out.println("Quien me llamó : "+comp.getParent().getId());
 		if (comp.getParent().getId().equals("formaCrearMicro")){
 			inicializarFormaCrear();
 			
@@ -329,12 +573,14 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			inicializarFormaListado();
 			cargarMaterias(cmbNucleo.getValue());
 			
+		} else if (comp.getParent().getId().equals("consultarMicro")){
+			cargarEstados();
+			cargarMicrocurriculos();
+			inhabilitarControles();
 		}
 		cargarUnidades();
 		cargarDependencias();
-		cargarSemestres();
 		cargarNucleos();
-		cargarDocentes();
-	}
-
+		cargarSemestres();
+		cargarDocentes();	}
 }

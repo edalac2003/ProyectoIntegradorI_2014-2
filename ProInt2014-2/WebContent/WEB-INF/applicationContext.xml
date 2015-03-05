@@ -501,10 +501,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         </bean>
         
-        <!--<bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
-        	
-        </bean>  -->
-        
+             
         <bean id="cargarDatosFormas" class="com.udea.proint1.microcurriculo.ctrl.CargarDatosFormas" scope="prototype">
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
@@ -514,6 +511,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="personaNGC" ref="personaNGC" />
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="paisNGC" ref="paisNGC" />
+        	<property name="estadoNGC" ref="estadoNGC" />
         </bean>
         
         <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype">

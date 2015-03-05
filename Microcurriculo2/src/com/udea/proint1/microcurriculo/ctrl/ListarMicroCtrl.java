@@ -11,6 +11,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Toolbar;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
@@ -37,6 +38,8 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	Combobox cmbEstado;
 	
 	Listbox listaMicrocurriculo;
+	
+	Toolbar tool_details;
 	
 	MicrocurriculoNGC microcurriculoNGC;
 	MicroxEstadoNGC microxEstadoNGC;
@@ -105,6 +108,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 		
 	}
 	
+
 	public void onClick$btnBuscar(){
 		if(!"[Seleccione]".equals(cmbMateria.getValue().toString())&&(!"".equals(cmbMateria.getValue().toString()))){
 			String busca = cmbMateria.getValue().toString();

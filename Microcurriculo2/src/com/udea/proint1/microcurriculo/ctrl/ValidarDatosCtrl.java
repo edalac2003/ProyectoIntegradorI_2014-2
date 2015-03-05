@@ -19,6 +19,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
+import org.zkoss.zul.Window;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -66,7 +67,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  *
  */
 public class ValidarDatosCtrl extends GenericForwardComposer{
-
+	
 	private static Logger logger = Logger.getLogger(ValidarDatosCtrl.class);
 	private static String modUsuario = "SYSTEM";
 	private static Date modFecha = new Date();
@@ -91,7 +92,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	private static List<TbMicSubtema> listadoSubtemas;
 	private static List<TbMicBibliografia> listadoBibliografia;
 	
-		
+	
 	Button btnGuardarMicro;
 	
 	Toolbarbutton tool_home;
@@ -99,6 +100,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	Toolbarbutton tool_save;
 	Toolbarbutton tool_print;
 	Toolbarbutton tool_close;
+	
 	
 	Combobox cmbSemestre;
 	Combobox cmbNucleo;
@@ -127,6 +129,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	Listbox listaCibergrafia;
 	
 	Label lblidMicrocurriculo;
+
 	
 	//Objetos de Tipo NGC que se requieren para las validaciones.
 	MateriaNGC materiaNGC;
@@ -230,8 +233,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
 	}
 
-	
-	
 
 	/**
 	 * Evento onClick del Boton Guardar Microcurriculo
@@ -245,6 +246,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	public void onClick$btnGuardarMicro(Event event){		
 		
 	}
+	
 	
 	public void onClick$tool_save(){
 		//Aqui se va a empaquetar todo.

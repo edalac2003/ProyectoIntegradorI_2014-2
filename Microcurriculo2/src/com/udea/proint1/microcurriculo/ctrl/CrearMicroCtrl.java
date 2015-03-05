@@ -126,7 +126,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbTipoCibergrafia;
 	Combobox cmbMateria;
 	Combobox cmbDocente;
-	Combobox cmbNucleo;
+	//Combobox cmbNucleo;
 	Combobox cmbSemestre;
 	Combobox cmbUnidadAcademica;
 	Combobox cmbDependencia;
@@ -358,33 +358,13 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
 	}
 
-	public void onOK$cmbUnidadAcademica(){
-		cmbDependencia.focus();
-	}
 	
-	public void onSelect$cmbUnidadAcademica(){
-		lblNombreUnidadAcademica.setValue(mostrarUnidadAcademica(cmbUnidadAcademica.getValue()));
-	}
 	
-	public void onOK$cmbDependencia(){
-		cmbNucleo.focus();
-	}
 	
-	public void onSelect$cmbDependencia(){
-		lblNombreDependencia.setValue(mostrarDependencia(cmbDependencia.getValue()));
-	}
 	
-	public void onSelect$cmbMateria(){
-		mostrarInfoMateria(cmbMateria.getValue().toString());
-	}
 	
-	public void onOK$cmbMateria(){
-		mostrarInfoMateria(cmbMateria.getValue().toString());
-	}
 	
-	public void onSelect$cmbNucleo(){
-		mostrarNucleo(cmbNucleo.getValue().toString());
-	}
+	
 	
 	public void onSelect$fichaContenidos(){
 		Tabpanel tabpanels = (Tabpanel)fichaContenidos.getSelectedPanel();
@@ -810,37 +790,27 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	
-	public void cargarMaterias(String nucleo){
-		try {
-			List<TbAdmMateria> listaMaterias = materiaNGC.listarMateriasxNucleo(nucleo);
-			if (listaMaterias != null){
-				for (TbAdmMateria materia : listaMaterias){
-					Comboitem item = new Comboitem(materia.getVrIdmateria());
-					item.setDescription(materia.getVrNombre());
-					cmbMateria.appendChild(item);
-				}
-			} else {
-				//System.out.println("El objeto está Vacio");
-			}
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
-		}
-	}
+//	public void cargarMaterias(String nucleo){
+//		try {
+//			List<TbAdmMateria> listaMaterias = materiaNGC.listarMateriasxNucleo(nucleo);
+//			if (listaMaterias != null){
+//				for (TbAdmMateria materia : listaMaterias){
+//					Comboitem item = new Comboitem(materia.getVrIdmateria());
+//					item.setDescription(materia.getVrNombre());
+//					cmbMateria.appendChild(item);
+//				}
+//			} else {
+//				//System.out.println("El objeto está Vacio");
+//			}
+//		} catch (ExcepcionesLogica e) {
+//			logger.error(e);
+//		}
+//	}
 	
 	
 	
 	
-	private void mostrarNucleo(String idNucleo){
-		TbAdmNucleo nucleo;
-		try {
-			nucleo = nucleoNGC.obtenerNucleo(idNucleo);
-			lblNombreNucleo.setValue(nucleo.getVrNombre());
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
-		}
-		cmbMateria.getItems().clear();
-		cargarMaterias(idNucleo);
-	}
+	
 		
 	private void llenarCombosUnidades(String unidad){
 		Comboitem item = new Comboitem(unidad);		
@@ -926,70 +896,12 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		return nombre;
 	}
 	
-	private String mostrarUnidadAcademica(String idUnidad){
-		String nombre = "";
-		TbAdmUnidadAcademica unidadAcademica = null;
-		
-		try{
-			unidadAcademica = unidadAcademicaNGC.obtenerUnidadAcademica(idUnidad);
-		}catch(ExcepcionesLogica e){
-			logger.error(e);
-		}
-		
-		if (unidadAcademica != null)
-			nombre = unidadAcademica.getVrNombre();
-		return nombre;
-	}
-	
-	private String mostrarDependencia(String idDependencia){
-		String nombre = "";
-		TbAdmDependencia dependencia = null;
-		
-		try {
-			dependencia = dependenciaNGC.obtenerDependencia(idDependencia);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
-		}
-		
-		if (dependencia != null)
-			nombre = dependencia.getVrNombre();
-		
-		return nombre;
-	}
 	
 	
-	private void mostrarInfoMateria(String idMateria){
-		try {
-			TbAdmMateria materia = materiaNGC.obtenerMateria(idMateria);
-			if (materia != null ){
-				lblNombreMateria.setValue(materia.getVrNombre());
-				lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
-				lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
-				lblHpMateria.setValue(Integer.toString(materia.getNbHp()));
-				lblHtpMateria.setValue(Integer.toString(materia.getNbHtp()));
-				Integer horaClaseSemestral = (materia.getNbHt()+materia.getNbHp()+materia.getNbHtp())*16;
-				lblHoraClaseSemestral.setValue(Integer.toString(horaClaseSemestral));
-				if (materia.getBlValidable() == 1)
-					ckbValidable.setChecked(true);
-				else
-					ckbValidable.setChecked(false);
-				
-				if (materia.getBlHabilitable() == 1)
-					ckbHabilitable.setChecked(true);
-				else
-					ckbHabilitable.setChecked(false);
-				
-				if (materia.getBlClasificable() == 1)
-					ckbClasificable.setChecked(true);
-				else
-					ckbClasificable.setChecked(false);	
-			} else 
-				Messagebox.show("El Registro esta vacio.");
-			
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
+	
+	
 	
 		
 	@SuppressWarnings("unchecked")
