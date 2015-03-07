@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
@@ -93,8 +94,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	private static List<TbMicBibliografia> listadoBibliografia;
 	
 	
-	Button btnGuardarMicro;
-	
 	Toolbarbutton tool_home;
 	Toolbarbutton tool_new;
 	Toolbarbutton tool_save;
@@ -109,7 +108,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	Combobox cmbIdUnidad;
 	Combobox cmbListaUnidades;
 	Combobox cmbReferenciaBiblio;
-	Combobox cmbEstadoActual;
+	Combobox cmbEstado;
 	
 	Textbox txtPropositoMicro;
 	Textbox txtJustificacionMicro;
@@ -138,7 +137,6 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	ObjetivoNGC objetivoNGC;
 	ObjetivoxMicroNGC objetivoxMicroNGC;
 	UnidadNGC unidadNGC;
-	
 	EstadoNGC estadoNGC;
 	TemaNGC temaNGC;
 	TemaxUnidadNGC temaxUnidadNGC;
@@ -152,6 +150,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	MicrocurriculoNGC microcurriculoNGC;
 	MicroxEstadoNGC microxEstadoNGC;
 	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
+
 	
 	/*
 	 * Definición de Metodos Setter de Objetos de Negocio.
@@ -233,6 +232,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
 	}
 
+	
 
 	/**
 	 * Evento onClick del Boton Guardar Microcurriculo
@@ -318,6 +318,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		TbMicMicroxestado microxEstado = null;
 		int registro = 0;
 		TbMicEstado estado = null;
+		TbAdmPersona responsable = null;
 		
 		try {
 			registro = microxEstadoNGC.contarRegistros();			
@@ -331,8 +332,14 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			logger.error("Error al obtener el objeto Estado.");
 		}
 		
+		try {
+			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
+		} catch (ExcepcionesLogica e) {
+			logger.error("Error al obtener el objeto Persona.");
+		}
+		
 		if(estado != null){
-			microxEstado = new TbMicMicroxestado(registro+1, estado, microcurriculo, modUsuario, modFecha);
+			microxEstado = new TbMicMicroxestado(registro+1, estado, modFecha, microcurriculo, responsable, modUsuario, modFecha);
 		}		
 		return microxEstado;
 	}
@@ -697,7 +704,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		String codigoMicrocurriculo = "";
 		TbAdmMateria materia = null;
 		TbAdmSemestre semestre = null;
-		TbAdmPersona responsable = null;		
+		TbAdmPersona responsable = null;
+		TbMicEstado estado = null;
 				
 		try {
 			materia = materiaNGC.obtenerMateria(cmbMateria.getValue());
@@ -717,6 +725,16 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			logger.error(e);
 		}
 
+		try {
+			estado = estadoNGC.obtenerEstados(1);
+		} catch (WrongValueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExcepcionesLogica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		codigoMicrocurriculo = asignarIdMicrocurriculo(cmbSemestre.getValue().toString(), cmbMateria.getValue().toString());
 		
 		if ((codigoMicrocurriculo.length() > 0) && (!codigoMicrocurriculo.equals(""))){
@@ -724,9 +742,9 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				if (semestre != null){
 					if (responsable != null){
 						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, semestre, txtPropositoMicro.getValue().toString(), 
-								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, modUsuario, modFecha);
+								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, estado, modUsuario, modFecha);
 						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
-						cmbEstadoActual.setValue(obtenerEstado());
+						//cmbEstadoActual.setValue(obtenerEstado());
 					}
 				}
 			}

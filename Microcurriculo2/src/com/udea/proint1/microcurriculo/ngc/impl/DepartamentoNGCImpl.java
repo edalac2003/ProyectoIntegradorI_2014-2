@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.DepartamentoDAO;
 import com.udea.proint1.microcurriculo.dao.PaisDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
+import com.udea.proint1.microcurriculo.dto.TbAdmPais;
 import com.udea.proint1.microcurriculo.ngc.DepartamentoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -50,7 +51,25 @@ public class DepartamentoNGCImpl implements DepartamentoNGC {
 			return listaDepartamentos;
 		}
 	}
+	
+	@Override
+	public List<TbAdmDepartamento> listarDepartamentosxPais(TbAdmPais idPais) throws ExcepcionesLogica {
+		List<TbAdmDepartamento> listaDepartamentos = null;
+		
+		if(idPais != null){
+			try {
+				listaDepartamentos = departamentoDao.listarDepartamentosxPais(idPais);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica(e);
+			}
+		} 
+//		else
+//			throw new ExcepcionesLogica("No Seleccionó ningun Pais." + e);
+		
+		return listaDepartamentos;
+	}
 
+	
 	@Override
 	public TbAdmDepartamento obtenerDepartamentos(int id) throws ExcepcionesLogica {
 		/*

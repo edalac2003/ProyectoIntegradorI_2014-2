@@ -15,7 +15,9 @@ public class TbMicMicroxestado implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int nbId;
 	private TbMicEstado tbMicEstado;
+	private Date dtFecha;
 	private TbMicMicrocurriculo tbMicMicrocurriculo;
+	private TbAdmPersona tbAdmResponsable;
 	private String vrModusuario;
 	private Date dtModfecha;
 
@@ -29,12 +31,15 @@ public class TbMicMicroxestado implements java.io.Serializable {
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
 
-	public TbMicMicroxestado(int nbId, TbMicEstado tbMicEstado,
-			TbMicMicrocurriculo tbMicMicrocurriculo, String vrModusuario,
-			Date dtModfecha) {
+	public TbMicMicroxestado(int nbId, TbMicEstado tbMicEstado, Date dtFecha,
+			TbMicMicrocurriculo tbMicMicrocurriculo,
+			TbAdmPersona tbAdmResponsable, String vrModusuario, Date dtModfecha) {
+		super();
 		this.nbId = nbId;
 		this.tbMicEstado = tbMicEstado;
+		this.dtFecha = dtFecha;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
+		this.tbAdmResponsable = tbAdmResponsable;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
@@ -62,6 +67,22 @@ public class TbMicMicroxestado implements java.io.Serializable {
 	public void setTbMicMicrocurriculo(
 			TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
+	}
+
+	public Date getDtFecha() {
+		return dtFecha;
+	}
+
+	public void setDtFecha(Date dtFecha) {
+		this.dtFecha = dtFecha;
+	}
+
+	public TbAdmPersona getTbAdmResponsable() {
+		return tbAdmResponsable;
+	}
+
+	public void setTbAdmResponsable(TbAdmPersona tbAdmResponsable) {
+		this.tbAdmResponsable = tbAdmResponsable;
 	}
 
 	public String getVrModusuario() {

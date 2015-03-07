@@ -232,6 +232,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		}
 		
 		if(listaEstados != null){
+			cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
 			for(TbMicEstado estado: listaEstados){
 				Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
 				item.setDescription(estado.getVrDescripcion());
@@ -437,9 +438,10 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	public void onSelect$cmbSemestre(){
-		cmbMicrocurriculo.setDisabled(false);
+		//cmbMicrocurriculo.setDisabled(false);
 		String codigo = cmbMateria.getValue().toString()+"-"+cmbSemestre.getValue().toString();
-		cargarMicroxMateriaxSemestre(codigo);	}
+//		cargarMicroxMateriaxSemestre(codigo);	
+	}
 	
 	
 //	public void onSelect$cmbEstado(){
@@ -576,11 +578,13 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		} else if (comp.getParent().getId().equals("consultarMicro")){
 			cargarEstados();
 			cargarMicrocurriculos();
-			inhabilitarControles();
+			//inhabilitarControles();
 		}
+		cargarEstados();
 		cargarUnidades();
 		cargarDependencias();
 		cargarNucleos();
 		cargarSemestres();
-		cargarDocentes();	}
+		cargarDocentes();	
+	}
 }

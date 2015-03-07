@@ -1,4 +1,4 @@
-                package com.udea.proint1.microcurriculo.dao.hibernate;
+package com.udea.proint1.microcurriculo.dao.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.DepartamentoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
+import com.udea.proint1.microcurriculo.dto.TbAdmPais;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -19,10 +21,6 @@ public class DepartamentoDAOHibernate extends HibernateDaoSupport implements Dep
 
 	private static Logger log=Logger.getLogger(DepartamentoDAOHibernate.class);
 	
-	public DepartamentoDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public TbAdmDepartamento obtenerDepartamento(int id) throws ExcepcionesDAO {
 		Session session = null;
@@ -60,6 +58,25 @@ public class DepartamentoDAOHibernate extends HibernateDaoSupport implements Dep
 		}
 		
 		return departamentos;
+	}
+
+		
+	@Override
+	public List<TbAdmDepartamento> listarDepartamentosxPais(TbAdmPais idPais)	throws ExcepcionesDAO {
+		Session session = null;
+		List<TbAdmDepartamento> listaDepartamentos = null;
+		
+		try {
+			session = getSession();
+			Query query = session.createQuery("from TbAdmDepartamento where tbAdmPais = :idPais");
+        	query.setEntity("idPais", idPais);
+        	listaDepartamentos = query.list();
+        	
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO(e.getMessage());
+		}
+		
+		return listaDepartamentos;
 	}
 
 	@Override

@@ -4,7 +4,7 @@
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmPais" table="TB_ADM_PAIS">
-        <id name="nbIdpais" type="big_decimal">
+        <id name="nbIdpais" type="integer">
             <column name="NB_IDPAIS" precision="22" scale="0" />
             <generator class="assigned" />
         </id>

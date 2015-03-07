@@ -26,6 +26,9 @@
         <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="select">
             <column name="VR_RESPONSABLE" length="15" not-null="true" />
         </many-to-one>
+        <many-to-one name="tbMicEstado" class="com.udea.proint1.microcurriculo.dto.TbMicEstado" fetch="select">
+            <column name="NB_ESTADO" length="10" not-null="true" />
+        </many-to-one>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" not-null="true" />
         </property>
@@ -33,19 +36,19 @@
             <column name="DT_MODFECHA" length="7" />
         </property>
                
-        <set name="tbMicObjetivosxmicros" table="TB_MIC_OBJETIVOSXMICRO" inverse="true" lazy="true" fetch="select">
+        <set name="tbMicObjetivosxmicros" table="TB_MIC_OBJETIVOSXMICRO" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="VR_MICROCURRICULO" length="20" not-null="true" />
             </key>
             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro" />
         </set>
-        <set name="tbMicUnidadesxmicros" table="TB_MIC_UNIDADESXMICRO" inverse="true" lazy="true" fetch="select">
+        <set name="tbMicUnidadesxmicros" table="TB_MIC_UNIDADESXMICRO" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="VR_MICROCURRICULO" length="20" not-null="true" />
             </key>
             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro" />
         </set>
-        <set name="tbMicMicroxestados" table="TB_MIC_MICROXESTADO" inverse="true" lazy="true" fetch="select">
+        <set name="tbMicMicroxestados" table="TB_MIC_MICROXESTADO" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="VR_MICROCURRICULO" length="20" not-null="true" />
             </key>

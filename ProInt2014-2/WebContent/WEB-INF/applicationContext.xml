@@ -248,6 +248,15 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="auditoriaDao" ref="auditoriaDao" />
         </bean>
         
+         <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
+        	<property name="paisDao" ref="paisDao" />
+        </bean>
+        
+        <bean id="departamentoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DepartamentoNGCImpl">
+        	<property name="paisDao" ref="paisDao" />
+        	<property name="departamentoDao" ref="departamentoDao" />
+        </bean>
+        
         <bean id="ciudadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CiudadNGCImpl">
         	<property name="ciudadDao" ref="ciudadDao" />
         	<property name="departamentoDao" ref="departamentoDao" />
@@ -276,11 +285,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         
         <bean id="nucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl">
         	<property name="nucleoDao" ref="nucleoDao" />
-        </bean>
-        
-        <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
-        	<property name="paisDao" ref="paisDao" />
-        </bean>
+        </bean>    
         
         <bean id="personaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl">
         	<property name="personaDao" ref="personaDao" />
@@ -523,6 +528,15 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         
         <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        </bean>
+        
+        <bean id="crearPersonaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearPersonaCtrl" scope="prototype">
+        	<property name="personaNGC" ref="personaNGC"/>
+        	<property name="ciudadNGC" ref="ciudadNGC" />
+        	<property name="paisNGC" ref="paisNGC" />
+        	<property name="departamentoNGC" ref="departamentoNGC" />
+        	<property name="tipoIdentificacionNGC" ref="tipoIdentificacionNGC" />
+        	<property name="tipoPersonaNGC" ref="tipoPersonaNGC" />
         </bean>
             
 </beans>

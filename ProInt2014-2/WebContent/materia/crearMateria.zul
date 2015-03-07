@@ -25,7 +25,6 @@
 							</toolbar>
 						</north>
 						<center border="none" autoscroll="true" >
-
 							<div align="center">
 								<separator />
 								<hlayout width="100%">

@@ -44,17 +44,15 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 		return tipoIdentificacion;
 	}
 
+	
 	@Override
-	public List<TbAdmTipoidentificacion> listarTipoIdentificacion()
-			throws ExcepcionesDAO {
+	public List<TbAdmTipoidentificacion> listarTipoIdentificacion()	throws ExcepcionesDAO {
 		Session session = null;
-		List<TbAdmTipoidentificacion> listaTipoIdentificacion = new ArrayList<TbAdmTipoidentificacion>();
+		List<TbAdmTipoidentificacion> listaTipoIdentificacion = null;
 		
 		try{
 			session = getSession();
-			
 			Criteria criteria = session.createCriteria(TbAdmTipoidentificacion.class);
-			
 			listaTipoIdentificacion = criteria.list();
 			
 		}catch(HibernateException e){
@@ -64,6 +62,7 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 		return listaTipoIdentificacion;
 	}
 
+	
 	@Override
 	public void actualizarTipoIdentificacion(
 			TbAdmTipoidentificacion tipoIdentificacion) throws ExcepcionesDAO {

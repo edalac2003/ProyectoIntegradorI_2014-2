@@ -15,18 +15,18 @@
 			<center border="0">
 				<div align="center">
 					<borderlayout height="870px">
-						<north border="0">
+						<north border="normal">
 							<include id="listMenu" src="/_sections/toolbar-micro.zul"/>
 						</north>
-						<west width="180px" border="0">
+						<west width="180px" border="normal">
 							<label></label>
 						</west>
-						<east width="180px" border="0">
+						<east width="180px" border="normal">
 							<label></label>
 						</east>
 						
 						<center autoscroll="true" border="0">							
-							<tabbox id="fichaContenidos" sclass="tabbox">
+							<tabbox id="fichaContenidos" sclass="tabbox" width="99%">
 								<tabs style="">
 									<tab label="Información General" id="infoGeneral"/>
 									<tab label="Información Complementaria" id="infoComplemento"/>
@@ -48,6 +48,10 @@
 								                    <div>
 								                        <label id="lblidMicrocurriculo" value="" sclass="titulos"/>									                        
 								                    </div>
+						                		</row>
+						                		<row>
+								                    <label value="Estado Actual" width="150px" />
+								                    <combobox id="cmbEstado" disabled="true" droppable="2"/>
 						                		</row>
 						                		<row>
 													<label value="Docente Responsable" />
@@ -148,10 +152,7 @@
 								                    <label value="Programas Vinculados" width="150px" />
 								                    <label id="lblProgramasVinculados" />
 						                		</row>
-						                		<row>
-								                    <label value="Estado Actual" width="150px" />
-								                    <combobox id="cmbEstadoActual" disabled="true" droppable="2"/>
-						                		</row>
+						                		
 											</rows>
 										</grid>
 									</tabpanel>
@@ -393,8 +394,9 @@
 							</tabbox>			
 						</center>
 						
-						<south border="0" height="130px">
+						<south border="normal" height="130px">
 							<div>
+								<label value="SUR-CENTRO"></label>
 								<div height="20px" />
 								<div>
 									<include id="footerIdx" src="/_sections/footer.zul" />
@@ -405,8 +407,8 @@
 				</div>		
 			</center>
 			
-			<south border="0">		
-				<div>  </div>					
+			<south border="normal">		
+				<label value="SUR-PRINCIPAL"></label>					
 			</south>
 		</borderlayout>
 	</window>

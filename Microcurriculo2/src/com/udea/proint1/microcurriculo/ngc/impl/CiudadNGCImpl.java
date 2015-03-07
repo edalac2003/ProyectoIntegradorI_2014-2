@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.CiudadDAO;
 import com.udea.proint1.microcurriculo.dao.DepartamentoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmCiudad;
+import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
 import com.udea.proint1.microcurriculo.ngc.CiudadNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -79,5 +80,22 @@ public class CiudadNGCImpl implements CiudadNGC {
 			return listaCiudades;
 		}
 	}
+
+	@Override
+	public List<TbAdmCiudad> listarCiudadesxDepartamento(TbAdmDepartamento idDepartamento) throws ExcepcionesLogica {
+		List<TbAdmCiudad> listaCiudades = null;
+		
+		try {
+			listaCiudades = ciudadDao.listarCiudadesxDepartamento(idDepartamento);
+		} catch (ExcepcionesDAO e) {
+			throw new ExcepcionesLogica(e);
+		}
+		
+		return listaCiudades;
+	}
+
+	
+	
+	
 
 }

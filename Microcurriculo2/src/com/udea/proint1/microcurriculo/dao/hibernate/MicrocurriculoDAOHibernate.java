@@ -36,15 +36,15 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 	@Override
 	public void guardarMicrocurriculo(TbMicMicrocurriculo microcurriculo)
 			throws ExcepcionesDAO {
-		Session session = null;
-
-		try {
-			session = getSession();
-			session.save(microcurriculo);
-			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("Error al Intentar guardar el Registro Microcurriculo en la Base de Datos. "+e);			
-		}
+//		Session session = null;
+//
+//		try {
+//			session = getSession();
+//			session.save(microcurriculo);
+//			session.flush(); 
+//		} catch (HibernateException e) {
+//			throw new ExcepcionesDAO("Error al Intentar guardar el Registro Microcurriculo en la Base de Datos. "+e);			
+//		}
 
 	}
 

@@ -897,19 +897,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-		
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		cmbDocente.focus();
-		System.out.println();
 	}
 
 }

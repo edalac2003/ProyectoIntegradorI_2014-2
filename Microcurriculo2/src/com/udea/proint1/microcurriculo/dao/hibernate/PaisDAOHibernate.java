@@ -34,7 +34,7 @@ public class PaisDAOHibernate extends HibernateDaoSupport implements PaisDAO{
 	@Override
 	public List<TbAdmPais> listarPaises() throws ExcepcionesDAO {
 		Session session = null;
-		List<TbAdmPais> paises = new ArrayList<TbAdmPais>();
+		List<TbAdmPais> paises = null;
 		
 		try{
 			session = getSession();
