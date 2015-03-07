@@ -3,7 +3,7 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos2.css" ?>
 
 <zk>	
-	<window id="inicioMicro" border="0">	
+	<window id="inicioMicro" border="0" apply="${borrarVariablesSession}">	
 		<borderlayout height="670px">
 			
 			<north height="100px" border="0">
@@ -35,7 +35,7 @@
 						</vlayout>
 						
 						<vlayout>
-							<button image="/_img/icons/128x128/clone.png" />
+							<button image="/_img/icons/128x128/clone.png" href="/microcurriculo/duplicarMic.zul"/>
 							<label value="Duplicar Microcurriculo" />
 						</vlayout>
 						<vlayout>
