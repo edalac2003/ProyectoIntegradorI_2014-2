@@ -1,0 +1,51 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>	
+	<window id="index" border="0">	
+		<borderlayout height="600px">
+			
+			<north height="100px" border="0">
+				<include id="headerIdx" src="/_sections/header.zul" />							
+			</north>
+			<east width="180px" border="0">
+				<label value="" />
+			</east>
+			
+			<west width="180px" border="0">
+				<label value="" />
+			</west>
+			<center border="0">
+				<div>
+					<div height="50px" />
+					<div height="70px" align="center" >
+						<label value="GESTION DE MICROCURRICULOS" sclass="titulos"/>
+					</div>
+					<div align="center">
+						<grid width="960px">
+							<columns>
+								<column align="center">
+									<button label="Microcurriculos" image="/_img/icons/128x128/microcurriculos.png" 
+									href="/microcurriculo/inicio_mic.zul"/>
+								</column>
+								<column align="center">
+									<button label="Docentes" image="//_img/icons/128x128/docentes.png" />
+								</column>
+								<column align="center">
+									<button label="Materias" image="//_img/icons/128x128/materias.png" 
+									href="/materia/inicio_mat.zul"/>
+								</column>
+							</columns>						
+						</grid>
+					</div>
+					
+				</div>
+			</center>
+			
+			<south border="0">		
+				<div> <include id="footerIdx" src="/_sections/footer.zul" /> </div>					
+			</south>
+		</borderlayout>
+	</window>
+</zk>
