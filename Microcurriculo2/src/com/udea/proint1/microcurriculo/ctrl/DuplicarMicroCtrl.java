@@ -12,6 +12,7 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Include;
@@ -66,8 +67,19 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Label lblNombreDependencia;
 	Label lblNombreNucleo;
 	Label lblNombreMateria;
+	Label lblCreditosMateria;
+	Label lblHtMateria;
+	Label lblHpMateria;
+	Label lblHtpMateria;
+	Label lblHoraClaseSemestral;
+	Label lblCampoFormacion;
 	Label lblCorrequisitos;
 	Label lblPrerrequisitos;
+	Label lblProgramasVinculados;
+	
+	Checkbox ckbValidable;
+	Checkbox ckbHabilitable;
+	Checkbox ckbClasificable;
 	
 	Textbox txtPropositoMicro;
 	Textbox txtJustificacionMicro;
@@ -193,6 +205,8 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 			
 			if(microcurriculo!= null){
 				llenarDatosDependencias(microcurriculo);
+				llenarPrerrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
+				llenarCorrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
 				llenarDatosMateria(microcurriculo.getTbAdmMateria());
 				cmbSemestre.setValue(idSemestre);
 				cmbSemestre.setDisabled(true);
@@ -220,10 +234,39 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	public void llenarDatosMateria(TbAdmMateria materia){
-		String listaCorrequisitos = "";
-		String listaPrerrequisitos = "";
 		
-		String idMateria = materia.getVrIdmateria(); 
+		lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
+		lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
+		lblHpMateria.setValue(Integer.toString(materia.getNbHp()));
+		lblHtpMateria.setValue(Integer.toString(materia.getNbHtp()));
+		
+		int ht = materia.getNbHt();
+		int hp = materia.getNbHp();
+		int htp = materia.getNbHtp();
+		int horasSemestral = (ht+hp+htp)*16;
+		
+		lblHoraClaseSemestral.setValue(Integer.toString(horasSemestral));
+		if((materia.getBlClasificable())==1){
+			ckbClasificable.setChecked(true);
+		}else if((materia.getBlClasificable())==0){
+			ckbClasificable.setChecked(false);
+		}
+		if((materia.getBlHabilitable()) == 1){
+			ckbHabilitable.setChecked(true);
+		}else if((materia.getBlHabilitable()) == 0){
+			ckbHabilitable.setChecked(false);
+		}
+		if((materia.getBlValidable()) == 1){
+			ckbValidable.setChecked(true);
+		}else if((materia.getBlValidable()) == 0){
+			ckbValidable.setChecked(false);
+		}
+		
+	}
+	
+	public void llenarCorrequisitos(String idMateria){
+		String listaCorrequisitos = "";
+		 
 		List<TbAdmCorrequisito> correquisitos = null;
 		try {
 			correquisitos = correquisitoNGC.listarCorrequisitosxMateria(idMateria);
@@ -241,6 +284,10 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 			}
 		}
 		lblCorrequisitos.setValue(listaCorrequisitos);
+	}
+	
+	public void llenarPrerrequisitos(String idMateria){
+		String listaPrerrequisitos = "";
 		
 		List<TbAdmPrerrequisito> prerrequisitos = null;
 		try {
@@ -255,11 +302,10 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 				listaPrerrequisitos = prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrIdmateria()+" - "+prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre();
 				bandera2 = false;
 			}else{
-				listaPrerrequisitos = listaCorrequisitos + "\n"+(prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrIdmateria()+" - "+prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre());
+				listaPrerrequisitos = listaPrerrequisitos + "\n"+(prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrIdmateria()+" - "+prerrequisito.getTbAdmMateriasByVrPrerrequisito().getVrNombre());
 			}
 		}
 		lblPrerrequisitos.setValue(listaPrerrequisitos);
-		
 	}
 	
 //	public void llenarComplementaria(TbMicMicrocurriculo microcurriculo){

@@ -337,21 +337,23 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	}
 	
 	public void recargarMicrocurriculos(String buscaMicrocurriculos){
-		try {
-			buscaMicrocurriculos = buscaMicrocurriculos + "%";
-			List<TbMicMicrocurriculo> listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
-			cmbMicrocurriculo.getItems().clear();
-			
-			if(listaMicrocurriculos != null){
-				for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
-					Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
-					cmbMicrocurriculo.appendChild(item);
+		if(cmbMicrocurriculo != null){
+			try {
+				buscaMicrocurriculos = buscaMicrocurriculos + "%";
+				List<TbMicMicrocurriculo> listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
+				cmbMicrocurriculo.getItems().clear();
+				
+				if(listaMicrocurriculos != null){
+					for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
+						Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
+						cmbMicrocurriculo.appendChild(item);
+					}
+				}else{
+					Messagebox.show("No se hallaron microcurriculos");
 				}
-			}else{
-				Messagebox.show("No se hallaron microcurriculos");
+			} catch (ExcepcionesLogica e) {
+				e.printStackTrace();
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
 		}
 	}
 	

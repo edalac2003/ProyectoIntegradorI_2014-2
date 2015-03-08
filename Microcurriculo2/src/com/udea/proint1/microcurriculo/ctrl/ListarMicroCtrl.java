@@ -233,27 +233,16 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	 */
 	public List<TbMicMicrocurriculo> filtrarMicrocurriculosPorEstado(List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable){
 		
-		List<TbMicMicroxestado> consultaMicrosxEstado = null;
 		List<TbMicMicrocurriculo> microcurriculosFiltradoEstado = new ArrayList<TbMicMicrocurriculo>();
 		
 		if("[Seleccione]".equals(cmbEstado.getValue().toString()) || ("".equals(cmbEstado.getValue().toString()))){
 			microcurriculosFiltradoEstado = microcurriculosFiltradoResponsable;
 		}else{
 			int estado = Integer.parseInt(cmbEstado.getValue().toString());
-			try {
-				consultaMicrosxEstado = microxEstadoNGC.listarMicrosxestado(estado);
-			} catch (ExcepcionesLogica e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			if(microcurriculosFiltradoResponsable != null){
 				for(TbMicMicrocurriculo microcurriculo: microcurriculosFiltradoResponsable){
-					if(consultaMicrosxEstado != null){
-						for(TbMicMicroxestado microxEstado: consultaMicrosxEstado){
-							if(microcurriculo.getVrIdmicrocurriculo().equals(microxEstado.getTbMicMicrocurriculo().getVrIdmicrocurriculo())){
-								microcurriculosFiltradoEstado.add(microcurriculo);
-							}
-						}
+					if(estado == microcurriculo.getTbMicEstado().getNbIdestado()){
+						microcurriculosFiltradoEstado.add(microcurriculo);
 					}
 				}
 			}
@@ -266,13 +255,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	  */
 	public void listarMicrocurriculos(List<TbMicMicrocurriculo> microsListar){
 		if(microsListar != null){
-			List<TbMicMicroxestado> microsxEstado = null;
 			
-			try {
-				microsxEstado = microxEstadoNGC.listarMicroxestado();
-			} catch (ExcepcionesLogica e) {
-				e.printStackTrace();
-			}
 			for(TbMicMicrocurriculo micro: microsListar){
 				final Listitem listaItem = new Listitem();
 				
@@ -282,22 +265,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 				Listcell celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrNombre());
 				Listcell celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
 				Listcell celdaResponsable = new Listcell(micro.getTbAdmPersona().getVrNombres()+" "+micro.getTbAdmPersona().getVrApellidos());
-				
-				TbMicMicroxestado microxEstadoEncontrado = null;
-				
-				if(microsxEstado != null){
-					for(TbMicMicroxestado microxEstado: microsxEstado){
-						if(microxEstado.getTbMicMicrocurriculo().getVrIdmicrocurriculo().equals(micro.getVrIdmicrocurriculo())){
-							microxEstadoEncontrado = microxEstado;
-						}
-					}
-				}
-				Listcell celdaEstado;
-				if(microxEstadoEncontrado != null){
-					celdaEstado = new Listcell(microxEstadoEncontrado.getTbMicEstado().getVrDescripcion());
-				}else{
-					celdaEstado = new Listcell("");
-				}
+				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());
 				
 				celdaCodigo.setStyle("font-size:10px");
 				celdaUnidad.setStyle("font-size:10px");
@@ -319,19 +287,6 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 			}
 		}
 	}
-	
-//	public void onClick$tool_details(){
-//		Listitem itemSelect = listaMicrocurriculo.getSelectedItem();
-//		if(itemSelect != null){
-//			Listcell celdaIdMicro = (Listcell) itemSelect.getChildren().get(0);
-//			String idMicro = celdaIdMicro.getLabel();
-//			tool_details.setHref("/microcurriculo/inicio_mic.zul");
-//			
-//		}else{
-//			Messagebox.show("seleccione un microcurriculo de la lista");
-//		}
-//		
-//	}
 	
 	/**
 	 * Ante el evento click en el listbox listaMicrocurriculo, procede a generar enlaces en los botenes
