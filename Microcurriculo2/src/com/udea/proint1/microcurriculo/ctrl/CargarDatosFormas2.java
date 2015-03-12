@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
@@ -38,8 +39,15 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	Combobox cmbSemestre;
 	Combobox cmbMateria;
 	Combobox cmbMicrocurriculo;
+	Combobox cmbUnidadAcademica2;
+	Combobox cmbDependencia2;
+	Combobox cmbNucleo2;
+	Combobox cmbMateria2;
+	Combobox cmbMicrocurriculo2;
 	Combobox cmbDocente;
 	Combobox cmbEstado;
+	
+	Label lblEncabezadoMicro;
 	
 	UnidadAcademicaNGC unidadAcademicaNGC;
 	DependenciaNGC dependenciaNGC;
@@ -95,12 +103,21 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 			List<TbAdmUnidadAcademica> listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
 			if (listaUnidadAcademica != null){			
 				cmbUnidadAcademica.appendChild(new Comboitem("[Seleccione]"));
+				if(cmbUnidadAcademica2 != null){
+					cmbUnidadAcademica2.appendChild(new Comboitem("[Seleccione]"));
+				}
 				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
 					Comboitem item = new Comboitem(unidad.getVrIdunidad());
 					item.setDescription(unidad.getVrNombre());
 					cmbUnidadAcademica.appendChild(item);
+					if(cmbUnidadAcademica2 != null){
+						cmbUnidadAcademica2.appendChild(item);
+					}
 				}
 				cmbUnidadAcademica.setValue("[Seleccione]");
+				if(cmbUnidadAcademica2 != null){
+					cmbUnidadAcademica2.setValue("[Seleccione]");
+				}
 			}
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron problemas al Obtener los registros de la tabla <Tb_Adm_UnidadAcademica>.  "+e);
@@ -113,15 +130,23 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	private void cargarDependencias(){
 		try {
 			List<TbAdmDependencia> listaDependencias = dependenciaNGC.listarDependencias();
-			cmbDependencia.getItems().clear();
 			if (listaDependencias != null){
 				cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
+				if(cmbDependencia2 != null){
+					cmbDependencia2.appendChild(new Comboitem("[Seleccione]"));
+				}
 				for(TbAdmDependencia dependencia : listaDependencias){
 					Comboitem item = new Comboitem(dependencia.getVrIddependencia());
 					item.setDescription(dependencia.getVrNombre());
 					cmbDependencia.appendChild(item);
+					if(cmbDependencia2 != null){
+						cmbDependencia2.appendChild(item);
+					}
 				}
 				cmbDependencia.setValue("[Seleccione]");
+				if(cmbDependencia2 != null){
+					cmbDependencia2.setValue("[Seleccione]");
+				}
 			}
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
@@ -132,18 +157,26 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todas los nucleos existentes y las ubica en el combobox cmbNucleo
 	 */
 	private void cargarNucleos(){
-		cmbNucleo.getItems().clear();
 		try {
 			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
 			listaNucleos = nucleoNGC.listarNucleos();
 			if (listaNucleos != null){
 				cmbNucleo.appendChild(new Comboitem("[Seleccione]"));
+				if(cmbNucleo2 != null){
+					cmbNucleo2.appendChild(new Comboitem("[Seleccione]"));
+				}
 				for(TbAdmNucleo nucleo : listaNucleos){
 					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
 					item.setDescription(nucleo.getVrNombre());
 					cmbNucleo.appendChild(item);
+					if(cmbNucleo2 != null){
+						cmbNucleo2.appendChild(item);
+					}
 				}
 				cmbNucleo.setValue("[Seleccione]");
+				if(cmbNucleo2 != null){
+					cmbNucleo2.setValue("[Seleccione]");
+				}
 			}
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
@@ -160,12 +193,21 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 			
 			if(listaMaterias != null){
 				cmbMateria.appendChild(new Comboitem("[Seleccione]"));
+				if(cmbMateria2 != null){
+					cmbMateria2.appendChild(new Comboitem("[Seleccione]"));
+				}
 				for(TbAdmMateria materia: listaMaterias){
 					Comboitem item = new Comboitem(materia.getVrIdmateria());
 					item.setDescription(materia.getVrNombre());
 					cmbMateria.appendChild(item);
+					if(cmbMateria2 != null){
+						cmbMateria2.appendChild(item);
+					}
 				}
 				cmbMateria.setValue("[Seleccione]");
+				if(cmbMateria2 != null){
+					cmbMateria2.setValue("[Seleccione]");
+				}
 			}else{
 				Messagebox.show("No se hallaron materias");
 			}
@@ -203,7 +245,6 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 		try {
 			List<TbMicEstado> listaEstados = estadoNGC.listarEstados();
 			cmbEstado.getItems().clear();
-			
 			if(listaEstados != null){
 				cmbEstado.appendChild(new Comboitem("[Seleccione]"));
 				for(TbMicEstado estado: listaEstados){
@@ -255,11 +296,19 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 		
 		if(listaMicrocurriculos != null){
 			for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
-				Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
-				cmbMicrocurriculo.appendChild(item);
+				if(microcurriculo.getTbMicEstado().getNbIdestado()==6){
+					Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
+					cmbMicrocurriculo.appendChild(item);
+					if(cmbMicrocurriculo2 != null){
+						cmbMicrocurriculo2.appendChild(item);
+					}
+				}
 			}
 		}
 		cmbMicrocurriculo.setValue("[Seleccione]");
+		if(cmbMicrocurriculo2 != null){
+			cmbMicrocurriculo2.setValue("[Seleccione]");
+		}
 	}
 	
 	/**
@@ -408,6 +457,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
+		System.out.println(comp.getParent().getId().toString());
 		if (comp.getParent().getId().equals("formaListarMicro")){
 			inicializarFormaListado();
 			cargarMaterias();
@@ -423,6 +473,13 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 			cargarNucleos();
 			cargarMicrocurriculos();
 			cargarSemestres();
+		} else if(comp.getParent().getId().equals("formaDetallesMicro")){
+			cargarMaterias();
+			cargarUnidades();
+			cargarDependencias();
+			cargarNucleos();
+			cargarMicrocurriculos();
+			lblEncabezadoMicro.setVisible(false);
 		}
 	}
 	

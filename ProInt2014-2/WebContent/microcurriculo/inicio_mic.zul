@@ -4,7 +4,7 @@
 
 <zk>	
 	<window id="inicioMicro" border="0" apply="${borrarVariablesSession}">	
-		<borderlayout height="670px">
+		<borderlayout height="570px">
 			
 			<north height="100px" border="0">
 				<include id="headerIdx" src="/_sections/header.zul" />							
@@ -18,34 +18,16 @@
 			
 			<center border="0">				
 				<div>
-					<div height="40px" />
+					<div height="60px" />
 					<div align="center" height="50px">
 						<label value="SECCION MICROCURRICULOS" sclass="titulo"/>
 					</div>
-					
+					<div height="40px"></div>
 					<hlayout height="180px">
 						<vlayout>
 							<button image="/_img/icons/128x128/new.png" href="/microcurriculo/crearMic.zul" />
 							<label value="Crear Microcurriculo" />
 						</vlayout>
-						
-						<vlayout>
-							<button image="/_img/icons/128x128/edit.png" />
-							<label value="Editar Microcurriculo" />
-						</vlayout>
-						
-						<vlayout>
-							<button image="/_img/icons/128x128/clone.png" href="/microcurriculo/duplicarMic.zul"/>
-							<label value="Duplicar Microcurriculo" />
-						</vlayout>
-						<vlayout>
-							<button image="/_img/icons/128x128/search.png" href="/microcurriculo/consultaMicro.zul"/>
-							<label value="Buscar Microcurriculo" />
-						</vlayout>
-						
-					</hlayout>
-					
-					<hlayout height="180px">
 						<vlayout>
 							<button image="/_img/icons/128x128/list.png"  href="/microcurriculo/listamic.zul"/>
 							<label value="Listar Microcurriculo" />
@@ -58,6 +40,7 @@
 							<button image="/_img/icons/128x128/shutdown.png" href="/index.zul"/>
 							<label value="Regresar" />
 						</vlayout>
+						
 					</hlayout>
 				
 				</div>

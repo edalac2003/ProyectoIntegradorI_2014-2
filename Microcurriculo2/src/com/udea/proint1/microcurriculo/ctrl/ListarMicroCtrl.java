@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -299,7 +300,8 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 //			param.put(1, "dato Elmer");
 //			System.out.println(param.get(1));
 			String idMicro = celdaIdMicro.getLabel();
-			session.setAttribute("idMicro", idMicro);
+//			session.setAttribute("idMicro", idMicro);
+			Executions.getCurrent().getSession().setAttribute("idMicro", idMicro);
 			tool_duplica.setHref("/microcurriculo/duplicarMic.zul");
 		}
 	}

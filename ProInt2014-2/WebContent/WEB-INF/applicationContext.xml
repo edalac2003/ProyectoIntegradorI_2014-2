@@ -76,7 +76,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
                               org.hibernate.dialect.Oracle10gDialect
                       </prop>
                       <prop key="hibernate.show_sql">
-                              true                                   
+                              false                                   
                       </prop>
                       <prop key="hibernate.transaction.factory_class">
                               org.hibernate.transaction.JDBCTransactionFactory
@@ -561,6 +561,11 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
         	<property name="correquisitoNGC" ref="correquisitoNGC" />
         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
+        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
+        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         </bean>
         
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">

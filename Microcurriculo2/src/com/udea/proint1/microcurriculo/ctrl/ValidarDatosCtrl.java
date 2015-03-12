@@ -277,6 +277,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 					
 				} catch (ExcepcionesLogica e) {
 					logger.error("Error al intentar guardar el objeto <Microcurriculo>. "+e);
+					logger.error(new StringBuilder(e.getClass().getName()).append(": ").append(e.getMessage()), e);
 				}
 //				if (verificarCampos() == 1){
 //					cmbEstadoActual.setDisabled(false);
@@ -305,6 +306,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se ha producido un Error al intentar obtener un Registro desde la tabla Microcurriculos.");
+			logger.error(e);
 		}
 		
 		if (micro != null)
@@ -323,19 +325,19 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		try {
 			registro = microxEstadoNGC.contarRegistros();			
 		} catch (ExcepcionesLogica e) {
-			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Microcurriculo x Estado.");
+			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Microcurriculo x Estado."+e);
 		}
 		
 		try {
 			estado = estadoNGC.obtenerEstados(1);
 		} catch (ExcepcionesLogica e) {
-			logger.error("Error al obtener el objeto Estado.");
+			logger.error("Error al obtener el objeto Estado."+e);
 		}
 		
 		try {
 			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
 		} catch (ExcepcionesLogica e) {
-			logger.error("Error al obtener el objeto Persona.");
+			logger.error("Error al obtener el objeto Persona."+e);
 		}
 		
 		if(estado != null){

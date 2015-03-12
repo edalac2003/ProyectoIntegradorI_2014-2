@@ -61,7 +61,6 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		} catch (HibernateException e){
 			throw new ExcepcionesDAO("DAO : Error al Intentar Obtener el Registro Microcurriculo en la Base de Datos."+e);
 		}
-
 		return microcurriculo;
 	}
 

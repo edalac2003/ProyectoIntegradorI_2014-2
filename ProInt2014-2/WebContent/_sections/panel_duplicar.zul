@@ -62,7 +62,7 @@
 							                </grid>
 							                <div height="10px"/>
 							                <toolbar>
-							                	<label value="Seleccione microcurriculo y semestre a duplicar"/>
+							                	<label id="lblEncabezadoMicro" value="Seleccione microcurriculo y semestre a duplicar"/>
 							                </toolbar>
 							                <grid>
 							                	<columns>
@@ -77,7 +77,7 @@
 									                    </div>
 							                		</row>
 							                		
-							                		<row>
+							                		<row >
 														<label value="Semestre a Duplicar" />
 									                    <div>
 									                        <combobox id="cmbSemestre"/>

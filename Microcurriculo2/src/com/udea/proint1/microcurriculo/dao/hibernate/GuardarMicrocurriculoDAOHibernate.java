@@ -50,7 +50,8 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		Transaction tx = null;
 
 		try{
-			session = getSessionFactory().openSession();
+			session = getSession();
+//			session = getSessionFactory().getCurrentSession();
 //			if (!session.isOpen())
 //				session = getSessionFactory().openSession();
 //			else

@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,11 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestAttributes;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -31,20 +34,38 @@ import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
+import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
+import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class DuplicarMicroCtrl extends GenericForwardComposer{
 	
 	private static Logger logger = Logger.getLogger(DuplicarMicroCtrl.class);
+	
+	Button btnAddObjetivo;
 	
 	Include panelDuplicarMicro;
 	
@@ -53,6 +74,7 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Tabbox fichaContenidos;
 	
 	Panel panelSemestre;
+	Panel panelBuscarMicro;
 	
 	Combobox cmbSemestre2;
 	Combobox cmbDocente;
@@ -67,6 +89,7 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Label lblNombreDependencia;
 	Label lblNombreNucleo;
 	Label lblNombreMateria;
+	Label lblNombreDocente;
 	Label lblCreditosMateria;
 	Label lblHtMateria;
 	Label lblHpMateria;
@@ -76,6 +99,10 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Label lblCorrequisitos;
 	Label lblPrerrequisitos;
 	Label lblProgramasVinculados;
+	Label lblResumenMicro;
+	Label lblPropositoMicro;
+	Label lblJustificacionMicro;
+	Label lblObjetivoGeneral;
 	
 	Checkbox ckbValidable;
 	Checkbox ckbHabilitable;
@@ -85,6 +112,7 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Textbox txtJustificacionMicro;
 	Textbox txtObjetivoGeneral;
 	Textbox txtResumenMicro;
+	Textbox txtObjetivoEspecifico;
 	
 	Listbox listaObjetivosEspecificos;
 	Listbox listaUnidades;
@@ -96,6 +124,7 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	
 	Toolbarbutton tool_save;
 	Toolbarbutton tool_print;
+	Toolbarbutton tool_duplica_otro;
 	
 	MicrocurriculoNGC microcurriculoNGC;
 	SemestreNGC semestreNGC;
@@ -103,6 +132,11 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	ObjetivoxMicroNGC objetivoxMicroNGC;
 	CorrequisitoNGC correquisitoNGC;
 	PrerrequisitoNGC prerrequisitoNGC;
+	UnidadxMicroNGC unidadxMicroNGC;
+	TemaxUnidadNGC temaxUnidadNGC;
+	SubtemaxTemaNGC subtemaxTemaNGC;
+	EvaluacionxMicroNGC evaluacionxMicroNGC;
+	BiblioxunidadNGC biblioxUnidadNGC;
 	
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
@@ -128,6 +162,37 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		this.prerrequisitoNGC = prerrequisitoNGC;
 	}
 
+	public void setUnidadxMicroNGC(UnidadxMicroNGC unidadxMicroNGC) {
+		this.unidadxMicroNGC = unidadxMicroNGC;
+	}
+
+	public void setTemaxUnidadNGC(TemaxUnidadNGC temaxUnidadNGC) {
+		this.temaxUnidadNGC = temaxUnidadNGC;
+	}
+
+	public void setSubtemaxTemaNGC(SubtemaxTemaNGC subtemaxTemaNGC) {
+		this.subtemaxTemaNGC = subtemaxTemaNGC;
+	}
+
+	public void setEvaluacionxMicroNGC(EvaluacionxMicroNGC evaluacionxMicroNGC) {
+		this.evaluacionxMicroNGC = evaluacionxMicroNGC;
+	}
+
+	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
+		this.biblioxUnidadNGC = biblioxUnidadNGC;
+	}
+
+	List<TbMicObjetivo> objetivosGuardar = new ArrayList<TbMicObjetivo>();
+	List<TbMicUnidad> unidadesGuardar = new ArrayList<TbMicUnidad>();
+	List<TbMicTemaxunidad> temasxUnidadGuardar = new ArrayList<TbMicTemaxunidad>();
+	List<TbMicTema> temasGuardar = new ArrayList<TbMicTema>();
+	List<TbMicSubtemaxtema> subtemasxTemaGuardar = new ArrayList<TbMicSubtemaxtema>();
+	List<TbMicSubtema> subtemasGuardar = new ArrayList<TbMicSubtema>();
+	List<TbMicEvaluacion> evaluacionesGuardar = new ArrayList<TbMicEvaluacion>();
+	List<TbMicBiblioxunidad> bibliosxUnidadGuardar = new ArrayList<TbMicBiblioxunidad>();
+	List<TbMicBibliografia> bibliosGuardar = new ArrayList<TbMicBibliografia>();
+	
+	
 	public void cargarSemestres(String idMicrocurriculo){
 		TbMicMicrocurriculo microcurriculo = null;
 		try {
@@ -204,16 +269,80 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 			}
 			
 			if(microcurriculo!= null){
+				System.out.println(microcurriculo.getTbMicEstado().getNbIdestado());
+				if(microcurriculo.getTbMicEstado().getNbIdestado() == 6){
+					llenarDatosDependencias(microcurriculo);
+					llenarPrerrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
+					llenarCorrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
+					llenarDatosMateria(microcurriculo.getTbAdmMateria());
+					llenarDatosComplementarios(microcurriculo);
+					llenarUnidadesTemasBiblios(microcurriculo.getVrIdmicrocurriculo());
+					//llenarEvaluaciones(microcurriculo.getVrIdmicrocurriculo());
+					cmbSemestre.setValue(idSemestre);
+					cmbSemestre.setDisabled(true);
+					lblIdMicrocurriculo.setValue(microcurriculo.getTbAdmMateria().getVrIdmateria()+"-"+idSemestre);
+					
+				}else{
+					ReiniciarBusqueda();
+				}
+			}else{
+				ReiniciarBusqueda();
+			}
+		}
+	}
+	
+	public void llenarDatos(String idMicro){
+		
+		TbMicMicrocurriculo microcurriculo = null;
+		
+		if(!idMicro.equals("") && (!idMicro.equals(null))){
+			try {
+				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+			
+			if(microcurriculo!= null){
 				llenarDatosDependencias(microcurriculo);
 				llenarPrerrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
 				llenarCorrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
 				llenarDatosMateria(microcurriculo.getTbAdmMateria());
-				cmbSemestre.setValue(idSemestre);
+				llenarDatosComplementarios(microcurriculo);
+				llenarUnidadesTemasBiblios(microcurriculo.getVrIdmicrocurriculo());
+				llenarEvaluaciones(microcurriculo.getVrIdmicrocurriculo());
+				cmbSemestre.setValue(microcurriculo.getTbAdmSemestre().getVrIdsemestre());
 				cmbSemestre.setDisabled(true);
-				lblIdMicrocurriculo.setValue(microcurriculo.getTbAdmMateria().getVrIdmateria()+"-"+idSemestre);
-				//llenarComplementaria(microcurriculo);
+				lblIdMicrocurriculo.setValue(microcurriculo.getVrIdmicrocurriculo());
+				
+				/**
+				 * Ocultando campos de la vista consultar y poniendolos en modo label
+				 */
+				cmbDocente.setValue(microcurriculo.getTbAdmPersona().getVrIdpersona());
+				cmbDocente.setDisabled(true);
+				lblNombreDocente.setValue(microcurriculo.getTbAdmPersona().getVrNombres()+" "+microcurriculo.getTbAdmPersona().getVrApellidos());
+				txtResumenMicro.setVisible(false);
+				txtJustificacionMicro.setVisible(false);
+				txtObjetivoGeneral.setVisible(false);
+				txtPropositoMicro.setVisible(false);
+				lblResumenMicro.setValue(microcurriculo.getVrResumen());
+				lblJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
+				lblPropositoMicro.setValue(microcurriculo.getVrProposito());
+				
+				
+			}else{
+				ReiniciarBusqueda();
 			}
 		}
+	}
+	
+	public void ReiniciarBusqueda(){
+		panelDuplicarMicro.setVisible(true);
+		blyDuplicarMicro.setVisible(false);
+		tool_print.setVisible(false);
+		tool_save.setVisible(false);
+		Executions.getCurrent().getSession().removeAttribute("idMicro");
+		Executions.getCurrent().getSession().removeAttribute("semestre");
+		//Messagebox.show("Solo se pueden duplicar microcurriculos en estado aprobado.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
 	}
 	
 	public void llenarDatosDependencias(TbMicMicrocurriculo microcurriculo){
@@ -308,6 +437,208 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		lblPrerrequisitos.setValue(listaPrerrequisitos);
 	}
 	
+	public void llenarDatosComplementarios(TbMicMicrocurriculo microcurriculo){
+		
+		txtJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
+		txtPropositoMicro.setValue(microcurriculo.getVrProposito());
+		txtResumenMicro.setValue(microcurriculo.getVrResumen());
+		List<TbMicObjetivoxmicro> objetivosxMicro = null;
+		try {
+			objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(microcurriculo.getVrIdmicrocurriculo());
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
+			if(objetivoxMicro.getBlTipo()=='1'){
+				txtObjetivoGeneral.setValue(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
+				if(lblObjetivoGeneral != null){
+					lblObjetivoGeneral.setValue(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
+				}
+			}else{
+				final Listitem item = new Listitem();
+				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {
+						eliminaListItem(item,"");
+					}
+				});
+				
+				Listcell celda = new Listcell(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
+				item.appendChild(celda);
+				listaObjetivosEspecificos.appendChild(item);
+				
+				objetivosGuardar.add(objetivoxMicro.getTbMicObjetivo());
+			}
+		}
+	}
+	
+	public void onClick$btnAddObjetivo(Event event){
+		if(txtObjetivoEspecifico.getValue() != null && (txtObjetivoEspecifico.getValue().trim().length() >0)){	
+			final Listitem listaItem = new Listitem();
+			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+				@Override
+				public void onEvent(Event arg0) throws Exception {
+					eliminaListItem(listaItem,"");
+				}
+			});
+			Listcell celda = new Listcell(txtObjetivoEspecifico.getValue());
+			listaItem.appendChild(celda);			
+			listaObjetivosEspecificos.appendChild(listaItem);
+			txtObjetivoEspecifico.setText(null);
+			txtObjetivoEspecifico.setValue(null);
+		} else {
+			Messagebox.show("Se Requiere información en el Campo <Objetivo Especifico>");
+		}
+	}
+	
+	public void llenarUnidadesTemasBiblios(String idMicrocurriculo){
+		List<TbMicUnidadxmicro> unidadesxMicro = null;
+		try {
+			unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(idMicrocurriculo);
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
+			final Listitem item = new Listitem();
+			item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+				@Override
+				public void onEvent(Event arg0) throws Exception {
+					eliminaListItem(item,"");
+				}
+			});
+			
+			Listcell celda1 = new Listcell("");
+			item.appendChild(celda1);
+			Listcell celda2 = new Listcell(unidadxMicro.getTbMicUnidad().getVrNombre());
+			item.appendChild(celda2);
+			listaUnidades.appendChild(item);
+			
+			unidadesGuardar.add(unidadxMicro.getTbMicUnidad());
+			
+			List<TbMicTemaxunidad> temasxUnidad = null;
+			try {
+				temasxUnidad = temaxUnidadNGC.ListarTemasxUnidadxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+			if(temasxUnidad != null){
+				for(TbMicTemaxunidad temaxUnidad: temasxUnidad){
+					Listitem itemTemas = new Listitem();
+					
+					Listcell celdaTemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
+					itemTemas.appendChild(celdaTemas1);
+					Listcell celdaTemas2 = new Listcell(temaxUnidad.getTbMicTema().getVrDescripcion());
+					itemTemas.appendChild(celdaTemas2);
+					Listcell celdaTemas3 = new Listcell(Integer.toString(temaxUnidad.getNbSemanasRequeridas()));
+					itemTemas.appendChild(celdaTemas3);
+					listaTemas.appendChild(itemTemas);
+					
+					temasGuardar.add(temaxUnidad.getTbMicTema());
+					temasxUnidadGuardar.add(temaxUnidad);
+					
+					List<TbMicSubtemaxtema> subtemasxTema = null;
+					try {
+						subtemasxTema = subtemaxTemaNGC.listarSubtemaxTema_Tema(temaxUnidad.getTbMicTema().getNbIdtema());
+					} catch (ExcepcionesLogica e) {
+						logger.error(e);
+					}
+					if(subtemasxTema != null){
+						for(TbMicSubtemaxtema subtemaxTema: subtemasxTema){
+							Listitem itemSubTemas = new Listitem();
+							
+							Listcell celdaSubTemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
+							itemSubTemas.appendChild(celdaSubTemas1);
+							Listcell celdaSubTemas2 = new Listcell(subtemaxTema.getTbMicTema().getVrDescripcion());
+							itemSubTemas.appendChild(celdaSubTemas2);
+							Listcell celdaSubTemas3 = new Listcell(subtemaxTema.getTbMicSubtema().getVrDescripcion());
+							itemSubTemas.appendChild(celdaSubTemas3);
+							listaSubtemas.appendChild(itemSubTemas);
+							
+							subtemasGuardar.add(subtemaxTema.getTbMicSubtema());
+							subtemasxTemaGuardar.add(subtemaxTema);
+						}
+					}
+				}
+			}
+			
+			List<TbMicBiblioxunidad> bibliosxUnidad = null;
+			try {
+				bibliosxUnidad = biblioxUnidadNGC.listadoBiblioxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+			
+			if(bibliosxUnidad!=null){
+				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidad){
+					if(biblioxUnidad.getTbMicBibliografia().getVrSitioweb() == null){
+						Listitem itemBiblio = new Listitem();
+						
+						Listcell celdaBiblio1 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrNombre());
+						itemBiblio.appendChild(celdaBiblio1);
+						Listcell celdaBiblio2 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrAutor());
+						itemBiblio.appendChild(celdaBiblio2);
+						Listcell celdaBiblio3 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrIsbn());
+						itemBiblio.appendChild(celdaBiblio3);
+						if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='1'){
+							Listcell celdaBiblio4 = new Listcell("COMPLEMENTARIA");
+							itemBiblio.appendChild(celdaBiblio4);
+						}else if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='0'){
+							Listcell celdaBiblio4 = new Listcell("BÁSICA");
+							itemBiblio.appendChild(celdaBiblio4);
+						}
+						listaBibliografia.appendChild(itemBiblio);
+						
+						bibliosGuardar.add(biblioxUnidad.getTbMicBibliografia());
+						bibliosxUnidadGuardar.add(biblioxUnidad);
+					}else{
+						Listitem itemBiblio = new Listitem();
+						
+						Listcell celdaBiblio1 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrNombre());
+						itemBiblio.appendChild(celdaBiblio1);
+						Listcell celdaBiblio2 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrSitioweb());
+						itemBiblio.appendChild(celdaBiblio2);
+						if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='1'){
+							Listcell celdaBiblio3 = new Listcell("COMPLEMENTARIA");
+							itemBiblio.appendChild(celdaBiblio3);
+						}else if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='0'){
+							Listcell celdaBiblio3 = new Listcell("BÁSICA");
+							itemBiblio.appendChild(celdaBiblio3);
+						}
+						listaCibergrafia.appendChild(itemBiblio);
+						
+						bibliosGuardar.add(biblioxUnidad.getTbMicBibliografia());
+						bibliosxUnidadGuardar.add(biblioxUnidad);
+					}
+				}
+			}
+		}
+		
+	}
+	
+	public void llenarEvaluaciones(String idMicrocurriculo){
+		List<TbMicEvaluacionxmicro> evaluacionesxMicro = null;
+		try {
+			evaluacionesxMicro = evaluacionxMicroNGC.ListarEvaluacionxMicroxMicro(idMicrocurriculo);
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		for(TbMicEvaluacionxmicro evaluacionxmicro: evaluacionesxMicro){
+			Listitem item = new Listitem();
+			
+			Listcell celda1 = new Listcell(evaluacionxmicro.getTbMicEvaluacion().getVrDescripcion());
+			item.appendChild(celda1);
+			Listcell celda2 = new Listcell(Integer.toString(evaluacionxmicro.getNbPorcentaje()));
+			item.appendChild(celda2);
+			Listcell celda3 = new Listcell(evaluacionxmicro.getDtFechaestimada().toString());
+			item.appendChild(celda3);
+			listaEvaluaciones.appendChild(item);
+			
+			evaluacionesGuardar.add(evaluacionxmicro.getTbMicEvaluacion());
+		}
+	}
+	
 //	public void llenarComplementaria(TbMicMicrocurriculo microcurriculo){
 //		
 //		txtJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
@@ -340,29 +671,145 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 //		}
 //	}
 	
-//	private void eliminaListItem(Listitem item, String clave){		
-//		if(item.getParent().getId().toString().equals("listaUnidades")){
-//			eliminaCascadaUnidad(item, clave.toUpperCase());
-//			item.detach();
-//			recargarCombosUnidades(listaUnidades);
-//		} else if (item.getParent().getId().toString().equals("listaTemas")){
-//			eliminaCascadaTema(item, clave.toUpperCase());
-//			item.detach();
-//			recargarCombosTemas(listaTemas);
-//		} else if(item.getParent().getId().toString().equals("listaSubtemas")){
-//			item.detach();
-//		} else if(item.getParent().getId().toString().equals("listaEvaluaciones")){
-//			Listcell celdaPorcentaje = (Listcell)item.getChildren().get(1);
-//			porcentajeEvaluacion = porcentajeEvaluacion - Integer.parseInt(celdaPorcentaje.getValue().toString());
-//			item.detach();
-//		} else if(item.getParent().getId().toString().equals("listaBibliografia")){
-//			item.detach();
-//		} else if(item.getParent().getId().toString().equals("listaCibergrafia")){
-//			item.detach();
-//		} else if(item.getParent().getId().toString().equals("listaObjetivosEspecificos")){
-//			item.detach();
+	private void eliminaListItem(Listitem item, String clave){		
+		if(item.getParent().getId().toString().equals("listaUnidades")){
+			//eliminaCascadaUnidad(item, clave.toUpperCase());
+			quitarUnidad(item);
+			item.detach();
+			//recargarCombosUnidades(listaUnidades);
+		} else if (item.getParent().getId().toString().equals("listaTemas")){
+			eliminaCascadaTema(item, clave.toUpperCase());
+			item.detach();
+			//recargarCombosTemas(listaTemas);
+		} else if(item.getParent().getId().toString().equals("listaSubtemas")){
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaEvaluaciones")){
+			Listcell celdaPorcentaje = (Listcell)item.getChildren().get(1);
+			//porcentajeEvaluacion = porcentajeEvaluacion - Integer.parseInt(celdaPorcentaje.getValue().toString());
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaBibliografia")){
+			quitarBibliografia(item);
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaCibergrafia")){
+			item.detach();
+		} else if(item.getParent().getId().toString().equals("listaObjetivosEspecificos")){
+			quitarObjetivo(item);
+			item.detach();
+		}
+	}
+	
+	public void quitarBibliografia(Listitem item){
+		
+	}
+	
+	public void quitarUnidad(Listitem item){
+		Listcell celda = (Listcell) item.getChildren().get(1);
+		String nombreUnidad = celda.getLabel();
+		
+		TbMicUnidad unidadBorrar = null;
+		for(TbMicUnidad unidad: unidadesGuardar){
+			if(unidad.getVrNombre().equals(nombreUnidad)){
+				unidadBorrar = unidad;
+			}
+		}
+		quitarCascadaTemas(unidadBorrar.getNbIdunidad());
+		if(unidadBorrar != null){
+			unidadesGuardar.remove(unidadBorrar);
+		}
+		for(TbMicUnidad unidad: unidadesGuardar){
+			System.out.println(unidad.getVrNombre());
+		}
+	}
+	
+	public void quitarCascadaTemas(int idUnidad){
+		boolean seguirBorrando = true;
+		while(seguirBorrando){
+			seguirBorrando = false;
+			TbMicTemaxunidad temaxUnidadBorrar = null;
+			for(TbMicTemaxunidad temaxUnidad: temasxUnidadGuardar){
+				if(temaxUnidad.getTbMicUnidad().getNbIdunidad() == idUnidad){
+					temaxUnidadBorrar = temaxUnidad;
+					seguirBorrando = true;
+				}
+			}
+			if(temaxUnidadBorrar != null){
+				temasxUnidadGuardar.remove(temaxUnidadBorrar);
+			}
+			for(TbMicTemaxunidad temaxUnidad: temasxUnidadGuardar){
+				System.out.println(temaxUnidad.getNbId());
+			}
+			if(temaxUnidadBorrar != null){
+				TbMicTema temaBorrar = null;
+				for(TbMicTema tema: temasGuardar){
+					if(tema.getNbIdtema() == temaxUnidadBorrar.getTbMicTema().getNbIdtema()){
+						temaBorrar = tema;
+						seguirBorrando = true;
+					}
+				}
+				if(temaBorrar != null){
+					temasGuardar.remove(temaBorrar);
+				}
+				quitarCascadaSubtemas(temaxUnidadBorrar.getTbMicTema().getNbIdtema());
+			}
+			for(TbMicTema tema: temasGuardar){
+				System.out.println(tema.getVrDescripcion());
+			}
+		}
+	}
+	
+	public void quitarCascadaSubtemas(int idTema){
+		boolean seguirBorrando = true;
+		while(seguirBorrando){
+			seguirBorrando = false;
+			TbMicSubtemaxtema subtemaxtemaBorrar = null;
+			for(TbMicSubtemaxtema subtemaxTema: subtemasxTemaGuardar){
+				if(subtemaxTema.getTbMicTema().getNbIdtema() == idTema){
+					subtemaxtemaBorrar = subtemaxTema;
+					seguirBorrando = true;
+				}
+			}
+			if(subtemaxtemaBorrar != null){
+				subtemasxTemaGuardar.remove(subtemaxtemaBorrar);
+			}
+			for(TbMicSubtemaxtema subtemaxTema: subtemasxTemaGuardar){
+				System.out.println(subtemaxTema.getNbid());
+			}
+			if(subtemaxtemaBorrar != null){
+				TbMicSubtema subtemaBorrar = null;
+				for(TbMicSubtema subtema: subtemasGuardar){
+					if(subtema.getNbIdsubtema() == subtemaxtemaBorrar.getTbMicSubtema().getNbIdsubtema()){
+						subtemaBorrar = subtema;
+						seguirBorrando = true;
+					}
+				}
+				if(subtemaBorrar != null){
+					subtemasGuardar.remove(subtemaBorrar);
+				}
+			}
+			for(TbMicSubtema subtema: subtemasGuardar){
+				System.out.println(subtema.getVrDescripcion());
+			}
+		}
+	}
+	
+	public void quitarObjetivo(Listitem item){
+		Listcell celda = (Listcell) item.getChildren().get(0);
+		String nombreObjetivo = celda.getLabel();
+		
+		TbMicObjetivo objetivoBorrar = null;
+		for(TbMicObjetivo objetivo: objetivosGuardar){
+			if(objetivo.getVrDescripcion().equals(nombreObjetivo)){
+				objetivoBorrar = objetivo;
+			}
+		}
+		
+		if(objetivoBorrar != null){
+			objetivosGuardar.remove(objetivoBorrar);
+		}
+//		for(TbMicObjetivo objetivo: objetivosGuardar){
+//			System.out.println(objetivo.getVrDescripcion());
 //		}
-//	}
+	}
 	
 	private void eliminaCascadaTema(Listitem item, String clave){
 		Listcell celda = (Listcell)item.getChildren().get(1);
@@ -462,43 +909,66 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	public void onSelect$cmbSemestre2(){
 		String semestreDuplicar = cmbSemestre2.getValue().toString();
 		if(!semestreDuplicar.equals("[Seleccione]")&&(!semestreDuplicar.equals(""))){
-			session.setAttribute("semestre", semestreDuplicar);
+//			session.setAttribute("semestre", semestreDuplicar);
+			Executions.getCurrent().getSession().setAttribute("semestre", semestreDuplicar);
 		}else{
-			if(session.hasAttribute("semestre")){
-				session.removeAttribute("semestre");
+			if(Executions.getCurrent().getSession().hasAttribute("semestre")){
+//				session.removeAttribute("semestre");
+				Executions.getCurrent().getSession().removeAttribute("semestre");
 			}
 		}
+	}
+	
+	public void onClick$tool_duplica_otro(){
+		ReiniciarBusqueda();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-		if(session.hasAttribute("idMicro")&&(session.hasAttribute("semestre"))){
-			panelDuplicarMicro.setVisible(false);
-			blyDuplicarMicro.setVisible(true);
-			panelSemestre.setVisible(false);
-			fichaContenidos.setVisible(true);
-			cargarDocentes();
+		if("formaDuplicarMicro".equals(comp.getParent().getId().toString())){
 			
-			String idMicrocurriculo = session.getAttribute("idMicro").toString();
-			String idSemestre = session.getAttribute("semestre").toString();
-			llenarDatos(idMicrocurriculo, idSemestre);
-			
-		}else if(session.hasAttribute("idMicro")){
-			panelDuplicarMicro.setVisible(false);
-			blyDuplicarMicro.setVisible(true);
-			panelSemestre.setVisible(true);
-			fichaContenidos.setVisible(false);
-			String idMicrocurriculo = session.getAttribute("idMicro").toString();
-			cargarSemestres(idMicrocurriculo);
-			tool_print.setVisible(false);
-			tool_save.setVisible(false);
-		}else{
-			panelDuplicarMicro.setVisible(true);
-			blyDuplicarMicro.setVisible(false);
-			tool_print.setVisible(false);
-			tool_save.setVisible(false);
+			if(Executions.getCurrent().getSession().hasAttribute("idMicro")&&(Executions.getCurrent().getSession().hasAttribute("semestre"))){
+				panelDuplicarMicro.setVisible(false);
+				blyDuplicarMicro.setVisible(true);
+				panelSemestre.setVisible(false);
+				fichaContenidos.setVisible(true);
+				cargarDocentes();
+				
+				String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+				String idSemestre = Executions.getCurrent().getSession().getAttribute("semestre").toString();
+				llenarDatos(idMicrocurriculo, idSemestre);
+				
+			}else if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+				panelDuplicarMicro.setVisible(false);
+				blyDuplicarMicro.setVisible(true);
+				panelSemestre.setVisible(true);
+				fichaContenidos.setVisible(false);
+				String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+				cargarSemestres(idMicrocurriculo);
+				tool_print.setVisible(false);
+				tool_save.setVisible(false);
+			}else{
+				panelDuplicarMicro.setVisible(true);
+				blyDuplicarMicro.setVisible(false);
+				tool_print.setVisible(false);
+				tool_save.setVisible(false);
+			}
+		}else if("formaDetallesMicro".equals(comp.getParent().getId().toString())){
+			if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+				panelDuplicarMicro.setVisible(false);
+				blyDuplicarMicro.setVisible(true);
+				fichaContenidos.setVisible(true);
+				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+					llenarDatos(idMicro);
+				}
+			}else{
+				panelBuscarMicro.setVisible(true);
+				blyDuplicarMicro.setVisible(true);
+				fichaContenidos.setVisible(false);
+			}
 		}
 		
 	}
