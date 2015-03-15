@@ -34,6 +34,8 @@ public class DepartamentoDAOHibernate extends HibernateDaoSupport implements Dep
 		}catch(HibernateException e){
 			log.error("Falla al obtener departamento", e);
 			throw new ExcepcionesDAO(e);	
+		} finally{
+			session.close();
 		}
 				
 		return departamento;
@@ -55,6 +57,8 @@ public class DepartamentoDAOHibernate extends HibernateDaoSupport implements Dep
 		}catch(HibernateException e){
 			log.error("Falla al obtener lista de departamentos", e);
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return departamentos;
@@ -74,6 +78,8 @@ public class DepartamentoDAOHibernate extends HibernateDaoSupport implements Dep
         	
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e.getMessage());
+		} finally{
+			session.close();
 		}
 		
 		return listaDepartamentos;
@@ -89,6 +95,8 @@ public class DepartamentoDAOHibernate extends HibernateDaoSupport implements Dep
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

@@ -8,13 +8,13 @@
             <column name="VR_IDPERSONA" length="15" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmTipopersona" class="com.udea.proint1.microcurriculo.dto.TbAdmTipopersona" fetch="select">
+        <many-to-one name="tbAdmTipopersona" class="com.udea.proint1.microcurriculo.dto.TbAdmTipopersona" fetch="join" lazy="false">
             <column name="NB_TIPOPERSONA" precision="22" scale="0" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbAdmCiudad" class="com.udea.proint1.microcurriculo.dto.TbAdmCiudad" fetch="select">
+        <many-to-one name="tbAdmCiudad" class="com.udea.proint1.microcurriculo.dto.TbAdmCiudad" fetch="join" lazy="false">
             <column name="NB_CIUDAD" precision="22" scale="0" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbAdmTipoidentificacion" class="com.udea.proint1.microcurriculo.dto.TbAdmTipoidentificacion" fetch="select">
+        <many-to-one name="tbAdmTipoidentificacion" class="com.udea.proint1.microcurriculo.dto.TbAdmTipoidentificacion" fetch="join" lazy="false">
             <column name="NB_TIPOIDENTIFICACION" precision="22" scale="0" not-null="true" />
         </many-to-one>
         <property name="vrNombres" type="string">

@@ -26,6 +26,8 @@ public class PaisDAOHibernate extends HibernateDaoSupport implements PaisDAO{
 			pais = (TbAdmPais)session.get(TbAdmPais.class, idPais);
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 			
 		return pais;
@@ -42,6 +44,8 @@ public class PaisDAOHibernate extends HibernateDaoSupport implements PaisDAO{
 			paises = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return paises;

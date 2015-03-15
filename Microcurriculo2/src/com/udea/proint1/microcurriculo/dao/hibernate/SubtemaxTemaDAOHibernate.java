@@ -31,6 +31,8 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : Se presentaron problemas al guardar registro de <SubtemaxTema>.  "+e.getMessage());
+		} finally{
+			session.close();
 		}
 
 	}
@@ -78,7 +80,9 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
         	subtemaxTema = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return subtemaxTema;
 	}
 
@@ -89,12 +93,16 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicSubtemaxtema.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbid) from TbMicSubtemaxtema");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicSubtemaxtema.class);
+//			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO: Se generaron problemas al contar los registros de la tabla <SubtemaxTema>"+e.getMessage());
-		}	
+		} finally{
+			session.close();
+		}
 		
 		return registro;
 	}

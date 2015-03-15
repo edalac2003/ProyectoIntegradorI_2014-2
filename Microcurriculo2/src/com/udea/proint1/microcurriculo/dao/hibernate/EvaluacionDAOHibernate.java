@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -32,6 +33,8 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -42,10 +45,12 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 		
 		try{
 			session = getSession();
-			evaluacion = (TbMicEvaluacion)session.load(TbMicEvaluacion.class, id);
+			evaluacion = (TbMicEvaluacion)session.get(TbMicEvaluacion.class, id);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return evaluacion;
 	}
@@ -61,6 +66,8 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 			evaluaciones = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return evaluaciones;
@@ -73,11 +80,15 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicEvaluacion.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbIdevaluacion) from TbMicEvaluacion");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicEvaluacion.class);
+//			registro = criteria.list().size();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : Se presentaron Errores al Contar los Registros de la Tabla Evaluaciones. "+e);
-		}		
+		} finally{
+			session.close();
+		}	
 		return registro;
 	}
 
@@ -87,12 +98,12 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 
 		try {
 			session = getSession();
-
-			session = getSession();
 			this.getHibernateTemplate().update(evaluacion);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+ e);
+		} finally{
+			session.close();
 		}
 	}
 

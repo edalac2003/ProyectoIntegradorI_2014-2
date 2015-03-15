@@ -29,6 +29,8 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -44,6 +46,8 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return dependencia;
 	}
@@ -60,6 +64,8 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 	}
@@ -77,6 +83,8 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return dependencia;
@@ -93,7 +101,9 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
             dependencias = query.list();                
         }catch(HibernateException e){
             throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar Listar las Dependencias por Unidad. "+e);
-        }
+        } finally{
+			session.close();
+		}
         return dependencias;
 	}
 	
@@ -109,7 +119,9 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
             dependencias = query.list();
         }catch(HibernateException e){
             throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return dependencias;
 	}
 }

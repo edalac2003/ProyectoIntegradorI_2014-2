@@ -25,6 +25,8 @@ public class PensumDAOHibernate extends HibernateDaoSupport implements PensumDAO
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -35,10 +37,12 @@ public class PensumDAOHibernate extends HibernateDaoSupport implements PensumDAO
 
 		try {
 			session = getSession();
-			pensum = (TbMicPensum) session.load(TbMicPensum.class, id);
+			pensum = (TbMicPensum) session.get(TbMicPensum.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return pensum;
 	}
@@ -56,6 +60,8 @@ public class PensumDAOHibernate extends HibernateDaoSupport implements PensumDAO
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return pensums;
 	}
@@ -70,6 +76,8 @@ public class PensumDAOHibernate extends HibernateDaoSupport implements PensumDAO
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

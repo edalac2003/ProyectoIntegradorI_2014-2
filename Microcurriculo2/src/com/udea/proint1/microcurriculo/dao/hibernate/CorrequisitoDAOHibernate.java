@@ -32,6 +32,8 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 	}
@@ -46,6 +48,8 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -61,6 +65,8 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return correquisitos;
 	}
@@ -79,6 +85,8 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return correquisitos;
@@ -100,7 +108,9 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
                 
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return correquisitos;
 	}
 }

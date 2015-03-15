@@ -29,6 +29,8 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 	
@@ -42,6 +44,8 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -56,6 +60,8 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			listaSemestre = criteria.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 		return listaSemestre;
 	}
@@ -67,10 +73,12 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 		
 		try{
 			session = getSession();
-			semestre = (TbAdmSemestre)session.load(TbAdmSemestre.class, id);
+			semestre = (TbAdmSemestre)session.get(TbAdmSemestre.class, id);
 			
 		}catch (HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return semestre;
 	}	

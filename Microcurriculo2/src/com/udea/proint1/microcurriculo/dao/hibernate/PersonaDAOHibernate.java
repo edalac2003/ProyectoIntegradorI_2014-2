@@ -40,6 +40,8 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 			
+		} finally{
+			session.close();
 		}
 
 	}
@@ -57,6 +59,8 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 
 	}
@@ -73,6 +77,8 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
 			
+		} finally{
+			session.close();
 		}
 		return persona;
 	}
@@ -89,7 +95,9 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
         	personas = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return personas;
 	}
 
@@ -107,6 +115,8 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 			persona = (TbAdmPersona) criteria.uniqueResult();			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e.getMessage());
+		} finally{
+			session.close();
 		}
 		
 		if (persona != null)
@@ -128,6 +138,8 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 			personas = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return personas;

@@ -34,6 +34,8 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -48,6 +50,8 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -58,10 +62,12 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 
 		try {
 			session = getSession();
-			objetivosxMicro = (TbMicObjetivoxmicro) session.load(TbMicObjetivoxmicro.class, id);
+			objetivosxMicro = (TbMicObjetivoxmicro) session.get(TbMicObjetivoxmicro.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return objetivosxMicro;
 	}
@@ -83,7 +89,9 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
         	objetivosxMicro = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return objetivosxMicro;
 	}
 	
@@ -104,7 +112,9 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
         	objetivosxMicro = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return objetivosxMicro;
 	}
 	
@@ -122,6 +132,8 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return objetivosxMicro;
 	}
@@ -133,12 +145,16 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicObjetivoxmicro.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbId) from TbMicObjetivoxmicro");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicObjetivoxmicro.class);
+//			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("Se produjo un error al calcular los Registros de la Tabla Objetivos x Microcurriculo. "+e);			
-		}		
+		} finally{
+			session.close();
+		}
 		return registro;
 	}
 

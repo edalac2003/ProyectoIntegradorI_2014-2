@@ -25,6 +25,8 @@ public class ActaxMicroDAOHibernate extends HibernateDaoSupport implements Actax
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -35,10 +37,12 @@ public class ActaxMicroDAOHibernate extends HibernateDaoSupport implements Actax
 
 		try {
 			session = getSession();
-			actaxmicro = (TbMicActaxmicro) session.load(TbMicActaxmicro.class, id);
+			actaxmicro = (TbMicActaxmicro) session.get(TbMicActaxmicro.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return actaxmicro;
 	}
@@ -56,6 +60,8 @@ public class ActaxMicroDAOHibernate extends HibernateDaoSupport implements Actax
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return actaxmicro;
 	}
@@ -71,6 +77,8 @@ public class ActaxMicroDAOHibernate extends HibernateDaoSupport implements Actax
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

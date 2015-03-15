@@ -31,6 +31,8 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 	}
 
@@ -44,6 +46,8 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -54,10 +58,12 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 
 		try {
 			session = getSession();
-			nucleo = (TbAdmNucleo) session.load(TbAdmNucleo.class, id);
+			nucleo = (TbAdmNucleo) session.get(TbAdmNucleo.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return nucleo;
 	}
@@ -73,6 +79,8 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			nucleos = criteria.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 		return nucleos;
@@ -91,7 +99,9 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
             nucleos = query.list();
         }catch(HibernateException e){
             throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar listar los Nucleos por Dependencia.  "+e);
-        }
+        } finally{
+			session.close();
+		}
         return nucleos;
 	}
 	
@@ -110,7 +120,9 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
             	listarNucleos();   
         }catch(HibernateException e){
             throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return nucleos;
 	}
 	

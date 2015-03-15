@@ -39,7 +39,9 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
                 
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return prerrequisitos;
 	}
 
@@ -57,6 +59,8 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return prerrequisitos;
 	}
@@ -72,6 +76,8 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return prerrequisito;
 	}
@@ -87,6 +93,8 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -101,6 +109,8 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

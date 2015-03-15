@@ -8,10 +8,10 @@
             <column name="NB_IDAUDITORIA" precision="7" scale="0"/>
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmUsuario" class="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" fetch="join">
+        <many-to-one name="tbAdmUsuario" class="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" fetch="join" lazy="false">
             <column name="VR_USUARIO" length="20"/>
         </many-to-one>
-        <many-to-one name="tbAdmTabla" class="com.udea.proint1.microcurriculo.dto.TbAdmTabla" fetch="join">
+        <many-to-one name="tbAdmTabla" class="com.udea.proint1.microcurriculo.dto.TbAdmTabla" fetch="join" lazy="false">
             <column name="NB_TABLA" precision="7" scale="0"/>
         </many-to-one>
         <property name="vrObservaciones" type="int">

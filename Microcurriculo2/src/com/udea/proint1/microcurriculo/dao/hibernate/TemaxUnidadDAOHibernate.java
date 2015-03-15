@@ -33,6 +33,8 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			session.flush(); 
 		} catch (HibernateException e) {
 
+		} finally{
+			session.close();
 		}
 	}
 
@@ -47,6 +49,8 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 	
@@ -60,7 +64,9 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			temaxUnidad = (TbMicTemaxunidad)session.get(TbMicTemaxunidad.class, idTemaxUnidad);
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}		
+		} finally{
+			session.close();
+		}	
 		
 		return temaxUnidad;
 	}
@@ -82,7 +88,9 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
         	temasxUnidad = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return temasxUnidad;
 	}
 
@@ -98,6 +106,8 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			temasxUnidad = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return temasxUnidad;
@@ -110,10 +120,14 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicTemaxunidad.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbId) from TbMicTemaxunidad");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicTemaxunidad.class);
+//			registro = criteria.list().size();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : Se presentaron problemas al intentar recuperar el Numero de Registros de la Tabla <TB_MIC_TEMAXUNIDAD>. "+e);
+		} finally{
+			session.close();
 		}
 		
 		return registro;

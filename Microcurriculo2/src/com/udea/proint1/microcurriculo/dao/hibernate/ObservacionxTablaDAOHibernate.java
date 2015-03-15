@@ -25,6 +25,8 @@ public class ObservacionxTablaDAOHibernate extends HibernateDaoSupport implement
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -36,10 +38,12 @@ public class ObservacionxTablaDAOHibernate extends HibernateDaoSupport implement
 
 		try {
 			session = getSession();
-			observacionxtabla = (TbAdmObservacionxtabla) session.load(TbAdmObservacionxtabla.class, id);
+			observacionxtabla = (TbAdmObservacionxtabla) session.get(TbAdmObservacionxtabla.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return observacionxtabla;
 	}
@@ -58,6 +62,8 @@ public class ObservacionxTablaDAOHibernate extends HibernateDaoSupport implement
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return observacionxtabla;
 	}
@@ -73,6 +79,8 @@ public class ObservacionxTablaDAOHibernate extends HibernateDaoSupport implement
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

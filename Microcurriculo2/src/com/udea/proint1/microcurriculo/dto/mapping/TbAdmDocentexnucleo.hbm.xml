@@ -8,10 +8,10 @@
             <column name="NB_ID" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="select">
+        <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="join" lazy="false">
             <column name="VR_NUCLEO" length="7" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="select">
+        <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
             <column name="VR_DOCENTE" length="15" not-null="true" />
         </many-to-one>
         <property name="vrModusuario" type="string">

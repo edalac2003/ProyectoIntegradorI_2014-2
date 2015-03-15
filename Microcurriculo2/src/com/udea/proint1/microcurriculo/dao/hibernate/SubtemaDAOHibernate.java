@@ -37,6 +37,8 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -53,6 +55,8 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 	}
@@ -68,6 +72,8 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 		
 		return subtema;
@@ -85,6 +91,8 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 		return subtemas;
 	}
@@ -105,7 +113,9 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
         	subtemas = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return subtemas;
 	}
 
@@ -115,12 +125,16 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 		Session session = null;
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicSubtema.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbIdsubtema) from TbMicSubtema");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicSubtema.class);
+//			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : Se presentaron errores al contar los Registros de la Tabla Subtemas. "+e);
-		}				
+		} finally{
+			session.close();
+		}		
 		return registro;
 	}
 

@@ -28,6 +28,8 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 	
@@ -42,6 +44,8 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+		} finally{
+			session.close();
 		}
 	}
 
@@ -52,10 +56,12 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 		
 		try{
 			session = getSession();
-			microxEstado = (TbMicMicroxestado)session.load(TbMicMicroxestado.class, id);
+			microxEstado = (TbMicMicroxestado)session.get(TbMicMicroxestado.class, id);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return microxEstado;
 	}
@@ -71,6 +77,8 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			microsxestado = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return microsxestado;
@@ -88,7 +96,9 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
             
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
 		return microsxEstado;
 	}
 	
@@ -104,6 +114,8 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			registro = Integer.parseInt(query.uniqueResult().toString());
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : Error al Contar el numero de registros de la Tabla MicroxEstado.");
+		} finally{
+			session.close();
 		}
 	
 		return registro;

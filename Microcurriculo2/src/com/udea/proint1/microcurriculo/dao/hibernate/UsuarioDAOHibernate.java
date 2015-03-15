@@ -25,6 +25,8 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -35,10 +37,12 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 
 		try {
 			session = getSession();
-			usuario = (TbAdmUsuario) session.load(TbAdmUsuario.class, id);
+			usuario = (TbAdmUsuario) session.get(TbAdmUsuario.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return usuario;
 	}
@@ -56,6 +60,8 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return usuarios;
 	}
@@ -70,6 +76,8 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

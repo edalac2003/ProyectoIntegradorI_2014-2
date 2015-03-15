@@ -25,6 +25,8 @@ public class AuditoriaDAOHibernate extends HibernateDaoSupport implements Audito
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -35,10 +37,12 @@ public class AuditoriaDAOHibernate extends HibernateDaoSupport implements Audito
 
 		try {
 			session = getSession();
-			auditoria = (TbAdmAuditoria) session.load(TbAdmAuditoria.class, id);
+			auditoria = (TbAdmAuditoria) session.get(TbAdmAuditoria.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return auditoria;
 	}
@@ -56,6 +60,8 @@ public class AuditoriaDAOHibernate extends HibernateDaoSupport implements Audito
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return auditoria;
 	}
@@ -71,6 +77,8 @@ public class AuditoriaDAOHibernate extends HibernateDaoSupport implements Audito
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

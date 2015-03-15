@@ -11,7 +11,7 @@
         <property name="vrDescripcion" type="java.lang.String">
             <column name="VR_DESCRIPCION" length="255"/>
         </property>
-        <many-to-one name="tbMicMicrocurriculo" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" fetch="join">
+        <many-to-one name="tbMicMicrocurriculo" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" fetch="join" lazy="false">
             <column name="VR_MICROCURRICULO" length="20"/>
         </many-to-one>
         <property name="dtFechaobservacion" type="java.util.Date">

@@ -32,6 +32,8 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -45,6 +47,8 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 			objetivo = (TbMicObjetivo)session.get(TbMicObjetivo.class, idObjetivo);			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return objetivo;
 	}
@@ -56,11 +60,15 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 			
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicObjetivo.class);
-			registro = criteria.list().size();			
+			Query query = session.createQuery("select max(nbIdobjetivo) from TbMicObjetivo");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicObjetivo.class);
+//			registro = criteria.list().size();			
 		} catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}		
+		} finally{
+			session.close();
+		}
 		return registro;
 	}
 	
@@ -77,7 +85,9 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
             objetivos = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return objetivos;
 	}
 
@@ -93,7 +103,9 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
             objetivos = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return objetivos;
 	}
 	
@@ -108,7 +120,9 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 			objetivos = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}		
+		} finally{
+			session.close();
+		}
 		return objetivos;
 	}
 	
@@ -126,6 +140,8 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

@@ -26,6 +26,8 @@ public class DocentexNucleoDAOHibernate extends HibernateDaoSupport implements D
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -37,10 +39,12 @@ public class DocentexNucleoDAOHibernate extends HibernateDaoSupport implements D
 
 		try {
 			session = getSession();
-			docentesxnucleo = (TbAdmDocentexnucleo) session.load(TbAdmDocentexnucleo.class, id);
+			docentesxnucleo = (TbAdmDocentexnucleo) session.get(TbAdmDocentexnucleo.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return docentesxnucleo;
 	}
@@ -59,6 +63,8 @@ public class DocentexNucleoDAOHibernate extends HibernateDaoSupport implements D
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return docentesxnucleo;
 	}
@@ -74,6 +80,8 @@ public class DocentexNucleoDAOHibernate extends HibernateDaoSupport implements D
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

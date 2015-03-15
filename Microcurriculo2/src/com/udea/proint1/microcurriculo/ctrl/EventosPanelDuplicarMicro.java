@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -38,9 +39,9 @@ public class EventosPanelDuplicarMicro extends GenericForwardComposer {
 		
 		if(!idMicro.equals("")&&(!idMicro.equals("[Seleccione]"))){
 			recargarSemestres(idMicro);
-			session.setAttribute("idMicro", idMicro);
+			Executions.getCurrent().getSession().setAttribute("idMicro", idMicro);
 		}else{
-			session.removeAttribute("idMicro");
+			Executions.getCurrent().getSession().removeAttribute("idMicro");
 			cargarSemestres();
 		}
 	}
@@ -112,9 +113,9 @@ public class EventosPanelDuplicarMicro extends GenericForwardComposer {
 		String idSemestre = cmbSemestre.getValue().toString();
 		
 		if(!idSemestre.equals("")&&(!idSemestre.equals("[Seleccione]"))){
-			session.setAttribute("semestre", idSemestre);
+			Executions.getCurrent().getSession().setAttribute("semestre", idSemestre);
 		}else{
-			session.removeAttribute("semestre");
+			Executions.getCurrent().getSession().removeAttribute("semestre");
 		}
 	}
 	

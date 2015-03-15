@@ -36,6 +36,8 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -52,6 +54,8 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -65,7 +69,9 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 			tema = (TbMicTema)session.get(TbMicTema.class, idTema);			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}				
+		} finally{
+			session.close();
+		}			
 		return tema;
 	}
 
@@ -87,7 +93,9 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
         	temas = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return temas;
 	}
 
@@ -104,6 +112,8 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		
 		return temas;
@@ -116,12 +126,16 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicTema.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbIdtema) from TbMicTema");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicTema.class);
+//			registro = criteria.list().size();
 			
 		} catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : No es posible retornar un valor numerico de los registros. "+e);
-		}	
+		} finally{
+			session.close();
+		}
 		
 		return registro;
 	}

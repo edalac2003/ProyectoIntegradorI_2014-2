@@ -36,6 +36,8 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 	}
@@ -47,10 +49,12 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 
 		try {
 			session = getSession();
-			bibliografia = (TbMicBibliografia) session.load(TbMicBibliografia.class, id);
+			bibliografia = (TbMicBibliografia) session.get(TbMicBibliografia.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return bibliografia;
 	}
@@ -66,6 +70,8 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 	}
@@ -82,6 +88,8 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			bibliografias = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return bibliografias;
@@ -104,6 +112,8 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 		return bibliografias;
@@ -116,11 +126,15 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbIdbibliografia) from TbMicBibliografia");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
+//			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("Problemas para contar el numero de registros de la tabla Bibliografias");
+		} finally{
+			session.close();
 		}
 
 		return registro;
@@ -138,6 +152,8 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return bibliografias;
 	}

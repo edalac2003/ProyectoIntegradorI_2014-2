@@ -30,6 +30,8 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -40,11 +42,13 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 		
 		try{
 			session = getSession();
-			estado = (TbMicEstado)session.load(TbMicEstado.class, idEstado);
+			estado = (TbMicEstado)session.get(TbMicEstado.class, idEstado);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}		
+		} finally{
+			session.close();
+		}	
 		return estado;
 	}
 
@@ -62,6 +66,8 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return listaEstados;
@@ -78,6 +84,8 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			estados = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return estados;
@@ -93,6 +101,8 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 }

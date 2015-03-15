@@ -27,9 +27,11 @@ public class TipoPersonaDAOHibernate extends HibernateDaoSupport implements Tipo
 		
 		try{
 			session = getSession();
-			tipoPersona = (TbAdmTipopersona)session.load(TbAdmTipopersona.class, id);
+			tipoPersona = (TbAdmTipopersona)session.get(TbAdmTipopersona.class, id);
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return tipoPersona;
 	}
@@ -48,6 +50,8 @@ public class TipoPersonaDAOHibernate extends HibernateDaoSupport implements Tipo
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 		
 		return tipoPersonas;

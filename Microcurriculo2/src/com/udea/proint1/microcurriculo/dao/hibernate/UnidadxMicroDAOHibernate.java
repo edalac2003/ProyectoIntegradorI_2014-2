@@ -33,7 +33,9 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
-		}	
+		} finally{
+			session.close();
+		}
 	}
 	
 	@Override
@@ -65,6 +67,8 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -84,7 +88,9 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
         	unidadesXMicro = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return unidadesXMicro;
 	}
 
@@ -102,6 +108,8 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return unidadesXMicro;
 	}
@@ -113,10 +121,14 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicUnidadxmicro.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbId) from TbMicUnidadxmicro");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicUnidadxmicro.class);
+//			registro = criteria.list().size();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("Se produjo un Error al Intentar contar los Registros de la Tabla Unidades x Microcurriculo. "+e);
+		} finally{
+			session.close();
 		}
 	
 		return registro;

@@ -25,6 +25,8 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -36,10 +38,12 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 
 		try {
 			session = getSession();
-			actividadxmicro = (TbMicActividadxmicro) session.load(TbMicActividadxmicro.class, id);
+			actividadxmicro = (TbMicActividadxmicro) session.get(TbMicActividadxmicro.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return actividadxmicro;
 	}
@@ -58,6 +62,8 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return actividadxmicro;
 	}
@@ -73,6 +79,8 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

@@ -8,7 +8,7 @@
             <column name="NB_IDDEPARTAMENTO" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmPais" class="com.udea.proint1.microcurriculo.dto.TbAdmPais" fetch="select">
+        <many-to-one name="tbAdmPais" class="com.udea.proint1.microcurriculo.dto.TbAdmPais" fetch="join" lazy="false">
             <column name="NB_PAIS" precision="22" scale="0" not-null="true" />
         </many-to-one>
         <property name="vrNombres" type="string">

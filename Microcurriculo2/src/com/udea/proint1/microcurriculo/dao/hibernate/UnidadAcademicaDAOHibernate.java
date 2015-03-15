@@ -29,6 +29,8 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -39,10 +41,12 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 
 		try {
 			session = getSession();
-			unidad = (TbAdmUnidadAcademica) session.load(TbAdmUnidadAcademica.class, idUnidad);
+			unidad = (TbAdmUnidadAcademica) session.get(TbAdmUnidadAcademica.class, idUnidad);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return unidad;
 	}
@@ -57,6 +61,8 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 	
@@ -73,6 +79,8 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return unidadesAcademicas;
 	}

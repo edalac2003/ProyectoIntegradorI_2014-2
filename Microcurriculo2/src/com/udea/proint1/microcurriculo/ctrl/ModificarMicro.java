@@ -1,8 +1,6 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,17 +18,14 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
-import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Tabbox;
-import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 
@@ -71,17 +66,12 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  * @author Elmer Urrea & Edwin Acosta
  *
  */
-public class DuplicarMicroCtrl extends GenericForwardComposer{
+
+public class ModificarMicro extends GenericForwardComposer{
 	
-	private static Logger logger = Logger.getLogger(DuplicarMicroCtrl.class);
+	private static Logger logger = Logger.getLogger(ModificarMicro.class);
 	
 	Button btnAddObjetivo;
-	Button btnAddUnidad;
-	Button btnAddTemas;
-	Button btnAddSubTema;
-	Button btnAddEvaluacion;
-	Button btnAddBibliografia;
-	Button btnAddCibergrafia;
 	
 	Include panelDuplicarMicro;
 	
@@ -100,12 +90,6 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Combobox cmbDependencia;
 	Combobox cmbNucleo;
 	Combobox cmbMateria;
-	Combobox cmbIdUnidad;
-	Combobox cmbListaUnidades;
-	Combobox cmbListaTemas;
-	Combobox cmbListaUnidadBiblio;
-	Combobox cmbTipoBibliografia;
-	Combobox cmbTipoCibergrafia;
 	
 	Label lblIdMicrocurriculo;
 	Label lblNombreUnidadAcademica;
@@ -136,19 +120,6 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Textbox txtObjetivoGeneral;
 	Textbox txtResumenMicro;
 	Textbox txtObjetivoEspecifico;
-	Textbox txtNombreUnidad;
-	Textbox txtNombreTema;
-	Longbox txtNumeroSemanas;
-	Textbox txtSubTemas;
-	Textbox txtActividadMicro;
-	Longbox txtPorcentajeActividad;
-	Textbox txtReferenciaBiblio;
-	Textbox txtAutorBiblio;
-	Textbox txtISBNBiblio;
-	Textbox txtNombreSitioCiber;
-	Textbox txtURLSitioCiber;
-	
-	Datebox dtFechaEvaluacion;
 	
 	Listbox listaObjetivosEspecificos;
 	Listbox listaUnidades;
@@ -163,12 +134,6 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	Toolbarbutton tool_duplica_otro;
 	Toolbarbutton tool_consulta_otro;
 	
-	/**
-	 * Formatos de fecha
-	 */
-	Date fechaEstimada = null;
-	DateFormat formatoFecha = DateFormat.getDateInstance(DateFormat.MEDIUM);
-	
 	MicrocurriculoNGC microcurriculoNGC;
 	SemestreNGC semestreNGC;
 	PersonaNGC personaNGC;
@@ -180,11 +145,6 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	SubtemaxTemaNGC subtemaxTemaNGC;
 	EvaluacionxMicroNGC evaluacionxMicroNGC;
 	BiblioxunidadNGC biblioxUnidadNGC;
-	
-	/**
-	 * Variable de control de porcentaje, que no sobrepase el 100%
-	 */
-	int porcentajeEvaluacion = 0;
 	
 	/**
 	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicMicrocurriculo
@@ -273,6 +233,21 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
 		this.biblioxUnidadNGC = biblioxUnidadNGC;
 	}
+
+	/**
+	 * Listados para destionar los datos del nuevo microcurriculo a duplicar, dejandolos listos para el
+	 * guardado en la base de datos
+	 */
+	
+	List<TbMicObjetivo> objetivosGuardar = new ArrayList<TbMicObjetivo>();
+	List<TbMicUnidad> unidadesGuardar = new ArrayList<TbMicUnidad>();
+	List<TbMicTemaxunidad> temasxUnidadGuardar = new ArrayList<TbMicTemaxunidad>();
+	List<TbMicTema> temasGuardar = new ArrayList<TbMicTema>();
+	List<TbMicSubtemaxtema> subtemasxTemaGuardar = new ArrayList<TbMicSubtemaxtema>();
+	List<TbMicSubtema> subtemasGuardar = new ArrayList<TbMicSubtema>();
+	List<TbMicEvaluacion> evaluacionesGuardar = new ArrayList<TbMicEvaluacion>();
+	List<TbMicBiblioxunidad> bibliosxUnidadGuardar = new ArrayList<TbMicBiblioxunidad>();
+	List<TbMicBibliografia> bibliosGuardar = new ArrayList<TbMicBibliografia>();
 	
 	/**
 	 * Solicita de la capa del negocio todos los semestres disponibles para ese tipo de microcurriculos
@@ -650,13 +625,13 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 				item.appendChild(celda);
 				listaObjetivosEspecificos.appendChild(item);
 				
+				objetivosGuardar.add(objetivoxMicro.getTbMicObjetivo());
 			}
 		}
 	}
 	
 	/**
-	 * Metodo a la espera del evento click en el boton btnAddObjetivo para validar si la información se ingresó
-	 * para luego ser adicionada al listbox
+	 * 
 	 * @param event
 	 */
 	public void onClick$btnAddObjetivo(Event event){
@@ -687,20 +662,15 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		try {
 			unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(idMicrocurriculo);
 		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo listarUnidadesXMicroxMicro de la clase UnidadxMicroNGC "+e);
+			logger.error(e);
 		}
-		/**
-		 * Inicia buscando unidades relacionadas al microcurriculo y luego son agregadas
-		 * a los listbox y combobox
-		 */
 		
 		for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
 			final Listitem item = new Listitem();
-			final String tmpUnidad = unidadxMicro.getTbMicUnidad().getVrNombre(); 
 			item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 				@Override
 				public void onEvent(Event arg0) throws Exception {
-					eliminaListItem(item, tmpUnidad);
+					eliminaListItem(item,"");
 				}
 			});
 			
@@ -710,33 +680,17 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 			item.appendChild(celda2);
 			listaUnidades.appendChild(item);
 			
-			Comboitem comboUnidad1 = new Comboitem(unidadxMicro.getTbMicUnidad().getVrNombre());
-			cmbIdUnidad.appendChild(comboUnidad1);
-			Comboitem comboUnidad2 = new Comboitem(unidadxMicro.getTbMicUnidad().getVrNombre());
-			cmbListaUnidades.appendChild(comboUnidad2);
-			Comboitem comboUnidad3 = new Comboitem(unidadxMicro.getTbMicUnidad().getVrNombre());
-			cmbListaUnidadBiblio.appendChild(comboUnidad3);
-			
-			/**
-			 * busca todos los temas x unidad asociados a las unidades y se ubican extraen los temas
-			 * para llenar los listbox
-			 */
+			unidadesGuardar.add(unidadxMicro.getTbMicUnidad());
 			
 			List<TbMicTemaxunidad> temasxUnidad = null;
 			try {
 				temasxUnidad = temaxUnidadNGC.ListarTemasxUnidadxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
 			} catch (ExcepcionesLogica e) {
-				logger.error("problemas al invocar metodo ListarTemasxUnidadxUnidad de la clase TemaxUnidadNGC "+e);
+				logger.error(e);
 			}
 			if(temasxUnidad != null){
 				for(TbMicTemaxunidad temaxUnidad: temasxUnidad){
-					final Listitem itemTemas = new Listitem();
-					itemTemas.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-						@Override
-						public void onEvent(Event arg0) throws Exception {
-							eliminaListItem(itemTemas, "");
-						}
-					});
+					Listitem itemTemas = new Listitem();
 					
 					Listcell celdaTemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
 					itemTemas.appendChild(celdaTemas1);
@@ -746,64 +700,46 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 					itemTemas.appendChild(celdaTemas3);
 					listaTemas.appendChild(itemTemas);
 					
-					/**
-					 * Busca los subtemas x unidad y los extrae para ser agregados al listbox listaSubtemas
-					 */
+					temasGuardar.add(temaxUnidad.getTbMicTema());
+					temasxUnidadGuardar.add(temaxUnidad);
 					
 					List<TbMicSubtemaxtema> subtemasxTema = null;
 					try {
 						subtemasxTema = subtemaxTemaNGC.listarSubtemaxTema_Tema(temaxUnidad.getTbMicTema().getNbIdtema());
 					} catch (ExcepcionesLogica e) {
-						logger.error("problemas al invocar metodo listarSubtemaxTema_Tema de la clase SubtemaxTemaNGC "+e);
+						logger.error(e);
 					}
 					if(subtemasxTema != null){
 						for(TbMicSubtemaxtema subtemaxTema: subtemasxTema){
-							final Listitem itemSubtemas = new Listitem();
-							itemSubtemas.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-								@Override
-								public void onEvent(Event arg0) throws Exception {
-									eliminaListItem(itemSubtemas, "");
-								}
-							});
+							Listitem itemSubTemas = new Listitem();
 							
-							Listcell celdaSubtemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
-							itemSubtemas.appendChild(celdaSubtemas1);
-							Listcell celdaSubtemas2 = new Listcell(subtemaxTema.getTbMicTema().getVrDescripcion());
-							itemSubtemas.appendChild(celdaSubtemas2);
-							Listcell celdaSubtemas3 = new Listcell(subtemaxTema.getTbMicSubtema().getVrDescripcion());
-							itemSubtemas.appendChild(celdaSubtemas3);
-							listaSubtemas.appendChild(itemSubtemas);
+							Listcell celdaSubTemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
+							itemSubTemas.appendChild(celdaSubTemas1);
+							Listcell celdaSubTemas2 = new Listcell(subtemaxTema.getTbMicTema().getVrDescripcion());
+							itemSubTemas.appendChild(celdaSubTemas2);
+							Listcell celdaSubTemas3 = new Listcell(subtemaxTema.getTbMicSubtema().getVrDescripcion());
+							itemSubTemas.appendChild(celdaSubTemas3);
+							listaSubtemas.appendChild(itemSubTemas);
 							
+							subtemasGuardar.add(subtemaxTema.getTbMicSubtema());
+							subtemasxTemaGuardar.add(subtemaxTema);
 						}
 					}
 				}
 			}
 			
-			/**
-			 * Hace la busqueda de las bibliografias asociadas a las unidades del microcurriculo y las agrega
-			 * finalmente a los list box de las bibliografias
-			 */
-			
 			List<TbMicBiblioxunidad> bibliosxUnidad = null;
 			try {
 				bibliosxUnidad = biblioxUnidadNGC.listadoBiblioxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
 			} catch (ExcepcionesLogica e) {
-				logger.error("problemas al invocar metodo listadoBiblioxUnidad de la clase BiblioxUnidadNGC "+e);
+				logger.error(e);
 			}
 			
 			if(bibliosxUnidad!=null){
 				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidad){
 					if(biblioxUnidad.getTbMicBibliografia().getVrSitioweb() == null){
-						final Listitem itemBiblio = new Listitem();
-						itemBiblio.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-							@Override
-							public void onEvent(Event arg0) throws Exception {
-								eliminaListItem(itemBiblio, "");
-							}
-						});
+						Listitem itemBiblio = new Listitem();
 						
-						Listcell celdaBiblio0 = new Listcell(biblioxUnidad.getTbMicUnidad().getVrNombre());
-						itemBiblio.appendChild(celdaBiblio0);
 						Listcell celdaBiblio1 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrNombre());
 						itemBiblio.appendChild(celdaBiblio1);
 						Listcell celdaBiblio2 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrAutor());
@@ -819,17 +755,11 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 						}
 						listaBibliografia.appendChild(itemBiblio);
 						
+						bibliosGuardar.add(biblioxUnidad.getTbMicBibliografia());
+						bibliosxUnidadGuardar.add(biblioxUnidad);
 					}else{
-						final Listitem itemBiblio = new Listitem();
-						itemBiblio.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-							@Override
-							public void onEvent(Event arg0) throws Exception {
-								eliminaListItem(itemBiblio, "");
-							}
-						});
+						Listitem itemBiblio = new Listitem();
 						
-						Listcell celdaBiblio0 = new Listcell(biblioxUnidad.getTbMicUnidad().getVrNombre());
-						itemBiblio.appendChild(celdaBiblio0);
 						Listcell celdaBiblio1 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrNombre());
 						itemBiblio.appendChild(celdaBiblio1);
 						Listcell celdaBiblio2 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrSitioweb());
@@ -843,6 +773,8 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 						}
 						listaCibergrafia.appendChild(itemBiblio);
 						
+						bibliosGuardar.add(biblioxUnidad.getTbMicBibliografia());
+						bibliosxUnidadGuardar.add(biblioxUnidad);
 					}
 				}
 			}
@@ -852,7 +784,6 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 	
 	/**
 	 * El metodo procede a llenar las evaluaciones encontradas del microcurriculo
-	 * Solo aplica para la consulta, porque para el duplicado se asumen fechas diferentes de evaluaciones
 	 * @param idMicrocurriculo cadena de caracteres con identificacion del microcurriculo
 	 */
 	public void llenarEvaluaciones(String idMicrocurriculo){
@@ -860,7 +791,7 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		try {
 			evaluacionesxMicro = evaluacionxMicroNGC.ListarEvaluacionxMicroxMicro(idMicrocurriculo);
 		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo ListarEvaluacionxMicroxMicro de la clase EvaluacionxMicroNGC "+e);
+			logger.error(e);
 		}
 		for(TbMicEvaluacionxmicro evaluacionxmicro: evaluacionesxMicro){
 			Listitem item = new Listitem();
@@ -873,48 +804,185 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 			item.appendChild(celda3);
 			listaEvaluaciones.appendChild(item);
 			
+			evaluacionesGuardar.add(evaluacionxmicro.getTbMicEvaluacion());
 		}
 	}
 	
-	/**
-	 * Atiende a los eventos de doble click en las listas que corresponden al borrado de items
-	 * El metodo revisa la lista que hizo el llamado y procede a borrar en cascada (y/o) borrar item
-	 * @param item fila a borrar en la lista
-	 * @param clave identificacion del objeto borrado no siempre es enviado
-	 */
-	private void eliminaListItem(Listitem item, String clave){
+//	public void llenarComplementaria(TbMicMicrocurriculo microcurriculo){
+//		
+//		txtJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
+//		txtPropositoMicro.setValue(microcurriculo.getVrProposito());
+//		txtResumenMicro.setValue(microcurriculo.getVrResumen());
+//		
+//		List<TbMicObjetivoxmicro> objetivosxMicro = null;
+//		try {
+//			objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(microcurriculo.getVrIdmicrocurriculo());
+//		} catch (ExcepcionesLogica e) {
+//			logger.error(e);
+//		}
+//		if(objetivosxMicro != null){
+//			for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
+//				if(objetivoxMicro.getBlTipo()=='1'){
+//					txtObjetivoGeneral.setValue(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
+//				}else{
+//					final Listitem listaItem = new Listitem();
+//					listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+//						@Override
+//						public void onEvent(Event arg0) throws Exception {
+//							eliminaListItem(listaItem,"");
+//						}
+//					});
+//					Listcell celda = new Listcell(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
+//					listaItem.appendChild(celda);			
+//					listaObjetivosEspecificos.appendChild(listaItem);
+//				}
+//			}
+//		}
+//	}
+	
+	private void eliminaListItem(Listitem item, String clave){		
 		if(item.getParent().getId().toString().equals("listaUnidades")){
 			eliminaCascadaUnidad(item, clave.toUpperCase());
+			//quitarUnidad(item);
 			item.detach();
-			recargarCombosUnidades(listaUnidades);
+			//recargarCombosUnidades(listaUnidades);
 		} else if (item.getParent().getId().toString().equals("listaTemas")){
 			eliminaCascadaTema(item, clave.toUpperCase());
 			item.detach();
-			recargarCombosTemas(listaTemas);
+			//recargarCombosTemas(listaTemas);
 		} else if(item.getParent().getId().toString().equals("listaSubtemas")){
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaEvaluaciones")){
 			Listcell celdaPorcentaje = (Listcell)item.getChildren().get(1);
-			porcentajeEvaluacion = porcentajeEvaluacion - Integer.parseInt(celdaPorcentaje.getLabel());
+			//porcentajeEvaluacion = porcentajeEvaluacion - Integer.parseInt(celdaPorcentaje.getValue().toString());
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaBibliografia")){
+			//quitarBibliografia(item);
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaCibergrafia")){
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaObjetivosEspecificos")){
+			//quitarObjetivo(item);
 			item.detach();
 		}
 	}
 	
-	/**
-	 * Elimina todos los subtemas asociados al tema que se borrará para que no queden sueltos
-	 * sin refencia de alguno
-	 * @param item fila a eliminar
-	 * @param clave identificacion de tema
-	 */
+//	public void quitarBibliografia(Listitem item){
+//		
+//	}
+//	
+//	public void quitarUnidad(Listitem item){
+//		Listcell celda = (Listcell) item.getChildren().get(1);
+//		String nombreUnidad = celda.getLabel();
+//		
+//		TbMicUnidad unidadBorrar = null;
+//		for(TbMicUnidad unidad: unidadesGuardar){
+//			if(unidad.getVrNombre().equals(nombreUnidad)){
+//				unidadBorrar = unidad;
+//			}
+//		}
+//		quitarCascadaTemas(unidadBorrar.getNbIdunidad());
+//		if(unidadBorrar != null){
+//			unidadesGuardar.remove(unidadBorrar);
+//		}
+//		for(TbMicUnidad unidad: unidadesGuardar){
+//			System.out.println(unidad.getVrNombre());
+//		}
+//	}
+//	
+//	public void quitarCascadaTemas(int idUnidad){
+//		boolean seguirBorrando = true;
+//		while(seguirBorrando){
+//			seguirBorrando = false;
+//			TbMicTemaxunidad temaxUnidadBorrar = null;
+//			for(TbMicTemaxunidad temaxUnidad: temasxUnidadGuardar){
+//				if(temaxUnidad.getTbMicUnidad().getNbIdunidad() == idUnidad){
+//					temaxUnidadBorrar = temaxUnidad;
+//					seguirBorrando = true;
+//				}
+//			}
+//			if(temaxUnidadBorrar != null){
+//				temasxUnidadGuardar.remove(temaxUnidadBorrar);
+//			}
+//			for(TbMicTemaxunidad temaxUnidad: temasxUnidadGuardar){
+//				System.out.println(temaxUnidad.getNbId());
+//			}
+//			if(temaxUnidadBorrar != null){
+//				TbMicTema temaBorrar = null;
+//				for(TbMicTema tema: temasGuardar){
+//					if(tema.getNbIdtema() == temaxUnidadBorrar.getTbMicTema().getNbIdtema()){
+//						temaBorrar = tema;
+//						seguirBorrando = true;
+//					}
+//				}
+//				if(temaBorrar != null){
+//					temasGuardar.remove(temaBorrar);
+//				}
+//				quitarCascadaSubtemas(temaxUnidadBorrar.getTbMicTema().getNbIdtema());
+//			}
+//			for(TbMicTema tema: temasGuardar){
+//				System.out.println(tema.getVrDescripcion());
+//			}
+//		}
+//	}
+//	
+//	public void quitarCascadaSubtemas(int idTema){
+//		boolean seguirBorrando = true;
+//		while(seguirBorrando){
+//			seguirBorrando = false;
+//			TbMicSubtemaxtema subtemaxtemaBorrar = null;
+//			for(TbMicSubtemaxtema subtemaxTema: subtemasxTemaGuardar){
+//				if(subtemaxTema.getTbMicTema().getNbIdtema() == idTema){
+//					subtemaxtemaBorrar = subtemaxTema;
+//					seguirBorrando = true;
+//				}
+//			}
+//			if(subtemaxtemaBorrar != null){
+//				subtemasxTemaGuardar.remove(subtemaxtemaBorrar);
+//			}
+//			for(TbMicSubtemaxtema subtemaxTema: subtemasxTemaGuardar){
+//				System.out.println(subtemaxTema.getNbid());
+//			}
+//			if(subtemaxtemaBorrar != null){
+//				TbMicSubtema subtemaBorrar = null;
+//				for(TbMicSubtema subtema: subtemasGuardar){
+//					if(subtema.getNbIdsubtema() == subtemaxtemaBorrar.getTbMicSubtema().getNbIdsubtema()){
+//						subtemaBorrar = subtema;
+//						seguirBorrando = true;
+//					}
+//				}
+//				if(subtemaBorrar != null){
+//					subtemasGuardar.remove(subtemaBorrar);
+//				}
+//			}
+//			for(TbMicSubtema subtema: subtemasGuardar){
+//				System.out.println(subtema.getVrDescripcion());
+//			}
+//		}
+//	}
+//	
+//	public void quitarObjetivo(Listitem item){
+//		Listcell celda = (Listcell) item.getChildren().get(0);
+//		String nombreObjetivo = celda.getLabel();
+//		
+//		TbMicObjetivo objetivoBorrar = null;
+//		for(TbMicObjetivo objetivo: objetivosGuardar){
+//			if(objetivo.getVrDescripcion().equals(nombreObjetivo)){
+//				objetivoBorrar = objetivo;
+//			}
+//		}
+//		
+//		if(objetivoBorrar != null){
+//			objetivosGuardar.remove(objetivoBorrar);
+//		}
+////		for(TbMicObjetivo objetivo: objetivosGuardar){
+////			System.out.println(objetivo.getVrDescripcion());
+////		}
+//	}
+	
 	private void eliminaCascadaTema(Listitem item, String clave){
 		Listcell celda = (Listcell)item.getChildren().get(1);
-		clave = celda.getLabel().toUpperCase();
+		clave = celda.getLabel();
 		if (listaSubtemas.getItems().size() > 0){
 			for(int i=1; i<=listaSubtemas.getItems().size(); i++){
 				Listitem itemSubtema = (Listitem)listaSubtemas.getChildren().get(i);
@@ -927,29 +995,19 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
-	/**
-	 * Hace la carga de los combos de los temas actuales, para facilitar la eleccion del usuario
-	 * @param lista objeto lista de temas a llenar
-	 */
-	private void recargarCombosTemas(Listbox lista){
-		cmbListaTemas.getItems().clear();
-		
-		if(lista.getItems().size() > 0){
-			for(int i=1; i<= lista.getItemCount(); i++){
-				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
-				Listcell celda = (Listcell)listaItem.getChildren().get(1);
-				Comboitem item = new Comboitem(celda.getLabel());
-				cmbListaTemas.appendChild(item);
-			}
-		}
-	}
+//	private void recargarCombosTemas(Listbox lista){
+//		cmbListaTemas.getItems().clear();
+//		
+//		if(lista.getItems().size() > 0){
+//			for(int i=1; i<= lista.getItemCount(); i++){
+//				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
+//				Listcell celda = (Listcell)listaItem.getChildren().get(0);
+//				Comboitem item = new Comboitem(celda.getLabel());
+//				cmbListaTemas.appendChild(item);
+//			}
+//		}
+//	}
 	
-	/**
-	 * Elimina en cascada los items asociados a la Unidad a borrar, para que no queden
-	 * referencias sueltas
-	 * @param item objeto fila a borrar
-	 * @param clave identificacion de unidad a borrar
-	 */
 	private void eliminaCascadaUnidad(Listitem item, String clave){
 		if (listaBibliografia.getItems().size() > 0){
 			for (int i=1; i<=listaBibliografia.getItems().size(); i++){
@@ -995,600 +1053,47 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
-	/**
-	 * Hace la carga de unidades existentes en los combobox de busqueda para
-	 * facilitar la eleccion del usuario
-	 * @param lista objeto listado de unidades a recargar en los combobox
-	 */
-	private void recargarCombosUnidades(Listbox lista){
-		cmbIdUnidad.getItems().clear();
-		cmbListaUnidades.getItems().clear();
-		cmbListaUnidadBiblio.getItems().clear();
-		cmbListaTemas.getItems().clear();
-
-		if (lista.getItems().size() > 0){
-			for (int i=1; i <= lista.getItems().size(); i++ ){
-				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
-				Listcell celda = (Listcell)listaItem.getChildren().get(1);
-
-				Comboitem itemUnidadTema = new Comboitem(celda.getLabel());
-				cmbIdUnidad.appendChild(itemUnidadTema);
-				Comboitem item2 = new Comboitem(celda.getLabel());
-				cmbListaUnidades.appendChild(item2); 
-				Comboitem item3 = new Comboitem(celda.getLabel());
-				cmbListaUnidadBiblio.appendChild(item3);
-			}	
-		}	
-	}
+//	private void recargarCombosUnidades(Listbox lista){
+//		cmbIdUnidad.getItems().clear();
+//		cmbListaUnidades.getItems().clear();
+//		cmbListaUnidadBiblio.getItems().clear();
+//		cmbListaTemas.getItems().clear();
+//
+//		if (lista.getItems().size() > 0){
+//			for (int i=1; i <= lista.getItems().size(); i++ ){
+//				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
+//				Listcell celda = (Listcell)listaItem.getChildren().get(1);
+//
+//				Comboitem itemUnidadTema = new Comboitem(celda.getLabel());
+//				cmbIdUnidad.appendChild(itemUnidadTema);
+//				Comboitem item2 = new Comboitem(celda.getLabel());
+//				cmbListaUnidades.appendChild(item2); 
+//				Comboitem item3 = new Comboitem(celda.getLabel());
+//				cmbListaUnidadBiblio.appendChild(item3);
+//			}	
+//		}
+//			
+//	}
 	
-	/**
-	 * Ante la eleccion del semestre a duplicar, se guarda en session 
-	 * el id de semestre a duplicar
-	 */
 	public void onSelect$cmbSemestre2(){
 		String semestreDuplicar = cmbSemestre2.getValue().toString();
 		if(!semestreDuplicar.equals("[Seleccione]")&&(!semestreDuplicar.equals(""))){
+//			session.setAttribute("semestre", semestreDuplicar);
 			Executions.getCurrent().getSession().setAttribute("semestre", semestreDuplicar);
 		}else{
 			if(Executions.getCurrent().getSession().hasAttribute("semestre")){
+//				session.removeAttribute("semestre");
 				Executions.getCurrent().getSession().removeAttribute("semestre");
 			}
 		}
 	}
 	
-	/**
-	 * Ante el evento click en el botón de reinicio de duplicado, procede a
-	 * llamar el metodo que reinicia el duplicado
-	 */
 	public void onClick$tool_duplica_otro(){
 		ReiniciarBusqueda();
 	}
 	
-	/**
-	 * Ante el evento click en el botón de reiniciar busqueda, procede a
-	 * llamar el metodo que muestra el menú para buscar otro microcurriculo a mostrar
-	 */
 	public void onClick$tool_consulta_otro(){
 		ReiniciarBusqueda2();
-	}
-	
-	/**
-	 * Boton btnAddTemas Evento onClick
-	 * 
-	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
-	 * lista previa validación de contenido existente.
-	 * 
-	 * @param event
-	 */
-	public void onClick$btnAddTemas(Event event){		
-		validarCamposTemas(txtNombreTema.getValue().toString());
-					
-	}
-	
-	/**
-	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
-	 * lista previa validación de contenido existente.
-	 * 
-	 */
-	private void validarCamposTemas(String nombreTema){
-		if(cmbIdUnidad.getValue().trim().length() > 0)
-			if (txtNombreTema.getValue().trim().length() > 0 && (!"".equals(txtNombreTema.getValue())))
-				if(txtNumeroSemanas.longValue() > 0){
-					
-					llenarListaTemas(nombreTema);
-					cmbListaUnidades.setSelectedIndex(-1);
-					cmbListaUnidades.setValue("");
-				}else{
-					Messagebox.show("Se requiere información en el campo <Tiempo (Semanas)>");
-					txtNumeroSemanas.focus();
-				}
-			else{
-				Messagebox.show("Se requiere información en el campo <Nombre Tema>");
-				txtNombreTema.focus();
-			}
-		else{
-			Messagebox.show("Se requiere información en el campo <Nombre Unidad>");
-			cmbIdUnidad.focus();
-		}
-	}
-	
-	/**
-	 * El metodo valida que no exista y agrega nuevos temas al listbox cmbListaTemas
-	 * @param tema objeto tema con parametros definidos para ser ubicado junto a los otros temas existentes en la lista
-	 */
-	public void llenarListaTemas(String tema){
-		final Listitem listaItem = new Listitem();
-		final String tmpTema = tema.toUpperCase().trim();
-		
-		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {
-				eliminaListItem(listaItem, tmpTema);
-			}
-		});
-		
-		if (!existeTema(tmpTema)){
-			Listcell celdaUnidad = new Listcell(cmbIdUnidad.getValue());
-			Listcell celdaTema = new Listcell(txtNombreTema.getValue().toUpperCase());		
-			Listcell celdaTiempo = new Listcell(txtNumeroSemanas.getValue().toString());		
-			listaItem.appendChild(celdaUnidad);
-			listaItem.appendChild(celdaTema);
-			listaItem.appendChild(celdaTiempo);
-			
-			Comboitem item = new Comboitem(txtNombreTema.getValue().toUpperCase());		
-			cmbListaTemas.appendChild(item);
-			
-			listaTemas.appendChild(listaItem);
-			cmbIdUnidad.setValue("");
-			txtNombreTema.setValue("");
-			txtNumeroSemanas.setValue(null);
-		} else{
-			Messagebox.show("El Tema a Ingresar ya Existe.");
-		}
-	}
-	
-	/**
-	 * Metodo de validación si el tema existe
-	 * @param tema variable objeto que contiene el nombre del tema a verificar
-	 * @return true si el tema existe o sino retorna falso indicando que no existe tema con dicho nombre
-	 */
-	private boolean existeTema(String tema){
-		boolean estado = false;
-		for(int i=1; i<=listaTemas.getItems().size(); i++){
-			Listitem item = (Listitem)listaTemas.getChildren().get(i);
-			Listcell celdaTema = (Listcell)item.getChildren().get(1);
-			if (tema.equals(celdaTema.getLabel().trim().toUpperCase())){
-				estado = true;
-				break;
-			}
-		}
-		return estado;
-	}
-	
-	/**
-	 * Metodo a la espera de click en el boton agregar unidad y procede a enviar a metodo
-	 * que agrega la unidad si cumple los parametros de guardado
-	 * @param event
-	 */
-	public void onClick$btnAddUnidad(Event event){
-		llenarListaUnidades(txtNombreUnidad.getValue());
-	}
-	
-	/**
-	 * Procede a verificar si la unidad cumple con los parametros de guardado y la grega a la lista de
-	 * unidades existentes
-	 * @param nombreUnidad nombre de la unidad a agregar en la lista de unidades
-	 */
-	private void llenarListaUnidades(String nombreUnidad){
-		if(!("".equals(nombreUnidad)) && (nombreUnidad.trim().length() > 0)){			
-			final Listitem listaItem = new Listitem();
-			final String tmpUnidad = nombreUnidad;
-			
-			listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-				@Override
-				public void onEvent(Event arg0) throws Exception {
-					eliminaListItem(listaItem, tmpUnidad);					
-				}
-			});
-			if (!existeUnidad(tmpUnidad)){
-				Listcell celdaVacia = new Listcell("");
-				listaItem.appendChild(celdaVacia);
-				Listcell celdaUnidad = new Listcell(nombreUnidad.toUpperCase());
-				listaItem.appendChild(celdaUnidad);
-				llenarCombosUnidades(nombreUnidad.toUpperCase());
-				listaUnidades.appendChild(listaItem);
-				txtNombreUnidad.setValue("");
-				txtNombreUnidad.setFocus(true);
-			}else
-				Messagebox.show("Existe un unidad con el mismo nombre.");
-			
-		} else
-			if (listaUnidades.getItems().size() > 0)
-				cmbIdUnidad.focus();
-			else
-				Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
-	}
-	
-	/**
-	 * Verifica si existe la unidad a guardar
-	 * @param unidad nombre de unidad a verificar
-	 * @return true si la unidad ya existe y false si no existe con ese nombre
-	 */
-	private boolean existeUnidad(String unidad){
-		boolean estado = false;
-		for (int i=1;i<=listaUnidades.getItems().size(); i++){
-			Listitem item = (Listitem)listaUnidades.getChildren().get(i);
-			Listcell celdaUnidad = (Listcell)item.getChildren().get(1);
-			if (unidad.toUpperCase().equals(celdaUnidad.getLabel())){
-				estado = true;
-				break;
-			}	
-		}
-		return estado;
-	}
-	
-	/**
-	 * El metodo agrega la unidad nueva a los combobox
-	 * @param unidad nombre de unidad a agregar en los combobox
-	 */
-	private void llenarCombosUnidades(String unidad){
-		Comboitem item = new Comboitem(unidad);		
-		cmbIdUnidad.appendChild(item);
-		Comboitem item2 = new Comboitem(unidad);
-		cmbListaUnidades.appendChild(item2);
-		Comboitem item3 = new Comboitem(unidad);
-		cmbListaUnidadBiblio.appendChild(item3);
-	}
-	
-	public void onClick$btnAddSubTema(Event event){
-		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
-	}
-	
-	private void validarCamposSubtemas(String listaUnidades, String listaTemas, String subTema){
-		if (cmbListaUnidades.getValue() != null && (cmbListaUnidades.getValue().trim().length() > 0)){
-			if (cmbListaTemas.getValue() != null && (cmbListaTemas.getValue().trim().length() > 0)){
-				if (txtSubTemas.getValue() != null && (txtSubTemas.getValue().trim().length() > 0)){
-					llenarListaSubTemas();
-					cmbListaTemas.getItems().clear();
-					cmbListaTemas.setValue("");
-					cmbListaUnidades.focus();
-				} else
-					Messagebox.show("Se Requiere información en el Campo <Subtema>");
-			} else
-				Messagebox.show("Se Requiere información en el Campo <Tema>");			
-		} else
-			Messagebox.show("Se Requiere información en el Campo <Unidad>");
-	}
-	
-	private void llenarListaSubTemas(){
-		final Listitem listaItem = new Listitem();
-		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-
-			@Override
-			public void onEvent(Event arg0) throws Exception {						
-				eliminaListItem(listaItem,"");
-			}
-		});			
-		
-		Listcell celdaUnidad = new Listcell(cmbListaUnidades.getValue());
-		Listcell celdaTema = new Listcell(cmbListaTemas.getValue());
-		Listcell celdaSubtema = new Listcell(txtSubTemas.getValue());
-		listaItem.appendChild(celdaUnidad);
-		listaItem.appendChild(celdaTema);
-		listaItem.appendChild(celdaSubtema);
-		
-		listaSubtemas.appendChild(listaItem);
-		txtSubTemas.setValue("");
-	}
-	
-	/**
-	 * Este metodo de encarga de Cargar, en el ComboBox de Temas de la pestaña Subtemas, los datos hallados de acuerdo a la unidad Seleccionada.
-	 * 
-	 * @param lista.  Recibe el ListBox de donde se Extraeran los registros.
-	 * @param unidad. Es el valor que se utilizará para comparar.
-	 */
-	private void cargarTemasEnSubtemas(Listbox lista, String unidad){
-		
-		cmbListaTemas.getItems().clear();
-		if (lista.getItemCount() > 0){
-			for(int i=1;i<=lista.getItemCount(); i++){
-				Listitem listaItem = (Listitem)lista.getChildren().get(i); 
-				Listcell celdaTema = (Listcell)listaItem.getChildren().get(1);
-				Listcell celdaUnidad = (Listcell)listaItem.getChildren().get(0);
-				Comboitem itemTema = new Comboitem(celdaTema.getLabel());
-				
-				if (unidad.equals(celdaUnidad.getLabel()))
-					cmbListaTemas.appendChild(itemTema);
-			}
-		}		
-	}
-	
-	private void verificarCamposBibliografia(){
-		if (!"".equals(cmbListaUnidadBiblio.getValue())){
-			if (txtReferenciaBiblio.getValue() != null && (txtReferenciaBiblio.getValue().trim().length() > 0)){
-				if (txtAutorBiblio.getValue() != null && (txtAutorBiblio.getValue().trim().length() > 0)){
-					if (txtISBNBiblio.getValue() != null && (txtISBNBiblio.getValue().trim().length() > 0)){
-						if (cmbTipoBibliografia.getValue() != null && (cmbTipoBibliografia.getValue().trim().length() > 0)){
-							llenarListaBibliografia();
-						} else
-							Messagebox.show("Se Requiere información en el Campo <Tipo Bibliografia>");					
-					} else
-						Messagebox.show("Se Requiere información en el Campo <ISBN>");
-				} else
-					Messagebox.show("Se Requiere información en el Campo <Autor>");				
-			} else
-				Messagebox.show("Se Requiere información en el Campo <Referencia Bibliografica>");
-		} else 
-			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
-	}
-	
-	private void llenarListaBibliografia(){
-		final Listitem listaItem = new Listitem();
-		
-		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {						
-				eliminaListItem(listaItem,"");
-			}
-		});
-		
-		Listcell celdaUnidad = new Listcell(cmbListaUnidadBiblio.getValue());
-		Listcell celdaReferencia = new Listcell(txtReferenciaBiblio.getValue());
-		Listcell celdaAutor = new Listcell(txtAutorBiblio.getValue().toUpperCase());
-		Listcell celdaISBN = new Listcell(txtISBNBiblio.getValue().toUpperCase());
-		Listcell celdaTipo = new Listcell(cmbTipoBibliografia.getValue().toUpperCase());
-		listaItem.appendChild(celdaUnidad);
-		listaItem.appendChild(celdaReferencia);
-		listaItem.appendChild(celdaAutor);
-		listaItem.appendChild(celdaISBN);
-		listaItem.appendChild(celdaTipo);
-		listaBibliografia.appendChild(listaItem);		
-		
-		limpiarCamposBibliografia();
-		txtReferenciaBiblio.focus();
-	}
-	
-	private void limpiarCamposBibliografia(){
-		txtReferenciaBiblio.setValue("");
-		txtAutorBiblio.setValue("");
-		txtISBNBiblio.setValue("");
-		cmbTipoBibliografia.setValue("");
-	}
-	
-	public void onClick$btnAddEvaluacion(Event event){
-		verificarCamposEvaluacion();
-	}
-	
-	private void verificarCamposEvaluacion(){
-		if (txtActividadMicro.getValue() != null && (txtActividadMicro.getValue().trim().length() > 0)){
-			if (txtPorcentajeActividad.getValue() != null && (txtPorcentajeActividad.getValue() > 0)){
-				if (dtFechaEvaluacion.getValue() != null) {
-					llenarListaActividades();
-				} else{
-					Messagebox.show("La Información del Campo <fecha> no es válida");
-					dtFechaEvaluacion.setFocus(true);
-				}					
-			} else{
-				Messagebox.show("Se Requiere información en el Campo <Porcentaje>");
-				txtPorcentajeActividad.setFocus(true);
-			}	
-		} else {
-			Messagebox.show("Se Requiere información en el Campo <Actividad>");
-			txtActividadMicro.setFocus(true);
-		}			
-	}
-	
-	public void llenarListaActividades() {
-		final Listitem listaItem = new Listitem();				
-		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {		
-				eliminaListItem(listaItem,"");
-			}
-		});
-		
-		Listcell celdaActividad = new Listcell(txtActividadMicro.getValue());
-		Listcell celdaPorcentaje = new Listcell(txtPorcentajeActividad.getValue().toString());
-		String tmpFecha = formatoFecha.format(dtFechaEvaluacion.getValue());
-		Listcell celdaFecha = new Listcell(tmpFecha);
-		
-		porcentajeEvaluacion = calcularPorcentaje();
-		if (porcentajeEvaluacion > 100){
-			Messagebox.show("No es posible agregar el registro a la lista. El porcentaje de las Evaluaciones supera el 100%. " +
-					"\n Por favor verifique los valores.");			
-		} else {
-			listaItem.appendChild(celdaActividad);
-			listaItem.appendChild(celdaPorcentaje);
-			listaItem.appendChild(celdaFecha);
-			listaEvaluaciones.appendChild(listaItem);
-			txtActividadMicro.setValue("");
-			txtPorcentajeActividad.setValue(null);
-			dtFechaEvaluacion.setValue(null);
-			txtActividadMicro.focus();
-		}
-	}
-	
-	private int calcularPorcentaje(){
-		int porcentaje = Integer.parseInt(txtPorcentajeActividad.getValue().toString());
-		for (int i=1; i <= listaEvaluaciones.getItems().size();i++){
-			Listitem item = (Listitem) listaEvaluaciones.getChildren().get(i);
-			Listcell celdaPorcentaje = (Listcell)item.getChildren().get(1);
-			porcentaje = porcentaje + Integer.parseInt(celdaPorcentaje.getLabel());
-		}
-		
-		return porcentaje;
-	}
-	
-	private void verificarCamposCibergrafia(){
-		if (!"".equals(cmbListaUnidadBiblio.getValue())){
-			if (txtNombreSitioCiber.getValue() != null && (txtNombreSitioCiber.getValue().trim().length() > 0)){
-				if (!"".equals(txtURLSitioCiber.getValue())){
-					if (!"".equals(cmbTipoCibergrafia.getValue())){
-						llenarListaCibergrafia();
-					} else {
-						Messagebox.show("Se Requiere información en el Campo <Tipo Cibergrafía>");
-					}
-				} else {
-					Messagebox.show("Se Requiere información en el Campo <URL Sitio>");
-				}
-			} else {
-				Messagebox.show("Se Requiere información en el Campo <Nombre Sitio>");
-			}				
-		} else {
-			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
-		}
-	}
-	
-	/**
-	 * Este Metodo se encarga de llenar 
-	 */
-	private void llenarListaCibergrafia(){
-		final Listitem listaItem = new Listitem();				
-		listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {						
-				eliminaListItem(listaItem, "");
-			}
-		});
-		Listcell celdaUnidad = new Listcell(cmbListaUnidadBiblio.getValue());
-		Listcell celdaSitio = new Listcell(txtNombreSitioCiber.getValue());
-		Listcell celdaURL = new Listcell(txtURLSitioCiber.getValue());
-		Listcell celdaTipo = new Listcell(cmbTipoCibergrafia.getValue());
-		listaItem.appendChild(celdaUnidad);
-		listaItem.appendChild(celdaSitio);
-		listaItem.appendChild(celdaURL);
-		listaItem.appendChild(celdaTipo);
-		listaCibergrafia.appendChild(listaItem);
-		txtNombreSitioCiber.setValue("");
-		txtURLSitioCiber.setValue("");
-		txtNombreSitioCiber.focus();
-	}
-	
-	private String mostrarNombreDocente(String idDocente){
-		String nombre = "";
-		TbAdmPersona persona = null;
-	
-		try {
-			persona = personaNGC.obtenerPersona(idDocente);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
-		}
-		
-		if (persona != null){
-			nombre = persona.getVrApellidos()+" "+persona.getVrNombres();
-		}	
-		return nombre;
-	}
-	
-	/**
-	 * Este evento ocurre cuando se hace click en sobre el boton <AddCibergrafia>.
-	 * 
-	 * Captura y valora los valores y los adiciona al ListBox Listacibergrafia a traves del método llenarListaCibergrafia
-	 * 
-	 * @param event
-	 */
-	public void onClick$btnAddCibergrafia(Event event){
-		verificarCamposCibergrafia();
-	}
-	
-	/**
-	 * Eventos durante edicion
-	 */
-	
-	public void onOK$cmbListaUnidadBiblio(){
-		txtReferenciaBiblio.focus();
-	}
-	
-	public void onOK$txtReferenciaBiblio(){
-		txtAutorBiblio.focus();
-	}
-	
-	public void onOK$txtAutorBiblio(){
-		txtISBNBiblio.focus();
-	}
-	
-	public void onOK$txtISBNBiblio(){
-		cmbTipoBibliografia.focus();
-	}
-	
-	public void onOK$cmbTipoBibliografia(){
-		verificarCamposBibliografia();
-	}
-		
-	public void onClick$btnAddBibliografia(Event event){
-		verificarCamposBibliografia();
-	}
-	
-	public void onOK$txtNombreSitioCiber(){
-		txtURLSitioCiber.focus();
-	}
-	
-	public void onOK$txtURLSitioCiber(){
-		cmbTipoCibergrafia.focus();
-	}
-	
-	public void onOK$cmbTipoCibergrafia(){
-		verificarCamposCibergrafia();
-	}
-	
-	public void onOK$cmbIdUnidad(){
-		txtNombreTema.setFocus(true);
-	}
-	
-	public void onOK$txtNombreTema(){
-		txtNumeroSemanas.focus();
-	}
-	
-	public void onOK$txtNumeroSemanas(){
-		validarCamposTemas(txtNombreTema.getValue());
-		cmbIdUnidad.setFocus(true);
-	}
-		
-	public void onOK$txtSubTemas(){
-		validarCamposSubtemas(cmbListaUnidades.getValue(), cmbListaTemas.getValue(), txtSubTemas.getValue());
-		cmbListaUnidades.setFocus(true);
-	}
-	
-	public void onOK$txtActividadMicro(){
-		txtPorcentajeActividad.focus();
-	}
-	
-	public void onOK$txtPorcentajeActividad(){
-		dtFechaEvaluacion.focus();
-	}
-	
-	public void onOK$dtFechaEvaluacion(){
-		verificarCamposEvaluacion();
-	}
-	
-	public void onSelect$cmbListaTemas(){
-		txtSubTemas.setFocus(true);
-	}
-	
-	public void onOK$cmbListaTemas(){
-		txtSubTemas.setFocus(true);
-	}
-	
-	
-	public void onSelect$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
-	}
-	
-	public void onOK$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
-		if (!(lblNombreDocente.getValue().equals("") && (lblNombreDocente.getValue().trim().length() > 0)))
-			cmbSemestre.focus();				
-	}
-	
-	public void onOK$txtNombreUnidad(){
-		llenarListaUnidades(txtNombreUnidad.getValue());
-	}
-	
-	public void onOK$cmbListaUnidades(){		
-		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
-		cmbListaTemas.focus();
-	}
-	
-	public void onSelect$cmbListaUnidades(){
-		cargarTemasEnSubtemas(listaTemas, cmbListaUnidades.getValue());
-	}
-	
-	public void onSelect$fichaContenidos(){
-		Tabpanel tabpanels = (Tabpanel)fichaContenidos.getSelectedPanel();
-		int indice = tabpanels.getIndex();
-		if (indice == 0){
-			cmbDocente.focus();
-		}else if (indice == 1){
-			txtPropositoMicro.focus();
-		}else if (indice == 2){
-			txtNombreUnidad.focus();
-		}else if (indice == 3){
-			cmbListaUnidades.focus();
-		}else if (indice == 4){
-			txtActividadMicro.focus();
-		}else if (indice == 5){
-			cmbListaUnidadBiblio.focus();
-		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -1643,3 +1148,5 @@ public class DuplicarMicroCtrl extends GenericForwardComposer{
 		
 	}
 }
+
+

@@ -8,7 +8,7 @@
             <column name="NB_ID" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="select">
+        <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
             <column name="VR_PERSONA" length="15" not-null="true" />
         </many-to-one>
         <property name="vrLogin" type="string">

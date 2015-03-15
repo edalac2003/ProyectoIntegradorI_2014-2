@@ -29,9 +29,11 @@ public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO
 		
 		try{
 			session = getSession();
-			ciudad = (TbAdmCiudad)session.load(TbAdmCiudad.class, idCiudad);
+			ciudad = (TbAdmCiudad)session.get(TbAdmCiudad.class, idCiudad);
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 			
 		return ciudad;
@@ -48,6 +50,8 @@ public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO
 			ciudades = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return ciudades;
@@ -66,6 +70,8 @@ public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO
         	
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e.getMessage());
+		} finally{
+			session.close();
 		}
 		
 		return listaCiudades;

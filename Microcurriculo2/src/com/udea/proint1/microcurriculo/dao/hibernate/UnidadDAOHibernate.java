@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -26,6 +27,8 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 	
@@ -40,6 +43,8 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return unidad;
@@ -56,6 +61,8 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -65,11 +72,15 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 		int registro = 0;
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicUnidad.class);
-			registro = criteria.list().size();			
+			Query query = session.createQuery("select max(nbIdunidad) from TbMicUnidad");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicUnidad.class);
+//			registro = criteria.list().size();			
 		} catch(HibernateException e){
 			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro "+e);
-		}		
+		} finally{
+			session.close();
+		}	
 		return registro;
 	}
 
@@ -87,6 +98,8 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 		
 		return unidades;

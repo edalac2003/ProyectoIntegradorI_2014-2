@@ -31,6 +31,8 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -41,10 +43,12 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 		
 		try{
 			session = getSession();
-			evaluacionxMicro = (TbMicEvaluacionxmicro)session.load(TbMicEvaluacionxmicro.class, id);
+			evaluacionxMicro = (TbMicEvaluacionxmicro)session.get(TbMicEvaluacionxmicro.class, id);
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return evaluacionxMicro;
 	}
@@ -60,6 +64,8 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 			evaluacionesxMicro = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 		return evaluacionesxMicro;
@@ -77,6 +83,8 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -87,11 +95,15 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicEvaluacionxmicro.class);
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbId) from TbMicEvaluacionxmicro");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicEvaluacionxmicro.class);
+//			registro = criteria.list().size();
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("DAO : Error al intentar contar los registros de la tabla <EvaluacionesxMicro>    "+e.getMessage());
+		} finally{
+			session.close();
 		}
 		
 		return registro;
@@ -114,7 +126,9 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
         	evaluacionesxMicro = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return evaluacionesxMicro;
 	}
 	

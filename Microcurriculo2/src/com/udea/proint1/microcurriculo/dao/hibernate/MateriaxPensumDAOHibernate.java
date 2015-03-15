@@ -26,6 +26,8 @@ public class MateriaxPensumDAOHibernate extends HibernateDaoSupport implements M
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -37,10 +39,12 @@ public class MateriaxPensumDAOHibernate extends HibernateDaoSupport implements M
 
 		try {
 			session = getSession();
-			materiasxPensum = (TbMicMateriaxpensum) session.load(TbMicMateriaxpensum.class, id);
+			materiasxPensum = (TbMicMateriaxpensum) session.get(TbMicMateriaxpensum.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return materiasxPensum;
 	}
@@ -59,6 +63,8 @@ public class MateriaxPensumDAOHibernate extends HibernateDaoSupport implements M
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return materiasxPensum;
 	}
@@ -74,6 +80,8 @@ public class MateriaxPensumDAOHibernate extends HibernateDaoSupport implements M
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

@@ -51,95 +51,92 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 
 		try{
 			session = getSession();
-//			session = getSessionFactory().getCurrentSession();
-//			if (!session.isOpen())
-//				session = getSessionFactory().openSession();
-//			else
-//				session = getSessionFactory().getCurrentSession();
-//			
 						
 			tx = session.beginTransaction();
 			
 			session.save(microcurriculo);
 			
 			tx.commit();
+			session.close();
 		} catch(HibernateException e){
 			tx.rollback();
 			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
 		}
-//		try {
-//			session = getSession();
-//			tx = session.beginTransaction();
-//			
-//			session.save(microcurriculo);
-//			session.saveOrUpdate(microxEstado);
-//			
-//			if (unidades != null){
-//				for(TbMicUnidad unidad:unidades)
-//					session.save(unidad);
-//			}
-//			
-//			if (temas != null){
-//				for(TbMicTema tema:temas)
-//					session.save(tema);	
-//			}
-//			
-//			if (objetivos != null){
-//				for(TbMicObjetivo objetivo:objetivos)
-//					session.save(objetivo);	
-//			}
-//			
-//			if (evaluaciones != null){
-//				for(TbMicEvaluacion evalua:evaluaciones)
-//					session.save(evalua);
-//			}
-//			
-//			if (subtemas != null){
-//				for(TbMicSubtema subtema:subtemas)
-//					session.save(subtema);
-//			}
-//			
-//			if (bibliografia != null){
-//				for(TbMicBibliografia biblio:bibliografia)
-//					session.save(biblio);	
-//			}
-//			
-//			if (unidadesxmicro != null){
-//				for(TbMicUnidadxmicro unidadxmicro:unidadesxmicro)
-//					session.save(unidadxmicro);	
-//			}
-//			
-//			if(objetivosxmicro != null){
-//				for(TbMicObjetivoxmicro objetivoxmicro:objetivosxmicro)
-//					session.save(objetivoxmicro);	
-//			}
-//			
-//			if (temasxunidad != null){
-//				for(TbMicTemaxunidad temasxUnidad:temasxunidad)
-//					session.save(temasxUnidad);	
-//			}
-//			
-//			if (evaluacionxMicro != null){
-//				for(TbMicEvaluacionxmicro exM : evaluacionxMicro)
-//					session.save(exM);			
-//			}
-//			
-//			if (subtemaxTema != null){
-//				for(TbMicSubtemaxtema sxT : subtemaxTema)
-//					session.save(sxT);
-//			}
-//			
-//			if(biblioxunidad != null){
-//				for (TbMicBiblioxunidad bxU : biblioxunidad)
-//					session.save(bxU);
-//			}
-//					
-//			tx.commit();
-//			
-//		} catch (HibernateException e){
-//			tx.rollback();
-//			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
-//					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
-//		}
+		try {
+			session = getSession();
+			tx = session.beginTransaction();
+			
+			session.save(microcurriculo);
+			session.saveOrUpdate(microxEstado);
+			
+			if (unidades != null){
+				for(TbMicUnidad unidad:unidades)
+					session.save(unidad);
+			}
+			
+			if (temas != null){
+				for(TbMicTema tema:temas)
+					session.save(tema);	
+			}
+			
+			if (objetivos != null){
+				for(TbMicObjetivo objetivo:objetivos)
+					session.save(objetivo);	
+			}
+			
+			if (evaluaciones != null){
+				for(TbMicEvaluacion evalua:evaluaciones)
+					session.save(evalua);
+			}
+			
+			if (subtemas != null){
+				for(TbMicSubtema subtema:subtemas)
+					session.save(subtema);
+			}
+			
+			if (bibliografia != null){
+				for(TbMicBibliografia biblio:bibliografia)
+					session.save(biblio);	
+			}
+			
+			if (unidadesxmicro != null){
+				for(TbMicUnidadxmicro unidadxmicro:unidadesxmicro)
+					session.save(unidadxmicro);	
+			}
+			
+			if(objetivosxmicro != null){
+				for(TbMicObjetivoxmicro objetivoxmicro:objetivosxmicro)
+					session.save(objetivoxmicro);	
+			}
+			
+			if (temasxunidad != null){
+				for(TbMicTemaxunidad temasxUnidad:temasxunidad)
+					session.save(temasxUnidad);	
+			}
+			
+			if (evaluacionxMicro != null){
+				for(TbMicEvaluacionxmicro exM : evaluacionxMicro)
+					session.save(exM);			
+			}
+			
+			if (subtemaxTema != null){
+				for(TbMicSubtemaxtema sxT : subtemaxTema)
+					session.save(sxT);
+			}
+			
+			if(biblioxunidad != null){
+				for (TbMicBiblioxunidad bxU : biblioxunidad)
+					session.save(bxU);
+			}
+					
+			tx.commit();
+			
+			session.close();
+			
+		} catch (HibernateException e){
+			tx.rollback();
+			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
+		}
 	}	
 }

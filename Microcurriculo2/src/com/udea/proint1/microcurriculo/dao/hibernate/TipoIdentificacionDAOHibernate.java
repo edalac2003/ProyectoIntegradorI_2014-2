@@ -26,6 +26,8 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -37,9 +39,11 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 		
 		try{
 			session = getSession();
-			tipoIdentificacion = (TbAdmTipoidentificacion)session.load(TbAdmTipoidentificacion.class, id);
+			tipoIdentificacion = (TbAdmTipoidentificacion)session.get(TbAdmTipoidentificacion.class, id);
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return tipoIdentificacion;
 	}
@@ -57,6 +61,8 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO();
+		} finally{
+			session.close();
 		}
 		
 		return listaTipoIdentificacion;
@@ -74,6 +80,8 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

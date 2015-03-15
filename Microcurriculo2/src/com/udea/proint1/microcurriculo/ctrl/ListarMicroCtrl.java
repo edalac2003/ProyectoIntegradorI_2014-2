@@ -30,7 +30,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 /**
  * 
- * @author Elmer Urrea y Edwin Acosta
+ * @author Elmer Urrea & Edwin Acosta
  * Controlador para la vista listamic.zul, cuyo objetivo es facilitar la busqueda de microcurriculos en los
  * registros actuales, controlando el ingreso de datos y haciendo llenado de los combobox
  *
@@ -112,7 +112,6 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 				//Messagebox.show("No se hallaron estados");
 			}
 		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
 			logger.error("error al invocar metodo listarEstados de la clase EstadoNGC: "+e);
 		}
 	}
@@ -129,6 +128,11 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable;
 		
 		List<TbMicMicrocurriculo> microcurriculosFiltradoEstado = new ArrayList<TbMicMicrocurriculo>();
+		
+		/**
+		 * Verifica los campos de busqueda por dependencias y los prioriza en orden para proceder a llamar el metodo que hará la carga
+		 * de los microcurriculos en la lista
+		 */
 		
 		if(!"[Seleccione]".equals(cmbMateria.getValue().toString())&&(!"".equals(cmbMateria.getValue().toString()))){
 			String busca = cmbMateria.getValue().toString();
@@ -155,16 +159,29 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 				}
 			}
 		}
+		
+		/**
+		 * Una vez se tiene el microcurriculo se procede a filtrar por los campos especiales semestre, docente responsable y estado
+		 */
+		
 		microcurriculosFiltradoSemestre = filtrarMicrocurriculosPorSemestre(microcurriculosEncontrados);
 		microcurriculosFiltradoResponsable = filtrarMicrocurriculosPorResponsable(microcurriculosFiltradoSemestre);
 		microcurriculosFiltradoEstado = filtrarMicrocurriculosPorEstado(microcurriculosFiltradoResponsable);
+		
+		/**
+		 * se llama al metodo para que liste los microcurriculos que se le pasaran por un objeto, el cual ya
+		 * se encuentra filtrado para mostrar
+		 */
+		
 		listarMicrocurriculos(microcurriculosFiltradoEstado);
 	}
 	
 	/**
+	 * El metodo pide a la capa del negocio que le retorne todos los microcurriculos con el concepto de busqueda
 	 * @param materiaBuscar cadena de caracteres concodigo de materia a buscar como like (coincidan primeros digitos)
 	 * @return objeto array list con microcurriculos encontrados
 	 */
+	
 	public List<TbMicMicrocurriculo> consultarMicrocurriculos(String materiaBuscar){
 		List<TbMicMicrocurriculo> microcurriculosEncontrados = null;
 		
@@ -173,7 +190,6 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 			listaMicrocurriculo.getItems().clear();
 			
 		}catch(ExcepcionesLogica e){
-			e.printStackTrace();
 			logger.error("error al invocar metodo listarMicrocurriculosPorMateria de la clase MicrocurriculoNGC: "+e);
 		}
 		return microcurriculosEncontrados;
@@ -250,6 +266,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 		}
 		return microcurriculosFiltradoEstado;
 	}
+	
 	 /**
 	  * Procede a mostrar el listado de los microcurriculos encontrados
 	  * @param microsListar objeto array list con microcurriculos ya filtrados y los cuales se listaran
@@ -290,19 +307,16 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Ante el evento click en el listbox listaMicrocurriculo, procede a generar enlaces en los botenes
-	 * con funciones consultar, actualizar, duplicar e imprimir el microcurriculo seleccionado. 
+	 * Ante el evento click en el listbox listaMicrocurriculo, procede a verificar que elemento del listbox fue
+	 * seleccionado, para guardar en la session la variable que identificará al microcurriculo al cual se le 
+	 * implemntará las acciones de consulta, duplicado, actualizacion o impresion.  
 	 */
 	public void onClick$listaMicrocurriculo(){
 		Listitem itemSelect = listaMicrocurriculo.getSelectedItem();
 		if(itemSelect != null){
 			Listcell celdaIdMicro = (Listcell) itemSelect.getChildren().get(0);
-//			param.put(1, "dato Elmer");
-//			System.out.println(param.get(1));
 			String idMicro = celdaIdMicro.getLabel();
-//			session.setAttribute("idMicro", idMicro);
 			Executions.getCurrent().getSession().setAttribute("idMicro", idMicro);
-			tool_duplica.setHref("/microcurriculo/duplicarMic.zul");
 		}
 	}
 	

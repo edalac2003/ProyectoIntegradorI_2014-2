@@ -33,6 +33,8 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -47,6 +49,8 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -57,10 +61,12 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 
 		try {
 			session = getSession();
-			BiblioxUnidad = (TbMicBiblioxunidad) session.load(TbMicBiblioxunidad.class, id);
+			BiblioxUnidad = (TbMicBiblioxunidad) session.get(TbMicBiblioxunidad.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return BiblioxUnidad;
 	}
@@ -79,6 +85,8 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return BibliosxUnidad;
 	}
@@ -100,7 +108,9 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
         	bibliosxUnidad = query.list();
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return bibliosxUnidad;
 	}
 
@@ -111,12 +121,15 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 		
 		try{
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicBiblioxunidad.class);
-			
-			registro = criteria.list().size();
+			Query query = session.createQuery("select max(nbId) from TbMicBiblioxunidad");
+			registro = (Integer)query.list().get(0);
+//			Criteria criteria = session.createCriteria(TbMicBiblioxunidad.class);
+//			registro = criteria.list().size();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
-		}	
+		} finally{
+			session.close();
+		}
 		
 		return registro;
 	}

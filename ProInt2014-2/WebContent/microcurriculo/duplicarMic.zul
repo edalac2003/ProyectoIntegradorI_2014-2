@@ -12,7 +12,7 @@
 				<include id="headerIdx" src="/_sections/header.zul" />			
 			</north>
 			
-			<center border="0">
+			<center border="0" apply="${validarDatosCtrl}">
 				<div align="center">
 					<borderlayout height="870px">
 						<north border="0"> 

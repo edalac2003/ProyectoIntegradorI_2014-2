@@ -24,6 +24,8 @@ public class TablaDAOHibernate extends HibernateDaoSupport implements TablaDAO {
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -34,10 +36,12 @@ public class TablaDAOHibernate extends HibernateDaoSupport implements TablaDAO {
 
 		try {
 			session = getSession();
-			tabla = (TbAdmTabla) session.load(TbAdmTabla.class, id);
+			tabla = (TbAdmTabla) session.get(TbAdmTabla.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return tabla;
 	}
@@ -55,6 +59,8 @@ public class TablaDAOHibernate extends HibernateDaoSupport implements TablaDAO {
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return tabla;
 	}
@@ -69,6 +75,8 @@ public class TablaDAOHibernate extends HibernateDaoSupport implements TablaDAO {
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 

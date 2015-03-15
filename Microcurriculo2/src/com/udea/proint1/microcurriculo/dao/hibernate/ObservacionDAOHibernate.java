@@ -25,6 +25,8 @@ public class ObservacionDAOHibernate extends HibernateDaoSupport implements Obse
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -35,10 +37,12 @@ public class ObservacionDAOHibernate extends HibernateDaoSupport implements Obse
 
 		try {
 			session = getSession();
-			observacion = (TbMicObservacion) session.load(TbMicObservacion.class, id);
+			observacion = (TbMicObservacion) session.get(TbMicObservacion.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return observacion;
 	}
@@ -56,6 +60,8 @@ public class ObservacionDAOHibernate extends HibernateDaoSupport implements Obse
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
+		} finally{
+			session.close();
 		}
 		return observacion;
 	}
@@ -71,6 +77,8 @@ public class ObservacionDAOHibernate extends HibernateDaoSupport implements Obse
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -85,6 +93,8 @@ public class ObservacionDAOHibernate extends HibernateDaoSupport implements Obse
 			registro = criteria.list().size();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO("Ocurrieron problemas al contar los registros de la tabla <TbMicObservaciones>.");
+		} finally{
+			session.close();
 		}
 		
 		return registro;

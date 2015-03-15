@@ -8,7 +8,7 @@
             <column name="NB_IDCIUDAD" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmDepartamento" class="com.udea.proint1.microcurriculo.dto.TbAdmDepartamento" fetch="select">
+        <many-to-one name="tbAdmDepartamento" class="com.udea.proint1.microcurriculo.dto.TbAdmDepartamento" fetch="join" lazy="false">
             <column name="NB_DEPARTAMENTO" precision="22" scale="0" not-null="true" />
         </many-to-one>
         <property name="vrNombre" type="string">

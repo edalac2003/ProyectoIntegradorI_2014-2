@@ -60,6 +60,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		
 		} catch (HibernateException e){
 			throw new ExcepcionesDAO("DAO : Error al Intentar Obtener el Registro Microcurriculo en la Base de Datos."+e);
+		} finally{
+			session.close();
 		}
 		return microcurriculo;
 	}
@@ -73,6 +75,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			this.getHibernateTemplate().update(microcurriculo);
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 	}
 
@@ -87,6 +91,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			microcurriculos = criteria.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 		return microcurriculos;
@@ -105,6 +111,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 
 		return microcurriculos;
@@ -123,6 +131,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return microcurriculos;
 	}
@@ -140,6 +150,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return microcurriculos;
 	}
@@ -162,6 +174,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("Se presentaron problemas al intentar Listar los Microcurriculos por Materia.");
+		} finally{
+			session.close();
 		}
 		return microcurriculos;
 	}
@@ -184,6 +198,8 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			microcurriculos = query.list();
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return microcurriculos;
 	}

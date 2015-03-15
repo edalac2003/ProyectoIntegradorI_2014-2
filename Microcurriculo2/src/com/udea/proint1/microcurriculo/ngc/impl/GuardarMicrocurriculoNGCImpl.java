@@ -77,7 +77,7 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 				throw new ExcepcionesLogica("El Microcurriculo ya existe.");
 			}
 		}catch(ExcepcionesDAO e){
-			logger.error("Error al intentar Obtener la informacion del registro de Microcurriculo.");
+			logger.error("Error al intentar Obtener la informacion del registro de Microcurriculo.",e);
 		}
 				
 	}	

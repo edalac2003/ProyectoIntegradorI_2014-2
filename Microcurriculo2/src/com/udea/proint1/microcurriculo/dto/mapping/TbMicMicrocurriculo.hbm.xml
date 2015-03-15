@@ -8,10 +8,10 @@
             <column name="VR_IDMICROCURRICULO" length="20" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmMateria" class="com.udea.proint1.microcurriculo.dto.TbAdmMateria" fetch="select">
+        <many-to-one name="tbAdmMateria" class="com.udea.proint1.microcurriculo.dto.TbAdmMateria" fetch="join" lazy="false">
             <column name="VR_MATERIA" length="10" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbAdmSemestre" class="com.udea.proint1.microcurriculo.dto.TbAdmSemestre" fetch="select">
+        <many-to-one name="tbAdmSemestre" class="com.udea.proint1.microcurriculo.dto.TbAdmSemestre" fetch="join" lazy="false">
             <column name="VR_SEMESTRE" not-null="true" />
         </many-to-one>
         <property name="vrProposito" type="string">
@@ -23,10 +23,10 @@
         <property name="vrResumen" type="string">
             <column name="VR_RESUMEN" length="512" />
         </property>
-        <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="select">
+        <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
             <column name="VR_RESPONSABLE" length="15" not-null="true" />
         </many-to-one>
-        <many-to-one name="tbMicEstado" class="com.udea.proint1.microcurriculo.dto.TbMicEstado" fetch="select">
+        <many-to-one name="tbMicEstado" class="com.udea.proint1.microcurriculo.dto.TbMicEstado" fetch="join" lazy="false">
             <column name="NB_ESTADO" length="10" not-null="true" />
         </many-to-one>
         <property name="vrModusuario" type="string">

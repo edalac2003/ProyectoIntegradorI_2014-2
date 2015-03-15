@@ -8,7 +8,7 @@
             <column name="VR_IDMATERIA" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="select">
+        <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="join" lazy="false">
             <column name="VR_NUCLEO" length="7" not-null="true" />
         </many-to-one>
         <property name="vrNombre" type="string">

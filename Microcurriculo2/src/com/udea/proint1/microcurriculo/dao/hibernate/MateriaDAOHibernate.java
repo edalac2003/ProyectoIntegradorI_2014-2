@@ -36,6 +36,8 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		
 	}
@@ -51,6 +53,8 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return materia;
 	}
@@ -66,6 +70,8 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			materias = criteria.list();			
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
+		} finally{
+			session.close();
 		}
 		return materias;
 	}
@@ -83,7 +89,9 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
             materias = query.list();			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
-		} 		
+		} finally{
+			session.close();
+		}	
 		return materias;
 	}
 
@@ -104,7 +112,9 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
                 
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return materias;
 	}
 
@@ -120,6 +130,8 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+		} finally{
+			session.close();
 		}
 	}
 	
@@ -138,7 +150,9 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
                 materias = query.list();                
         }catch(HibernateException e){
                 throw new ExcepcionesDAO(e);
-        }
+        } finally{
+			session.close();
+		}
         return materias;
 	}
 
