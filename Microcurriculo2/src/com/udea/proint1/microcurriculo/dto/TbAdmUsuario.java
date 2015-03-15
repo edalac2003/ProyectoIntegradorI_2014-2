@@ -17,20 +17,14 @@ public class TbAdmUsuario implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbAdmUsuario() {
-	}
 
-	public TbAdmUsuario(int nbId, TbAdmPersona tbAdmPersona,
-			String vrLogin) {
-		this.nbId = nbId;
+	public TbAdmUsuario(TbAdmPersona tbAdmPersona, String vrLogin) {
 		this.tbAdmPersona = tbAdmPersona;
 		this.vrLogin = vrLogin;
 	}
 
-	public TbAdmUsuario(int nbId, TbAdmPersona tbAdmPersona,
-			String vrLogin, String vrPassword, int blEstado,
+	public TbAdmUsuario(TbAdmPersona tbAdmPersona, String vrLogin, String vrPassword, int blEstado,
 			String vrModusuario, Date dtModfecha) {
-		this.nbId = nbId;
 		this.tbAdmPersona = tbAdmPersona;
 		this.vrLogin = vrLogin;
 		this.vrPassword = vrPassword;

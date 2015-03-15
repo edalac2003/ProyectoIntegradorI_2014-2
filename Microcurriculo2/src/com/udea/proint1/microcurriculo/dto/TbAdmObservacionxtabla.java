@@ -5,8 +5,6 @@ public class TbAdmObservacionxtabla {
 	private String vrObservaciones;
 	private int nbIdobservaciones;
 
-	public TbAdmObservacionxtabla() {
-	}
 
 	public TbAdmObservacionxtabla(String vrObservaciones, int nbIdobservaciones) {
 		this.vrObservaciones = vrObservaciones;

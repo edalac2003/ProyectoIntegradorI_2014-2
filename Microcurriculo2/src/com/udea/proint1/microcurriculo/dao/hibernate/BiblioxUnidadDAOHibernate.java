@@ -18,10 +18,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements BiblioxUnidadDAO {
 
-	public BiblioxUnidadDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public void guardarBiblioxUnidad(TbMicBiblioxunidad biblioxUnidad)
 			throws ExcepcionesDAO {
@@ -114,24 +111,24 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
         return bibliosxUnidad;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbId) from TbMicBiblioxunidad");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicBiblioxunidad.class);
-//			registro = criteria.list().size();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
-		} finally{
-			session.close();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbId) from TbMicBiblioxunidad");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicBiblioxunidad.class);
+////			registro = criteria.list().size();
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO(e);
+//		} finally{
+//			session.close();
+//		}
+//		
+//		return registro;
+//	}
 
 }

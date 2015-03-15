@@ -151,19 +151,19 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = temaxUnidadDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			//throw new ExcepcionesLogica("Se presentaron problemas al intentar obtener el numero de registros de la tabla <TB_MIC_TEMASXUNIDAD>.");
-			throw new ExcepcionesLogica(e);
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = temaxUnidadDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			//throw new ExcepcionesLogica("Se presentaron problemas al intentar obtener el numero de registros de la tabla <TB_MIC_TEMASXUNIDAD>.");
+//			throw new ExcepcionesLogica(e);
+//		}
+//		
+//		return registro;
+//	}
 	
 	public List<TbMicTemaxunidad> ListarTemasxUnidadxUnidad(int idUnidad) throws ExcepcionesLogica{
 		List<TbMicTemaxunidad> listaTemasxUnidad = null;

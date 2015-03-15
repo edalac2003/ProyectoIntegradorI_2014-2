@@ -10,9 +10,6 @@ public class TbMicActividadxmicro {
 	private String vrDescripcion;
 	private Date dtModfecha;
 
-	public TbMicActividadxmicro() {
-	}
-
 	public TbMicActividadxmicro(int nbIdactividad, TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.nbIdactividad = nbIdactividad;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;

@@ -128,18 +128,16 @@ private static Logger log = Logger.getLogger(UnidadNGCImpl.class);
 	}
 
 	
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		try {
-			registro = unidadDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("Se produjo un Error al Contar los Registros de la Tabla Unidades.");
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		try {
+//			registro = unidadDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("Se produjo un Error al Contar los Registros de la Tabla Unidades.");
+//		}
+//		
+//		return registro;
+//	}
 	
-	
-
 }

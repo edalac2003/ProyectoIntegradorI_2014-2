@@ -17,9 +17,6 @@ public class TbAdmTipoidentificacion implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbAdmPersonas = new HashSet(0);
 
-	public TbAdmTipoidentificacion() {
-	}
-
 	public TbAdmTipoidentificacion(int nbIdidentificacion) {
 		this.nbIdidentificacion = nbIdidentificacion;
 	}

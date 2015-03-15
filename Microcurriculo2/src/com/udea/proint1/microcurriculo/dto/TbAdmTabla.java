@@ -5,9 +5,6 @@ public class TbAdmTabla {
 	private int nbIdtabla;
 	private String vrNombretabla;
 
-	public TbAdmTabla() {
-	}
-
 	public TbAdmTabla(int nbIdtabla, String vrNombretabla) {
 		this.nbIdtabla = nbIdtabla;
 		this.vrNombretabla = vrNombretabla;

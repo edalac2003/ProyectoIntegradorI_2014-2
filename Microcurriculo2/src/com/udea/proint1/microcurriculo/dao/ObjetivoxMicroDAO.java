@@ -21,6 +21,6 @@ public interface ObjetivoxMicroDAO {
 	
 	public List<TbMicObjetivoxmicro> listarObjetivosxMicro() throws ExcepcionesDAO;
 	
-	public int contarRegistros() throws ExcepcionesDAO;
+//	public int contarRegistros() throws ExcepcionesDAO;
 	
 }

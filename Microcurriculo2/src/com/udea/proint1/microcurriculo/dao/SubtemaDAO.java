@@ -18,5 +18,5 @@ public interface SubtemaDAO {
 	
 	public List<TbMicSubtema> listarSubtemasxTema(TbMicTema tema) throws ExcepcionesDAO;
 	
-	public int contarRegistros() throws ExcepcionesDAO;
+//	public int contarRegistros() throws ExcepcionesDAO;
 }

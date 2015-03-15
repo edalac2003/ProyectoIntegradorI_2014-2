@@ -98,17 +98,17 @@ public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
 		return listaSubtemasxtema;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = subtemaxTemaDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("NGC : Se presentaron errores al Obtener el numero de registros de la tabla <SubtemaxTema>" + e.getMessage());
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = subtemaxTemaDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("NGC : Se presentaron errores al Obtener el numero de registros de la tabla <SubtemaxTema>" + e.getMessage());
+//		}
+//		
+//		return registro;
+//	}
 
 }

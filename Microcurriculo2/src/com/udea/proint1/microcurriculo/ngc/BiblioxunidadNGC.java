@@ -17,6 +17,6 @@ public interface BiblioxunidadNGC {
 	
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(int idUnidad) throws ExcepcionesLogica;
 	
-	public int contarRegistros() throws ExcepcionesLogica;
+//	public int contarRegistros() throws ExcepcionesLogica;
 
 }

@@ -103,23 +103,23 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 	}
 	
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query =  session.createQuery("select count(*) from TbMicMicroxestado");
-			registro = Integer.parseInt(query.uniqueResult().toString());
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : Error al Contar el numero de registros de la Tabla MicroxEstado.");
-		} finally{
-			session.close();
-		}
-	
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query =  session.createQuery("select count(*) from TbMicMicroxestado");
+//			registro = Integer.parseInt(query.uniqueResult().toString());
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("DAO : Error al Contar el numero de registros de la Tabla MicroxEstado.");
+//		} finally{
+//			session.close();
+//		}
+//	
+//		return registro;
+//	}
 	
 	
 

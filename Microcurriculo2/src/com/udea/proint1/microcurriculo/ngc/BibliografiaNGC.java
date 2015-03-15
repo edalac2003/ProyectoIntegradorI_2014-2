@@ -17,5 +17,5 @@ public interface BibliografiaNGC {
 	
 	public List<TbMicBibliografia> listarBibliografia(char tipo) throws ExcepcionesLogica;
 	
-	public int contarRegistros() throws ExcepcionesLogica;
+//	public int contarRegistros() throws ExcepcionesLogica;
 }

@@ -66,23 +66,23 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		Session session = null;
-		int registro = 0;
-		try {
-			session = getSession();
-			Query query = session.createQuery("select max(nbIdunidad) from TbMicUnidad");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicUnidad.class);
-//			registro = criteria.list().size();			
-		} catch(HibernateException e){
-			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro "+e);
-		} finally{
-			session.close();
-		}	
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		Session session = null;
+//		int registro = 0;
+//		try {
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbIdunidad) from TbMicUnidad");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicUnidad.class);
+////			registro = criteria.list().size();			
+//		} catch(HibernateException e){
+//			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro "+e);
+//		} finally{
+//			session.close();
+//		}	
+//		return registro;
+//	}
 
 	@Override
 	public List<TbMicUnidad> listarUnidades() throws ExcepcionesDAO{

@@ -167,17 +167,17 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 		return listaBibliosxUnidad;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = biblioxUnidadDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = biblioxUnidadDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica();
+//		}
+//		
+//		return registro;
+//	}
 
 }

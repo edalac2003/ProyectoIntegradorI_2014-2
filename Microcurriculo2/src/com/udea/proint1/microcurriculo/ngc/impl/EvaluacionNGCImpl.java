@@ -20,10 +20,6 @@ public class EvaluacionNGCImpl implements EvaluacionNGC {
 		this.evaluacionDao = evaluacionDao;
 	}
 
-	public EvaluacionNGCImpl() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void guardarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesLogica {
 		/*
@@ -128,17 +124,17 @@ public class EvaluacionNGCImpl implements EvaluacionNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registros = 0;
-			
-		try {
-			registros = evaluacionDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("NGC : Se presentaron errores al intentar Obtener el numero de Registros de la Tabla Evaluaciones.");
-		}
-		return registros;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registros = 0;
+//			
+//		try {
+//			registros = evaluacionDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("NGC : Se presentaron errores al intentar Obtener el numero de Registros de la Tabla Evaluaciones.");
+//		}
+//		return registros;
+//	}
 	
 	
 

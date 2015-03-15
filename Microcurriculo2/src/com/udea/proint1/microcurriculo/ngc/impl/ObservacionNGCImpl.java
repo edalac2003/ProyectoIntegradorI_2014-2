@@ -126,18 +126,18 @@ public class ObservacionNGCImpl implements ObservacionNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = observacionDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica(e);
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = observacionDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica(e);
+//		}
+//		
+//		return registro;
+//	}
 	
 	
 

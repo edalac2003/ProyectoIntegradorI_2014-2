@@ -21,24 +21,17 @@ public class TbMicEvaluacionxmicro implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbMicEvaluacionxmicro() {
-	}
-
-	public TbMicEvaluacionxmicro(int nbId, TbMicEvaluacion tbMicEvaluacion,
-			TbMicMicrocurriculo tbMicMicrocurriculo,int nbPorcentaje,
-			Date dtFechaestimada) {
-		this.nbId = nbId;
+	public TbMicEvaluacionxmicro(TbMicEvaluacion tbMicEvaluacion, TbMicMicrocurriculo tbMicMicrocurriculo,
+			int nbPorcentaje, Date dtFechaestimada) {
 		this.tbMicEvaluacion = tbMicEvaluacion;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.nbPorcentaje = nbPorcentaje;
 		this.dtFechaestimada = dtFechaestimada;
 	}
 
-	public TbMicEvaluacionxmicro(int nbId, TbMicEvaluacion tbMicEvaluacion,
-			TbMicMicrocurriculo tbMicMicrocurriculo, int nbPorcentaje,
+	public TbMicEvaluacionxmicro(TbMicEvaluacion tbMicEvaluacion, TbMicMicrocurriculo tbMicMicrocurriculo, int nbPorcentaje,
 			Date dtFechaestimada, String vrModusuario, Date dtModfecha) {
 		super();
-		this.nbId = nbId;
 		this.tbMicEvaluacion = tbMicEvaluacion;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.nbPorcentaje = nbPorcentaje;

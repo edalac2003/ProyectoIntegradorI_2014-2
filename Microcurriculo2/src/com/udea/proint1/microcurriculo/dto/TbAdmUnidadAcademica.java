@@ -17,8 +17,6 @@ public class TbAdmUnidadAcademica implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbAdmDependencias = new HashSet(0);
 
-	public TbAdmUnidadAcademica() {
-	}
 
 	public TbAdmUnidadAcademica(String vrIdunidad) {
 		this.vrIdunidad = vrIdunidad;

@@ -17,6 +17,6 @@ public interface MicroxEstadoNGC {
 	
 	public List<TbMicMicroxestado> listarMicrosxestado(int idEstado) throws ExcepcionesLogica;
 	
-	public int contarRegistros() throws ExcepcionesLogica;
+//	public int contarRegistros() throws ExcepcionesLogica;
 
 }

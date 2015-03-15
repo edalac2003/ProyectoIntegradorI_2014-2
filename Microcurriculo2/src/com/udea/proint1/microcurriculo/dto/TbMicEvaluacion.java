@@ -17,16 +17,11 @@ public class TbMicEvaluacion implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbMicMicroxevaluaciones = new HashSet(0);
 
-	public TbMicEvaluacion() {
-	}
-
-	public TbMicEvaluacion(int nbIdevaluacion, String vrDescripcion) {
-		this.nbIdevaluacion = nbIdevaluacion;
+	public TbMicEvaluacion(String vrDescripcion) {
 		this.vrDescripcion = vrDescripcion;
 	}
 	
-	public TbMicEvaluacion(int nbIdevaluacion, String vrDescripcion, String vrModusuario, Date dtModfecha) {
-		this.nbIdevaluacion = nbIdevaluacion;
+	public TbMicEvaluacion(String vrDescripcion, String vrModusuario, Date dtModfecha) {
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;

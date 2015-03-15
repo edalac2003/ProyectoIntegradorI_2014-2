@@ -19,9 +19,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class BibliografiaDAOHibernate extends HibernateDaoSupport implements BibliografiaDAO {
 
-	public BibliografiaDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void guardarBibliografia(TbMicBibliografia bibliografia)
@@ -119,26 +116,26 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 		return bibliografias;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbIdbibliografia) from TbMicBibliografia");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
-//			registro = criteria.list().size();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("Problemas para contar el numero de registros de la tabla Bibliografias");
-		} finally{
-			session.close();
-		}
-
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbIdbibliografia) from TbMicBibliografia");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
+////			registro = criteria.list().size();
+//			
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("Problemas para contar el numero de registros de la tabla Bibliografias");
+//		} finally{
+//			session.close();
+//		}
+//
+//		return registro;
+//	}
 	
 	public List<TbMicBibliografia> listarBibliografias() throws ExcepcionesDAO{
 		Session session = null;

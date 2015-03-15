@@ -15,22 +15,20 @@ public class TbAdmCorrequisito implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	
 	public TbAdmCorrequisito() {
+		super();
 	}
 
-	public TbAdmCorrequisito(int nbId,
-			TbAdmMateria tbAdmMateriasByVrMateria,
+	public TbAdmCorrequisito(TbAdmMateria tbAdmMateriasByVrMateria,
 			TbAdmMateria tbAdmMateriasByVrCorrequisito) {
-		this.nbId = nbId;
 		this.tbAdmMateriasByVrMateria = tbAdmMateriasByVrMateria;
 		this.tbAdmMateriasByVrCorrequisito = tbAdmMateriasByVrCorrequisito;
 	}
 
-	public TbAdmCorrequisito(int nbId,
-			TbAdmMateria tbAdmMateriasByVrMateria,
+	public TbAdmCorrequisito(TbAdmMateria tbAdmMateriasByVrMateria,
 			TbAdmMateria tbAdmMateriasByVrCorrequisito, String vrModusuario,
 			Date dtModfecha) {
-		this.nbId = nbId;
 		this.tbAdmMateriasByVrMateria = tbAdmMateriasByVrMateria;
 		this.tbAdmMateriasByVrCorrequisito = tbAdmMateriasByVrCorrequisito;
 		this.vrModusuario = vrModusuario;

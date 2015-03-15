@@ -18,6 +18,6 @@ public interface UnidadXMicroDAO {
 	
 	public List<TbMicUnidadxmicro> listarUnidadesXmicro() throws ExcepcionesDAO;
 	
-	public int contarRegistros() throws ExcepcionesDAO;
+//	public int contarRegistros() throws ExcepcionesDAO;
 	
 }

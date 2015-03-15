@@ -22,9 +22,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
  */
 public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 
-	public TemaDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void guardarTema(TbMicTema tema) throws ExcepcionesDAO {
@@ -119,25 +116,25 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 		return temas;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbIdtema) from TbMicTema");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicTema.class);
-//			registro = criteria.list().size();
-			
-		} catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : No es posible retornar un valor numerico de los registros. "+e);
-		} finally{
-			session.close();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbIdtema) from TbMicTema");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicTema.class);
+////			registro = criteria.list().size();
+//			
+//		} catch(HibernateException e){
+//			throw new ExcepcionesDAO("DAO : No es posible retornar un valor numerico de los registros. "+e);
+//		} finally{
+//			session.close();
+//		}
+//		
+//		return registro;
+//	}
 
 }

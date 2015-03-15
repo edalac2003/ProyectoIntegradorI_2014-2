@@ -15,19 +15,14 @@ public class TbMicMateriaxpensum implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbMicMateriaxpensum() {
-	}
 
-	public TbMicMateriaxpensum(int nbId, TbAdmMateria tbAdmMateria,
-			TbMicPensum tbMicPensum) {
-		this.nbId = nbId;
+	public TbMicMateriaxpensum(TbAdmMateria tbAdmMateria, TbMicPensum tbMicPensum) {
 		this.tbAdmMateria = tbAdmMateria;
 		this.tbMicPensum = tbMicPensum;
 	}
 
-	public TbMicMateriaxpensum(int nbId, TbAdmMateria tbAdmMateria,
-			TbMicPensum tbMicPensum, String vrModusuario, Date dtModfecha) {
-		this.nbId = nbId;
+	public TbMicMateriaxpensum(TbAdmMateria tbAdmMateria, TbMicPensum tbMicPensum, 
+			String vrModusuario, Date dtModfecha) {
 		this.tbAdmMateria = tbAdmMateria;
 		this.tbMicPensum = tbMicPensum;
 		this.vrModusuario = vrModusuario;

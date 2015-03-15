@@ -16,9 +16,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EvaluacionDAOHibernate extends HibernateDaoSupport implements EvaluacionDAO {
 
-	public EvaluacionDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void guardarEvaluaciones(TbMicEvaluacion evaluacion) throws ExcepcionesDAO {
@@ -73,24 +70,24 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 		return evaluaciones;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbIdevaluacion) from TbMicEvaluacion");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicEvaluacion.class);
-//			registro = criteria.list().size();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : Se presentaron Errores al Contar los Registros de la Tabla Evaluaciones. "+e);
-		} finally{
-			session.close();
-		}	
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbIdevaluacion) from TbMicEvaluacion");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicEvaluacion.class);
+////			registro = criteria.list().size();
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("DAO : Se presentaron Errores al Contar los Registros de la Tabla Evaluaciones. "+e);
+//		} finally{
+//			session.close();
+//		}	
+//		return registro;
+//	}
 
 	@Override
 	public void actualizarEvaluaciones(TbMicEvaluacion evaluacion) throws ExcepcionesDAO {

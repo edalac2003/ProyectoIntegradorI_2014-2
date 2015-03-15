@@ -19,10 +19,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements UnidadXMicroDAO {
 
-	public UnidadxMicroDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void guardarUnidadXmicro(TbMicUnidadxmicro unidadXmicro) throws ExcepcionesDAO {
 		Session session = null;
@@ -114,25 +110,25 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 		return unidadesXMicro;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbId) from TbMicUnidadxmicro");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicUnidadxmicro.class);
-//			registro = criteria.list().size();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("Se produjo un Error al Intentar contar los Registros de la Tabla Unidades x Microcurriculo. "+e);
-		} finally{
-			session.close();
-		}
-	
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbId) from TbMicUnidadxmicro");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicUnidadxmicro.class);
+////			registro = criteria.list().size();
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("Se produjo un Error al Intentar contar los Registros de la Tabla Unidades x Microcurriculo. "+e);
+//		} finally{
+//			session.close();
+//		}
+//	
+//		return registro;
+//	}
 	
 	
 

@@ -16,21 +16,14 @@ public class TbMicTemaxunidad implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbMicTemaxunidad() {
-		super();
-	}
 
-	public TbMicTemaxunidad(int nbId, TbMicUnidad tbMicUnidad,
-			TbMicTema tbMicTema) {
-		this.nbId = nbId;
+	public TbMicTemaxunidad(TbMicUnidad tbMicUnidad, TbMicTema tbMicTema) {
 		this.tbMicUnidad = tbMicUnidad;
 		this.tbMicTema = tbMicTema;
 	}
 
-	public TbMicTemaxunidad(int nbId, TbMicUnidad tbMicUnidad,
-			TbMicTema tbMicTema, int nbSemanasRequeridas,
+	public TbMicTemaxunidad(TbMicUnidad tbMicUnidad, TbMicTema tbMicTema, int nbSemanasRequeridas,
 			String vrModusuario, Date dtModfecha) {
-		this.nbId = nbId;
 		this.tbMicUnidad = tbMicUnidad;
 		this.tbMicTema = tbMicTema;
 		this.nbSemanasRequeridas = nbSemanasRequeridas;

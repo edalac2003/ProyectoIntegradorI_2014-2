@@ -164,18 +164,18 @@ public class MicroxEstadoNGCImpl implements MicroxEstadoNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;		
-		try {
-			registro = microxEstadoDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("NGC : Ocurrió un error al contar los registros de MicroxEstado.");
-		}
-		
-		return registro;
-	}
-	
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;		
+//		try {
+//			registro = microxEstadoDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("NGC : Ocurrió un error al contar los registros de MicroxEstado.");
+//		}
+//		
+//		return registro;
+//	}
+//	
 	
 
 }

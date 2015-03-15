@@ -15,6 +15,6 @@ public interface ObservacionDAO {
 	
 	public void actualizarObservacion(TbMicObservacion observacion) throws ExcepcionesDAO;
 	
-	public int contarRegistros() throws ExcepcionesDAO;
+//	public int contarRegistros() throws ExcepcionesDAO;
 	
 }

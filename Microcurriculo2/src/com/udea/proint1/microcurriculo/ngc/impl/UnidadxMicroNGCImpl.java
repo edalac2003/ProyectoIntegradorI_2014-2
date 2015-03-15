@@ -174,19 +174,17 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = unidadxMicroDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("Se produjeron Errores al Obtener el numero de Registros de la Tabla Unidades x Microcurriculo.");
-		}
-				
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = unidadxMicroDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("Se produjeron Errores al Obtener el numero de Registros de la Tabla Unidades x Microcurriculo.");
+//		}
+//				
+//		return registro;
+//	}
 	
-	
-
 }

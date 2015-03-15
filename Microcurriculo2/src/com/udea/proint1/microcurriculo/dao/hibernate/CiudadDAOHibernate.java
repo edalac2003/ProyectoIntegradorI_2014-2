@@ -18,10 +18,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO {
 
-	public CiudadDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public TbAdmCiudad obtenerCiudad(int idCiudad) throws ExcepcionesDAO {
 		Session session = null;

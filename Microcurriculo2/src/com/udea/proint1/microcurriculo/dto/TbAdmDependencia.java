@@ -18,8 +18,6 @@ public class TbAdmDependencia implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbAdmNucleo = new HashSet(0);
 
-	public TbAdmDependencia() {
-	}
 
 	public TbAdmDependencia(String vrIddependencia,
 			TbAdmUnidadAcademica tbAdmUnidadAcademica) {

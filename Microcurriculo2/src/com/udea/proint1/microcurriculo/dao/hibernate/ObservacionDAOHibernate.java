@@ -82,23 +82,23 @@ public class ObservacionDAOHibernate extends HibernateDaoSupport implements Obse
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Criteria criteria = session.createCriteria(TbMicObservacion.class);
-			registro = criteria.list().size();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("Ocurrieron problemas al contar los registros de la tabla <TbMicObservaciones>.");
-		} finally{
-			session.close();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Criteria criteria = session.createCriteria(TbMicObservacion.class);
+//			registro = criteria.list().size();
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("Ocurrieron problemas al contar los registros de la tabla <TbMicObservaciones>.");
+//		} finally{
+//			session.close();
+//		}
+//		
+//		return registro;
+//	}
 	
 	
 

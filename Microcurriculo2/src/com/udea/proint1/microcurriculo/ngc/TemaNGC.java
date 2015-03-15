@@ -15,7 +15,7 @@ public interface TemaNGC {
     
     public List<TbMicTema> listarTemas () throws ExcepcionesLogica;
     
-    public int contarRegistros() throws ExcepcionesLogica;
+//    public int contarRegistros() throws ExcepcionesLogica;
     
     public List<TbMicTema> obtenerTemaxNombre(String nombre) throws ExcepcionesLogica;
 

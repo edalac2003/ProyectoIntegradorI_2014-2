@@ -11,14 +11,9 @@ public class TbMicSubtemaxtema {
 	private Date dtModFecha;
 	
 	
-	public TbMicSubtemaxtema() {
-	}
-
-
-	public TbMicSubtemaxtema(int nbid, TbMicTema tbMicTema,
-			TbMicSubtema tbMicSubtema, String vrModUsuario, Date dtModFecha) {
+	public TbMicSubtemaxtema(TbMicTema tbMicTema, TbMicSubtema tbMicSubtema, String vrModUsuario, 
+			Date dtModFecha) {
 		super();
-		this.nbid = nbid;
 		this.tbMicTema = tbMicTema;
 		this.tbMicSubtema = tbMicSubtema;
 		this.vrModUsuario = vrModUsuario;
@@ -26,10 +21,8 @@ public class TbMicSubtemaxtema {
 	}
 
 
-	public TbMicSubtemaxtema(int nbid, TbMicTema tbMicTema,
-			TbMicSubtema tbMicSubtema) {
+	public TbMicSubtemaxtema(TbMicTema tbMicTema,TbMicSubtema tbMicSubtema) {
 		super();
-		this.nbid = nbid;
 		this.tbMicTema = tbMicTema;
 		this.tbMicSubtema = tbMicSubtema;
 	}

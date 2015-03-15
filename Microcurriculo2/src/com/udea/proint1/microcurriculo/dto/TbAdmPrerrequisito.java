@@ -15,23 +15,20 @@ public class TbAdmPrerrequisito implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	
 	public TbAdmPrerrequisito() {
+		super();
 	}
 
-	public TbAdmPrerrequisito(int nbId,
-			TbAdmMateria tbAdmMateriasByVrMateria,
-			TbAdmMateria tbAdmMateriasByVrPrerrequisito, String vrModusuario) {
-		this.nbId = nbId;
+	public TbAdmPrerrequisito(TbAdmMateria tbAdmMateriasByVrMateria, TbAdmMateria tbAdmMateriasByVrPrerrequisito, 
+			String vrModusuario) {
 		this.tbAdmMateriasByVrMateria = tbAdmMateriasByVrMateria;
 		this.tbAdmMateriasByVrPrerrequisito = tbAdmMateriasByVrPrerrequisito;
 		this.vrModusuario = vrModusuario;
 	}
 
-	public TbAdmPrerrequisito(int nbId,
-			TbAdmMateria tbAdmMateriasByVrMateria,
-			TbAdmMateria tbAdmMateriasByVrPrerrequisito, String vrModusuario,
-			Date dtModfecha) {
-		this.nbId = nbId;
+	public TbAdmPrerrequisito(TbAdmMateria tbAdmMateriasByVrMateria, TbAdmMateria tbAdmMateriasByVrPrerrequisito, 
+			String vrModusuario, Date dtModfecha) {
 		this.tbAdmMateriasByVrMateria = tbAdmMateriasByVrMateria;
 		this.tbAdmMateriasByVrPrerrequisito = tbAdmMateriasByVrPrerrequisito;
 		this.vrModusuario = vrModusuario;

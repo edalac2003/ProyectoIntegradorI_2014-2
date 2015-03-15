@@ -16,7 +16,7 @@ public interface EvaluacionxMicroDAO {
 	
 	public void actualizarEvaluacionesxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesDAO;
 	
-	public int obtenerRegistro() throws ExcepcionesDAO;
+//	public int obtenerRegistro() throws ExcepcionesDAO;
 	
 	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(TbMicMicrocurriculo microcurriculo)throws ExcepcionesDAO;
 

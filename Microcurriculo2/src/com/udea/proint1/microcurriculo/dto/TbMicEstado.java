@@ -17,17 +17,12 @@ public class TbMicEstado implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbMicMicroxestados = new HashSet(0);
 
-	public TbMicEstado() {
-	}
-
-	public TbMicEstado(int nbIdestado, String vrDescripcion) {
-		this.nbIdestado = nbIdestado;
+	public TbMicEstado(String vrDescripcion) {
 		this.vrDescripcion = vrDescripcion;
 	}
 
-	public TbMicEstado(int nbIdestado, String vrDescripcion,
+	public TbMicEstado(String vrDescripcion,
 			String vrModusuario, Date dtModfecha, Set tbMicMicroxestados) {
-		this.nbIdestado = nbIdestado;
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;

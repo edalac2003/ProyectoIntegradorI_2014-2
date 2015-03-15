@@ -33,10 +33,6 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 		this.evaluacionxMicroDao = evaluacionxMicroDao;
 	}
 
-	public EvaluacionxMicroNGCImpl() {
-		// TODO Auto-generated constructor stub
-	}
-
 	
 	
 	@Override
@@ -143,18 +139,18 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 		}
 	}
 
-	@Override
-	public int obtenerRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = evaluacionxMicroDao.obtenerRegistro();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("NGC : Error al intentar contar los Registros de la tabla <EvaluacionesxMicro>"+e.getMessage());
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int obtenerRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = evaluacionxMicroDao.obtenerRegistro();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("NGC : Error al intentar contar los Registros de la tabla <EvaluacionesxMicro>"+e.getMessage());
+//		}
+//		
+//		return registro;
+//	}
 	
 	@Override
 	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(String idMicrocurriculo) throws ExcepcionesLogica {

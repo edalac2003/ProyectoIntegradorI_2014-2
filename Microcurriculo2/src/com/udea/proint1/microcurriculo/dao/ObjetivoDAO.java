@@ -20,6 +20,6 @@ public interface ObjetivoDAO {
 	
 	public List<TbMicObjetivo> listarObjetivos () throws ExcepcionesDAO;
 	
-	public int numeroRegistros() throws ExcepcionesDAO;
+//	public int numeroRegistros() throws ExcepcionesDAO;
 
 }

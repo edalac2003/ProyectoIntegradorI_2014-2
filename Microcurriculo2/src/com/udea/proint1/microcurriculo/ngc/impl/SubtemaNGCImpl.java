@@ -132,19 +132,19 @@ public class SubtemaNGCImpl implements SubtemaNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = subtemaDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-//			throw new ExcepcionesLogica("Se presentaron errores al intentar obtener el numero de Registros de la tabla Subtemas.");
-			throw new ExcepcionesLogica(e);
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = subtemaDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+////			throw new ExcepcionesLogica("Se presentaron errores al intentar obtener el numero de Registros de la tabla Subtemas.");
+//			throw new ExcepcionesLogica(e);
+//		}
+//		
+//		return registro;
+//	}
 	
 	@Override
 	public List<TbMicSubtema> listarSubtemasxTema(int idTema) throws ExcepcionesLogica{

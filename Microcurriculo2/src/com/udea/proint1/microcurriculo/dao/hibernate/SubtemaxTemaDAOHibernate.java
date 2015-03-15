@@ -16,10 +16,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements SubtemaxTemaDAO {
 
-//	public SubtemaxTemaDAOHibernate() {
-//		// TODO Auto-generated constructor stub
-//	}
-
 	@Override
 	public void guardar(TbMicSubtemaxtema subtemaxTema) throws ExcepcionesDAO {
 		Session session = null;
@@ -86,25 +82,25 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
         return subtemaxTema;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbid) from TbMicSubtemaxtema");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicSubtemaxtema.class);
-//			registro = criteria.list().size();
-			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO: Se generaron problemas al contar los registros de la tabla <SubtemaxTema>"+e.getMessage());
-		} finally{
-			session.close();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbid) from TbMicSubtemaxtema");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicSubtemaxtema.class);
+////			registro = criteria.list().size();
+//			
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("DAO: Se generaron problemas al contar los registros de la tabla <SubtemaxTema>"+e.getMessage());
+//		} finally{
+//			session.close();
+//		}
+//		
+//		return registro;
+//	}
 
 }

@@ -123,18 +123,18 @@ public class TemaNGCImpl implements TemaNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = temaDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("NGC : Se produjo un Error al intentar Contar los Registros de Temas.");
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = temaDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica("NGC : Se produjo un Error al intentar Contar los Registros de Temas.");
+//		}
+//		
+//		return registro;
+//	}
 	
 	@Override
 	public List<TbMicTema> obtenerTemaxNombre(String nombre) throws ExcepcionesLogica{

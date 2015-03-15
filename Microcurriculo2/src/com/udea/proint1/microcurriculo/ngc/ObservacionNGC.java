@@ -15,6 +15,6 @@ public interface ObservacionNGC {
     
     public List<TbMicObservacion> listarObservacion () throws ExcepcionesLogica;
     
-    public int contarRegistros() throws ExcepcionesLogica;
+//    public int contarRegistros() throws ExcepcionesLogica;
 	
 }

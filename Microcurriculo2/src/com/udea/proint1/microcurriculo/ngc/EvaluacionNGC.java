@@ -15,6 +15,6 @@ public interface EvaluacionNGC {
 	
 	public List<TbMicEvaluacion> listarEvaluacion() throws ExcepcionesLogica;
 	
-	public int contarRegistros() throws ExcepcionesLogica;
+//	public int contarRegistros() throws ExcepcionesLogica;
 	
 }

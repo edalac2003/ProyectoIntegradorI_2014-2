@@ -20,9 +20,6 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 		this.bibliografiaDao = bibliografiaDao;
 	}
 
-	public BibliografiaNGCImpl() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void guardarBibliografia(TbMicBibliografia bibliografia)
@@ -153,18 +150,18 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 		}
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesLogica {
-		int registro = 0;
-		
-		try {
-			registro = bibliografiaDao.contarRegistros();
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesLogica {
+//		int registro = 0;
+//		
+//		try {
+//			registro = bibliografiaDao.contarRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			throw new ExcepcionesLogica();
+//		}
+//		
+//		return registro;
+//	}
 
 	
 }

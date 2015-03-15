@@ -19,10 +19,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements TemaxUnidadDAO {
 
-	public TemaxUnidadDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void guardarTemasXUnidad(TbMicTemaxunidad temaXunidad)	throws ExcepcionesDAO {
 		Session session = null;
@@ -113,25 +109,25 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 		return temasxUnidad;
 	}
 
-	@Override
-	public int contarRegistros() throws ExcepcionesDAO {
-		int registro = 0;
-		Session session = null;
-		
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbId) from TbMicTemaxunidad");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicTemaxunidad.class);
-//			registro = criteria.list().size();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : Se presentaron problemas al intentar recuperar el Numero de Registros de la Tabla <TB_MIC_TEMAXUNIDAD>. "+e);
-		} finally{
-			session.close();
-		}
-		
-		return registro;
-	}
+//	@Override
+//	public int contarRegistros() throws ExcepcionesDAO {
+//		int registro = 0;
+//		Session session = null;
+//		
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbId) from TbMicTemaxunidad");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicTemaxunidad.class);
+////			registro = criteria.list().size();
+//		}catch(HibernateException e){
+//			throw new ExcepcionesDAO("DAO : Se presentaron problemas al intentar recuperar el Numero de Registros de la Tabla <TB_MIC_TEMAXUNIDAD>. "+e);
+//		} finally{
+//			session.close();
+//		}
+//		
+//		return registro;
+//	}
 	
 	
 

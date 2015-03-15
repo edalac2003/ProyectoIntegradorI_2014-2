@@ -18,20 +18,14 @@ public class TbAdmDocentexnucleo implements java.io.Serializable {
 	private String vrHorarioclases;
 	private Date dtModfecha;
 
-	public TbAdmDocentexnucleo() {
-	}
-
-	public TbAdmDocentexnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
-			TbAdmPersona tbAdmPersona) {
-		this.nbId = nbId;
+	public TbAdmDocentexnucleo(TbAdmNucleo tbAdmNucleo,	TbAdmPersona tbAdmPersona) {
 		this.tbAdmNucleo = tbAdmNucleo;
 		this.tbAdmPersona = tbAdmPersona;
 	}
 
-	public TbAdmDocentexnucleo(int nbId, TbAdmNucleo tbAdmNucleo,
+	public TbAdmDocentexnucleo(TbAdmNucleo tbAdmNucleo,
 			TbAdmPersona tbAdmPersona, String vrModusuario, Date dtModfecha,
 			String vrOficina, String vrHorarioatencion, String vrHorarioclases) {
-		this.nbId = nbId;
 		this.tbAdmNucleo = tbAdmNucleo;
 		this.tbAdmPersona = tbAdmPersona;
 		this.vrModusuario = vrModusuario;

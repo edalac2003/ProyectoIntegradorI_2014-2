@@ -20,5 +20,5 @@ public interface SubtemaxTemaNGC {
 	
 	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(int idTema) throws  ExcepcionesLogica;
 	
-	public int contarRegistros() throws  ExcepcionesLogica;
+//	public int contarRegistros() throws  ExcepcionesLogica;
 }

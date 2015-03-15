@@ -20,6 +20,6 @@ public interface SubtemaxTemaDAO {
 	
 	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(TbMicTema tema) throws ExcepcionesDAO;
 	
-	public int contarRegistros() throws ExcepcionesDAO;
+//	public int contarRegistros() throws ExcepcionesDAO;
 
 }

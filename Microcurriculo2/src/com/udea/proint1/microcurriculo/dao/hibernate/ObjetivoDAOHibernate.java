@@ -18,10 +18,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class ObjetivoDAOHibernate extends HibernateDaoSupport implements ObjetivoDAO {
 
-	public ObjetivoDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void guardarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesDAO {
 		Session session = null;
@@ -53,24 +49,24 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		return objetivo;
 	}
 
-	@Override
-	public int numeroRegistros() throws ExcepcionesDAO {
-		Session session = null;
-		int registro = 0;
-			
-		try{
-			session = getSession();
-			Query query = session.createQuery("select max(nbIdobjetivo) from TbMicObjetivo");
-			registro = (Integer)query.list().get(0);
-//			Criteria criteria = session.createCriteria(TbMicObjetivo.class);
-//			registro = criteria.list().size();			
-		} catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
-		} finally{
-			session.close();
-		}
-		return registro;
-	}
+//	@Override
+//	public int numeroRegistros() throws ExcepcionesDAO {
+//		Session session = null;
+//		int registro = 0;
+//			
+//		try{
+//			session = getSession();
+//			Query query = session.createQuery("select max(nbIdobjetivo) from TbMicObjetivo");
+//			registro = (Integer)query.list().get(0);
+////			Criteria criteria = session.createCriteria(TbMicObjetivo.class);
+////			registro = criteria.list().size();			
+//		} catch(HibernateException e){
+//			throw new ExcepcionesDAO(e);
+//		} finally{
+//			session.close();
+//		}
+//		return registro;
+//	}
 	
 	@Override
 	public List<TbMicObjetivo> listarObjetivosPorMicrocurriculo(

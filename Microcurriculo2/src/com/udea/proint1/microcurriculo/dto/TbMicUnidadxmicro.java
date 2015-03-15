@@ -15,21 +15,14 @@ public class TbMicUnidadxmicro implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
-	public TbMicUnidadxmicro() {
-		super();
-	}
 
-	public TbMicUnidadxmicro(int nbId, TbMicUnidad tbMicUnidad,
-			TbMicMicrocurriculo tbMicMicrocurriculo) {
-		this.nbId = nbId;
+	public TbMicUnidadxmicro(TbMicUnidad tbMicUnidad, TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.tbMicUnidad = tbMicUnidad;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
 
-	public TbMicUnidadxmicro(int nbId, TbMicUnidad tbMicUnidad,
-			TbMicMicrocurriculo tbMicMicrocurriculo, String vrModusuario,
-			Date dtModfecha) {
-		this.nbId = nbId;
+	public TbMicUnidadxmicro(TbMicUnidad tbMicUnidad, TbMicMicrocurriculo tbMicMicrocurriculo, 
+			String vrModusuario, Date dtModfecha) {
 		this.tbMicUnidad = tbMicUnidad;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.vrModusuario = vrModusuario;

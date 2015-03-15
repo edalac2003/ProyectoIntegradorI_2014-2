@@ -28,10 +28,6 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 		this.microcurriculoDao = microcurriculoDao;
 	}
 
-	public ObjetivoNGCImpl() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public TbMicObjetivo obtenerObjetivo(int id)
 			throws ExcepcionesLogica {
@@ -149,17 +145,17 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 		}
 	}
 
-	@Override
-	public int numeroRegistros() throws ExcepcionesLogica {
-		int numeroRegistro = 0;
-		try {
-			numeroRegistro = objetivoDao.numeroRegistros();
-		} catch (ExcepcionesDAO e) {
-			e.printStackTrace();
-		}
-		
-		return numeroRegistro;
-	}
+//	@Override
+//	public int numeroRegistros() throws ExcepcionesLogica {
+//		int numeroRegistro = 0;
+//		try {
+//			numeroRegistro = objetivoDao.numeroRegistros();
+//		} catch (ExcepcionesDAO e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return numeroRegistro;
+//	}
 
 	@Override
 	public List<TbMicObjetivo> listarObjetivosPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesLogica{

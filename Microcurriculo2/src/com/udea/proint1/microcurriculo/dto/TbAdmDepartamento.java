@@ -18,9 +18,6 @@ public class TbAdmDepartamento implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbAdmCiudad = new HashSet(0);
 
-	public TbAdmDepartamento() {
-	}
-
 	public TbAdmDepartamento(int nbIddepartamento,
 			TbAdmPais tbAdmPais) {
 		this.nbIddepartamento = nbIddepartamento;
