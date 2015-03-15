@@ -6,7 +6,7 @@
  <class name="com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema" table="TB_MIC_SUBTEMAXTEMA">
   <id name="nbid" type="int">
    <column name="NB_ID" precision="22" scale="0"/>
-   <generator class="assigned"/>
+   <generator class="sequence"/>
   </id>
   <many-to-one class="com.udea.proint1.microcurriculo.dto.TbMicTema" fetch="join" lazy="false" name="tbMicTema">
    <column name="NB_TEMA" not-null="true" precision="22" scale="0"/>

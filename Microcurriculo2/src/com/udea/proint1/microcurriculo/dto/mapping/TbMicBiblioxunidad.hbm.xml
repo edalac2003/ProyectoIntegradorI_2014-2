@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad" table="TB_MIC_BIBLIOXUNIDAD">
         <id name="nbId" type="int">
             <column name="NB_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="sequence" />
         </id>
         <many-to-one name="tbMicBibliografia" class="com.udea.proint1.microcurriculo.dto.TbMicBibliografia" fetch="join" lazy="false">
             <column name="NB_BIBLIOGRAFIA" precision="22" scale="0" not-null="true" />

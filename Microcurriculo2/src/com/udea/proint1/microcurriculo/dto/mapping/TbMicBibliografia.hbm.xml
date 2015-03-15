@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicBibliografia" table="TB_MIC_BIBLIOGRAFIA">
         <id name="nbIdbibliografia" type="int">
             <column name="NB_IDBIBLIOGRAFIA" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="sequence" />
         </id>
         <property name="vrNombre" type="string">
             <column name="VR_NOMBRE" />

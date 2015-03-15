@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicMicroxestado" table="TB_MIC_MICROXESTADO">
         <id name="nbId" type="int">
             <column name="NB_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="sequence" />
         </id>
         <property name="dtFecha" type="date">
             <column name="DT_FECHA" length="7" />

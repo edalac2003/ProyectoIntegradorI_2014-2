@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicEvaluacion" table="TB_MIC_EVALUACION">
         <id name="nbIdevaluacion" type="java.lang.Integer">
             <column name="NB_IDEVALUACION" precision="22" scale="0"/>
-            <generator class="assigned" />
+            <generator class="sequence" />
         </id>
         <property name="vrDescripcion" type="java.lang.String">
             <column name="VR_DESCRIPCION" />
