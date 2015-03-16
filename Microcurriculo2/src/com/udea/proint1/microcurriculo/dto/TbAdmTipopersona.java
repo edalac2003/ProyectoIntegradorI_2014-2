@@ -17,6 +17,11 @@ public class TbAdmTipopersona implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbAdmPersonas = new HashSet(0);
 
+	
+	public TbAdmTipopersona() {
+		super();
+	}
+
 	public TbAdmTipopersona(int nbIdpersona) {
 		this.nbIdpersona = nbIdpersona;
 	}

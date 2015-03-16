@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" table="TB_ADM_USUARIO">
         <id name="nbId" type="int">
             <column name="NB_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
             <column name="VR_PERSONA" length="15" not-null="true" />

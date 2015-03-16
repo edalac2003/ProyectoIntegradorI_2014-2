@@ -17,6 +17,11 @@ public class TbAdmUsuario implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	
+
+	public TbAdmUsuario() {
+		super();
+	}
 
 	public TbAdmUsuario(TbAdmPersona tbAdmPersona, String vrLogin) {
 		this.tbAdmPersona = tbAdmPersona;

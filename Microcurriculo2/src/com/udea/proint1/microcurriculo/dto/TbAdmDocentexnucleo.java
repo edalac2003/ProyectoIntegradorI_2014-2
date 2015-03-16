@@ -18,6 +18,11 @@ public class TbAdmDocentexnucleo implements java.io.Serializable {
 	private String vrHorarioclases;
 	private Date dtModfecha;
 
+	
+	public TbAdmDocentexnucleo() {
+		super();
+	}
+
 	public TbAdmDocentexnucleo(TbAdmNucleo tbAdmNucleo,	TbAdmPersona tbAdmPersona) {
 		this.tbAdmNucleo = tbAdmNucleo;
 		this.tbAdmPersona = tbAdmPersona;

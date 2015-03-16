@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro" table="TB_MIC_OBJETIVOXMICRO">
         <id name="nbId" type="int">
             <column name="NB_ID" precision="22" scale="0" />
-            <generator class="sequence" />
+            <generator class="increment" />
         </id>
         <many-to-one name="tbMicObjetivo" class="com.udea.proint1.microcurriculo.dto.TbMicObjetivo" fetch="join" lazy="false">
             <column name="NB_OBJETIVO" precision="22" scale="0" not-null="true" />

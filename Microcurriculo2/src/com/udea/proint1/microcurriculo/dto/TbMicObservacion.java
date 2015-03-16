@@ -11,6 +11,11 @@ public class TbMicObservacion {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	public TbMicObservacion() {
+		super();
+	}
+
+
 
 	public TbMicObservacion(int nbIdobservacion, String vrDescripcion,
 			TbMicMicrocurriculo tbMicMicrocurriculo, Date dtFechaobservacion) {

@@ -18,6 +18,10 @@ public class TbAdmUnidadAcademica implements java.io.Serializable {
 	private Set tbAdmDependencias = new HashSet(0);
 
 
+	public TbAdmUnidadAcademica() {
+		super();
+	}
+
 	public TbAdmUnidadAcademica(String vrIdunidad) {
 		this.vrIdunidad = vrIdunidad;
 	}

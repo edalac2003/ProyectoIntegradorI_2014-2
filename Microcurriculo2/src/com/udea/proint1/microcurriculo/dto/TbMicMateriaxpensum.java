@@ -16,6 +16,11 @@ public class TbMicMateriaxpensum implements java.io.Serializable {
 	private Date dtModfecha;
 
 
+	
+	public TbMicMateriaxpensum() {
+		super();
+	}
+
 	public TbMicMateriaxpensum(TbAdmMateria tbAdmMateria, TbMicPensum tbMicPensum) {
 		this.tbAdmMateria = tbAdmMateria;
 		this.tbMicPensum = tbMicPensum;

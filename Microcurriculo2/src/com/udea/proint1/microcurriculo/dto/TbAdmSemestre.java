@@ -19,6 +19,11 @@ public class TbAdmSemestre implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbMicMicrocurriculos = new HashSet(0);
 
+	
+	public TbAdmSemestre() {
+		super();
+	}
+
 	public TbAdmSemestre(String vrIdsemestre) {
 		this.vrIdsemestre = vrIdsemestre;
 	}

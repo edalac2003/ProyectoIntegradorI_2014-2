@@ -10,6 +10,11 @@ public class TbMicActividadxmicro {
 	private String vrDescripcion;
 	private Date dtModfecha;
 
+	
+	public TbMicActividadxmicro() {
+		super();
+	}
+
 	public TbMicActividadxmicro(int nbIdactividad, TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.nbIdactividad = nbIdactividad;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;

@@ -15,6 +15,9 @@ public class TbMicBiblioxunidad implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	public TbMicBiblioxunidad() {
+		super();
+	}
 
 	public TbMicBiblioxunidad(TbMicBibliografia tbMicBibliografia, TbMicUnidad tbMicUnidad) {
 		this.tbMicBibliografia = tbMicBibliografia;

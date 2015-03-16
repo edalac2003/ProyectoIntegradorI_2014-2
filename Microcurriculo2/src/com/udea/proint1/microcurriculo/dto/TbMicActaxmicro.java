@@ -9,6 +9,11 @@ public class TbMicActaxmicro {
 	private TbAdmUsuario tbAdmUsuario;
 	private Date dtFechaaprobacion;
 
+	
+	public TbMicActaxmicro() {
+		super();
+	}
+
 	public TbMicActaxmicro(int nbIdactas, TbMicMicrocurriculo tbMicMicrocurriculo,
 			TbAdmUsuario tbAdmUsuario) {
 		this.nbIdactas = nbIdactas;

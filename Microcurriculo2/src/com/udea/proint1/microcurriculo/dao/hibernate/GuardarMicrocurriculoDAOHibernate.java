@@ -49,19 +49,17 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		Session session = null;
 		Transaction tx = null;
 
-		try{
-			session = getSession();
-						
-			tx = session.beginTransaction();
-			
-			session.save(microcurriculo);
-			
-			tx.commit();
-			session.close();
-		} catch(HibernateException e){
-			tx.rollback();
-			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
-		}
+//		try{
+//			session = getSession();	
+//			tx = session.beginTransaction();
+//			session.save(microcurriculo);
+//			tx.commit();
+//		} catch(HibernateException e){
+//			tx.rollback();
+//			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
+//		} finally {
+//			session.close();
+//		}
 		try {
 			session = getSession();
 			tx = session.beginTransaction();
@@ -135,8 +133,9 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			
 		} catch (HibernateException e){
 			tx.rollback();
-			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
-					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
+			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
+//			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+//					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
 		}
 	}	
 }

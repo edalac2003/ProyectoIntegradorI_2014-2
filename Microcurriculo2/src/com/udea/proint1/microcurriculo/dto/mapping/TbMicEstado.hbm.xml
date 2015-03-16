@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicEstado" table="TB_MIC_ESTADO">
         <id name="nbIdestado" type="int">
             <column name="NB_IDESTADO" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="vrDescripcion" type="string">
             <column name="VR_DESCRIPCION" length="30" not-null="true" />

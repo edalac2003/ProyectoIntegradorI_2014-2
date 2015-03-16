@@ -14,6 +14,11 @@ public class TbMicSubtema implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 	
+	
+	public TbMicSubtema() {
+		super();
+	}
+
 	public TbMicSubtema(int nbIdsubtema, String vrDescripcion) {
 		super();
 		this.nbIdsubtema = nbIdsubtema;

@@ -16,6 +16,11 @@ public class TbMicObjetivoxmicro implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	
+	public TbMicObjetivoxmicro() {
+		super();
+	}
+
 	public TbMicObjetivoxmicro(TbMicObjetivo tbMicObjetivo, TbMicMicrocurriculo tbMicMicrocurriculo) {
 		super();
 		this.tbMicObjetivo = tbMicObjetivo;

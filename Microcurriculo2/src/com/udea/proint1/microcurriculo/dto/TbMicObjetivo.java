@@ -18,6 +18,10 @@ public class TbMicObjetivo implements java.io.Serializable {
 	private Set tbMicObjetivosxmicros = new HashSet(0);
 
 	
+	public TbMicObjetivo() {
+		super();
+	}
+
 	public TbMicObjetivo(int nbIdobjetivo, String vrDescripcion, String vrModusuario, Date dtModfecha) {
 		super();
 		this.nbIdobjetivo = nbIdobjetivo;

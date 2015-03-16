@@ -736,8 +736,8 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 					if (responsable != null){
 						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, semestre, txtPropositoMicro.getValue().toString(), 
 								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, estado, modUsuario, modFecha);
-//						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
-						//cmbEstadoActual.setValue(obtenerEstado());
+						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
+//						cmbEstado.setValue(obtenerEstado());
 					}
 				}
 			}

@@ -21,6 +21,11 @@ public class TbMicMicroxestado implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 
+	
+	public TbMicMicroxestado() {
+		super();
+	}
+
 	public TbMicMicroxestado(TbMicEstado tbMicEstado, TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.tbMicEstado = tbMicEstado;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;

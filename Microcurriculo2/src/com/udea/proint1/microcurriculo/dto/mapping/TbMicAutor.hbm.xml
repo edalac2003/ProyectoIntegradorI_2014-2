@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbMicAutor" table="TB_MIC_AUTOR">
         <id name="nbIdautor" type="int">
             <column name="NB_IDAUTOR" precision="22" scale="0" />
-            <generator class="sequence" />
+            <generator class="increment" />
         </id>
         <property name="vrNombres" type="string">
             <column name="VR_NOMBRES" length="128" />

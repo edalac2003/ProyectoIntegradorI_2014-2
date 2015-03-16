@@ -16,6 +16,10 @@ public class TbMicUnidadxmicro implements java.io.Serializable {
 	private Date dtModfecha;
 
 
+	public TbMicUnidadxmicro() {
+		super();
+	}
+
 	public TbMicUnidadxmicro(TbMicUnidad tbMicUnidad, TbMicMicrocurriculo tbMicMicrocurriculo) {
 		this.tbMicUnidad = tbMicUnidad;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;

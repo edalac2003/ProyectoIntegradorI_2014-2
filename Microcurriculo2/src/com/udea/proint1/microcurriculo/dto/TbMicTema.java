@@ -19,6 +19,11 @@ public class TbMicTema implements java.io.Serializable {
 	private Set tbMicTemasxunidads = new HashSet(0);
 
 
+	
+	public TbMicTema() {
+		super();
+	}
+
 	public TbMicTema(String vrDescripcion, String vrModusuario,
 			Date dtModfecha) {
 		super();

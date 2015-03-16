@@ -6,6 +6,11 @@ public class TbAdmObservacionxtabla {
 	private int nbIdobservaciones;
 
 
+	
+	public TbAdmObservacionxtabla() {
+		super();
+	}
+
 	public TbAdmObservacionxtabla(String vrObservaciones, int nbIdobservaciones) {
 		this.vrObservaciones = vrObservaciones;
 		this.nbIdobservaciones = nbIdobservaciones;

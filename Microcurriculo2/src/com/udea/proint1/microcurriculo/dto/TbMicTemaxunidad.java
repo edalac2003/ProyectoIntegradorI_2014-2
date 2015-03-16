@@ -17,6 +17,11 @@ public class TbMicTemaxunidad implements java.io.Serializable {
 	private Date dtModfecha;
 
 
+	
+	public TbMicTemaxunidad() {
+		super();
+	}
+
 	public TbMicTemaxunidad(TbMicUnidad tbMicUnidad, TbMicTema tbMicTema) {
 		this.tbMicUnidad = tbMicUnidad;
 		this.tbMicTema = tbMicTema;
