@@ -23,16 +23,12 @@ public class TbMicUnidad implements java.io.Serializable {
 		super();
 	}
 
-	public TbMicUnidad(int nbIdunidad, String vrNombre, String vrModusuario,
-			Date dtModfecha) {
+	public TbMicUnidad(String vrNombre, String vrModusuario, Date dtModfecha) {
 		super();
-		this.nbIdunidad = nbIdunidad;
 		this.vrNombre = vrNombre;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
-
-
 
 	public TbMicUnidad(int nbIdunidad) {
 		this.nbIdunidad = nbIdunidad;

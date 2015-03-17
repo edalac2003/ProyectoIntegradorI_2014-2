@@ -3,6 +3,7 @@ package com.udea.proint1.microcurriculo.ngc;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface DependenciaNGC {
@@ -16,6 +17,8 @@ public interface DependenciaNGC {
 	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesLogica;
 
 	public List<TbAdmDependencia> listarDependenciasPorUnidad(String unidad) throws ExcepcionesLogica;
+	
+	public List<TbAdmDependencia> listarDependenciasPorUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesLogica;
 	
 	public List<TbAdmDependencia> buscarDepedencias(String buscar) throws ExcepcionesLogica;
 }

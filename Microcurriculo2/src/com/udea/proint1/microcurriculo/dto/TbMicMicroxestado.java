@@ -31,11 +31,10 @@ public class TbMicMicroxestado implements java.io.Serializable {
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 	}
 
-	public TbMicMicroxestado(int nbId, TbMicEstado tbMicEstado, Date dtFecha,
+	public TbMicMicroxestado(TbMicEstado tbMicEstado, Date dtFecha,
 			TbMicMicrocurriculo tbMicMicrocurriculo,
 			TbAdmPersona tbAdmResponsable, String vrModusuario, Date dtModfecha) {
 		super();
-		this.nbId = nbId;
 		this.tbMicEstado = tbMicEstado;
 		this.dtFecha = dtFecha;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;

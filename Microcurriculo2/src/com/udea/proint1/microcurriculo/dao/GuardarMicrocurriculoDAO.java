@@ -17,7 +17,6 @@ import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface GuardarMicrocurriculoDAO {
 	
@@ -35,4 +34,20 @@ public interface GuardarMicrocurriculoDAO {
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicEvaluacion> evaluaciones,
 			List<TbMicEvaluacionxmicro> evaluacionxMicro) throws ExcepcionesDAO;	
+	
+	public void actualizarMicroxlotes(TbMicMicrocurriculo microcurriculo,
+			TbMicMicroxestado microxEstado, 
+			List<TbMicTema> temas,
+			List<TbMicSubtema> subtemas,
+			List<TbMicSubtemaxtema> subtemaxTema,
+			List<TbMicTemaxunidad> temasxunidad,		 
+			List<TbMicUnidad> unidades,
+			List<TbMicUnidadxmicro> unidadesxmicro, 
+			List<TbMicObjetivo> objetivos, 
+			List<TbMicObjetivoxmicro> objetivosxmicro, 
+			List<TbMicBibliografia> bibliografia,
+			List<TbMicBiblioxunidad> biblioxunidad,
+			List<TbMicEvaluacion> evaluaciones,
+			List<TbMicEvaluacionxmicro> evaluacionxMicro) throws ExcepcionesDAO;
+	
 }

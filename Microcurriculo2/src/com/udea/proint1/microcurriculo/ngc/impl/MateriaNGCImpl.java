@@ -157,6 +157,25 @@ public class MateriaNGCImpl implements MateriaNGC {
 			return listaMaterias;
 	}
 	
+	
+	
+	@Override
+	public List<TbAdmMateria> listarMateriasxNucleo(TbAdmNucleo nucleo)	throws ExcepcionesLogica {
+		List<TbAdmMateria> listaMaterias = null;
+		
+		if (nucleo != null){
+			try {
+				listaMaterias = materiaDao.listarMateriasPorNucleo(nucleo);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica(e);
+			}
+		} else {
+			throw new ExcepcionesLogica("El objeto <Tb_Adm_Nucleo> está Vacio.");
+		}
+		
+		return listaMaterias;
+	}
+
 	@Override
 	public List<TbAdmMateria> listarMateriasxSemetre(int semestre) throws ExcepcionesLogica{
 		List<TbAdmMateria> listaMaterias = null;

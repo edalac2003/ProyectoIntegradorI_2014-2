@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -107,6 +108,26 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
         return dependencias;
 	}
 	
+	
+	
+	@Override
+	public List<TbAdmDependencia> listarDependenciasPorUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO {
+		List<TbAdmDependencia> listaDependencias = null;
+		Session session = null;
+		try {
+			session = getSession();
+			Query query = session.createQuery("from TbAdmDependencia where tbAdmUnidadAcademica = :unidad");
+			query.setEntity("unidad", unidad);
+			listaDependencias = query.list();
+		} catch (HibernateException e) {
+			throw new ExcepcionesDAO("Se presentaron problemas al intentar obtener listado de Dependencias por Unidad.");
+		} finally {
+			session.close();
+		}
+				
+		return listaDependencias;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmDependencia> buscarDependencias(String buscar) throws ExcepcionesDAO{

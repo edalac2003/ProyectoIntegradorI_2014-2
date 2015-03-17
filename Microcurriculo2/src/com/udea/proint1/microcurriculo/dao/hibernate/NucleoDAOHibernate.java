@@ -90,7 +90,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 	@Override
 	public List<TbAdmNucleo> listarNucleoPorDependencia(String dependencia) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmNucleo> nucleos = new ArrayList<TbAdmNucleo>();
+        List<TbAdmNucleo> nucleos = null;
         
         try{
             session = getSession();
@@ -105,6 +105,27 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
         return nucleos;
 	}
 	
+	
+	
+	@Override
+	public List<TbAdmNucleo> listarNucleoPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO {
+		List<TbAdmNucleo> listaNucleos = null;
+		Session session = null;
+		
+		try {
+			session = getSession();
+			Query query = session.createQuery("from TbAdmNucleo where tbAdmDependencia = :dependencia");
+			query.setEntity("dependencia", dependencia);
+			listaNucleos = query.list();
+		} catch (HibernateException e) {
+			
+		} finally{
+			session.close();
+		}
+		
+		return listaNucleos;
+	}
+
 	@Override
 	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesDAO{
 		Session session = null;

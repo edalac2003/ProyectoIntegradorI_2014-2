@@ -8,6 +8,7 @@ import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
 import com.udea.proint1.microcurriculo.dao.UnidadAcademicaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -114,6 +115,23 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 		}else{
 			return dependencia;
 		}
+	}
+	
+
+	@Override
+	public List<TbAdmDependencia> listarDependenciasPorUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesLogica {
+		List<TbAdmDependencia> listaDependencia = null;
+		
+		if(unidad != null){
+			try {
+				listaDependencia = dependenciaDao.listarDependenciasPorUnidad(unidad);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica(e);
+			}
+		} else {
+			throw new ExcepcionesLogica("El Objeto <Tb_Adm_UnidadAcademica> está Vacio.");
+		}		
+		return listaDependencia;
 	}
 
 	@Override

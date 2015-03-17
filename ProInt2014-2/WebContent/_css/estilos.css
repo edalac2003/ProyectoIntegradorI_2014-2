@@ -11,6 +11,7 @@
 	font-family: Arial, Tahoma, Verdana;
 	font-weight: bold;
 	font-size: medium;
+	color : red;
 	margin: px;
 	padding: 5px;
 	text-align: center;
@@ -19,22 +20,26 @@
 	font-style: normal
 }
 
-.titulos2{
-	
-}
 
-/**.resaltado{
+.resaltado{
 	color: Red;
 	font-family: Arial, Tahoma, Verdana;
 	font-weight: bold;
 	text-align: center;
 	font-style: normal;
-}**/
+}
 
 .resaltadonormal{
 	font-family: Arial, Tahoma, Verdana;
 	font-weight: bold;
 }
+
+.campoobligatorio{
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+	color: Red;
+}
+
 
 .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover {
     background-color: transparent;
@@ -72,7 +77,7 @@
 	font-weight: bold
 }**/
 
-.z-tabbox {
+/**.z-tabbox {
 	color: Green;
 	font-family: Arial, Tahoma, Verdana
-}
+} **/

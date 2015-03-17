@@ -157,6 +157,24 @@ public class NucleoNGCImpl implements NucleoNGC {
 		}
 	}
 	
+	
+	
+	@Override
+	public List<TbAdmNucleo> listarNucleosPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
+		List<TbAdmNucleo> listaNucleos = null;
+		
+		if(dependencia != null){
+			try {
+				listaNucleos = nucleoDao.listarNucleoPorDependencia(dependencia);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica(e);
+			}
+		} else {
+			throw new ExcepcionesLogica("El Objeto <Tb_Adm_Dependencia> está Vacio.");
+		}		
+		return listaNucleos;
+	}
+
 	@Override
 	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesLogica{
 //		if(buscar.equals("")||(buscar.equals(null))){

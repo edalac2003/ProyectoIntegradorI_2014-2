@@ -458,27 +458,33 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="correquisitoNGC" ref="correquisitoNGC" />
         </bean>
         
-        <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype">
-        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
-        	<property name="materiaNGC" ref="materiaNGC" />
-        	<property name="personaNGC" ref="personaNGC" />
-        	<property name="semestreNGC" ref="semestreNGC" />        	
-        	<property name="unidadNGC" ref="unidadNGC" />
-        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
-        	<property name="estadoNGC" ref="estadoNGC" />
-        	<property name="temaNGC" ref="temaNGC" />
-        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
-        	<property name="subtemaNGC" ref="subtemaNGC" />
-        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
-        	<property name="evaluacionNGC" ref="evaluacionNGC" />
-        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
-        	<property name="objetivoNGC" ref="objetivoNGC" />
-        	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
-        	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
-        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
-        	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
-        	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
-        </bean>
+        
+<!--         Se deja comentado este Bean para verificar su funcionabilidad.  FAVOR DEJAR ASI A MENOS QUE REALMENTE SE NECESITE. -->
+<!-- 		 Los metodos aqui contenidos los pasé al controlador CargarDatosFormas con el fin de optimizar los procedimientos   -->
+<!-- 		 de guardarMicrocurriculo.  Antes hacian muchas busquedas en la BD ahora se trabaja con listas de objetos -->
+
+<!--         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype"> -->
+<!--         	<property name="microcurriculoNGC" ref="microcurriculoNGC" /> -->
+<!--         	<property name="materiaNGC" ref="materiaNGC" /> -->
+<!--         	<property name="personaNGC" ref="personaNGC" /> -->
+<!--         	<property name="semestreNGC" ref="semestreNGC" />        	 -->
+<!--         	<property name="unidadNGC" ref="unidadNGC" /> -->
+<!--         	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" /> -->
+<!--         	<property name="estadoNGC" ref="estadoNGC" /> -->
+<!--         	<property name="temaNGC" ref="temaNGC" /> -->
+<!--         	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" /> -->
+<!--         	<property name="subtemaNGC" ref="subtemaNGC" /> -->
+<!--         	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" /> -->
+<!--         	<property name="evaluacionNGC" ref="evaluacionNGC" /> -->
+<!--         	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" /> -->
+<!--         	<property name="objetivoNGC" ref="objetivoNGC" /> -->
+<!--         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" /> -->
+<!--         	<property name="bibliografiaNGC" ref="bibliografiaNGC" /> -->
+<!--         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" /> -->
+<!--         	<property name="microxEstadoNGC" ref="microxEstadoNGC" /> -->
+<!--         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" /> -->
+<!--         </bean> -->
+        
         
         <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
@@ -517,6 +523,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="paisNGC" ref="paisNGC" />
         	<property name="estadoNGC" ref="estadoNGC" />
+        	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
         </bean>
         
         <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype">
@@ -571,10 +578,5 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
-        </bean>
-        
-        <bean id="borrarVariablesSession" class="com.udea.proint1.microcurriculo.ctrl.BorrarVariablesSession" scope="prototype">
-			
-        </bean>
-            
+        </bean>            
 </beans>

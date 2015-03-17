@@ -59,26 +59,33 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			List<TbMicEvaluacionxmicro> evaluacionxMicro)
 			throws ExcepcionesLogica {
 		
-		String idMicro;
+		String idMicro = microcurriculo.getVrIdmicrocurriculo();;
 		TbMicMicrocurriculo consulta = null;
 		
-		try{			
-			idMicro = microcurriculo.getVrIdmicrocurriculo();
+		try{
 			consulta = microcurriculoDao.obtenerMicrocurriculo(idMicro);
-			if (consulta == null){
-				try {
-					guardarMicrocurriculoDao.guardarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, 
-							subtemaxTema, temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, 
-							bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro);
-				} catch (ExcepcionesDAO e) {
-					throw new ExcepcionesLogica("Error al intentar Guardar el registro de Microcurriculo."+e.getMessage());
-				}
-			}else{
-				throw new ExcepcionesLogica("El Microcurriculo ya existe.");
-			}
 		}catch(ExcepcionesDAO e){
 			logger.error("Error al intentar Obtener la informacion del registro de Microcurriculo.",e);
 		}
-				
-	}	
+		
+		if (consulta == null){
+			try {
+				guardarMicrocurriculoDao.guardarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, 
+						subtemaxTema, temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, 
+						bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica("Error al intentar Guardar el registro de Microcurriculo."+e.getMessage());
+			}
+		}else{
+//			throw new ExcepcionesLogica("El Microcurriculo ya existe.");
+			try {
+				guardarMicrocurriculoDao.actualizarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, subtemaxTema, 
+						temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, bibliografia, biblioxunidad, 
+						evaluaciones, evaluacionxMicro);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica("Error al intentar Guardar el registro de Microcurriculo."+e.getMessage());
+			}
+			
+		}
+	}
 }

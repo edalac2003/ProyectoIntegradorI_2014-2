@@ -73,8 +73,7 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
         
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbAdmUnidadAcademica.class);
-			
+			Criteria criteria = session.createCriteria(TbAdmUnidadAcademica.class);			
 			unidadesAcademicas = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);

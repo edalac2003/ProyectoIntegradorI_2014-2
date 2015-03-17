@@ -26,14 +26,9 @@ public class TbMicBibliografia implements java.io.Serializable {
 		super();
 	}
 
-
-
-
-	public TbMicBibliografia(int nbIdbibliografia, String vrNombre,
-			String vrSitioweb, String vrIsbn, String vrAutor, Character blTipo,
+	public TbMicBibliografia(String vrNombre, String vrSitioweb, String vrIsbn, String vrAutor, Character blTipo,
 			String vrModusuario, Date dtModfecha) {
 		super();
-		this.nbIdbibliografia = nbIdbibliografia;
 		this.vrNombre = vrNombre;
 		this.vrSitioweb = vrSitioweb;
 		this.vrIsbn = vrIsbn;

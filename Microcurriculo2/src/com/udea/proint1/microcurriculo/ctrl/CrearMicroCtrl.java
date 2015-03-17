@@ -58,6 +58,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
 	
 	Tabbox fichaContenidos;
+//	Tabpanels paneles;
+//	Tabpanel tabInfoUnidad;
+//	Tabpanel tabInfoSubtemas;
+//	Tabpanel tabInfoEval;
+//	Tabpanel infoBiblioBas;
 	
 	Button btnAddUnidad;
 	Button btnAddTemas;
@@ -66,7 +71,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Button btnAddEvaluacion;
 	Button btnAddBibliografia;
 	Button btnAddCibergrafia;
-	//Button btnGuardarMicro;
 	
 	Label lblNombreUnidadAcademica;
 	Label lblNombreDependencia;
@@ -126,7 +130,6 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	Combobox cmbTipoCibergrafia;
 	Combobox cmbMateria;
 	Combobox cmbDocente;
-	//Combobox cmbNucleo;
 	Combobox cmbSemestre;
 	Combobox cmbUnidadAcademica;
 	Combobox cmbDependencia;
@@ -331,15 +334,13 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 	
 	
-	public void onSelect$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
-	}
 	
-	public void onOK$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
-		if (!(lblNombreDocente.getValue().equals("") && (lblNombreDocente.getValue().trim().length() > 0)))
-			cmbSemestre.focus();				
-	}
+	
+//	public void onOK$cmbDocente(){
+//		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
+//		if (!(lblNombreDocente.getValue().equals("") && (lblNombreDocente.getValue().trim().length() > 0)))
+//			cmbSemestre.focus();				
+//	}
 	
 	public void onClick$btnAddUnidad(Event event){
 		llenarListaUnidades(txtNombreUnidad.getValue());
@@ -359,29 +360,50 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Este Método activa acciones conforme se seleccione un Tabbox del TabPanel.
+	 */
 	public void onSelect$fichaContenidos(){
 		Tabpanel tabpanels = (Tabpanel)fichaContenidos.getSelectedPanel();
 		int indice = tabpanels.getIndex();
-		if (indice == 0){
+		switch (indice) {
+		case 0:
 			cmbDocente.focus();
-		}else if (indice == 1){
+			break;
+		case 1:
 			txtPropositoMicro.focus();
-		}else if (indice == 2){
+			break;
+		case 2:
 			txtNombreUnidad.focus();
-		}else if (indice == 3){
+			break;
+		case 3:
+			validarInfoTemas();
 			cmbListaUnidades.focus();
-		}else if (indice == 4){
+			break;
+		case 4:
 			txtActividadMicro.focus();
-		}else if (indice == 5){
+			break;
+		case 5:
+			validarInfoUnidades();
 			cmbListaUnidadBiblio.focus();
+			break;
+		default:
+			break;
 		}
+	}
+	
+	private void validarInfoUnidades(){
+		if(listaUnidades.getItems().size() < 1){
+			Messagebox.show("NO se encontró información ingresada en la sección Unidades. No será posible diligenciar este formulario hasta que haya ingresado información válida en el formulario <Unidades y Temas>.");		
+		}
+	}
+	
+	private void validarInfoTemas(){
+		if(listaUnidades.getItems().size() < 1){
+			Messagebox.show("NO se encontró información ingresada en la sección Unidades. No será posible diligenciar este formulario hasta que haya ingresado información válida en el formulario anterior.");		
+		}else if (listaTemas.getItems().size() < 1){
+			Messagebox.show("NO se encontró información ingresada en la sección Temas. No será posible diligenciar este formulario hasta que haya ingresado información válida en el formulario anterior.");
+		}		
 	}
 	
 	private void verificarCamposBibliografia(){
@@ -880,21 +902,21 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		}		
 	}
 	
-	private String mostrarNombreDocente(String idDocente){
-		String nombre = "";
-		TbAdmPersona persona = null;
-	
-		try {
-			persona = personaNGC.obtenerPersona(idDocente);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
-		}
-		
-		if (persona != null){
-			nombre = persona.getVrApellidos()+" "+persona.getVrNombres();
-		}	
-		return nombre;
-	}
+//	private String mostrarNombreDocente(String idDocente){
+//		String nombre = "";
+//		TbAdmPersona persona = null;
+//	
+//		try {
+//			persona = personaNGC.obtenerPersona(idDocente);
+//		} catch (ExcepcionesLogica e) {
+//			logger.error(e);
+//		}
+//		
+//		if (persona != null){
+//			nombre = persona.getVrApellidos()+" "+persona.getVrNombres();
+//		}	
+//		return nombre;
+//	}
 	
 	
 	@SuppressWarnings("unchecked")
