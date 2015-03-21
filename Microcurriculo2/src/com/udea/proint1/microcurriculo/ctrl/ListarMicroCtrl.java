@@ -93,30 +93,6 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Solicita de la capa del negocio todos los estados existentes y los ubica en el combobox cmbEstado
-	 */
-	public void cargarEstados(){
-		try {
-			List<TbMicEstado> listaEstados = estadoNGC.listarEstados();
-			cmbEstado.getItems().clear();
-			
-			if(listaEstados != null){
-				cmbEstado.appendChild(new Comboitem("[Seleccione]"));
-				for(TbMicEstado estado: listaEstados){
-					Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
-					item.setDescription(estado.getVrDescripcion());
-					cmbEstado.appendChild(item);
-				}
-				cmbEstado.setValue("[Seleccione]");
-			}else{
-				//Messagebox.show("No se hallaron estados");
-			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("error al invocar metodo listarEstados de la clase EstadoNGC: "+e);
-		}
-	}
-	
-	/**
 	 * ante el evento click en el boton buscar, el metodo procede a revisar los filtros diligenciados
 	 * y se muestran todos los microcurriculos relacionados con la busqueda
 	 */
@@ -328,6 +304,5 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {		
 		
 		super.doAfterCompose(comp);
-		cargarEstados();
 	}
 }

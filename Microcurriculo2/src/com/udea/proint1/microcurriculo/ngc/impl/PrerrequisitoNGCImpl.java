@@ -39,17 +39,17 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 		if(prerrequisito == null){
 			throw new ExcepcionesLogica("El objeto prerrequisito está vacio");
 		}
-		try {
-			int id = prerrequisito.getNbId();
-			TbAdmPrerrequisito prerrequisitoConsulta = prerrequisitoDao.obtenerPrerrequisito(id);
-		
-			if(prerrequisitoConsulta != null){
-				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
-		}
+//		try {
+//			int id = prerrequisito.getNbId();
+//			TbAdmPrerrequisito prerrequisitoConsulta = prerrequisitoDao.obtenerPrerrequisito(id);
+//		
+//			if(prerrequisitoConsulta != null){
+//				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
+//		}
 		
 		try {
 			

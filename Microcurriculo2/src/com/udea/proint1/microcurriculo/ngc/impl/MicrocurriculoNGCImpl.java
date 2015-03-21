@@ -192,7 +192,6 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
 		List<TbMicMicrocurriculo> listaTodosMicrocurriculos = new ArrayList<TbMicMicrocurriculo>();
 		List<TbMicMicrocurriculo> listaMicrocurriculo = null;
-		System.out.println("materia a consultar "+idMateria);
 		
 		List<TbAdmMateria> materias= null;
 		
